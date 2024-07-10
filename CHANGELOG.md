@@ -1,5 +1,15 @@
 # portfolio-artarik
 
+## 1.5.0
+
+### Minor Changes
+
+- 415f77a: feat: containerization added
+
+### Patch Changes
+
+- 6472d4f: fix: server rendering gallary issue and improved seo
+
 ## 1.4.2
 
 ### Patch Changes
