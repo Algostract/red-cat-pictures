@@ -1,6 +1,10 @@
 # portfolio-artarik
 
-## 1.4.3
+## 1.5.0
+
+### Minor Changes
+
+- 415f77a: feat: containerization added
 
 ### Patch Changes
 
