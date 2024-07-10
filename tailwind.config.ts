@@ -1,15 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    'components/**/*.{vue,js,ts}',
-    'layouts/**/*.vue',
-    'pages/**/*.vue',
-    'App.{js,ts,vue}',
-    'app.{js,ts,vue}',
-    'Error.{js,ts,vue}',
-    'error.{js,ts,vue}',
-    'content/**/*.md'
-  ],
+  content: ['components/**/*.{vue,js,ts}', 'layouts/**/*.vue', 'pages/**/*.vue', 'App.{js,ts,vue}', 'app.{js,ts,vue}', 'Error.{js,ts,vue}', 'error.{js,ts,vue}', 'content/**/*.md'],
   darkMode: 'class',
   theme: {
     fontSize: {
@@ -27,7 +18,7 @@ module.exports = {
     },
     fontFamily: {
       main: ['Oxanium', 'sans-serif'],
-      sub: ['Oxanium', 'sans-serif']
+      sub: ['Oxanium', 'sans-serif'],
     },
     fontWeight: {
       light: 300,
@@ -47,7 +38,7 @@ module.exports = {
       dark: {
         400: '#101724',
         500: '#1B2537',
-        600: '#23324D'
+        600: '#23324D',
       },
       primary: {
         400: '#E8D78E',
@@ -68,10 +59,8 @@ module.exports = {
         400: '#F24067',
         500: '#E11D48',
         600: '#C02650',
-      }
+      },
     },
-    extend: {
-    }
-  }
+    extend: {},
+  },
 }
-
