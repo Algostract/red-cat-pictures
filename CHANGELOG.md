@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 1.5.1
+
+### Patch Changes
+
+- cc0223b: refactor: moved gtag from config to env
+
 ## 1.5.0
 
 ### Minor Changes
