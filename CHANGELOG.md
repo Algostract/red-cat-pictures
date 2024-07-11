@@ -6,6 +6,8 @@
 
 - 415f77a: feat: containerization added
 
+## 1.4.3
+
 ### Patch Changes
 
 - 6472d4f: fix: server rendering gallary issue and improved seo

@@ -22,7 +22,7 @@
     "tunnel": "npx untun tunnel --port 3002 http://localhost:3002",
     "clean": "nuxt cleanup",
     "docker:build": "docker build --build-arg TAG=latest -t portfolio-aratrik:latest .",
-    "docker:start": "docker run --env-file .env.prod -p 1002:3000 portfolio-aratrik:latest"
+    "docker:start": "docker run --detach --name portfolio-aratrik --env-file .env.prod -p 1002:3000 ghcr.io/algostract/portfolio-aratrik:latest"
   },
   "dependencies": {
     "@nuxt/fonts": "^0.7.1",

@@ -14,7 +14,7 @@ RUN npm run build
 
 FROM node:lts-alpine AS deployer
 
-ARG TAG
+ARG VERSION
 
 WORKDIR /app
 
@@ -22,7 +22,7 @@ COPY --from=builder /app/.output ./.output
 COPY --from=builder /app/*.yml ./
 
 ENV NODE_ENV=production
-ENV NUXT_APP_VERSION=$TAG
+ENV NUXT_APP_VERSION=$VERSION
 
 EXPOSE 3000
 
