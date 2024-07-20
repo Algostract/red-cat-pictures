@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
+  photos: Photo[]
   tabs: {
     title: Categories
     icon: string
@@ -16,8 +17,8 @@ function objectToClass({ sm, md }: { sm: Position; md: Position }, size: string)
 }
 
 const categoryImages = {
-  food: getImages(['Food-002-001', 'Food-005-001', 'Food-003-001', 'Food-006-002', 'Food-007-001', 'Food-004-001', 'Food-001-001']),
-  product: getImages(['Product-004-002', 'Product-005-001', 'Product-006-001', 'Product-007-001', 'Product-002-002', 'Product-003-001', 'Product-001-001']),
+  food: usePhoto(props.photos, ['Food-002-001', 'Food-005-001', 'Food-003-001', 'Food-006-002', 'Food-007-001', 'Food-004-001', 'Food-001-001']),
+  product: usePhoto(props.photos, ['Product-004-002', 'Product-005-001', 'Product-006-001', 'Product-007-001', 'Product-002-002', 'Product-003-001', 'Product-001-001']),
 }
 
 const images = computed<GallaryImage[]>(() =>
@@ -80,8 +81,8 @@ const images = computed<GallaryImage[]>(() =>
     },
   ].map((image, index) => {
     return {
-      url: categoryImages[props.activeTab][index].id,
-      alt: categoryImages[props.activeTab][index].title,
+      url: categoryImages[props.activeTab].value[index]?.id,
+      alt: categoryImages[props.activeTab].value[index]?.title,
       dynamicClass: objectToClass(image.position, image.size),
       autoScale: image.autoScale,
     }

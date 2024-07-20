@@ -50,6 +50,7 @@ useSchemaOrg([
 </script>
 
 <template>
+  <NuxtRouteAnnouncer />
   <NuxtPwaManifest />
   <NuxtPwaAssets />
   <!-- <NuxtLoadingIndicator /> -->

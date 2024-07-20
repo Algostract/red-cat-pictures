@@ -29,15 +29,17 @@ const activeTab = ref<'food' | 'product'>('food')
 function changeActiveTab(tab: Categories) {
   activeTab.value = tab
 }
+
+const { data: photos } = useFetch('/api/photo', { default: () => [] })
 </script>
 
 <template>
   <div>
     <AppHeader />
     <main class="relative mx-auto flex max-w-[90rem] flex-col gap-4 overflow-hidden p-4 !pb-0 md:gap-16 md:p-16">
-      <SectionHero @contact="onContact(true)" />
-      <SectionFeatured />
-      <SectionGallery :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
+      <SectionHero :photos="photos" @contact="onContact(true)" />
+      <SectionFeatured :photos="photos" />
+      <SectionGallery :photos="photos" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
       <SectionPricing :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
       <!-- <SectionTestimonial /> -->
       <ModelContact :is-open="isModelContactOpen" @close="onContact(false)" />

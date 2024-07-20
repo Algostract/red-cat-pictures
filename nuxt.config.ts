@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   ],
 
   routeRules: {
-    '/': { prerender: true },
+    '/': { swr: true },
     '/_ipx/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/images/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/fonts/**': { headers: { 'cache-control': 'max-age=31536000' } },
@@ -27,6 +27,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     app: {
       version: '',
+    },
+    private: {
+      rootDir: '',
     },
   },
 
@@ -234,8 +237,7 @@ export default defineNuxtConfig({
     },
   },
 
-  gtag: {
-  },
+  gtag: {},
 
   splide: {
     theme: 'core',

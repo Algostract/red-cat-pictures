@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { breakpointsTailwind } from '@vueuse/core'
+const props = defineProps<{
+  photos: Photo[]
+}>()
 
-const allImages = getImages([
+const allImages = usePhoto(props.photos, [
   'Food-004-001',
   'Food-002-001',
   'Food-003-001',
@@ -20,9 +22,6 @@ const allImages = getImages([
   'Product-007-001',
   'Product-002-001',
 ])
-
-const breakpoints = useBreakpoints(breakpointsTailwind)
-const mdDevices = breakpoints.greaterOrEqual('sm')
 
 const container = ref<HTMLDivElement | null>(null)
 const { height: containerHeight } = useElementSize(container)
@@ -45,33 +44,43 @@ watch(offset, (value) => {
 })
 
 const imageSlides = computed(() => {
-  const noOfSlides = !mdDevices.value ? 2 : 3
-  const slides: { id: string; title: string }[][] = new Array(noOfSlides).fill(null).map((_) => [])
+  const slides = [2, 3].map((noOfSlides) => {
+    const slides: { id: string; title: string }[][] = new Array(noOfSlides).fill(null).map((_) => [])
 
-  allImages.forEach((image, index) => {
-    slides[index % noOfSlides].push(image)
+    allImages.value.forEach((image, index) => {
+      slides[index % noOfSlides].push(image)
+    })
+
+    return slides
   })
 
-  return slides
+  return {
+    2: slides[0],
+    3: slides[1],
+  }
 })
 </script>
 
 <template>
   <section id="featured" ref="container" class="relative z-0 mx-0 h-screen overflow-hidden bg-light-400 dark:bg-dark-400 md:-mx-12">
     <div v-show="isSliderVisible" ref="slider" class="relative z-10 flex gap-2 transition-all duration-[2s] ease-linear" :style="{ translate: `0 ${-offset}px` }">
-      <ClientOnly>
+      <!-- For Small Screen Devices -->
+      <template v-for="slideCount in (['2', '3'] as const)">
         <div
-          v-for="(images, index) in imageSlides"
+          v-for="(images, index) in imageSlides[slideCount]"
           :key="index"
           class="flex flex-1 flex-col gap-2"
           :class="{
             'translate-y-5': index == 0,
             '-translate-y-4': index == 1,
             'translate-y-12': index == 2,
+            'flex md:hidden': slideCount == '2',
+            'hidden md:flex': slideCount == '3',
           }">
           <NuxtImg v-for="{ id, title } in images" :key="id" provider="uploadcare" :src="id + '/-/preview/1280x960/'" :alt="title" class="w-full rounded-sm object-cover" />
         </div>
-      </ClientOnly>
+      </template>
+      <!-- For Large Screen Devices -->
     </div>
     <Transition>
       <div v-show="isEndVisible" class="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full items-center justify-center text-primary-500">

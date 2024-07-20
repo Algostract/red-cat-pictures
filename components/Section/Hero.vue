@@ -1,6 +1,11 @@
 <script setup lang="ts">
+const props = defineProps<{
+  photos: Photo[]
+}>()
+
 const emit = defineEmits<{ (event: 'contact'): void }>()
-const images = getImages(['Product-006-001', 'Product-001-002', 'Product-004-002'])
+
+const images = usePhoto(props.photos, ['Product-006-001', 'Product-001-002', 'Product-004-002'])
 </script>
 
 <template>
@@ -18,7 +23,7 @@ const images = getImages(['Product-006-001', 'Product-001-002', 'Product-004-002
       <NuxtImg
         v-for="({ id, title }, index) in images"
         :key="id"
-        :src="id + '/-/resize/800x450/'"
+        :src="id"
         :alt="title"
         width="800"
         height="450"
