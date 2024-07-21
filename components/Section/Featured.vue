@@ -43,9 +43,11 @@ watch(offset, (value) => {
   if (value > sliderHeight.value + 2 * offsetFactor) counter.value = -(containerHeight.value + 2 * offsetFactor) / offsetFactor
 })
 
+const slideCounts = ['2', '3'] as const
+
 const imageSlides = computed(() => {
-  const slides = [2, 3].map((noOfSlides) => {
-    const slides: { id: string; title: string }[][] = new Array(noOfSlides).fill(null).map((_) => [])
+  const slides = slideCounts.map((noOfSlides) => {
+    const slides: { id: string; title: string }[][] = new Array(parseInt(noOfSlides)).fill(null).map((_) => [])
 
     allImages.value.forEach((image, index) => {
       slides[index % noOfSlides].push(image)
@@ -65,7 +67,7 @@ const imageSlides = computed(() => {
   <section id="featured" ref="container" class="relative z-0 mx-0 h-screen overflow-hidden bg-light-400 dark:bg-dark-400 md:-mx-12">
     <div v-show="isSliderVisible" ref="slider" class="relative z-10 flex gap-2 transition-all duration-[2s] ease-linear" :style="{ translate: `0 ${-offset}px` }">
       <!-- For Small Screen Devices -->
-      <template v-for="slideCount in (['2', '3'] as const)">
+      <template v-for="slideCount in slideCounts">
         <div
           v-for="(images, index) in imageSlides[slideCount]"
           :key="index"
