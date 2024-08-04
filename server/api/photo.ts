@@ -1,16 +1,18 @@
 import type { Photo } from '~/utils/types'
 
-const photo = readYamlFile<Photo>('photos.yml')
+export default defineCachedEventHandler<Photo[]>(
+  () => {
+    try {
+      const photo = readYamlFile<Photo>('photos.yml')
+      return photo
+    } catch (error: any) {
+      console.error('API photo GET', error)
 
-export default defineEventHandler<Photo[]>(() => {
-  try {
-    return photo
-  } catch (error: any) {
-    console.error('API photo GET', error)
-
-    throw createError({
-      statusCode: 500,
-      statusMessage: 'Some Unknown Error Found',
-    })
-  }
-})
+      throw createError({
+        statusCode: 500,
+        statusMessage: 'Some Unknown Error Found',
+      })
+    }
+  },
+  { maxAge: 60 * 60 }
+)

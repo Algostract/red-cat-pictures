@@ -23,11 +23,11 @@ const images = usePhoto(props.photos, ['Product-006-001', 'Product-001-002', 'Pr
       <NuxtImg
         v-for="({ id, title }, index) in images"
         :key="id"
+        provider="uploadcare"
         :src="id"
         :alt="title"
-        width="800"
-        height="450"
-        provider="uploadcare"
+        :width="800"
+        :height="450"
         class="aspect-video rounded-full md:translate-x-[10%] lg:scale-[80%]"
         :class="{ '-rotate-6': index !== 1 }" />
     </div>

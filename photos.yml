@@ -96,5 +96,10 @@
 
 - name: Product-007-001
   id: 35899c6d-4a02-4979-bf88-55afe2d48a07
-  title: Three pairs of sunglasses in a row on a white background. From left to right, the first pair has a black frame and gray lenses, the second pair has a tortoiseshell frame and brown lenses, and the third pair has a gold frame and mirrored lenses.
+  title: Three pairs of sunglasses in a row on a white background
   category: product
+
+- name: Product-008-001
+  id: 02707ba2-73ed-4b65-b50b-59b1d48e87e1
+  title:
+  category: Classic Old Spice Musk After Shave Lotion Bottle

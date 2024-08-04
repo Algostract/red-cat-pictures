@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: '2024-07-11',
   devtools: { enabled: true },
-
   modules: [
     '@nuxt/eslint',
     '@nuxt/fonts',
@@ -16,14 +16,12 @@ export default defineNuxtConfig({
     'nuxt-icons',
     'nuxt-splide',
   ],
-
   routeRules: {
     '/': { swr: true },
     '/_ipx/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/images/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/fonts/**': { headers: { 'cache-control': 'max-age=31536000' } },
   },
-
   runtimeConfig: {
     app: {
       version: '',
@@ -32,11 +30,16 @@ export default defineNuxtConfig({
       rootDir: '',
     },
   },
-
   nitro: {
     compressPublicAssets: true,
   },
-
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en',
+      },
+    },
+  },
   image: {
     uploadcare: {
       cdnURL: 'https://ucarecdn.com',
@@ -44,18 +47,18 @@ export default defineNuxtConfig({
       format: 'auto',
     },
   },
-
   colorMode: {
     preference: 'system',
     fallback: 'light',
     classSuffix: '',
   },
-
   site: {
     name: 'Red Cat Pictures',
     url: 'https://redcatpictures.com',
   },
-
+  robots: {
+    disallow: ['/_nuxt/'],
+  },
   pwa: {
     scope: '/',
     base: '/',
@@ -236,12 +239,10 @@ export default defineNuxtConfig({
       navigateFallback: undefined,
     },
   },
-
-  gtag: {},
-
+  gtag: {
+    loadingStrategy: 'async',
+  },
   splide: {
     theme: 'core',
   },
-
-  compatibilityDate: '2024-07-11',
 })

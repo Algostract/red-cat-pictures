@@ -15,12 +15,13 @@ const allImages = usePhoto(props.photos, [
   'Food-008-001',
   'Food-006-002',
   'Product-001-001',
+  'Product-002-001',
   'Product-003-001',
   'Product-004-001',
   'Product-005-001',
   'Product-006-001',
   'Product-007-001',
-  'Product-002-001',
+  'Product-008-001',
 ])
 
 const container = ref<HTMLDivElement | null>(null)
@@ -79,7 +80,7 @@ const imageSlides = computed(() => {
             'flex md:hidden': slideCount == '2',
             'hidden md:flex': slideCount == '3',
           }">
-          <NuxtImg v-for="{ id, title } in images" :key="id" provider="uploadcare" :src="id + '/-/preview/1280x960/'" :alt="title" class="w-full rounded-sm object-cover" />
+          <NuxtImg v-for="{ id, title } in images" :key="id" provider="uploadcare" :src="id + '/-/preview/1280x960/'" :alt="title" :width="1280" class="w-full rounded-sm object-cover" />
         </div>
       </template>
       <!-- For Large Screen Devices -->

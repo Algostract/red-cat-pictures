@@ -18,7 +18,7 @@ function objectToClass({ sm, md }: { sm: Position; md: Position }, size: string)
 
 const categoryImages = {
   food: usePhoto(props.photos, ['Food-002-001', 'Food-005-001', 'Food-003-001', 'Food-006-002', 'Food-007-001', 'Food-004-001', 'Food-001-001']),
-  product: usePhoto(props.photos, ['Product-004-002', 'Product-005-001', 'Product-006-001', 'Product-007-001', 'Product-002-002', 'Product-003-001', 'Product-001-001']),
+  product: usePhoto(props.photos, ['Product-004-002', 'Product-005-001', 'Product-006-001', 'Product-008-001', 'Product-002-002', 'Product-003-001', 'Product-001-001']),
 }
 
 const images = computed<GallaryImage[]>(() =>
@@ -102,6 +102,7 @@ const images = computed<GallaryImage[]>(() =>
         provider="uploadcare"
         :src="autoScale ? `${url}/-/scale_crop/1280x960/center/` : url + '/-/preview/1280x960/'"
         :alt="alt"
+        :width="1280"
         class="h-full w-full overflow-hidden rounded-sm object-cover object-top"
         :class="dynamicClass" />
     </div>
