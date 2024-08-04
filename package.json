@@ -2,7 +2,7 @@
   "name": "portfolio-artarik",
   "description": "Aratrik's portfolio showcasing his projects, experience and contacts in a visually appealing manner",
   "author": "Shirsendu Bairagi <shirsendu2001@gmail.com>",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "private": true,
   "type": "module",
   "engines": {
