@@ -1,5 +1,12 @@
 # portfolio-artarik
 
+## 1.5.3
+
+### Patch Changes
+
+- 2c85496: chore: housekeeping
+- a4251f0: chore: new image added
+
 ## 1.5.2
 
 ### Patch Changes
