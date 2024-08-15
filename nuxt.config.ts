@@ -32,6 +32,12 @@ export default defineNuxtConfig({
   },
   nitro: {
     compressPublicAssets: true,
+    serverAssets: [
+      {
+        baseName: 'static',
+        dir: '../static', // Relative to `srcDir` (`server/` for nuxt)
+      },
+    ],
   },
   app: {
     head: {

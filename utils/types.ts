@@ -18,3 +18,9 @@ export interface GallaryImage {
   dynamicClass: string
   autoScale: boolean
 }
+
+export interface Video {
+  url: string
+  mime: string
+  poster: string
+}

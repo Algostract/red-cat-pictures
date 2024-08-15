@@ -94,12 +94,7 @@
   title: A pair of black Kaen sunglasses with a rectangular frame and blue mirrored lenses on a black background
   category: product
 
-- name: Product-007-001
-  id: 35899c6d-4a02-4979-bf88-55afe2d48a07
-  title: Three pairs of sunglasses in a row on a white background
-  category: product
-
 - name: Product-008-001
-  id: 02707ba2-73ed-4b65-b50b-59b1d48e87e1
-  title:
-  category: Classic Old Spice Musk After Shave Lotion Bottle
+  id: d7b95d4a-869c-4524-b924-3dba9d33f8fa
+  title: Classic Old Spice Musk After Shave Lotion Bottle
+  category: product

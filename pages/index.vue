@@ -41,6 +41,7 @@ const { data: photos } = useFetch('/api/photo', { default: () => [] })
       <SectionFeatured :photos="photos" />
       <SectionGallery :photos="photos" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
       <SectionPricing :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
+      <SectionVideo />
       <!-- <SectionTestimonial /> -->
       <ModelContact :is-open="isModelContactOpen" @close="onContact(false)" />
     </main>

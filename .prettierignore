@@ -22,3 +22,8 @@ logs
 # Local env files
 .env
 .env.*
+
+# Static files
+static/**/*.*
+!static/**/*.gitkeep
+!static/data/*

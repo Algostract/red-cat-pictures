@@ -30,3 +30,7 @@ logs
 
 .dockerignore
 Dockerfile
+
+# Static files
+static/**/*.*
+!static/**/*.gitkeep
