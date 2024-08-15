@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 1.6.0
+
+### Minor Changes
+
+- 79cf913: feat: video section with dyanmic serving added
+
 ## 1.5.3
 
 ### Patch Changes
