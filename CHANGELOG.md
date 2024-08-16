@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 1.6.1
+
+### Patch Changes
+
+- 7cc9550: fix: refactored useStorage.getItemRaw -> fs
+
 ## 1.6.0
 
 ### Minor Changes
