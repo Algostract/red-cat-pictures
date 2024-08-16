@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 1.6.2
+
+### Patch Changes
+
+- 1969937: fix: video path fixed
+
 ## 1.6.1
 
 ### Patch Changes
