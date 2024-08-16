@@ -18,7 +18,7 @@
     "build": "nuxt build && cp -r static .output/static",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "start": "node .output/server/index.mjs",
+    "start": "node --env-file=.env.prod .output/server/index.mjs",
     "tunnel": "untun tunnel --port 1002 http://localhost:1002",
     "clean": "nuxt cleanup",
     "docker:build": "docker build --build-arg TAG=dev -t portfolio-aratrik:dev .",
