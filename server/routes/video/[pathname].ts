@@ -1,3 +1,4 @@
+import fs from 'node:fs'
 import { Readable } from 'node:stream'
 import { z } from 'zod'
 
@@ -34,7 +35,9 @@ export default defineEventHandler(async (event) => {
   )
   const range = getRequestHeader(event, 'range')
 
-  const videoBuffer = await useStorage('assets:static').getItemRaw<Buffer>(`videos/${pathname}`)
+  // FIXME: use getItemRaw when it is stable
+  // const videoBuffer = await useStorage('assets:static').getItemRaw(`videos/${pathname}`)
+  const videoBuffer = fs.readFileSync(`./static/videos/${pathname}`);
 
   if (!videoBuffer) throw createError({ statusCode: 500, statusMessage: 'video is undefined' })
 
