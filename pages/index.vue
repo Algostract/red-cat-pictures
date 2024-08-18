@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import type { Categories } from '~/utils/types'
 
+const { gtag } = useScriptGoogleAnalytics()
+
 const isModelContactOpen = ref<boolean>(false)
 
 function onContact(action: boolean) {
   if (action) {
     isModelContactOpen.value = true
-    useTrackEvent('contact_open')
+    gtag('event', 'contact_open')
   } else {
     isModelContactOpen.value = false
-    useTrackEvent('contact_close')
+    gtag('event', 'contact_close')
   }
 }
 
-const prices = {
+const pricePhoto = {
   food: [
     {
       title: 'Basic Photography',
@@ -110,11 +112,11 @@ const prices = {
   ],
 }
 
-const pricesC = {
+const pricesVideo = {
   general: [
     {
-      title: 'Special/Commercial Videography',
-      price: 1000,
+      title: 'Commercial Videography',
+      price: 2000,
       unit: 'video',
       points: [
         { icon: 'photo', content: '15 sec Video, Minimum 2 Video' },
@@ -158,9 +160,9 @@ const { data: photos } = useFetch('/api/photo', { default: () => [] })
       <SectionHero :photos="photos" @contact="onContact(true)" />
       <SectionFeatured :photos="photos" />
       <SectionGallery :photos="photos" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
-      <SectionPricing id="pricing-image" :prices="prices" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
+      <SectionPricing id="pricing-image" :prices="pricePhoto" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
       <SectionVideo />
-      <SectionPricing id="pricing-video" :prices="pricesC" :tabs="[{ icon: 'pizza', title: 'general' }]" :active-tab="'general'" @change-tab="changeActiveTab" />
+      <SectionPricing id="pricing-video" :prices="pricesVideo" :tabs="[{ icon: 'box', title: 'commercial' }]" :active-tab="'commercial'" @change-tab="changeActiveTab" />
       <!-- <SectionTestimonial /> -->
       <ModalContact :is-open="isModelContactOpen" @close="onContact(false)" />
     </main>

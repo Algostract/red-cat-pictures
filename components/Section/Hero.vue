@@ -16,7 +16,7 @@ const images = usePhoto(props.photos, ['Product-006-001', 'Product-001-002', 'Pr
         product to life
       </h1>
       <p class="max-w-screen-sm text-lg leading-9 tracking-wide md:text-xl">Nurture the essence of your product with our photography & videography services</p>
-      <CTAButton class="hidden md:flex" @click="emit('contact')" />
+      <ButtonCTA class="hidden md:flex" @click="emit('contact')" />
     </div>
     <div
       class="gradient-mask relative -z-10 col-span-3 col-start-1 row-start-2 mx-auto flex items-center justify-center gap-4 sm:max-w-[32rem] md:col-span-2 md:col-start-2 md:row-start-1 md:flex-col lg:h-screen lg:max-w-full">
@@ -31,7 +31,7 @@ const images = usePhoto(props.photos, ['Product-006-001', 'Product-001-002', 'Pr
         class="aspect-video rounded-full md:translate-x-[10%] lg:scale-[80%]"
         :class="{ '-rotate-6': index !== 1 }" />
     </div>
-    <CTAButton class="col-start-2 row-start-3 items-center justify-self-center md:hidden" @click="emit('contact')" />
+    <ButtonCTA class="col-start-2 row-start-3 items-center justify-self-center md:hidden" @click="emit('contact')" />
   </section>
 </template>
 

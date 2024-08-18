@@ -1,8 +1,8 @@
 <script setup lang="ts">
+const { gtag } = useScriptGoogleAnalytics()
+
 function onNavigate(section: string) {
-  useTrackEvent('navigate', {
-    section,
-  })
+  gtag('event', 'navigate', { section })
 }
 </script>
 
@@ -25,7 +25,7 @@ function onNavigate(section: string) {
         <!-- <li><NuxtLink to="#testimonials" @click="onNavigate('testimonials')">Testimonials</NuxtLink></li> -->
       </ul>
       <div class="col-start-3 -translate-y-1/2 justify-self-end">
-        <ColorModeButton />
+        <ButtonColorMode />
       </div>
     </nav>
   </header>

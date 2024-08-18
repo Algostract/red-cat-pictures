@@ -6,13 +6,13 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/image',
+    '@nuxt/scripts',
     '@nuxt/test-utils',
     '@nuxtjs/color-mode',
     '@nuxtjs/seo',
     '@nuxtjs/tailwindcss',
     '@vite-pwa/nuxt',
     '@vueuse/nuxt',
-    'nuxt-gtag',
     'nuxt-icons',
     'nuxt-splide',
   ],
@@ -25,6 +25,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     app: {
       version: '',
+    },
+    public: {
+      scripts: {
+        googleAnalytics: {
+          id: '',
+        },
+      },
     },
     private: {
       rootDir: '',
@@ -244,9 +251,6 @@ export default defineNuxtConfig({
       suppressWarnings: false,
       navigateFallback: undefined,
     },
-  },
-  gtag: {
-    loadingStrategy: 'async',
   },
   splide: {
     theme: 'core',

@@ -15,7 +15,7 @@ const emit = defineEmits<{
         <NuxtIcon name="shba007" filled class="text-[20px]" />
       </NuxtLink>
     </div>
-    <CTAButton :primary="false" class="col-span-2 col-start-1 row-start-1 self-center justify-self-center md:col-span-1 md:col-start-2 md:row-start-2" @click="emit('contact')" />
+    <ButtonCTA :primary="false" class="col-span-2 col-start-1 row-start-1 self-center justify-self-center md:col-span-1 md:col-start-2 md:row-start-2" @click="emit('contact')" />
     <ul class="col-start-2 row-start-2 flex gap-4 justify-self-end *:transition-colors *:duration-500 *:ease-out hover:*:text-white md:col-start-3 md:row-start-3 md:gap-8">
       <li>
         <NuxtLink to="https://www.facebook.com/redcatxpictures" target="_blank">

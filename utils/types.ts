@@ -1,4 +1,4 @@
-export type Categories = 'general' | 'food' | 'product'
+export type Categories = 'commercial' | 'food' | 'product'
 
 export interface Photo {
   name: string

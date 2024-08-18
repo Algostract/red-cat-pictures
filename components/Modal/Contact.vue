@@ -6,6 +6,8 @@ const emit = defineEmits<{
   (event: 'close'): void
 }>()
 
+const { gtag } = useScriptGoogleAnalytics()
+
 const methods = ref([
   { method: 'call', icon: 'phone', link: 'tel:+91891-048-9578' },
   // { method: 'email', icon: 'email', link: 'mailto:shirsendu2001@gmail.com' },
@@ -13,9 +15,7 @@ const methods = ref([
 ])
 
 function contact(method: string) {
-  useTrackEvent('contact', {
-    method,
-  })
+  gtag('event', 'contact', { method })
 }
 
 function close() {

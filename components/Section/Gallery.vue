@@ -93,7 +93,7 @@ const images = computed<GallaryImage[]>(() =>
 <template>
   <section id="gallery" class="relative h-fit">
     <div class="mx-auto mb-4 flex w-fit gap-4 md:mb-12">
-      <TabButton v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="activeTab === title" @click="emit('changeTab', title)" />
+      <ButtonTab v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="activeTab === title" @click="emit('changeTab', title)" />
     </div>
     <div class="relative mx-0 grid grid-cols-2 grid-rows-6 gap-2 md:-mx-12 md:grid-cols-4 md:grid-rows-3">
       <NuxtImg

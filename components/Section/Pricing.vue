@@ -20,6 +20,8 @@ const props = defineProps<{
 
 const emit = defineEmits<{ (event: 'changeTab', value: Categories): void }>()
 
+const { gtag } = useScriptGoogleAnalytics()
+
 const splideOption = computed(() => ({
   mediaQuery: 'min',
   arrows: true,
@@ -54,10 +56,10 @@ const isModelContactOpen = ref<boolean>(false)
 function onContact(action: boolean) {
   if (action) {
     isModelContactOpen.value = true
-    useTrackEvent('contact_open')
+    gtag('event', 'contact_open')
   } else {
     isModelContactOpen.value = false
-    useTrackEvent('contact_close')
+    gtag('event', 'contact_close')
   }
 }
 </script>
@@ -65,7 +67,7 @@ function onContact(action: boolean) {
 <template>
   <section class="relative -left-4 w-screen md:left-0 md:w-full">
     <div class="mx-auto mb-4 flex w-fit gap-4 md:mb-12">
-      <TabButton v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="activeTab === title" @click="emit('changeTab', title)" />
+      <ButtonTab v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="activeTab === title" @click="emit('changeTab', title)" />
     </div>
     <Splide :options="splideOption" tag="div" :has-track="false" @move="(slideIndex: number) => (activeSlideIndex = slideIndex)">
       <SplideTrack>
