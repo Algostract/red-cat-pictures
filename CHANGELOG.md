@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 1.7.2
+
+### Patch Changes
+
+- fbc1f84: fix: videoPrices displayed
+
 ## 1.7.1
 
 ### Patch Changes
