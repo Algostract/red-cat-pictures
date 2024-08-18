@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 1.7.1
+
+### Patch Changes
+
+- 7b84ba1: refactor: nuxt scripts added
+
 ## 1.7.0
 
 ### Minor Changes
