@@ -113,7 +113,7 @@ const pricePhoto = {
 }
 
 const pricesVideo = {
-  general: [
+  commercial: [
     {
       title: 'Commercial Videography',
       price: 2000,
