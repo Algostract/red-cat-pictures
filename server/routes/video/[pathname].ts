@@ -37,17 +37,16 @@ export default defineEventHandler(async (event) => {
 
   // FIXME: use getItemRaw when it is stable
   // const videoBuffer = await useStorage('assets:static').getItemRaw(`videos/${pathname}`)
-  const videoBuffer = fs.readFileSync(`./.output/static/videos/${pathname}`);
+  const videoPath = `./.output/static/videos/${pathname}`
+  const stat = fs.statSync(videoPath)
 
-  if (!videoBuffer) throw createError({ statusCode: 500, statusMessage: 'video is undefined' })
+  if (!stat) throw createError({ statusCode: 500, statusMessage: 'video is undefined' })
 
-  const bufferSize = videoBuffer.length
+  const bufferSize = stat.size
   const { chunkStart, chunkEnd, chunkSize } = calculateChunkRange(range, bufferSize)
   // console.log({ pathname, start, end, bufferSize, chunksize })
 
   if (chunkSize !== bufferSize) setResponseStatus(event, 206)
-
-  const bufferStream = createBufferStream(videoBuffer, chunkStart, chunkEnd)
 
   setResponseHeaders(event, {
     'Accept-Ranges': 'bytes',
@@ -57,6 +56,8 @@ export default defineEventHandler(async (event) => {
     'Cache-Control': 'public, max-age=31552767',
     'X-Robots-Tag': 'index, follow',
   })
+
+  const bufferStream = fs.createReadStream(videoPath, { start: chunkStart, end: chunkEnd })
 
   return bufferStream
 })

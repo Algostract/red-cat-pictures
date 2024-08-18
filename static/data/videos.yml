@@ -1,8 +1,22 @@
 ---
-- url: /video/cookies.mp4
-  mime: video/mp4
-  poster:
+- poster:
+  sources:
+    - src: /video/cookies-av1.webm
+      type: video/webm
 
-- url: /video/red-bull.mp4
-  mime: video/mp4
-  poster:
+    - src: /video/cookies-vp9.webm
+      type: video/webm
+
+    - src: /video/cookies-h264.mp4
+      type: video/mp4
+
+- poster:
+  sources:
+    - src: /video/red-bull-av1.webm
+      type: video/webm
+
+    - src: /video/red-bull-vp9.webm
+      type: video/webm
+
+    - src: /video/red-bull-h264.mp4
+      type: video/mp4

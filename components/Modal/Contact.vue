@@ -28,7 +28,7 @@ function flippedClass(method: string) {
 </script>
 
 <template>
-  <ModelBase :is-open="isOpen" inner-class="grid grid-rows-1 grid-cols-2 gap-4 pt-6 w-full !max-w-[24.5rem] overflow-hidden" @close="close">
+  <ModalBase :is-open="isOpen" inner-class="grid grid-rows-1 grid-cols-2 gap-4 pt-6 w-full !max-w-[24.5rem] overflow-hidden" @close="close">
     <span class="col-span-2 mx-auto mb-2 text-lg">Book a Session via</span>
     <NuxtLink
       v-for="{ method, icon, link } of methods"
@@ -42,12 +42,12 @@ function flippedClass(method: string) {
       <NuxtIcon :name="icon" class="text-[56px]" :class="flippedClass(method)" />
       <span class="font-semi-bold capitalize" :class="flippedClass(method)">{{ method }}</span>
     </NuxtLink>
-  </ModelBase>
+  </ModalBase>
 </template>
 
 <style scoped>
 a {
-  @apply bg-primary-500 drop-shadow-[inset_-2px_2px_8px_0_rgba(0,_0,_0,_0.25)] transition-all duration-500 ease-out hover:bg-primary-400 hover:drop-shadow-[inset_-4px_4px_8px_0_rgba(0,_0,_0,_0.25)];
+  @apply bg-primary-500 drop-shadow-[inset_-2px_2px_8px_0_rgba(0,0,0,0.25)] transition-all duration-500 ease-out hover:bg-primary-400 hover:drop-shadow-[inset_-4px_4px_8px_0_rgba(0,0,0,0.25)];
   clip-path: polygon(
     100% 100%,
     -0.212% 100%,

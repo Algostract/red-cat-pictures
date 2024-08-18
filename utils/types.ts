@@ -1,4 +1,4 @@
-export type Categories = 'food' | 'product'
+export type Categories = 'general' | 'food' | 'product'
 
 export interface Photo {
   name: string
@@ -20,7 +20,9 @@ export interface GallaryImage {
 }
 
 export interface Video {
-  url: string
-  mime: string
   poster: string
+  sources: {
+    src: string
+    type: string
+  }[]
 }
