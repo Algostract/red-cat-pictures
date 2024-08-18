@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 1.7.0
+
+### Minor Changes
+
+- 4f81b75: feat: new video section added, video optimized
+
 ## 1.6.2
 
 ### Patch Changes
