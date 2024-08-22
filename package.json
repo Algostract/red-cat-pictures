@@ -11,18 +11,18 @@
   "license": "LGPL-3.0-or-later",
   "scripts": {
     "postinstall": "nuxt prepare",
-    "dev": "nuxt dev --tunnel",
+    "dev": "nuxt dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier .  --write",
-    "build": "nuxt build && cp -r static .output/static",
+    "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "start": "node --env-file=.env.prod .output/server/index.mjs",
     "tunnel": "untun tunnel --port 1002 http://localhost:1002",
     "clean": "nuxt cleanup",
     "docker:build": "docker build --build-arg TAG=dev -t portfolio-aratrik:dev .",
-    "docker:start": "docker run --detach --name portfolio-aratrik-dev --mount type=bind,source=$(pwd)/static,target=/app/.output/static,readonly --env-file .env.prod -p 1002:3000 portfolio-aratrik:dev"
+    "docker:start": "docker run --detach --name portfolio-aratrik-dev --mount type=bind,source=$(pwd)/static,target=/app/static,readonly --env-file .env.prod -p 1002:3000 portfolio-aratrik:dev"
   },
   "dependencies": {
     "confbox": "^0.1.7",

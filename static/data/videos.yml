@@ -1,22 +1,42 @@
 ---
 - poster:
   sources:
+    - src: /video/cookies-hevc.mp4
+      type: video/mp4
+
     - src: /video/cookies-av1.webm
       type: video/webm
 
     - src: /video/cookies-vp9.webm
       type: video/webm
 
-    - src: /video/cookies-h264.mp4
+    - src: /video/cookies-avc.mp4
       type: video/mp4
 
 - poster:
   sources:
+    - src: /video/red-bull-hevc.mp4
+      type: video/webm
+
     - src: /video/red-bull-av1.webm
       type: video/webm
 
     - src: /video/red-bull-vp9.webm
       type: video/webm
 
-    - src: /video/red-bull-h264.mp4
+    - src: /video/red-bull-avc.mp4
+      type: video/mp4
+
+- poster:
+  sources:
+    - src: /video/peanut-bar-hevc.mp4
+      type: video/webm
+
+    - src: /video/peanut-bar-av1.webm
+      type: video/webm
+
+    - src: /video/peanut-bar-vp9.webm
+      type: video/webm
+
+    - src: /video/peanut-bar-avc.mp4
       type: video/mp4

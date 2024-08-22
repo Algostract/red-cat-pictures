@@ -39,12 +39,12 @@ export default defineNuxtConfig({
   },
   nitro: {
     compressPublicAssets: true,
-    serverAssets: [
-      {
-        baseName: 'static',
-        dir: '../static', // Relative to `srcDir` (`server/` for nuxt)
-      },
-    ],
+    storage: {
+      fs: {
+        driver: 'fs',
+        base: './static'
+      }
+    }
   },
   app: {
     head: {

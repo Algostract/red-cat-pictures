@@ -1,4 +1,3 @@
-import fs from 'node:fs'
 import { Readable } from 'node:stream'
 import { z } from 'zod'
 
@@ -35,16 +34,13 @@ export default defineEventHandler(async (event) => {
   )
   const range = getRequestHeader(event, 'range')
 
-  // FIXME: use getItemRaw when it is stable
-  // const videoBuffer = await useStorage('assets:static').getItemRaw(`videos/${pathname}`)
-  const videoPath = `./.output/static/videos/${pathname}`
-  const stat = fs.statSync(videoPath)
+  const metaData = await useStorage('fs').getMeta(`videos/${pathname}`)
+  const bufferData = await useStorage('fs').getItemRaw(`videos/${pathname}`)
 
-  if (!stat) throw createError({ statusCode: 500, statusMessage: 'video is undefined' })
+  if (!bufferData) throw createError({ statusCode: 500, statusMessage: 'video is undefined' })
 
-  const bufferSize = stat.size
+  const bufferSize = metaData.size as number
   const { chunkStart, chunkEnd, chunkSize } = calculateChunkRange(range, bufferSize)
-  // console.log({ pathname, start, end, bufferSize, chunksize })
 
   if (chunkSize !== bufferSize) setResponseStatus(event, 206)
 
@@ -57,7 +53,7 @@ export default defineEventHandler(async (event) => {
     'X-Robots-Tag': 'index, follow',
   })
 
-  const bufferStream = fs.createReadStream(videoPath, { start: chunkStart, end: chunkEnd })
+  const bufferStream = createBufferStream(bufferData, chunkStart, chunkEnd)
 
-  return bufferStream
+  return sendStream(event, bufferStream)
 })
