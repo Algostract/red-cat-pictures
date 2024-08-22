@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 1.7.3
+
+### Patch Changes
+
+- e12ebd7: fix: dynamic file load caching fixed
+
 ## 1.7.2
 
 ### Patch Changes
