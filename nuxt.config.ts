@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-07-11',
+  compatibilityDate: '2024-07-04',
+  future: {
+    compatibilityVersion: 4,
+  },
   devtools: { enabled: true },
   modules: [
     '@nuxt/eslint',
@@ -31,6 +34,9 @@ export default defineNuxtConfig({
         googleAnalytics: {
           id: '',
         },
+        googleTagManager: {
+          id: '',
+        },
       },
     },
     private: {
@@ -42,9 +48,9 @@ export default defineNuxtConfig({
     storage: {
       fs: {
         driver: 'fs',
-        base: './static'
-      }
-    }
+        base: './static',
+      },
+    },
   },
   app: {
     head: {
@@ -58,6 +64,12 @@ export default defineNuxtConfig({
       cdnURL: 'https://ucarecdn.com',
       quality: 'smart',
       format: 'auto',
+    },
+  },
+  scripts: {
+    registry: {
+      googleAnalytics: true,
+      googleTagManager: true,
     },
   },
   colorMode: {

@@ -6,7 +6,6 @@ const currentVideo = computed(() => ({ ...videos.value[currentVideoIndex.value] 
 
 async function updateVideoIndex() {
   currentVideoIndex.value = (currentVideoIndex.value + 1) % videos.value.length
-  console.log({ currentVideoIndex: currentVideoIndex.value, currentVideo: currentVideo.value })
 }
 </script>
 

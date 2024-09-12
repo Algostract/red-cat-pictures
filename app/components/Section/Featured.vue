@@ -13,7 +13,7 @@ const allImages = usePhoto(props.photos, [
   'Food-006-001',
   'Food-009-001',
   'Food-008-001',
-  'Food-006-002',
+  // 'Food-006-002',
   'Product-001-001',
   'Product-002-001',
   'Product-003-001',

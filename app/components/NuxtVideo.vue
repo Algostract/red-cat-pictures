@@ -50,15 +50,15 @@ function handleError(e?: Error) {
 }
 
 function handleCanPlay() {
-  console.log('Video can start playing')
+  // console.log('Video can start playing')
 }
 
 function handlePlay() {
-  console.log('Video played')
+  // console.log('Video played')
 }
 
 function handlePause() {
-  console.log('Video paused')
+  // console.log('Video paused')
 }
 
 function handleProgress() {}

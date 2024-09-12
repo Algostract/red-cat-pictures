@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import type { Categories } from '~/utils/types'
 
-const { gtag } = useScriptGoogleAnalytics()
+const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
 const isModelContactOpen = ref<boolean>(false)
 
 function onContact(action: boolean) {
   if (action) {
     isModelContactOpen.value = true
-    gtag('event', 'contact_open')
+    gaProxy.gtag('event', 'contact_open')
   } else {
     isModelContactOpen.value = false
-    gtag('event', 'contact_close')
+    gaProxy.gtag('event', 'contact_close')
   }
 }
 
@@ -162,7 +162,7 @@ const { data: photos } = useFetch('/api/photo', { default: () => [] })
       <SectionGallery :photos="photos" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
       <SectionPricing id="pricing-image" :prices="pricePhoto" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
       <SectionVideo />
-      <SectionPricing id="pricing-video" :prices="pricesVideo" :tabs="[{ icon: 'box', title: 'commercial' }]" :active-tab="'commercial'" @change-tab="changeActiveTab" />
+      <SectionPricing id="pricing-video" :prices="pricesVideo" :tabs="[{ icon: 'box', title: 'commercial' }]" :active-tab="'commercial'" @change-tab="() => {}" />
       <!-- <SectionTestimonial /> -->
       <ModalContact :is-open="isModelContactOpen" @close="onContact(false)" />
     </main>

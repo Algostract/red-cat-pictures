@@ -6,7 +6,8 @@ const emit = defineEmits<{
   (event: 'close'): void
 }>()
 
-const { gtag } = useScriptGoogleAnalytics()
+const { proxy: gaProxy } = useScriptGoogleAnalytics()
+const { proxy: gtagProxy } = useScriptGoogleTagManager()
 
 const methods = ref([
   { method: 'call', icon: 'phone', link: 'tel:+91891-048-9578' },
@@ -15,7 +16,8 @@ const methods = ref([
 ])
 
 function contact(method: string) {
-  gtag('event', 'contact', { method })
+  gaProxy.gtag('event', 'contact', { method })
+  gtagProxy.dataLayer.push({ event: 'conversion', value: 1 })
 }
 
 function close() {
@@ -47,7 +49,7 @@ function flippedClass(method: string) {
 
 <style scoped>
 a {
-  @apply bg-primary-500 drop-shadow-[inset_-2px_2px_8px_0_rgba(0,0,0,0.25)] transition-all duration-500 ease-out hover:bg-primary-400 hover:drop-shadow-[inset_-4px_4px_8px_0_rgba(0,0,0,0.25)];
+  @apply drop-shadow-[inset_-2px_2px_8px_0_rgba(0, 0, 0, 0.25)] hover:drop-shadow-[inset_-4px_4px_8px_0_rgba(0, 0, 0, 0.25)] bg-primary-500 transition-all duration-500 ease-out hover:bg-primary-400;
   clip-path: polygon(
     100% 100%,
     -0.212% 100%,

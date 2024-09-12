@@ -11,10 +11,7 @@ const images = usePhoto(props.photos, ['Product-006-001', 'Product-001-002', 'Pr
 <template>
   <section id="hero" class="relative mt-24 grid h-screen grid-cols-3 grid-rows-[repeat(3,min-content)] items-center gap-y-[4.5rem] md:h-auto md:grid-rows-1 lg:mt-0">
     <div class="relative col-span-3 !col-start-1 row-start-1 flex flex-col gap-6 text-center md:col-span-2 md:text-left">
-      <h1 class="text-3xl font-semi-bold md:text-5xl">
-        Bring your<br />
-        product to life
-      </h1>
+      <h1 class="-mb-1 text-3xl font-semi-bold md:text-5xl">Elevate Your <br />Brand Image</h1>
       <p class="max-w-screen-sm text-lg leading-9 tracking-wide md:text-xl">Nurture the essence of your product with our photography & videography services</p>
       <ButtonCTA class="hidden md:flex" @click="emit('contact')" />
     </div>

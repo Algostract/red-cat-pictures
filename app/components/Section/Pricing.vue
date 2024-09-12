@@ -20,7 +20,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{ (event: 'changeTab', value: Categories): void }>()
 
-const { gtag } = useScriptGoogleAnalytics()
+const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
 const splideOption = computed(() => ({
   mediaQuery: 'min',
@@ -56,10 +56,10 @@ const isModelContactOpen = ref<boolean>(false)
 function onContact(action: boolean) {
   if (action) {
     isModelContactOpen.value = true
-    gtag('event', 'contact_open')
+    gaProxy.gtag('event', 'contact_open')
   } else {
     isModelContactOpen.value = false
-    gtag('event', 'contact_close')
+    gaProxy.gtag('event', 'contact_close')
   }
 }
 </script>
@@ -90,11 +90,11 @@ function onContact(action: boolean) {
 
 <style>
 #pricing-image ul.splide__list {
-  @apply md:!flex md:w-full md:items-center md:justify-between;
+  @apply md: !flex md:w-full md:items-center md:justify-between;
 }
 
 #pricing-video ul.splide__list {
-  @apply md:!flex md:w-full md:items-center md:justify-center;
+  @apply md: !flex md:w-full md:items-center md:justify-center;
 }
 
 #pricing-image .arrow,
