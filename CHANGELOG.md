@@ -1,5 +1,16 @@
 # portfolio-artarik
 
+## 1.8.0
+
+### Minor Changes
+
+- afffe68: refactor: file structure migrated to nuxt 4
+
+### Patch Changes
+
+- 5813353: style: hero slide animation
+- 5813353: chore: text copy change
+
 ## 1.7.3
 
 ### Patch Changes
