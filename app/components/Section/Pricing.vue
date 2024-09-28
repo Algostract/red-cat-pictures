@@ -18,7 +18,9 @@ const props = defineProps<{
   activeTab: Categories
 }>()
 
-const emit = defineEmits<{ (event: 'changeTab', value: Categories): void }>()
+const emit = defineEmits<{
+  changeTab: [value: Categories]
+}>()
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
@@ -90,11 +92,11 @@ function onContact(action: boolean) {
 
 <style>
 #pricing-image ul.splide__list {
-  @apply md: !flex md:w-full md:items-center md:justify-between;
+  @apply md:!flex md:w-full md:items-center md:justify-between;
 }
 
 #pricing-video ul.splide__list {
-  @apply md: !flex md:w-full md:items-center md:justify-center;
+  @apply md:!flex md:w-full md:items-center md:justify-center;
 }
 
 #pricing-image .arrow,

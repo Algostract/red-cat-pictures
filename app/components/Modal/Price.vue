@@ -11,7 +11,7 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (event: 'contact'): void
+  contact: []
 }>()
 </script>
 

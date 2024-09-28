@@ -29,7 +29,7 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<{
-  (event: 'ended'): void
+  ended: []
 }>()
 
 const videoRef = ref<HTMLVideoElement>()

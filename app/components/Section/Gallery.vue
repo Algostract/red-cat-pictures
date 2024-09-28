@@ -8,7 +8,7 @@ const props = defineProps<{
   activeTab: Categories
 }>()
 
-const emit = defineEmits<{ (event: 'changeTab', value: Categories): void }>()
+const emit = defineEmits<{ changeTab: [value: Categories] }>()
 
 function objectToClass({ sm, md }: { sm: Position; md: Position }, size: string) {
   const aspectRatio = { s: 1.57, m: 0.67, l: 1.39 }[size]

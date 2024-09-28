@@ -1,21 +1,24 @@
 {
   "name": "portfolio-artarik",
+  "version": "1.7.3",
   "description": "Aratrik's portfolio showcasing his projects, experience and contacts in a visually appealing manner",
   "author": "Shirsendu Bairagi <shirsendu2001@gmail.com>",
-  "version": "1.7.3",
-  "private": true,
-  "type": "module",
-  "engines": {
-    "node": "^20.15.0"
-  },
   "license": "LGPL-3.0-or-later",
+  "type": "module",
+  "private": true,
+  "volta": {
+    "node": "20.17.0"
+  },
+  "engines": {
+    "node": "^20.17.0"
+  },
   "scripts": {
     "postinstall": "nuxt prepare",
     "dev": "nuxt dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier .  --write",
-    "build": "nuxt build",
+    "build": "nuxt build && cp -r static .output/static",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "start": "node --env-file=.env.prod .output/server/index.mjs",
@@ -31,22 +34,22 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.8",
-    "@nuxt/eslint": "^0.5.6",
-    "@nuxt/fonts": "^0.7.2",
+    "@nuxt/eslint": "^0.5.7",
+    "@nuxt/fonts": "^0.9.2",
     "@nuxt/image": "^1.8.0",
-    "@nuxt/scripts": "^0.8.4",
-    "@nuxt/test-utils": "^3.14.1",
-    "@nuxtjs/color-mode": "^3.4.4",
+    "@nuxt/scripts": "^0.9.4",
+    "@nuxt/test-utils": "^3.14.2",
+    "@nuxtjs/color-mode": "^3.5.1",
     "@nuxtjs/seo": "^2.0.0-rc.21",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@vite-pwa/nuxt": "^0.10.5",
-    "@vueuse/nuxt": "^11.0.3",
+    "@vueuse/nuxt": "^11.1.0",
     "eslint-config-prettier": "^9.1.0",
-    "nuxt": "^3.13.1",
+    "nuxt": "^3.13.2",
     "nuxt-icons": "^3.2.1",
     "nuxt-splide": "^1.1.1",
     "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.6",
+    "prettier-plugin-tailwindcss": "^0.6.8",
     "untun": "^0.1.3"
   }
 }

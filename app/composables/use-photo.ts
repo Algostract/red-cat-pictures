@@ -1,6 +1,6 @@
-export default function (photos: Photo[] | Ref<globalThis.Photo[] | null>, imageNames: string[]): ComputedRef<Photo[]> {
+export default function (photos: Photo[] | Ref<globalThis.Photo[] | null>, imageNames: string[] | Ref<string[]>): ComputedRef<Photo[]> {
   const selectedImages = computed(() =>
-    imageNames.map<Photo | undefined>((name) => {
+    toValue(imageNames).map<Photo | undefined>((name) => {
       if (!('value' in photos)) return photos ? photos.find((image) => image.name === name) : undefined
       else return photos.value ? photos.value.find((image) => image.name === name) : undefined
     })

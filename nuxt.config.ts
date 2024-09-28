@@ -51,6 +51,15 @@ export default defineNuxtConfig({
         base: './static',
       },
     },
+    experimental: {
+      openAPI: {
+        ui: {
+          scalar: {
+            theme: 'blue',
+          },
+        },
+      },
+    },
   },
   app: {
     head: {

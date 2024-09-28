@@ -3,7 +3,7 @@ defineProps<{
   isOpen: boolean
 }>()
 const emit = defineEmits<{
-  (event: 'close'): void
+  close: []
 }>()
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
@@ -49,7 +49,7 @@ function flippedClass(method: string) {
 
 <style scoped>
 a {
-  @apply drop-shadow-[inset_-2px_2px_8px_0_rgba(0, 0, 0, 0.25)] hover:drop-shadow-[inset_-4px_4px_8px_0_rgba(0, 0, 0, 0.25)] bg-primary-500 transition-all duration-500 ease-out hover:bg-primary-400;
+  @apply bg-primary-500 drop-shadow-[inset_-2px_2px_8px_0_rgba(0,0,0,0.25)] transition-all duration-500 ease-out hover:bg-primary-400 hover:drop-shadow-[inset_-4px_4px_8px_0_rgba(0,0,0,0.25)];
   clip-path: polygon(
     100% 100%,
     -0.212% 100%,

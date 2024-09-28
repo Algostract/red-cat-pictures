@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const emit = defineEmits<{
-  (event: 'contact'): void
+  contact: []
 }>()
 </script>
 

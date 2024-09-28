@@ -26,16 +26,16 @@ function createBufferStream(buffer: Buffer, start: number, end: number) {
 }
 
 export default defineEventHandler(async (event) => {
-  const { pathname } = await getValidatedRouterParams(
+  const { name } = await getValidatedRouterParams(
     event,
     z.object({
-      pathname: z.string().min(1),
+      name: z.string().min(1),
     }).parse
   )
   const range = getRequestHeader(event, 'range')
 
-  const metaData = await useStorage('fs').getMeta(`videos/${pathname}`)
-  const bufferData = await useStorage('fs').getItemRaw(`videos/${pathname}`)
+  const metaData = await useStorage('fs').getMeta(`videos/${name}`)
+  const bufferData = await useStorage('fs').getItemRaw(`videos/${name}`)
 
   if (!bufferData) throw createError({ statusCode: 500, statusMessage: 'video is undefined' })
 
