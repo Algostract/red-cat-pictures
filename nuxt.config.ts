@@ -34,9 +34,9 @@ export default defineNuxtConfig({
         googleAnalytics: {
           id: '',
         },
-        googleTagManager: {
-          id: '',
-        },
+        // googleTagManager: {
+        //   id: '',
+        // },
       },
     },
     private: {
@@ -78,7 +78,7 @@ export default defineNuxtConfig({
   scripts: {
     registry: {
       googleAnalytics: true,
-      googleTagManager: true,
+      // googleTagManager: true,
     },
   },
   colorMode: {

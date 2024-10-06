@@ -3,98 +3,138 @@
   id: 50071c98-e75c-4673-a105-1ae104b6eb35
   title: Close-up of a traditional Indian chicken biryani dish on a banana leaf, garnished with onions, cucumbers, and yogurt
   category: food
+  width: 4536
+  height: 6804
 
 - name: Food-002-001
   id: 69dcabdd-d9da-419a-a823-285d34db4f95
   title: Spicy grilled chicken wings with onion rings on a black plate, garnished with chili flakes
   category: food
+  width: 3330
+  height: 3330
 
 - name: Food-003-001
   id: d4857636-289b-4e4d-a29f-8e3a42617eb4
   title: Food Photography of Stack of fluffy pancakes with fresh strawberries and honey drizzle on a wooden board
   category: food
+  width: 7008
+  height: 4672
 
 - name: Food-004-001
   id: 9e82456d-78e0-4df0-a152-566327697ef7
   title: Herbal tea in a glass teapot and cup with lemon slices, mint leaves, and honey dipper on a wooden tray
   category: food
+  width: 4150
+  height: 5534
 
 - name: Food-005-001
   id: badf3211-af49-4991-b573-303d8f485440
   title: A juicy cheeseburger on a wooden cutting board, served with a side of golden french fries
   category: food
+  width: 7008
+  height: 4672
 
 - name: Food-006-001
   id: 937b5072-2414-4d42-9006-5314f0b1682a
   title: A close-up of a plate of jiaozi dumplings with chopsticks and green onions on a blue table
   category: food
+  width: 4141
+  height: 6211
 
 - name: Food-006-002
   id: 9d7e283c-f017-40f5-b688-8af1a6f5d84c
   title: A bowl of momo with green onions on a blue table. The momo are filled with chicken and vegetables
   category: food
+  width: 2731
+  height: 2039
 
 - name: Food-007-001
   id: 17b026dd-bc91-4c14-bb34-9901e13ba7f8
   title: A bowl of stew with a hard-boiled egg and a slice of bread on a wooden cutting board
   category: food
+  width: 3565
+  height: 5348
 
 - name: Food-008-001
   id: 2c3e85c4-5562-4bc6-91bb-5ffb2cf95160
   title: Two chocolate chip muffins, one with a bite taken out, on a wooden cutting board
   category: food
+  width: 4088
+  height: 4088
 
 - name: Food-009-001
   id: 7873bdc2-a518-440d-a8d9-9dd5a13f332e
   title: Skewers of chicken lollipops and colorful bell peppers on a metal tray with a red napkin, knife, and fork
   category: food
+  width: 4630
+  height: 6174
 
 - name: Product-001-001
   id: 3011bb6e-b6cc-4de8-b829-793e17a23db9
   title: A pair of black sneakers with white soles on a black box against a black background
   category: product
+  width: 4161
+  height: 6242
 
 - name: Product-001-002
   id: c048ef8c-20d4-4b6b-be6f-103a56b2ba8b
   title: A black and white sneaker with red shoelaces floating in mid-air on a black background.
   category: product
+  width: 4333
+  height: 2726
 
 - name: Product-002-001
   id: ab7cab7e-d43e-4c48-a0e6-845db7b14c1d
   title: A pair of white tennis shoes with neon green laces against a gray background
   category: product
+  width: 4273
+  height: 6410
 
 - name: Product-002-002
   id: 76d57406-39d6-42bb-b1e4-5b0c2d0f48e3
   title: Close-up of a pair of classic white tennis shoes
   category: product
+  width: 3479
+  height: 2148
 
 - name: Product-003-001
   id: c2a0dbd9-0ad4-4526-9f2f-3e95c2e3957d
   title: A bottle of French Essence Luxury Urban Eau de Parfum for Men. The bottle is a sleek black glass with a silver cap
   category: product
+  width: 7008
+  height: 4672
 
 - name: Product-004-001
   id: bfec22b7-c27b-4ad3-9765-9d33484d6723
   title: Close-up of a BENYAR skeleton watch on a black background. The watch has a gold-colored case and a black leather strap
   category: product
+  width: 2535
+  height: 3802
 
 - name: Product-004-002
   id: cfed72bc-cbfa-4ab0-b30c-1eb17ae431b2
   title: A close-up photo of a silver mechanical wristwatch with a black leather band
   category: product
+  width: 3801
+  height: 2534
 
 - name: Product-005-001
   id: 9a34beb4-211d-418b-afe4-727b36a64039
   title: Black keyboard with rainbow LED backlight on a white background
   category: product
+  width: 4533
+  height: 4533
 
 - name: Product-006-001
   id: fa4134de-c4ef-467f-b750-a5f6b6d8a3fb
   title: A pair of black Kaen sunglasses with a rectangular frame and blue mirrored lenses on a black background
   category: product
+  width: 5633
+  height: 3755
 
 - name: Product-008-001
   id: d7b95d4a-869c-4524-b924-3dba9d33f8fa
   title: Classic Old Spice Musk After Shave Lotion Bottle
   category: product
+  width: 9502
+  height: 5345

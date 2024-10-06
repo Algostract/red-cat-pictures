@@ -1,13 +1,17 @@
 import type { Photo } from '~/utils/types'
 
-export default defineCachedEventHandler<Promise<Photo[]>>(
+interface ExtendedPhoto extends Omit<Photo, 'width' | 'height'> {
+  aspectRatio: number
+}
+
+export default defineCachedEventHandler<Promise<ExtendedPhoto[]>>(
   async () => {
     try {
       const photos = await readYamlFile<Photo>('photos.yml')
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })
 
-      return photos
+      return photos.map(({ width, height, ...rest }) => ({ aspectRatio: width / height, ...rest }))
     } catch (error: any) {
       console.error('API photo GET', error)
 

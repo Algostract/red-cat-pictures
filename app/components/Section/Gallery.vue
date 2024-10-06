@@ -21,7 +21,7 @@ const categoryImages = {
   product: usePhoto(props.photos, ['Product-004-002', 'Product-005-001', 'Product-006-001', 'Product-008-001', 'Product-002-002', 'Product-003-001', 'Product-001-001']),
 }
 
-const images = computed<GallaryImage[]>(() =>
+const images = computed<GallaryPhoto[]>(() =>
   [
     {
       position: {
@@ -29,7 +29,7 @@ const images = computed<GallaryImage[]>(() =>
         md: { row: { start: 1, span: 2 }, col: { start: 1, span: 2 } },
       },
       size: 'l',
-      autoScale: true,
+      aspectRatio: 1.356,
     },
     {
       position: {
@@ -37,7 +37,7 @@ const images = computed<GallaryImage[]>(() =>
         md: { row: { start: 1, span: 1 }, col: { start: 3, span: 1 } },
       },
       size: 's',
-      autoScale: true,
+      aspectRatio: 1.362,
     },
     {
       position: {
@@ -45,7 +45,7 @@ const images = computed<GallaryImage[]>(() =>
         md: { row: { start: 1, span: 1 }, col: { start: 4, span: 1 } },
       },
       size: 's',
-      autoScale: true,
+      aspectRatio: 1.362,
     },
     {
       position: {
@@ -53,7 +53,7 @@ const images = computed<GallaryImage[]>(() =>
         md: { row: { start: 3, span: 1 }, col: { start: 1, span: 1 } },
       },
       size: 's',
-      autoScale: true,
+      aspectRatio: 1.362,
     },
     {
       position: {
@@ -61,7 +61,7 @@ const images = computed<GallaryImage[]>(() =>
         md: { row: { start: 3, span: 1 }, col: { start: 2, span: 1 } },
       },
       size: 's',
-      autoScale: true,
+      aspectRatio: 1.362,
     },
     {
       position: {
@@ -69,7 +69,7 @@ const images = computed<GallaryImage[]>(() =>
         md: { row: { start: 2, span: 2 }, col: { start: 3, span: 1 } },
       },
       size: 'm',
-      autoScale: false,
+      aspectRatio: 0.67,
     },
     {
       position: {
@@ -77,17 +77,20 @@ const images = computed<GallaryImage[]>(() =>
         md: { row: { start: 2, span: 2 }, col: { start: 4, span: 1 } },
       },
       size: 'm',
-      autoScale: false,
+      aspectRatio: 0.67,
     },
   ].map((image, index) => {
     return {
-      url: categoryImages[props.activeTab].value[index]?.id,
+      name: categoryImages[props.activeTab].value[index]?.name,
+      id: categoryImages[props.activeTab].value[index]?.id,
       alt: categoryImages[props.activeTab].value[index]?.title,
       dynamicClass: objectToClass(image.position, image.size),
-      autoScale: image.autoScale,
+      aspectRatio: image.aspectRatio,
     }
   })
 )
+
+const activeImageName = useState()
 </script>
 
 <template>
@@ -95,16 +98,19 @@ const images = computed<GallaryImage[]>(() =>
     <div class="mx-auto mb-4 flex w-fit gap-4 md:mb-12">
       <ButtonTab v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="activeTab === title" @click="emit('changeTab', title)" />
     </div>
-    <div class="relative mx-0 grid grid-cols-2 grid-rows-6 gap-2 md:-mx-12 md:grid-cols-4 md:grid-rows-3">
-      <NuxtImg
-        v-for="{ url, alt, dynamicClass, autoScale } in images"
-        :key="url"
-        provider="uploadcare"
-        :src="autoScale ? `${url}/-/scale_crop/1280x960/center/` : url + '/-/preview/1280x960/'"
-        :alt="alt"
-        :width="1280"
-        class="h-full w-full overflow-hidden rounded-sm object-cover object-top"
-        :class="dynamicClass" />
+    <div class="relative mx-0 grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3 lg:-mx-12">
+      <NuxtLink v-for="{ name, id, alt, dynamicClass, aspectRatio } in images" :key="id" :to="`/images/${name}`" :class="dynamicClass" class="size-full" @click="activeImageName = name">
+        <NuxtImg
+          provider="uploadcare"
+          :src="id"
+          :alt="alt"
+          :width="640"
+          :height="Math.round(640 / aspectRatio)"
+          fit="cover"
+          format="webp"
+          loading="lazy"
+          class="size-full overflow-hidden rounded-sm" />
+      </NuxtLink>
     </div>
   </section>
 </template>

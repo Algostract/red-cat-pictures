@@ -1,6 +1,21 @@
 <script setup lang="ts">
 import type { Categories } from '~/utils/types'
 
+const title = `Professional Food & Product photography/Videography in Kolkata`
+const description = `Nurture the essence of your food & product with our photography & videography services in Kolkata`
+const url = 'https://redcatpictures.com'
+
+useSeoMeta({
+  title: title,
+  ogTitle: title,
+  description: description,
+  ogDescription: description,
+  ogImage: url + '/previews/landing.webp',
+  ogUrl: url,
+})
+
+const { data: photos } = useFetch('/api/photo', { default: () => [] })
+
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
 const isModelContactOpen = ref<boolean>(false)
@@ -149,14 +164,12 @@ const activeTab = ref<Categories>('food')
 function changeActiveTab(tab: Categories) {
   activeTab.value = tab
 }
-
-const { data: photos } = useFetch('/api/photo', { default: () => [] })
 </script>
 
 <template>
   <div>
     <AppHeader />
-    <main class="relative mx-auto flex max-w-[90rem] flex-col gap-4 overflow-hidden p-4 !pb-0 md:gap-16 md:p-16">
+    <main class="relative mx-auto flex max-w-[90rem] flex-col gap-4 overflow-hidden p-4 !pb-0 lg:gap-16 lg:p-16">
       <SectionHero :photos="photos" @contact="onContact(true)" />
       <SectionFeatured :photos="photos" />
       <SectionGallery :photos="photos" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />

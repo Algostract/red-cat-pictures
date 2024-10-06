@@ -5,6 +5,7 @@ export interface Photo {
   id: string
   title: string
   category: Categories
+  aspectRatio: number
 }
 
 export interface Position {
@@ -12,11 +13,12 @@ export interface Position {
   col: { start: number; span: number }
 }
 
-export interface GallaryImage {
-  url: string
+export interface GallaryPhoto {
+  name: string
+  id: string
   alt: string
   dynamicClass: string
-  autoScale: boolean
+  aspectRatio: number
 }
 
 export interface Video {

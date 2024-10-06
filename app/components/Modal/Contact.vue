@@ -7,7 +7,7 @@ const emit = defineEmits<{
 }>()
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
-const { proxy: gtagProxy } = useScriptGoogleTagManager()
+// const { proxy: gtagProxy } = useScriptGoogleTagManager()
 
 const methods = ref([
   { method: 'call', icon: 'phone', link: 'tel:+91891-048-9578' },
@@ -17,7 +17,7 @@ const methods = ref([
 
 function contact(method: string) {
   gaProxy.gtag('event', 'contact', { method })
-  gtagProxy.dataLayer.push({ event: 'conversion', value: 1 })
+  // gtagProxy.dataLayer.push({ event: 'conversion', value: 1 })
 }
 
 function close() {
