@@ -1,5 +1,12 @@
 # portfolio-artarik
 
+## 1.9.0
+
+### Minor Changes
+
+- 0fdb7e6: refactor: 3 to 8 colum feature image section
+- 0fdb7e6: feature: add light box and dynamic page for each image
+
 ## 1.8.0
 
 ### Minor Changes
