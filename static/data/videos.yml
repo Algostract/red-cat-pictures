@@ -40,3 +40,17 @@
 
     - src: /video/peanut-bar-avc.mp4
       type: video/mp4
+
+- poster:
+  sources:
+    # - src: /video/peanut-bar-hevc.mp4
+    #   type: video/webm
+
+    - src: /video/sweet-av1.webm
+      type: video/webm
+
+    - src: /video/sweet-vp9.webm
+      type: video/webm
+
+    - src: /video/sweet-avc.mp4
+      type: video/mp4

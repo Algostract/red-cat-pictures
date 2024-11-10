@@ -1,3 +1,4 @@
+
 export default function (photos: Photo[] | Ref<globalThis.Photo[] | null>, imageNames: string[] | Ref<string[]>): ComputedRef<Photo[]> {
   const selectedImages = computed(() =>
     toValue(imageNames).map<Photo | undefined>((name) => {

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const { data: photos } = await useFetch('/api/photo', { default: () => [] })
+const { data: images } = await useFetch('/api/image', { default: () => [] })
 
 const route = useRoute()
 
 const activeImageName = computed<string>(() => route.params.slug![0]!)
-const activeImage = computed(() => photos.value.find(({ name }) => name === activeImageName.value))
+const activeImage = computed(() => images.value.find(({ name }) => name === activeImageName.value))
 
 const title = `Image Gallery | ${activeImageName.value}`
 const description = `${activeImage.value?.title}`

@@ -1,10 +1,10 @@
-FROM node:lts-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN npm ci
+RUN npm ci --verbose
 
 COPY . .
 
@@ -15,6 +15,9 @@ RUN npm run build
 FROM node:lts-alpine AS deployer
 
 ARG VERSION
+
+# Install FFmpeg
+RUN apk update && apk add --no-cache ffmpeg
 
 WORKDIR /app
 

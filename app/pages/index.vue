@@ -14,7 +14,7 @@ useSeoMeta({
   ogUrl: url,
 })
 
-const { data: photos } = useFetch('/api/photo', { default: () => [] })
+const { data: images } = useFetch('/api/image', { default: () => [] })
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
@@ -170,9 +170,9 @@ function changeActiveTab(tab: Categories) {
   <div>
     <AppHeader />
     <main class="relative mx-auto flex max-w-[90rem] flex-col gap-4 overflow-hidden p-4 !pb-0 lg:gap-16 lg:p-16">
-      <SectionHero :photos="photos" @contact="onContact(true)" />
-      <SectionFeatured :photos="photos" />
-      <SectionGallery :photos="photos" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
+      <SectionHero :images="images" @contact="onContact(true)" />
+      <SectionFeatured :images="images" />
+      <SectionGallery :images="images" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
       <SectionPricing id="pricing-image" :prices="pricePhoto" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
       <SectionVideo />
       <SectionPricing id="pricing-video" :prices="pricesVideo" :tabs="[{ icon: 'box', title: 'commercial' }]" :active-tab="'commercial'" @change-tab="() => {}" />

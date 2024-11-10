@@ -7,16 +7,15 @@
   "type": "module",
   "private": true,
   "volta": {
-    "node": "20.17.0"
+    "node": "22.11.0"
   },
   "engines": {
-    "node": "^20.17.0"
+    "node": "^20.15.0 || ^22.11.0"
   },
   "scripts": {
     "postinstall": "nuxt prepare",
     "dev": "nuxt dev",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint . --fix",
     "format": "prettier .  --write",
     "build": "nuxt build && cp -r static .output/static",
     "generate": "nuxt generate",
@@ -25,29 +24,33 @@
     "tunnel": "untun tunnel --port 3002 http://localhost:3002",
     "clean": "nuxt cleanup",
     "docker:build": "docker build --build-arg TAG=dev -t portfolio-aratrik:dev .",
-    "docker:start": "docker run --detach --name portfolio-aratrik-dev --mount type=bind,source=$(pwd)/static,target=/app/static,readonly --env-file .env.prod -p 1002:3000 portfolio-aratrik:dev"
+    "docker:start": "docker run --detach --name portfolio-aratrik-dev --mount type=bind,source=$(pwd)/static,target=/app/static --env-file .env.prod -p 1002:3000 portfolio-aratrik:dev"
   },
   "dependencies": {
-    "confbox": "^0.1.7",
-    "vue": "latest",
-    "zod": "^3.23.8"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.27.8",
-    "@nuxt/eslint": "^0.5.7",
-    "@nuxt/fonts": "^0.9.2",
-    "@nuxt/image": "^1.8.0",
-    "@nuxt/scripts": "^0.9.4",
-    "@nuxt/test-utils": "^3.14.2",
-    "@nuxtjs/color-mode": "^3.5.1",
+    "@nuxt/eslint": "^0.6.1",
+    "@nuxt/fonts": "^0.10.2",
+    "@nuxt/image": "^1.8.1",
+    "@nuxt/scripts": "^0.9.5",
+    "@nuxt/test-utils": "^3.14.4",
+    "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/seo": "^2.0.0-rc.23",
     "@nuxtjs/tailwindcss": "^6.12.1",
-    "@vite-pwa/nuxt": "^0.10.5",
-    "@vueuse/nuxt": "^11.1.0",
-    "eslint-config-prettier": "^9.1.0",
+    "@vite-pwa/nuxt": "^0.10.6",
+    "@vueuse/nuxt": "^11.2.0",
+    "confbox": "^0.1.8",
+    "execa": "^9.5.1",
     "nuxt": "^3.13.2",
     "nuxt-icons": "^3.2.1",
     "nuxt-splide": "^1.1.1",
+    "undio": "^0.2.0",
+    "vue": "latest",
+    "vue-router": "latest",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.9",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "untun": "^0.1.3"

@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     '/_ipx/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/images/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/fonts/**': { headers: { 'cache-control': 'max-age=31536000' } },
+    '/api/**': { cors: true },
   },
   runtimeConfig: {
     app: {
@@ -34,9 +35,6 @@ export default defineNuxtConfig({
         googleAnalytics: {
           id: '',
         },
-        // googleTagManager: {
-        //   id: '',
-        // },
       },
     },
     private: {
@@ -52,13 +50,7 @@ export default defineNuxtConfig({
       },
     },
     experimental: {
-      openAPI: {
-        ui: {
-          scalar: {
-            theme: 'blue',
-          },
-        },
-      },
+      openAPI: true,
     },
   },
   app: {
@@ -78,7 +70,6 @@ export default defineNuxtConfig({
   scripts: {
     registry: {
       googleAnalytics: true,
-      // googleTagManager: true,
     },
   },
   colorMode: {

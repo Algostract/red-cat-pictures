@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  photos: Photo[]
+  images: Photo[]
   tabs: {
     title: Categories
     icon: string
@@ -17,11 +17,11 @@ function objectToClass({ sm, md }: { sm: Position; md: Position }, size: string)
 }
 
 const categoryImages = {
-  food: usePhoto(props.photos, ['Food-002-001', 'Food-005-001', 'Food-003-001', 'Food-006-002', 'Food-007-001', 'Food-004-001', 'Food-001-001']),
-  product: usePhoto(props.photos, ['Product-004-002', 'Product-005-001', 'Product-006-001', 'Product-008-001', 'Product-002-002', 'Product-003-001', 'Product-001-001']),
+  food: usePhoto(props.images, ['Food-002-001', 'Food-005-001', 'Food-003-001', 'Food-006-002', 'Food-007-001', 'Food-004-001', 'Food-001-001']),
+  product: usePhoto(props.images, ['Product-004-002', 'Product-005-001', 'Product-006-001', 'Product-008-001', 'Product-002-002', 'Product-003-001', 'Product-001-001']),
 }
 
-const images = computed<GallaryPhoto[]>(() =>
+const images = computed<GalleryPhoto[]>(() =>
   [
     {
       position: {
@@ -96,20 +96,14 @@ const activeImageName = useState()
 <template>
   <section id="gallery" class="relative h-fit">
     <div class="mx-auto mb-4 flex w-fit gap-4 md:mb-12">
-      <ButtonTab v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="activeTab === title" @click="emit('changeTab', title)" />
+      <ButtonTab v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="activeTab === title"
+        @click="emit('changeTab', title)" />
     </div>
     <div class="relative mx-0 grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3 lg:-mx-12">
-      <NuxtLink v-for="{ name, id, alt, dynamicClass, aspectRatio } in images" :key="id" :to="`/images/${name}`" :class="dynamicClass" class="size-full" @click="activeImageName = name">
-        <NuxtImg
-          provider="uploadcare"
-          :src="id"
-          :alt="alt"
-          :width="640"
-          :height="Math.round(640 / aspectRatio)"
-          fit="cover"
-          format="webp"
-          loading="lazy"
-          class="size-full overflow-hidden rounded-sm" />
+      <NuxtLink v-for="{ name, id, alt, dynamicClass, aspectRatio } in images" :key="id" :to="`/images/${name}`"
+        :class="dynamicClass" class="size-full" @click="activeImageName = name">
+        <NuxtImg provider="uploadcare" :src="id" :alt="alt" :width="640" :height="Math.round(640 / aspectRatio)"
+          fit="cover" format="webp" loading="lazy" class="size-full overflow-hidden rounded-sm" />
       </NuxtLink>
     </div>
   </section>

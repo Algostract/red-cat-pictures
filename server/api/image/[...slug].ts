@@ -1,13 +1,13 @@
-import type { Photo } from '~/utils/types'
+import type { FilePhoto } from '~/utils/types'
 
-interface ExtendedPhoto extends Omit<Photo, 'width' | 'height'> {
+interface Photo extends Omit<FilePhoto, 'width' | 'height'> {
   aspectRatio: number
 }
 
-export default defineCachedEventHandler<Promise<ExtendedPhoto[]>>(
+export default defineCachedEventHandler<Promise<Photo[]>>(
   async () => {
     try {
-      const photos = await readYamlFile<Photo>('photos.yml')
+      const photos = await readYamlFile<FilePhoto>('photos.yml')
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })
 

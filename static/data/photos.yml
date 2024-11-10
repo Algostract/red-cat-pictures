@@ -69,6 +69,62 @@
   width: 4630
   height: 6174
 
+- name: Food-010-001
+  id: 4487974b-c173-4603-b71e-feb15bc8690d
+  title: Traditional Indian coconut burfi sweets on a terracotta plate, with shredded coconut sprinkled around and a clay teapot and coconut halves in the background.
+  category: food
+  width: 2983
+  height: 4474
+
+- name: Food-011-001
+  id: 8f4e4ed7-0dee-4b53-a930-6b0c99fc16d7
+  title: Festive Indian sweets shaped like small pumpkins, coated in coconut, arranged on a terracotta plate with decorative clay pots, cashews, rose petals, and a rustic clay teapot in the background.
+  category: food
+  width: 4672
+  height: 7008
+
+- name: Food-012-001
+  id: 074f2084-690f-448d-8334-d96f8dc4b118
+  title: Plate of crispy, golden samosas arranged in a circle, with tamarind sauce being drizzled onto one samosa, and a clay teapot and steaming cup in the background, creating a warm and inviting scene.
+  category: food
+  width: 6733
+  height: 4489
+
+- name: Food-013-001
+  id: 384609af-c93c-4ea1-9c9a-20007f11e4c9
+  title: A visually appealing arrangement of green sweets on a black plate, with scattered nuts and a vibrant background.
+  category: food
+  width: 4672
+  height: 7008
+
+- name: Food-014-001
+  id: 866017b2-ea1a-4517-8074-ab35adba5956
+  title: A visually appealing arrangement of yellow sweets on a banana leaf, with a festive background.
+  category: food
+  width: 4536
+  height: 6804
+
+- name: Food-015-001
+  id: 62913df6-0423-4a97-a940-f17566efe57b
+  title: A plate of golden sweets made with almonds and pistachios, drizzled with honey, presented on a wooden board.
+  category: food
+  width: 4261
+  height: 6391
+
+- name: Food-016-001
+  id: 6d17fed0-9203-43ab-80f3-3d5406da5404
+  title: A boy and a girl holding a box of sweets.
+  category: food
+  width: 7008
+  height: 4672
+
+- name: Food-017-001
+  id: 27adefaa-f613-4d53-b60d-a58431a757b3
+  title: A boy and a girl holding a box of sweets.
+  category: food
+  width: 6846
+  height: 4564
+
 - name: Product-001-001
   id: 3011bb6e-b6cc-4de8-b829-793e17a23db9
   title: A pair of black sneakers with white soles on a black box against a black background
@@ -138,3 +194,45 @@
   category: product
   width: 9502
   height: 5345
+
+- name: Product-009-001
+  id: cc2c8f60-df36-45f2-9c65-4596c8cfd692
+  title: A large, industrial-looking electrical control panel with its door open, revealing various electrical components.
+  category: product
+  width: 7008
+  height: 4672
+
+- name: Product-010-001
+  id: 0804d546-ba52-45fe-98b9-064d9231dc74
+  title: A small, weatherproof enclosure housing a solar sensor with four terminal connectors.
+  category: product
+  width: 7008
+  height: 4672
+
+- name: Product-011-001
+  id: 7c8cc9b9-ad49-4210-b482-34997027be18
+  title: A sleek bottle of face serum with a dropper, displayed on a white pedestal against a vibrant yellow background.
+  category: product
+  width: 4673
+  height: 4672
+
+- name: Product-011-002
+  id: c42ac341-ef94-483c-b21c-7f095d66a7f3
+  title: A sleek bottle of face serum with a dropper, displayed on a white pedestal against a vibrant purple background.
+  category: product
+  width: 4506
+  height: 4506
+
+- name: Product-011-003
+  id: da8e89e2-cde2-4ec4-becd-bcb088118cd1
+  title: A sleek bottle of face serum with a dropper, displayed on a white pedestal against a vibrant blue background.
+  category: product
+  width: 3750
+  height: 3750
+
+- name: Product-011-004
+  id: 03922303-d9e4-4b21-9091-d55f1c46d3e5
+  title: A sleek bottle of face serum with a dropper, displayed on a white pedestal against a vibrant pink background.
+  category: product
+  width: 3947
+  height: 3947
