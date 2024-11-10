@@ -1,5 +1,15 @@
 # portfolio-artarik
 
+## 1.10.0
+
+### Minor Changes
+
+- 94081e3: feat: video file upload and process api added
+
+### Patch Changes
+
+- 94081e3: chore: pkgs updated and new photos added
+
 ## 1.9.0
 
 ### Minor Changes
