@@ -96,14 +96,20 @@ const activeImageName = useState()
 <template>
   <section id="gallery" class="relative h-fit">
     <div class="mx-auto mb-4 flex w-fit gap-4 md:mb-12">
-      <ButtonTab v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="activeTab === title"
-        @click="emit('changeTab', title)" />
+      <ButtonTab v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="activeTab === title" @click="emit('changeTab', title)" />
     </div>
     <div class="relative mx-0 grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3 lg:-mx-12">
-      <NuxtLink v-for="{ name, id, alt, dynamicClass, aspectRatio } in images" :key="id" :to="`/images/${name}`"
-        :class="dynamicClass" class="size-full" @click="activeImageName = name">
-        <NuxtImg provider="uploadcare" :src="id" :alt="alt" :width="640" :height="Math.round(640 / aspectRatio)"
-          fit="cover" format="webp" loading="lazy" class="size-full overflow-hidden rounded-sm" />
+      <NuxtLink v-for="{ name, id, alt, dynamicClass, aspectRatio } in images" :key="id" :to="`/images/${name}`" :class="dynamicClass" class="size-full" @click="activeImageName = name">
+        <NuxtImg
+          provider="uploadcare"
+          :src="id"
+          :alt="alt"
+          :width="640"
+          :height="Math.round(640 / aspectRatio)"
+          fit="cover"
+          format="webp"
+          loading="lazy"
+          class="size-full overflow-hidden rounded-sm" />
       </NuxtLink>
     </div>
   </section>

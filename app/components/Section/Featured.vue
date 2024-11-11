@@ -83,29 +83,28 @@ watch(offset, (value) => {
 </script>
 
 <template>
-  <section id="featured" ref="container"
-    class="relative z-0 mx-0 h-screen overflow-hidden bg-light-400 dark:bg-dark-400 lg:-mx-12">
-    <div v-show="isSliderVisible" ref="slider" class="relative z-10 flex gap-2 transition-all duration-[2s] ease-linear"
-      :style="{ translate: `0 ${-offset}px` }">
+  <section id="featured" ref="container" class="relative z-0 mx-0 h-screen overflow-hidden bg-light-400 dark:bg-dark-400 lg:-mx-12">
+    <div v-show="isSliderVisible" ref="slider" class="relative z-10 flex gap-2 transition-all duration-[2s] ease-linear" :style="{ translate: `0 ${-offset}px` }">
       <!-- For Small Screen Devices -->
       <template v-for="slideCount in slideCounts">
-        <div v-for="(images, index) in imageSlides[slideCount]" :key="index" class="flex-1 flex-col gap-2" :class="{
-          'flex md:hidden': slideCount == '3',
-          'hidden md:flex lg:hidden': slideCount == '4',
-          'hidden lg:flex': slideCount == '6',
-        }">
-          <NuxtLink v-for="{ id, name, title, aspectRatio } in images" :key="id" :to="`/images/${name}`"
-            @click="activeImageName = name" class="">
-            <NuxtImg provider="uploadcare" :src="id" :alt="title" :width="960" :height="Math.round(960 / aspectRatio)"
-              fit="fill" format="webp" loading="lazy" class="w-full rounded-sm object-cover" />
+        <div
+          v-for="(images, index) in imageSlides[slideCount]"
+          :key="index"
+          class="flex-1 flex-col gap-2"
+          :class="{
+            'flex md:hidden': slideCount == '3',
+            'hidden md:flex lg:hidden': slideCount == '4',
+            'hidden lg:flex': slideCount == '6',
+          }">
+          <NuxtLink v-for="{ id, name, title, aspectRatio } in images" :key="id" :to="`/images/${name}`" class="" @click="activeImageName = name">
+            <NuxtImg provider="uploadcare" :src="id" :alt="title" :width="960" :height="Math.round(960 / aspectRatio)" fit="fill" format="webp" loading="lazy" class="w-full rounded-sm object-cover" />
           </NuxtLink>
         </div>
       </template>
       <!-- For Large Screen Devices -->
     </div>
     <Transition>
-      <div v-show="isEndVisible"
-        class="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full items-center justify-center text-primary-500">
+      <div v-show="isEndVisible" class="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full items-center justify-center text-primary-500">
         <NuxtIcon name="logo-full" class="text-[196px] drop-shadow-md md:text-[356px]" />
       </div>
     </Transition>

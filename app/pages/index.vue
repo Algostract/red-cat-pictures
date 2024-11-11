@@ -34,10 +34,10 @@ const pricePhoto = {
   food: [
     {
       title: 'Basic Photography',
-      price: 3500,
+      price: 4500,
       unit: 'session',
       points: [
-        { icon: 'photo', content: '20 Photos' },
+        { icon: 'photo', content: 'Upto 20 Photos' },
         { icon: 'photo', content: 'Basic editing, color correction' },
         {
           icon: 'photo',
@@ -47,10 +47,10 @@ const pricePhoto = {
     },
     {
       title: 'Premium Photography',
-      price: 5500,
+      price: 6500,
       unit: 'session',
       points: [
-        { icon: 'photo', content: '20 Photos' },
+        { icon: 'photo', content: 'Upto 20 Photos' },
         {
           icon: 'photo',
           content: 'Advanced editing, retouching, and color correction ',
@@ -63,10 +63,10 @@ const pricePhoto = {
     },
     {
       title: 'Standard Videography',
-      price: 3500,
+      price: 4500,
       unit: 'session',
       points: [
-        { icon: 'photo', content: '1 Minute Video' },
+        { icon: 'photo', content: 'Upto 1 Minute Video' },
         {
           icon: 'photo',
           content: 'Extensive editing, retouching, and color grading',
@@ -84,7 +84,7 @@ const pricePhoto = {
       price: 100,
       unit: 'photo',
       points: [
-        { icon: 'photo', content: '20 Photos' },
+        { icon: 'photo', content: 'Upto 20 Photos' },
         { icon: 'photo', content: 'Basic editing, color correction' },
         {
           icon: 'photo',
@@ -97,7 +97,7 @@ const pricePhoto = {
       price: 200,
       unit: 'photo',
       points: [
-        { icon: 'photo', content: '20 Photos' },
+        { icon: 'photo', content: 'Upto 20 Photos' },
         {
           icon: 'photo',
           content: 'Dynamic angle, retouching, and color correction',
@@ -113,7 +113,7 @@ const pricePhoto = {
       price: 800,
       unit: 'video',
       points: [
-        { icon: 'photo', content: '30 Second Video' },
+        { icon: 'photo', content: 'Upto 30 Second Video' },
         {
           icon: 'photo',
           content: 'Extensive editing, retouching, and color grading',
