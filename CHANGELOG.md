@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 1.10.1
+
+### Patch Changes
+
+- 1bf6166: feat: add commit linting and pre-commit hooks; update Dockerfile and CI configuration
+
 ## 1.10.0
 
 ### Minor Changes
