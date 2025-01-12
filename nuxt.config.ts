@@ -49,9 +49,6 @@ export default defineNuxtConfig({
         base: './static',
       },
     },
-    experimental: {
-      openAPI: true,
-    },
   },
   app: {
     head: {

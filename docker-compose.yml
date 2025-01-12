@@ -1,0 +1,13 @@
+name: 'portfolio-aratrik'
+services:
+  app:
+    image: 'ghcr.io/algostract/portfolio-aratrik:latest'
+    restart: on-failure:3
+    volumes:
+      - type: bind
+        source: ./static
+        target: /app/static
+    env_file:
+      - .env.prod
+    ports:
+      - 4102:3000

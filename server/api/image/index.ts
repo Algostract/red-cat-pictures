@@ -1,5 +1,3 @@
-import type { FilePhoto, Photo } from '~/utils/types'
-
 export default defineCachedEventHandler<Promise<Photo[]>>(
   async () => {
     try {
@@ -8,7 +6,7 @@ export default defineCachedEventHandler<Promise<Photo[]>>(
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })
 
       return photos.map(({ width, height, ...rest }) => ({ aspectRatio: width / height, ...rest }))
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('API photo GET', error)
 
       throw createError({

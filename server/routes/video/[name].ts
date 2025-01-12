@@ -26,34 +26,44 @@ function createBufferStream(buffer: Buffer, start: number, end: number) {
 }
 
 export default defineEventHandler(async (event) => {
-  const { name } = await getValidatedRouterParams(
-    event,
-    z.object({
-      name: z.string().min(1),
-    }).parse
-  )
-  const range = getRequestHeader(event, 'range')
+  try {
+    const storage = useStorage('fs')
+    const { name } = await getValidatedRouterParams(
+      event,
+      z.object({
+        name: z.string().min(1),
+      }).parse
+    )
+    const range = getRequestHeader(event, 'range')
 
-  const metaData = await useStorage('fs').getMeta(`videos/${name}`)
-  const bufferData = await useStorage('fs').getItemRaw(`videos/${name}`)
+    const metaData = await storage.getMeta(`videos/${name}`)
+    const bufferData = await storage.getItemRaw(`videos/${name}`)
 
-  if (!bufferData) throw createError({ statusCode: 500, statusMessage: 'video is undefined' })
+    if (!bufferData) throw createError({ statusCode: 500, statusMessage: 'video is undefined' })
 
-  const bufferSize = metaData.size as number
-  const { chunkStart, chunkEnd, chunkSize } = calculateChunkRange(range, bufferSize)
+    const bufferSize = metaData.size as number
+    const { chunkStart, chunkEnd, chunkSize } = calculateChunkRange(range, bufferSize)
 
-  if (chunkSize !== bufferSize) setResponseStatus(event, 206)
+    if (chunkSize !== bufferSize) setResponseStatus(event, 206)
 
-  setResponseHeaders(event, {
-    'Accept-Ranges': 'bytes',
-    'Content-Type': 'video/mp4',
-    'Content-Length': chunkSize,
-    'Content-Range': `bytes ${chunkStart}-${chunkEnd}/${bufferSize}`,
-    'Cache-Control': 'public, max-age=31552767',
-    'X-Robots-Tag': 'index, follow',
-  })
+    setResponseHeaders(event, {
+      'Accept-Ranges': 'bytes',
+      'Content-Type': 'video/mp4',
+      'Content-Length': chunkSize,
+      'Content-Range': `bytes ${chunkStart}-${chunkEnd}/${bufferSize}`,
+      'Cache-Control': 'public, max-age=31552767',
+      'X-Robots-Tag': 'index, follow',
+    })
 
-  const bufferStream = createBufferStream(bufferData, chunkStart, chunkEnd)
+    const bufferStream = createBufferStream(bufferData, chunkStart, chunkEnd)
 
-  return sendStream(event, bufferStream)
+    return sendStream(event, bufferStream)
+  } catch (error) {
+    console.error('ROute video GET', error)
+
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Some Unknown Error Found',
+    })
+  }
 })

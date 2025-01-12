@@ -1,5 +1,3 @@
-import type { Video } from '~/utils/types'
-
 export default defineCachedEventHandler<Promise<Video[]>>(
   async () => {
     try {
@@ -8,7 +6,7 @@ export default defineCachedEventHandler<Promise<Video[]>>(
       if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
 
       return videos
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('API video GET', error)
 
       throw createError({

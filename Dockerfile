@@ -1,28 +1,28 @@
-FROM node:20-alpine AS builder
+FROM node:lts-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package.json pnpm-lock.yaml ./
 
-RUN npm ci --verbose
+RUN corepack enable
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 COPY . .
 
-ENV NODE_ENV=production
+RUN pnpm build
 
-RUN npm run build
-
-FROM node:lts-alpine AS deployer
+FROM node:lts-alpine AS runner
 
 ARG VERSION
-
-# Install FFmpeg
-RUN apk update && apk add --no-cache ffmpeg
+ARG BUILD_TIME
 
 WORKDIR /app
 
 COPY --from=builder /app/.output ./.output
-COPY --from=builder /app/*.yml ./
 
 ENV NODE_ENV=production
 ENV NUXT_APP_VERSION=$VERSION

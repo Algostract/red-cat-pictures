@@ -88,7 +88,7 @@ watch(offset, (value) => {
       <!-- For Small Screen Devices -->
       <template v-for="slideCount in slideCounts">
         <div
-          v-for="(images, index) in imageSlides[slideCount]"
+          v-for="(slideImages, index) in imageSlides[slideCount]"
           :key="index"
           class="flex-1 flex-col gap-2"
           :class="{
@@ -96,7 +96,7 @@ watch(offset, (value) => {
             'hidden md:flex lg:hidden': slideCount == '4',
             'hidden lg:flex': slideCount == '6',
           }">
-          <NuxtLink v-for="{ id, name, title, aspectRatio } in images" :key="id" :to="`/images/${name}`" class="" @click="activeImageName = name">
+          <NuxtLink v-for="{ id, name, title, aspectRatio } in slideImages" :key="id" :to="`/images/${name}`" class="" @click="activeImageName = name">
             <NuxtImg provider="uploadcare" :src="id" :alt="title" :width="960" :height="Math.round(960 / aspectRatio)" fit="fill" format="webp" loading="lazy" class="w-full rounded-sm object-cover" />
           </NuxtLink>
         </div>

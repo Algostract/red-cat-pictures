@@ -31,51 +31,63 @@ const allProcesses: {
 ]
 
 export default defineEventHandler(async (event) => {
-  const formData = await readFormData(event)
-  const file = formData.get('file') as File
+  try {
+    const formData = await readFormData(event)
+    const file = formData.get('file') as File
+    const storage = useStorage('fs')
 
-  if (!file || !file.size) throw createError({ statusCode: 400, message: 'No file provided' })
+    if (!file || !file.size) throw createError({ statusCode: 400, message: 'No file provided' })
 
-  const eventStream = createEventStream(event)
-  const streamResponse = (data: object) => eventStream.push(JSON.stringify(data))
+    const eventStream = createEventStream(event)
+    const streamResponse = (data: object) => eventStream.push(JSON.stringify(data))
 
-  event.waitUntil(
-    (async () => {
-      try {
-        const buffer = await toUint8Array(file)
+    event.waitUntil(
+      (async () => {
+        try {
+          const buffer = await toUint8Array(file)
 
-        await useStorage('fs').setItemRaw(`videos/source/${file.name}`, buffer)
-        await streamResponse({ message: 'File Saved' })
+          await storage.setItemRaw(`videos/source/${file.name}`, buffer)
+          await streamResponse({ message: 'File Saved' })
 
-        const executions = allProcesses.map(
-          ({ preset, args, extension }) =>
-            new Promise<Preset>(async (resolve, reject) => {
-              try {
-                console.log(`Conversion started to ${preset}`)
+          const executions = allProcesses.map(
+            ({ preset, args, extension }) =>
+              new Promise<Preset>((resolve, reject) => {
+                ;(async () => {
+                  try {
+                    console.log(`Conversion started to ${preset}`)
 
-                await execa({ shell: true })`ffmpeg -i ${'./static/videos/source/' + file.name} ${args} ./static/videos/${file.name.split('.')[0]}-${preset.toLowerCase()}.${extension}`
+                    await execa({ shell: true })`ffmpeg -i ${'./static/videos/source/' + file.name} ${args} ./static/videos/${file.name.split('.')[0]}-${preset.toLowerCase()}.${extension}`
 
-                await streamResponse({ message: `Conversion complete to ${preset}` })
+                    await streamResponse({ message: `Conversion complete to ${preset}` })
 
-                console.log(`Conversion complete to ${preset}`)
-                resolve(preset)
-              } catch (error) {
-                console.error(error)
-                reject(preset)
-              }
-            })
-        )
+                    console.log(`Conversion complete to ${preset}`)
+                    resolve(preset)
+                  } catch (error) {
+                    console.error(error)
+                    reject(preset)
+                  }
+                })()
+              })
+          )
 
-        const results = await Promise.allSettled(executions)
+          const results = await Promise.allSettled(executions)
 
-        await streamResponse({ message: 'File process completed', size: file.size, results })
-      } catch (error) {
-        await streamResponse({ error: (error as Error).message })
-      } finally {
-        eventStream.close()
-      }
-    })()
-  )
+          await streamResponse({ message: 'File process completed', size: file.size, results })
+        } catch (error) {
+          await streamResponse({ error: (error as Error).message })
+        } finally {
+          eventStream.close()
+        }
+      })()
+    )
 
-  return eventStream.send()
+    return eventStream.send()
+  } catch (error) {
+    console.error('API video POST', error)
+
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Some Unknown Error Found',
+    })
+  }
 })

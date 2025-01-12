@@ -30,7 +30,7 @@ function onContact(action: boolean) {
   }
 }
 
-const pricePhoto = {
+const pricesPhoto = {
   food: [
     {
       title: 'Basic Photography',
@@ -173,7 +173,7 @@ function changeActiveTab(tab: Categories) {
       <SectionHero :images="images" @contact="onContact(true)" />
       <SectionFeatured :images="images" />
       <SectionGallery :images="images" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
-      <SectionPricing id="pricing-image" :prices="pricePhoto" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
+      <SectionPricing id="pricing-image" :prices="pricesPhoto" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
       <SectionVideo />
       <SectionPricing id="pricing-video" :prices="pricesVideo" :tabs="[{ icon: 'box', title: 'commercial' }]" :active-tab="'commercial'" @change-tab="() => {}" />
       <!-- <SectionTestimonial /> -->
