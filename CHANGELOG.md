@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 2.0.1
+
+### Patch Changes
+
+- af39eea: feat: enhance hero section with video support and update layout
+
 ## 2.0.0
 
 ### Major Changes
