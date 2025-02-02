@@ -91,7 +91,7 @@ const activeImageName = useState()
 <template>
   <section id="featured-images" class="relative h-fit">
     <SectionLabel icon="photo" title="Featured Images" />
-    <div class="relative mx-0 grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3 lg:-mx-12">
+    <div class="relative -mx-2 grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3 lg:-mx-12">
       <NuxtLink v-for="{ name, id, alt, dynamicClass, aspectRatio } in images" :key="id" :to="`/images/${name}`" :class="dynamicClass" class="size-full" @click="activeImageName = name">
         <NuxtImg
           provider="uploadcare"

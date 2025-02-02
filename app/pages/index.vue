@@ -20,6 +20,7 @@ const { data: videos } = useFetch('/api/video', { default: () => [] })
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
 const isModelContactOpen = ref<boolean>(false)
+const activeCategory = ref<Category>('ecommerce')
 
 function onContact(action: boolean) {
   if (action) {
@@ -30,14 +31,12 @@ function onContact(action: boolean) {
     gaProxy.gtag('event', 'contact_close')
   }
 }
-
-const activeCategory = ref<Category>('ecommerce')
 </script>
 
 <template>
   <div>
     <AppHeader />
-    <main class="relative mx-auto mb-5 flex max-w-[90rem] flex-col gap-4 overflow-hidden p-4 !pb-0 lg:p-16">
+    <main class="relative mx-auto mb-20 flex max-w-[90rem] flex-col gap-4 overflow-hidden p-4 !pb-0 md:mb-8 lg:p-16">
       <ButtonFloatingAction :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
       <SectionHero :images="images" @contact="onContact(true)" />
       <SectionGallery :images="images" />

@@ -7,12 +7,12 @@ function onNavigate(section: string) {
 </script>
 
 <template>
-  <header class="absolute left-0 right-0 top-0 mx-auto max-w-[90rem] px-4 text-white md:px-16">
+  <header class="absolute left-0 right-0 top-6 mx-auto max-w-[90rem] px-4 text-white md:px-16">
     <nav class="relative z-20 grid grid-cols-3 items-center">
       <NuxtLink to="/">
-        <NuxtIcon name="logo-full" class="text-[96px] md:text-[128px]" />
+        <NuxtIcon name="logo-full" filled class="text-[80px] md:text-[112px]" />
       </NuxtLink>
-      <ul class="hidden justify-center gap-8 md:flex">
+      <ul class="hidden translate-y-1 justify-center gap-8 self-start md:flex">
         <li>
           <NuxtLink to="#featured" @click="onNavigate('featured')">Featured</NuxtLink>
         </li>

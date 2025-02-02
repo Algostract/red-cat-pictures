@@ -19,9 +19,14 @@ const emit = defineEmits<{
   <div
     class="my-4 flex aspect-[5/8] w-[254px] flex-col items-center justify-between rounded bg-light-500 px-5 py-8 dark:bg-dark-500 md:mx-auto md:w-[323px] md:px-9 md:py-12 xl:w-[392px]"
     :class="{ 'scale-105 border border-primary-500': active }">
-    <h2 class="w-min text-center text-lg text-primary-500 md:text-2xl">
-      {{ title }}
-    </h2>
+    <h2
+      class="w-min whitespace-nowrap text-center text-lg text-primary-500 md:text-2xl"
+      v-html="
+        title
+          .split(' ')
+          .map((w, i, a) => (i === Math.ceil(a.length / 2) ? `<br>${w}` : w))
+          .join(' ')
+      " />
     <span class="flex items-center justify-center gap-2">
       <h3 class="text-center text-3xl md:text-3xl">₹{{ price }}</h3>
       <h4>/ {{ unit }}</h4>

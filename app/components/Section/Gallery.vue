@@ -83,7 +83,7 @@ watch(offset, (value) => {
 </script>
 
 <template>
-  <section id="image-gallery" class="relative z-0 mx-0 h-screen overflow-hidden bg-light-400 dark:bg-dark-400 lg:-mx-12">
+  <section id="gallery" class="relative z-0 -mx-2 h-screen overflow-hidden bg-light-400 dark:bg-dark-400 lg:-mx-12">
     <SectionLabel icon="grid" title="Image Gallery" />
     <div ref="container" class="overflow-hidden">
       <div v-show="isSliderVisible" ref="slider" class="relative z-10 flex gap-2 transition-all duration-[2s] ease-linear" :style="{ translate: `0 ${-offset}px` }">
@@ -107,7 +107,7 @@ watch(offset, (value) => {
       </div>
       <Transition>
         <div v-show="isEndVisible" class="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full items-center justify-center text-primary-500">
-          <NuxtIcon name="logo-full" class="text-[196px] drop-shadow-md md:text-[356px]" />
+          <NuxtIcon name="logo-full" filled class="text-[196px] drop-shadow-md md:text-[356px]" />
         </div>
       </Transition>
     </div>

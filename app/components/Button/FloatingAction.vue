@@ -28,7 +28,7 @@ const categories = ref<
 </script>
 
 <template>
-  <ul class="fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-0.5 overflow-hidden rounded bg-white">
+  <ul class="fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-0.5 overflow-hidden rounded bg-white dark:bg-dark-600">
     <ButtonLabel
       v-for="{ icon, title } in categories"
       :key="title"
@@ -36,7 +36,7 @@ const categories = ref<
       :title="title"
       :active="title === activeCategory"
       :collapsable="true"
-      class="scale-110 rounded-none md:w-[195px]"
+      class="flex-1 rounded-none md:w-52"
       @click="emit('update', title)" />
   </ul>
 </template>

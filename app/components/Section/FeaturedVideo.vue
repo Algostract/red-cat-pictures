@@ -15,7 +15,7 @@ async function updateVideoIndex() {
 <template>
   <section id="featured-videos" class="pb-4">
     <SectionLabel icon="movie" title="Featured Videos" />
-    <div v-if="videos.length" class="relative left-1/2 aspect-video w-screen -translate-x-1/2 overflow-hidden border bg-black">
+    <div v-if="videos.length" class="relative left-1/2 aspect-video w-screen -translate-x-1/2 overflow-hidden bg-black">
       <NuxtVideo
         :key="currentVideoIndex"
         :source="currentVideo.sources"
