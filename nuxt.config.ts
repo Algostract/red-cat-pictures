@@ -89,9 +89,9 @@ export default defineNuxtConfig({
     manifest: {
       name: 'Red Cat Pictures',
       short_name: 'Red Cat Pictures',
-      description: 'Aratrik Nandy is a Professional Photographer/Videographer',
-      theme_color: '#CABC7C',
-      background_color: '#CABC7C',
+      description: 'Elevate Your Brand Image',
+      theme_color: '#CD2D2D',
+      background_color: '#BDC9E0',
       orientation: 'portrait',
       shortcuts: [
         {

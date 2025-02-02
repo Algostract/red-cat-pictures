@@ -28,6 +28,7 @@ export interface Position {
 }
 
 export interface Video {
+  type: 'hero' | 'feature'
   poster: string
   sources: {
     src: string

@@ -1,5 +1,21 @@
 ---
-- poster:
+- type: 'hero'
+  poster:
+  sources:
+    # - src: /video/hero-portrait-hevc.mp4
+    #   type: video/mp4
+
+    - src: /video/hero-portrait-av1.webm
+      type: video/webm
+
+    - src: /video/hero-portrait-vp9.webm
+      type: video/webm
+
+    - src: /video/hero-portrait-avc.mp4
+      type: video/mp4
+
+- type: 'feature'
+  poster:
   sources:
     # - src: /video/cookies-hevc.mp4
     #   type: video/mp4
@@ -13,7 +29,8 @@
     - src: /video/cookies-avc.mp4
       type: video/mp4
 
-- poster:
+- type: 'feature'
+  poster:
   sources:
     # - src: /video/red-bull-hevc.mp4
     #   type: video/webm
@@ -27,7 +44,8 @@
     - src: /video/red-bull-avc.mp4
       type: video/mp4
 
-- poster:
+- type: 'feature'
+  poster:
   sources:
     # - src: /video/peanut-bar-hevc.mp4
     #   type: video/webm
@@ -41,7 +59,8 @@
     - src: /video/peanut-bar-avc.mp4
       type: video/mp4
 
-- poster:
+- type: 'feature'
+  poster:
   sources:
     # - src: /video/peanut-bar-hevc.mp4
     #   type: video/webm
