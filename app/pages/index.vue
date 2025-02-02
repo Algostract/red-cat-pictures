@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Categories } from '~/utils/types'
+import type { Category } from '~~/shared/types/index'
 
 const title = `Professional Food & Product photography/Videography in Kolkata`
 const description = `Nurture the essence of your food & product with our photography & videography services in Kolkata`
@@ -15,6 +15,7 @@ useSeoMeta({
 })
 
 const { data: images } = useFetch('/api/image', { default: () => [] })
+const { data: videos } = useFetch('/api/video', { default: () => [] })
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
@@ -30,155 +31,21 @@ function onContact(action: boolean) {
   }
 }
 
-const pricesPhoto = {
-  food: [
-    {
-      title: 'Basic Photography',
-      price: 4500,
-      unit: 'session',
-      points: [
-        { icon: 'photo', content: 'Upto 20 Photos' },
-        { icon: 'photo', content: 'Basic editing, color correction' },
-        {
-          icon: 'photo',
-          content: 'High-resolution images delivered via online gallery',
-        },
-      ],
-    },
-    {
-      title: 'Premium Photography',
-      price: 6500,
-      unit: 'session',
-      points: [
-        { icon: 'photo', content: 'Upto 20 Photos' },
-        {
-          icon: 'photo',
-          content: 'Advanced editing, retouching, and color correction ',
-        },
-        {
-          icon: 'photo',
-          content: 'High-resolution images delivered via online gallery',
-        },
-      ],
-    },
-    {
-      title: 'Standard Videography',
-      price: 4500,
-      unit: 'session',
-      points: [
-        { icon: 'photo', content: 'Upto 1 Minute Video' },
-        {
-          icon: 'photo',
-          content: 'Extensive editing, retouching, and color grading',
-        },
-        {
-          icon: 'photo',
-          content: 'High-resolution video delivered via online gallery',
-        },
-      ],
-    },
-  ],
-  product: [
-    {
-      title: 'Basic Photography',
-      price: 100,
-      unit: 'photo',
-      points: [
-        { icon: 'photo', content: 'Upto 20 Photos' },
-        { icon: 'photo', content: 'Basic editing, color correction' },
-        {
-          icon: 'photo',
-          content: 'High-resolution images delivered via online gallery',
-        },
-      ],
-    },
-    {
-      title: 'Premium Photography',
-      price: 200,
-      unit: 'photo',
-      points: [
-        { icon: 'photo', content: 'Upto 20 Photos' },
-        {
-          icon: 'photo',
-          content: 'Dynamic angle, retouching, and color correction',
-        },
-        {
-          icon: 'photo',
-          content: 'High-resolution images delivered via online gallery',
-        },
-      ],
-    },
-    {
-      title: 'Standard Videography',
-      price: 800,
-      unit: 'video',
-      points: [
-        { icon: 'photo', content: 'Upto 30 Second Video' },
-        {
-          icon: 'photo',
-          content: 'Extensive editing, retouching, and color grading',
-        },
-        {
-          icon: 'photo',
-          content: 'High-resolution video delivered via online gallery',
-        },
-      ],
-    },
-  ],
-}
-
-const pricesVideo = {
-  commercial: [
-    {
-      title: 'Commercial Videography',
-      price: 2000,
-      unit: 'video',
-      points: [
-        { icon: 'photo', content: '15 sec Video, Minimum 2 Video' },
-        {
-          icon: 'photo',
-          content: 'Extensive editing, retouching, and color grading',
-        },
-        {
-          icon: 'photo',
-          content: 'High-resolution video delivered via online gallery',
-        },
-      ],
-    },
-  ],
-}
-
-const tabs = ref([
-  {
-    icon: 'pizza',
-    title: 'food' as const,
-  },
-  {
-    icon: 'box',
-    title: 'product' as const,
-  },
-])
-
-const activeTab = ref<Categories>('food')
-
-function changeActiveTab(tab: Categories) {
-  activeTab.value = tab
-}
+const activeCategory = ref<Category>('ecommerce')
 </script>
 
 <template>
   <div>
     <AppHeader />
-    <main class="relative mx-auto flex max-w-[90rem] flex-col gap-4 overflow-hidden p-4 !pb-0 lg:gap-16 lg:p-16">
+    <main class="relative mx-auto mb-5 flex max-w-[90rem] flex-col gap-4 overflow-hidden p-4 !pb-0 lg:p-16">
+      <ButtonFloatingAction :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
       <SectionHero :images="images" @contact="onContact(true)" />
-      <SectionFeatured :images="images" />
-      <SectionGallery :images="images" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
-      <SectionPricing id="pricing-image" :prices="pricesPhoto" :tabs="tabs" :active-tab="activeTab" @change-tab="changeActiveTab" />
-      <SectionVideo />
-      <SectionPricing id="pricing-video" :prices="pricesVideo" :tabs="[{ icon: 'box', title: 'commercial' }]" :active-tab="'commercial'" @change-tab="() => {}" />
-      <!-- <SectionTestimonial /> -->
+      <SectionGallery :images="images" />
+      <SectionFeaturedImage :images="images" :active-category="activeCategory" />
+      <SectionFeaturedVideo :videos="videos" :active-category="activeCategory" />
+      <SectionPricing :active-category="activeCategory" />
       <ModalContact :is-open="isModelContactOpen" @close="onContact(false)" />
+      <AppFooter @contact="onContact(true)" />
     </main>
-    <AppFooter @contact="onContact(true)" />
   </div>
 </template>

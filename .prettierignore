@@ -7,8 +7,10 @@ dist
 
 # Node dependencies
 node_modules
+
+# Package Manager
 package.json
-package-lock.json
+pnpm-lock.yaml
 
 # Logs
 logs
@@ -19,11 +21,13 @@ logs
 .fleet
 .idea
 
-# Local env files
-.env
-.env.*
+# Env files
+.env*
+!.env.example
 
 # Static files
 static/**/*.*
 !static/**/*.gitkeep
 !static/data/*
+
+photography

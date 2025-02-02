@@ -1,17 +1,21 @@
 <script setup lang="ts">
-const { data: videos } = useFetch('/api/video', { default: () => [] })
+const props = defineProps<{
+  videos: Video[]
+  activeCategory: Category
+}>()
 
 const currentVideoIndex = ref(0)
-const currentVideo = computed(() => ({ ...videos.value[currentVideoIndex.value] }))
+const currentVideo = computed(() => ({ ...props.videos[currentVideoIndex.value]! }))
 
 async function updateVideoIndex() {
-  currentVideoIndex.value = (currentVideoIndex.value + 1) % videos.value.length
+  currentVideoIndex.value = (currentVideoIndex.value + 1) % props.videos.length
 }
 </script>
 
 <template>
-  <section id="video" class="pb-4">
-    <div v-if="videos.length" class="aspect-video w-full overflow-hidden rounded-2xl border border-primary-400 bg-black">
+  <section id="featured-videos" class="pb-4">
+    <SectionLabel icon="movie" title="Featured Videos" />
+    <div v-if="videos.length" class="relative left-1/2 aspect-video w-screen -translate-x-1/2 overflow-hidden border bg-black">
       <NuxtVideo
         :key="currentVideoIndex"
         :source="currentVideo.sources"

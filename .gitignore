@@ -27,3 +27,5 @@ logs
 static/**/*.*
 !static/**/*.gitkeep
 !static/data/*
+
+photography

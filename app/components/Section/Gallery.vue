@@ -1,126 +1,131 @@
 <script setup lang="ts">
 const props = defineProps<{
   images: Photo[]
-  tabs: {
-    title: Categories
-    icon: string
-  }[]
-  activeTab: Categories
 }>()
 
-const emit = defineEmits<{ changeTab: [value: Categories] }>()
-
-function objectToClass({ sm, md }: { sm: Position; md: Position }, size: string) {
-  const aspectRatio = { s: 1.57, m: 0.67, l: 1.39 }[size]
-  return `row-start-${sm.row.start} md:row-start-${md.row.start} row-span-${sm.row.span} md:row-span-${md.row.span} 
-	col-start-${sm.col.start} md:col-start-${md.col.start} col-span-${sm.col.span} md:col-span-${md.col.span} aspect-[${aspectRatio}]`
-}
-
-const categoryImages = {
-  food: usePhoto(props.images, ['Food-002-001', 'Food-005-001', 'Food-003-001', 'Food-006-002', 'Food-007-001', 'Food-004-001', 'Food-001-001']),
-  product: usePhoto(props.images, ['Product-004-002', 'Product-005-001', 'Product-006-001', 'Product-008-001', 'Product-002-002', 'Product-003-001', 'Product-001-001']),
-}
-
-const images = computed<GalleryPhoto[]>(() =>
-  [
-    {
-      position: {
-        sm: { row: { start: 1, span: 2 }, col: { start: 1, span: 2 } },
-        md: { row: { start: 1, span: 2 }, col: { start: 1, span: 2 } },
-      },
-      size: 'l',
-      aspectRatio: 1.356,
-    },
-    {
-      position: {
-        sm: { row: { start: 3, span: 1 }, col: { start: 1, span: 1 } },
-        md: { row: { start: 1, span: 1 }, col: { start: 3, span: 1 } },
-      },
-      size: 's',
-      aspectRatio: 1.362,
-    },
-    {
-      position: {
-        sm: { row: { start: 4, span: 1 }, col: { start: 1, span: 1 } },
-        md: { row: { start: 1, span: 1 }, col: { start: 4, span: 1 } },
-      },
-      size: 's',
-      aspectRatio: 1.362,
-    },
-    {
-      position: {
-        sm: { row: { start: 5, span: 1 }, col: { start: 2, span: 1 } },
-        md: { row: { start: 3, span: 1 }, col: { start: 1, span: 1 } },
-      },
-      size: 's',
-      aspectRatio: 1.362,
-    },
-    {
-      position: {
-        sm: { row: { start: 6, span: 1 }, col: { start: 2, span: 1 } },
-        md: { row: { start: 3, span: 1 }, col: { start: 2, span: 1 } },
-      },
-      size: 's',
-      aspectRatio: 1.362,
-    },
-    {
-      position: {
-        sm: { row: { start: 3, span: 2 }, col: { start: 2, span: 1 } },
-        md: { row: { start: 2, span: 2 }, col: { start: 3, span: 1 } },
-      },
-      size: 'm',
-      aspectRatio: 0.67,
-    },
-    {
-      position: {
-        sm: { row: { start: 5, span: 2 }, col: { start: 1, span: 1 } },
-        md: { row: { start: 2, span: 2 }, col: { start: 4, span: 1 } },
-      },
-      size: 'm',
-      aspectRatio: 0.67,
-    },
-  ].map((image, index) => {
-    return {
-      name: categoryImages[props.activeTab].value[index]?.name,
-      id: categoryImages[props.activeTab].value[index]?.id,
-      alt: categoryImages[props.activeTab].value[index]?.title,
-      dynamicClass: objectToClass(image.position, image.size),
-      aspectRatio: image.aspectRatio,
-    }
-  })
-)
+const allImages = usePhoto(props.images, [
+  'Food-004-001',
+  'Food-002-001',
+  'Food-003-001',
+  'Food-001-001',
+  'Food-005-001',
+  'Food-007-001',
+  'Food-006-001',
+  'Food-009-001',
+  'Food-008-001',
+  // 'Food-006-002',
+  'Food-010-001',
+  'Food-011-001',
+  'Food-012-001',
+  'Product-003-001',
+  'Food-014-001',
+  'Food-015-001',
+  'Food-016-001',
+  'Food-017-001',
+  'Product-001-001',
+  'Product-006-001',
+  'Product-008-001',
+  'Product-004-001',
+  'Product-005-001',
+  'Food-013-001',
+  'Product-007-001',
+  'Product-002-001',
+  'Product-009-001',
+  'Product-010-001',
+  'Product-011-001',
+])
 
 const activeImageName = useState()
+
+const slideCounts = ['3', '4', '6'] as const
+
+const imageSlides = computed(() => {
+  const slides = slideCounts.map((noOfSlides) => {
+    const slides: { id: string; name: string; title: string; aspectRatio: number }[][] = new Array(parseInt(noOfSlides)).fill(null).map((_) => [])
+
+    allImages.value.forEach((image, index) => {
+      slides[index % parseInt(noOfSlides)]!.push(image)
+    })
+
+    // allImages.value.forEach((image, index) => {
+    //   slides[index % parseInt(noOfSlides)]!.push(image)
+    // })
+
+    return slides
+  })
+
+  return {
+    3: slides[0],
+    4: slides[1],
+    6: slides[2],
+  }
+})
+
+const container = ref<HTMLDivElement | null>(null)
+const { height: containerHeight } = useElementSize(container)
+const slider = ref<HTMLDivElement | null>(null)
+const { height: sliderHeight } = useElementSize(slider)
+
+const offsetFactor = 100
+const counter = useInterval(1800)
+const offset = computed(() => counter.value * offsetFactor)
+const isSliderVisible = ref(true)
+const isEndVisible = ref(false)
+
+watch(offset, (value) => {
+  if (offset.value >= -(containerHeight.value * (3 / 4)) && offset.value <= sliderHeight.value - containerHeight.value * (2 / 5)) isEndVisible.value = false
+  else isEndVisible.value = true
+
+  if (offset.value > -(containerHeight.value + 2 * offsetFactor)) isSliderVisible.value = true
+  if (value > sliderHeight.value) isSliderVisible.value = false
+  if (value > sliderHeight.value + 2 * offsetFactor) counter.value = -(containerHeight.value + 2 * offsetFactor) / offsetFactor
+})
 </script>
 
 <template>
-  <section id="gallery" class="relative h-fit">
-    <div class="mx-auto mb-4 flex w-fit gap-4 md:mb-12">
-      <ButtonTab v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="activeTab === title" @click="emit('changeTab', title)" />
-    </div>
-    <div class="relative mx-0 grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3 lg:-mx-12">
-      <NuxtLink v-for="{ name, id, alt, dynamicClass, aspectRatio } in images" :key="id" :to="`/images/${name}`" :class="dynamicClass" class="size-full" @click="activeImageName = name">
-        <NuxtImg
-          provider="uploadcare"
-          :src="id"
-          :alt="alt"
-          :width="640"
-          :height="Math.round(640 / aspectRatio)"
-          fit="cover"
-          format="webp"
-          loading="lazy"
-          class="size-full overflow-hidden rounded-sm" />
-      </NuxtLink>
+  <section id="image-gallery" class="relative z-0 mx-0 h-screen overflow-hidden bg-light-400 dark:bg-dark-400 lg:-mx-12">
+    <SectionLabel icon="grid" title="Image Gallery" />
+    <div ref="container" class="overflow-hidden">
+      <div v-show="isSliderVisible" ref="slider" class="relative z-10 flex gap-2 transition-all duration-[2s] ease-linear" :style="{ translate: `0 ${-offset}px` }">
+        <!-- For Small Screen Devices -->
+        <template v-for="slideCount in slideCounts">
+          <div
+            v-for="(slideImages, index) in imageSlides[slideCount]"
+            :key="index"
+            class="flex-1 flex-col gap-2"
+            :class="{
+              'flex md:hidden': slideCount == '3',
+              'hidden md:flex lg:hidden': slideCount == '4',
+              'hidden lg:flex': slideCount == '6',
+            }">
+            <NuxtLink v-for="{ id, name, title } in slideImages" :key="id" :to="`/images/${name}`" class="" @click="activeImageName = name">
+              <NuxtImg provider="uploadcare" :src="id" :alt="title" :width="960" :height="Math.round(960 / (3 / 4))" fit="cover" format="webp" loading="lazy" class="w-full rounded-sm object-cover" />
+            </NuxtLink>
+          </div>
+        </template>
+        <!-- For Large Screen Devices -->
+      </div>
+      <Transition>
+        <div v-show="isEndVisible" class="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full items-center justify-center text-primary-500">
+          <NuxtIcon name="logo-full" class="text-[196px] drop-shadow-md md:text-[356px]" />
+        </div>
+      </Transition>
     </div>
   </section>
 </template>
 
-<style>
-.img-dynamic {
-  @apply size-0;
-  @apply col-span-1 col-start-1 row-span-1 row-start-1 aspect-[1.57] sm:col-span-1 sm:col-start-1 sm:row-span-1 sm:row-start-1 md:col-span-1 md:col-start-1 md:row-span-1 md:row-start-1;
-  @apply col-span-2 col-start-2 row-span-2 row-start-2 aspect-[0.67] sm:col-span-2 sm:col-start-2 sm:row-span-2 sm:row-start-2 md:col-span-2 md:col-start-2 md:row-span-2 md:row-start-2;
-  @apply col-start-3 row-start-3 aspect-[1.39] sm:col-start-3 sm:row-start-3 md:col-start-3 md:row-start-3;
-  @apply col-start-5 row-start-5 sm:col-start-5 sm:row-start-5 md:col-start-5 md:row-start-5;
+<style scoped>
+.overlay {
+  @apply after:fixed after:left-0 after:top-0 after:z-20 after:h-screen after:w-screen after:bg-gradient-to-b after:from-black/40 after:from-[3%] after:via-transparent after:via-20% after:to-black/40 after:to-[97%] after:content-[''];
+}
+
+.v-enter-active,
+.v-leave-active {
+  @apply transition duration-[3000ms];
+}
+
+.v-enter-from,
+.v-leave-to {
+  @apply scale-90 opacity-0;
 }
 </style>

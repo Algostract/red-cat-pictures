@@ -34,3 +34,5 @@ Dockerfile
 # Static files
 static/**/*.*
 !static/**/*.gitkeep
+
+photography

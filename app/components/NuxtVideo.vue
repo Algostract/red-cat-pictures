@@ -72,8 +72,7 @@ function handleEnded() {
   <!-- @loadedmetadata="" -->
   <video
     ref="videoRef"
-    width="100%"
-    height="100%"
+    class="h-full w-full"
     :poster="poster"
     :controlsList="controlsList"
     :preload="preload"

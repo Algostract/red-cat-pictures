@@ -66,6 +66,10 @@ useSchemaOrg([
   @apply block size-[6px] bg-light-400 dark:bg-dark-400;
 }
 
+body::-webkit-scrollbar {
+  @apply hidden;
+}
+
 *::-webkit-scrollbar-thumb {
   @apply rounded-md bg-light-600 dark:bg-dark-600;
 }
@@ -90,7 +94,6 @@ body {
 }
 
 .scrollbar-hidden::-webkit-scrollbar {
-  display: none;
-  /* Safari and Chrome */
+  @apply /* Safari and Chrome */ hidden;
 }
 </style>

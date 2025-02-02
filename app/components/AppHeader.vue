@@ -7,7 +7,7 @@ function onNavigate(section: string) {
 </script>
 
 <template>
-  <header class="absolute left-0 right-0 top-0 mx-auto max-w-[90rem] px-4 md:px-16">
+  <header class="absolute left-0 right-0 top-0 mx-auto max-w-[90rem] px-4 text-white md:px-16">
     <nav class="relative z-20 grid grid-cols-3 items-center">
       <NuxtLink to="/">
         <NuxtIcon name="logo-full" class="text-[96px] md:text-[128px]" />

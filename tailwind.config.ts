@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['components/**/*.{vue,js,ts}', 'layouts/**/*.vue', 'pages/**/*.vue', 'App.{js,ts,vue}', 'app.{js,ts,vue}', 'Error.{js,ts,vue}', 'error.{js,ts,vue}', 'content/**/*.md'],
   darkMode: 'class',
   theme: {
@@ -41,9 +41,9 @@ module.exports = {
         600: '#23324D',
       },
       primary: {
-        400: '#E8D78E',
-        500: '#CABC7C',
-        600: '#988D5D',
+        400: '#FB3737',
+        500: '#CD2D2D',
+        600: '#813232',
       },
       success: {
         400: '#89E774',

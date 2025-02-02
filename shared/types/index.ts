@@ -1,21 +1,17 @@
-export type Categories = 'commercial' | 'food' | 'product'
+export type Category = 'ecommerce' | 'product' | 'food'
+export type Service = 'photo' | 'video'
 
 export interface FilePhoto {
   name: string
   id: string
   title: string
-  category: Categories
+  category: Category
   width: number
   height: number
 }
 
 export interface Photo extends Omit<FilePhoto, 'width' | 'height'> {
   aspectRatio: number
-}
-
-export interface Position {
-  row: { start: number; span: number }
-  col: { start: number; span: number }
 }
 
 export interface GalleryPhoto {
@@ -26,6 +22,11 @@ export interface GalleryPhoto {
   aspectRatio: number
 }
 
+export interface Position {
+  row: { start: number; span: number }
+  col: { start: number; span: number }
+}
+
 export interface Video {
   poster: string
   sources: {
@@ -33,3 +34,12 @@ export interface Video {
     type: string
   }[]
 }
+
+export interface ServicePrice {
+  title: string
+  price: number
+  unit: 'photo' | 'video' | 'session'
+  points: { icon: string; title: string }[]
+}
+
+export type Price = Record<Category, Record<Service, ServicePrice[]>>
