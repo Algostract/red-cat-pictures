@@ -1,5 +1,15 @@
 # portfolio-artarik
 
+## 2.0.0
+
+### Major Changes
+
+- fd6ca81: feat: new red/white theme added, remove Testimonial component, add new FloatingAction and Label components, update Tailwind colors and scrollbar styles
+
+### Patch Changes
+
+- efc7db7: feat: optimize price API handler and improve component layouts for better responsiveness
+
 ## 1.10.1
 
 ### Patch Changes
