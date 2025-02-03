@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 2.2.0
+
+### Minor Changes
+
+- 6a67867: refactor: update branding and improve UI elements across the application
+
 ## 2.1.0
 
 ### Minor Changes
