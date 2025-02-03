@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  videos: Video[]
+  videos: VideoItem[]
   activeCategory: Category
 }>()
 
@@ -18,8 +18,8 @@ async function updateVideoIndex() {
     <div v-if="videos.length" class="relative left-1/2 aspect-video w-screen -translate-x-1/2 overflow-hidden bg-black">
       <NuxtVideo
         :key="currentVideoIndex"
-        :source="currentVideo.sources"
         :poster="currentVideo.poster"
+        :source="currentVideo.sources"
         :disable-picture-in-picture="true"
         controls-list="nodownload"
         :autoplay="true"

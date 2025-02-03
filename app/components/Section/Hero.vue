@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-  images: Photo[]
-  video: Video
+  // images: Photo[]
+  video: VideoItem
 }>()
 
 const emit = defineEmits<{

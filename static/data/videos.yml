@@ -1,75 +1,74 @@
 ---
 - type: 'hero'
-  poster:
+  poster: ''
   sources:
-    # - src: /video/hero-portrait-hevc.mp4
-    #   type: video/mp4
+    default:
+      - src: /video/hero-default-av1.webm
+        type: video/webm
 
-    - src: /video/hero-portrait-av1.webm
-      type: video/webm
+      - src: /video/hero-default-vp9.webm
+        type: video/webm
 
-    - src: /video/hero-portrait-vp9.webm
-      type: video/webm
+      - src: /video/hero-default-avc.mp4
+        type: video/mp4
+    md:
+      - src: /video/hero-md-av1.webm
+        type: video/webm
 
-    - src: /video/hero-portrait-avc.mp4
-      type: video/mp4
+      - src: /video/hero-md-vp9.webm
+        type: video/webm
+
+      - src: /video/hero-md-avc.mp4
+        type: video/mp4
 
 - type: 'feature'
-  poster:
+  poster: ''
   sources:
-    # - src: /video/cookies-hevc.mp4
-    #   type: video/mp4
+    default:
+      - src: /video/cookies-av1.webm
+        type: video/webm
 
-    - src: /video/cookies-av1.webm
-      type: video/webm
+      - src: /video/cookies-vp9.webm
+        type: video/webm
 
-    - src: /video/cookies-vp9.webm
-      type: video/webm
-
-    - src: /video/cookies-avc.mp4
-      type: video/mp4
+      - src: /video/cookies-avc.mp4
+        type: video/mp4
 
 - type: 'feature'
-  poster:
+  poster: ''
   sources:
-    # - src: /video/red-bull-hevc.mp4
-    #   type: video/webm
+    default:
+      - src: /video/red-bull-av1.webm
+        type: video/webm
 
-    - src: /video/red-bull-av1.webm
-      type: video/webm
+      - src: /video/red-bull-vp9.webm
+        type: video/webm
 
-    - src: /video/red-bull-vp9.webm
-      type: video/webm
-
-    - src: /video/red-bull-avc.mp4
-      type: video/mp4
+      - src: /video/red-bull-avc.mp4
+        type: video/mp4
 
 - type: 'feature'
-  poster:
+  poster: ''
   sources:
-    # - src: /video/peanut-bar-hevc.mp4
-    #   type: video/webm
+    default:
+      - src: /video/peanut-bar-av1.webm
+        type: video/webm
 
-    - src: /video/peanut-bar-av1.webm
-      type: video/webm
+      - src: /video/peanut-bar-vp9.webm
+        type: video/webm
 
-    - src: /video/peanut-bar-vp9.webm
-      type: video/webm
-
-    - src: /video/peanut-bar-avc.mp4
-      type: video/mp4
+      - src: /video/peanut-bar-avc.mp4
+        type: video/mp4
 
 - type: 'feature'
-  poster:
+  poster: ''
   sources:
-    # - src: /video/peanut-bar-hevc.mp4
-    #   type: video/webm
+    default:
+      - src: /video/sweet-av1.webm
+        type: video/webm
 
-    - src: /video/sweet-av1.webm
-      type: video/webm
+      - src: /video/sweet-vp9.webm
+        type: video/webm
 
-    - src: /video/sweet-vp9.webm
-      type: video/webm
-
-    - src: /video/sweet-avc.mp4
-      type: video/mp4
+      - src: /video/sweet-avc.mp4
+        type: video/mp4

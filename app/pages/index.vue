@@ -41,7 +41,7 @@ function onContact(action: boolean) {
     <AppHeader />
     <main class="relative mx-auto mb-20 flex max-w-[90rem] flex-col gap-4 overflow-hidden p-4 !pb-0 md:mb-8 lg:p-16">
       <ButtonFloatingAction :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
-      <SectionHero :images="images" :video="heroVideo" @contact="onContact(true)" />
+      <SectionHero :video="heroVideo" @contact="onContact(true)" />
       <SectionGallery :images="images" />
       <SectionFeaturedImage :images="images" :active-category="activeCategory" />
       <SectionFeaturedVideo :videos="featuredVideos" :active-category="activeCategory" />

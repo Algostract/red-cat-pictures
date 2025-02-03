@@ -27,13 +27,31 @@ export interface Position {
   col: { start: number; span: number }
 }
 
-export interface Video {
-  type: 'hero' | 'feature'
-  poster: string
-  sources: {
+export type BreakpointKey = 'default' | 'md' | 'lg' | 'xl' | '2xl'
+
+export type FileSources = {
+  [key in BreakpointKey]?: {
     src: string
     type: string
   }[]
+}
+
+export interface FileVideoItem {
+  type: 'hero' | 'feature'
+  poster: string
+  sources: FileSources
+}
+
+export interface Source {
+  src: string
+  type: string
+  media: string
+}
+
+export interface VideoItem {
+  type: 'hero' | 'feature'
+  poster: string
+  sources: Source[]
 }
 
 export interface ServicePrice {

@@ -1,9 +1,4 @@
 <script setup lang="ts">
-interface Source {
-  src: string
-  type: string
-}
-
 const props = withDefaults(
   defineProps<{
     source: Source | Source[]
@@ -88,7 +83,7 @@ function handleEnded() {
     @progress="handleProgress"
     @ended="handleEnded">
     <template v-if="Array.isArray(source)">
-      <source v-for="{ src, type } of source" :key="src" :src="src" :type="type" />
+      <source v-for="{ src, type, media } of source" :key="src" :src="src" :type="type" :media="media" />
     </template>
     <template v-else>
       <source :src="source.src" :type="source.type" />
