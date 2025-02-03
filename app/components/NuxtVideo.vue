@@ -16,10 +16,10 @@ const props = withDefaults(
     controlsList: undefined,
     preload: 'auto',
     controls: false,
-    disablePictureInPicture: false,
     autoplay: false,
     muted: false,
     playsinline: false,
+    disablePictureInPicture: false,
   }
 )
 
@@ -27,7 +27,9 @@ const emit = defineEmits<{
   ended: []
 }>()
 
-const videoRef = ref<HTMLVideoElement>()
+const videoRef = useTemplateRef<HTMLVideoElement>('videoRef')
+
+defineExpose({ videoRef })
 
 watch(
   () => props.source,

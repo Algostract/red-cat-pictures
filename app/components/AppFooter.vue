@@ -18,20 +18,20 @@ const emit = defineEmits<{
     <ButtonCTA class="col-span-2 col-start-1 row-start-1 self-center justify-self-center md:col-span-1 md:col-start-2 md:row-start-2" @click="emit('contact')" />
     <ul class="col-start-2 row-start-2 flex gap-4 justify-self-end *:text-white *:transition-colors *:duration-500 *:ease-out hover:*:text-dark-600 md:col-start-3 md:row-start-3 md:gap-8">
       <li>
-        <NuxtLink to="https://www.facebook.com/redcatxpictures" target="_blank">
+        <NuxtLink to="https://www.facebook.com/redcatxpictures" target="_blank" external>
           <NuxtIcon name="facebook" class="text-[28px] md:text-[40px]" />
         </NuxtLink>
       </li>
       <li>
-        <NuxtLink to="https://www.instagram.com/redcatxpictures" target="_blank">
+        <NuxtLink to="https://www.instagram.com/redcatxpictures" target="_blank" external>
           <NuxtIcon name="instagram" class="text-[28px] md:text-[40px]" />
         </NuxtLink>
       </li>
-      <!-- <li>
-				<NuxtLink to="https://www.youtube.com/" target="_blank">
-					<NuxtIcon name="youtube" class="text-[28px] md:text-[40px]" />
-				</NuxtLink>
-			</li> -->
+      <li>
+        <NuxtLink to="https://maps.app.goo.gl/a5RZtb1rxHC8MoaY6" target="_blank" external>
+          <NuxtIcon name="map" class="text-[28px] md:text-[40px]" />
+        </NuxtLink>
+      </li>
     </ul>
   </footer>
 </template>

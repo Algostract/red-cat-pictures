@@ -87,9 +87,9 @@ export default defineNuxtConfig({
     injectRegister: 'auto',
     registerType: 'autoUpdate',
     manifest: {
-      name: 'Red Cat Pictures',
-      short_name: 'Red Cat Pictures',
-      description: 'Elevate Your Brand Image',
+      name: 'Redcat X Pictures | Elevate Your Brand Image',
+      short_name: 'Redcat X Pictures',
+      description: 'Nurture the essence of your product with our photography & videography services in kolkata',
       theme_color: '#CD2D2D',
       background_color: '#BDC9E0',
       orientation: 'portrait',

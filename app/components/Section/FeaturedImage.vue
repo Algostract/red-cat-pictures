@@ -11,9 +11,9 @@ function objectToClass({ sm, md }: { sm: Position; md: Position }, size: string)
 }
 
 const categoryImages = {
-  ecommerce: usePhoto(props.images, ['Ecommerce-012-001', 'Ecommerce-002-002', 'Product-005-001', 'Ecommerce-003-001', 'Product-010-001', 'Ecommerce-001-002', 'Ecommerce-008-002']),
-  product: usePhoto(props.images, ['Product-004-002', 'Product-015-001', 'Product-006-001', 'Product-016-005', 'Product-002-002', 'Product-013-001', 'Product-001-001']),
-  food: usePhoto(props.images, ['Food-002-001', 'Food-005-001', 'Food-003-001', 'Food-012-001', 'Food-023-001', 'Food-004-001', 'Food-001-001']),
+  ecommerce: usePhoto(props.images, ['Ecommerce-012-001', 'Ecommerce-002-002', 'Product-005-001', 'Ecommerce-003-002', 'Product-010-001', 'Ecommerce-001-004', 'Ecommerce-008-002']),
+  product: usePhoto(props.images, ['Product-004-002', 'Product-015-002', 'Product-006-001', 'Product-016-006', 'Product-002-002', 'Product-013-001', 'Product-001-001']),
+  food: usePhoto(props.images, ['Food-002-002', 'Food-005-001', 'Food-003-001', 'Food-012-001', 'Food-023-001', 'Food-004-001', 'Food-001-001']),
 }
 
 const images = computed<GalleryPhoto[]>(() =>
@@ -100,9 +100,10 @@ const activeImageName = useState()
           :width="640"
           :height="Math.round(640 / aspectRatio)"
           fit="fill"
-          format="webp"
+          format="auto"
           loading="lazy"
-          class="size-full overflow-hidden rounded-sm bg-light-600" />
+          :query="{ preview: `640x${Math.round(640 / aspectRatio)}` }"
+          class="size-full overflow-hidden rounded-sm bg-light-600 dark:bg-dark-500" />
       </NuxtLink>
     </div>
   </section>

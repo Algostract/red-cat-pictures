@@ -17,8 +17,8 @@ const emit = defineEmits<{
 
 <template>
   <div
-    class="my-4 flex aspect-[5/8] w-[254px] flex-col items-center justify-between rounded bg-light-500 px-5 py-8 dark:bg-dark-500 md:mx-auto md:w-[323px] md:px-9 md:py-12 xl:w-[392px]"
-    :class="{ 'scale-105 border border-primary-500': active }">
+    class="my-4 flex aspect-[5/8] w-[254px] flex-col items-center justify-between rounded bg-light-500 px-5 py-8 drop-shadow-md dark:bg-dark-500 md:mx-auto md:w-[323px] md:px-9 md:py-12 xl:w-[392px]"
+    :class="[active ? 'border border-primary-500' : 'scale-95']">
     <h2
       class="w-min whitespace-nowrap text-center text-lg text-primary-500 md:text-2xl"
       v-html="

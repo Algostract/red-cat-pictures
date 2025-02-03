@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const title = `Professional Food & Product photography/Videography in Kolkata`
-const description = `Nurture the essence of your food & product with our photography & videography services in Kolkata`
+const title = `Redcat X Pictures | Elevate Your Brand Image`
+const description = `Nurture the essence of your product with our photography & videography services in kolkata`
 const url = 'https://redcatpictures.com'
 
 useSeoMeta({

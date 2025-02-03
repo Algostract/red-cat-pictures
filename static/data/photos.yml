@@ -20,6 +20,13 @@
   width: 5661
   height: 7549
 
+- name: Ecommerce-001-004
+  id: b704492f-fc2b-4d92-8fa8-6e7e48e68730
+  title: ''
+  category: ecommerce
+  width: 6851
+  height: 9136
+
 - name: Ecommerce-002-001
   id: 74ea39ed-0696-4be5-a127-2c09024c3367
   title: ''
@@ -47,6 +54,13 @@
   category: ecommerce
   width: 4887
   height: 6516
+
+- name: Ecommerce-003-002
+  id: 7f64862b-29d7-4aa8-8dbb-6e73d156e3b2
+  title: ''
+  category: ecommerce
+  width: 3072
+  height: 2304
 
 - name: Ecommerce-004-001
   id: 1506613e-3f45-421c-810a-f417a757c30b
@@ -358,6 +372,13 @@
   width: 4191
   height: 5588
 
+- name: Product-015-002
+  id: f83bdafc-f1a9-4fa8-b9db-40a42454db0a
+  title:
+  category: product
+  width: 6492
+  height: 4868
+
 - name: Product-016-001
   id: 02eacdcb-f62d-4da4-9eeb-5c0c7db558da
   title:
@@ -393,6 +414,13 @@
   width: 3689
   height: 4919
 
+- name: Product-016-006
+  id: 6b019b67-8f28-4690-8ca3-14fd9b6e230b
+  title:
+  category: product
+  width: 1280
+  height: 940
+
 # Food
 
 - name: Food-001-001
@@ -408,6 +436,13 @@
   category: food
   width: 3330
   height: 3330
+
+- name: Food-002-002
+  id: 0031826c-9bff-46eb-a4c3-023c3d7e7b07
+  title: Spicy grilled chicken wings with onion rings on a black plate, garnished with chili flakes
+  category: food
+  width: 3330
+  height: 2497
 
 - name: Food-003-001
   id: d4857636-289b-4e4d-a29f-8e3a42617eb4

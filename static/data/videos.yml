@@ -25,6 +25,32 @@
   poster: ''
   sources:
     default:
+      - src: /video/pixelplate-portrait-av1.webm
+        type: video/webm
+
+      - src: /video/pixelplate-portrait-vp9.webm
+        type: video/webm
+
+      - src: /video/pixelplate-portrait-avc.mp4
+        type: video/mp4
+
+- type: 'feature'
+  poster: ''
+  sources:
+    default:
+      - src: /video/pixelplate-landscape-av1.webm
+        type: video/webm
+
+      - src: /video/pixelplate-landscape-vp9.webm
+        type: video/webm
+
+      - src: /video/pixelplate-landscape-avc.mp4
+        type: video/mp4
+
+- type: 'feature'
+  poster: ''
+  sources:
+    default:
       - src: /video/cookies-av1.webm
         type: video/webm
 

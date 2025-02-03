@@ -153,7 +153,17 @@ watch(offset, (value) => {
               'hidden lg:flex': slideCount == '6',
             }">
             <NuxtLink v-for="{ id, name, title } in slideImages" :key="id" :to="`/images/${name}`" class="" @click="activeImageName = name">
-              <NuxtImg provider="uploadcare" :src="id" :alt="title" :width="960" :height="Math.round(960 / (3 / 4))" fit="cover" format="webp" loading="lazy" class="w-full rounded-sm object-cover" />
+              <NuxtImg
+                provider="uploadcare"
+                :src="id"
+                :alt="title"
+                :width="960"
+                :height="Math.round(960 / (3 / 4))"
+                fit="cover"
+                format="auto"
+                loading="lazy"
+                quality="smart"
+                class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500" />
             </NuxtLink>
           </div>
         </template>

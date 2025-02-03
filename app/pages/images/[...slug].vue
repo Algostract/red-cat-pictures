@@ -32,7 +32,7 @@ useSeoMeta({
         fit="fill"
         format="webp"
         loading="lazy"
-        class="w-full rounded-sm bg-light-500 object-cover dark:bg-dark-500 md:h-full md:w-auto" />
+        class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500 md:h-full md:w-auto" />
       <!-- <h1 class="text-center my-8">{{ activeImage.title }}</h1> -->
     </main>
   </div>

@@ -25,10 +25,15 @@ const categories = ref<
     title: 'food',
   },
 ])
+
+function onClick(title: Category) {
+  emit('update', title)
+  document.getElementById('featured-images')!.scrollIntoView({ behavior: 'smooth', inline: 'center' })
+}
 </script>
 
 <template>
-  <ul class="fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-0.5 overflow-hidden rounded bg-white dark:bg-dark-600">
+  <ul class="fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-0.5 overflow-hidden rounded bg-white drop-shadow dark:bg-dark-600">
     <ButtonLabel
       v-for="{ icon, title } in categories"
       :key="title"
@@ -37,6 +42,6 @@ const categories = ref<
       :active="title === activeCategory"
       :collapsable="true"
       class="flex-1 rounded-none md:w-52"
-      @click="emit('update', title)" />
+      @click="onClick(title)" />
   </ul>
 </template>
