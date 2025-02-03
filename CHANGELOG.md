@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 2.1.0
+
+### Minor Changes
+
+- f2cb10e: refactor: update video handling and improve breakpoint management in components
+
 ## 2.0.1
 
 ### Patch Changes
