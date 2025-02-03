@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 2.2.1
+
+### Patch Changes
+
+- 13aa810: chore: updated branding assets
+
 ## 2.2.0
 
 ### Minor Changes
