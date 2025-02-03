@@ -31,6 +31,10 @@ const videoRef = useTemplateRef<HTMLVideoElement>('videoRef')
 
 defineExpose({ videoRef })
 
+/* onMounted(() => {
+  videoRef.value!.playbackRate = 0.25;
+}) */
+
 watch(
   () => props.source,
   async () => {

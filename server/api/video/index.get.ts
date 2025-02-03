@@ -30,19 +30,22 @@ function convertSources(sources: FileSources): Source[] {
   return result
 }
 
-export default defineEventHandler<Promise<VideoItem[]>>(async () => {
-  try {
-    const videos = await readYamlFile<FileVideoItem>('videos.yml')
+export default defineCachedEventHandler<Promise<VideoItem[]>>(
+  async () => {
+    try {
+      const videos = await readYamlFile<FileVideoItem>('videos.yml')
 
-    if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
+      if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
 
-    return videos.map(({ sources, ..._ }) => ({ ..._, sources: convertSources(sources) }))
-  } catch (error: unknown) {
-    console.error('API video GET', error)
+      return videos.map(({ sources, ..._ }) => ({ ..._, sources: convertSources(sources) }))
+    } catch (error: unknown) {
+      console.error('API video GET', error)
 
-    throw createError({
-      statusCode: 500,
-      statusMessage: 'Some Unknown Error Found',
-    })
-  }
-})
+      throw createError({
+        statusCode: 500,
+        statusMessage: 'Some Unknown Error Found',
+      })
+    }
+  },
+  { maxAge: 60 * 60 }
+)
