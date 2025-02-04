@@ -75,7 +75,7 @@ export default defineNuxtConfig({
     classSuffix: '',
   },
   site: {
-    name: 'Redcat X Pictures',
+    name: 'RED CAT PICTURES',
     url: 'https://redcatpictures.com',
   },
   robots: {
@@ -87,8 +87,8 @@ export default defineNuxtConfig({
     injectRegister: 'auto',
     registerType: 'autoUpdate',
     manifest: {
-      name: 'Redcat X Pictures',
-      short_name: 'Redcat X Pictures',
+      name: 'RED CAT PICTURES',
+      short_name: 'RED CAT PICTURES',
       description: 'Nurture the essence of your product with our photography & videography services in kolkata',
       theme_color: '#CD2D2D',
       background_color: '#FFFFFF',

@@ -2,7 +2,7 @@
   <img src="./public/logo.png" lt="Logo" width="80" />
 <p>
 
-# Redcat X Pictures
+# RED CAT PICTURES
 
 > Nurture the essence of your product with our photography & videography services in kolkata
 

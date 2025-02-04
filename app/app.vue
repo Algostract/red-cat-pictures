@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const title = `Redcat X Pictures | Elevate Your Brand Image`
+const title = `RED CAT PICTURES | Elevate Your Brand Image`
 const description = `Nurture the essence of your product with our photography & videography services in kolkata`
 const url = 'https://redcatpictures.com'
 
