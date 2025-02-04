@@ -1,5 +1,11 @@
 # portfolio-artarik
 
+## 2.2.2
+
+### Patch Changes
+
+- a81ec90: chore: updated seo image with proper aspect ratio
+
 ## 2.2.1
 
 ### Patch Changes
