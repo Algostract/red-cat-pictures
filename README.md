@@ -2,9 +2,9 @@
   <img src="./public/logo.png" lt="Logo" width="80" />
 <p>
 
-# Portfolio Aratrik
+# Redcat X Pictures
 
-> Aratrik's portfolio showcasing his projects, experience and contacts in a visually appealing manner
+> Nurture the essence of your product with our photography & videography services in kolkata
 
 <p align="center">
   <a href="https://redcatpictures.betteruptime.com">
