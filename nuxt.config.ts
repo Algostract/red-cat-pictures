@@ -6,18 +6,20 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   modules: [
+    '@nuxtjs/seo',
+    '@nuxt/content',
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxt/test-utils/module',
     '@nuxtjs/color-mode',
-    '@nuxtjs/seo',
     '@nuxtjs/tailwindcss',
     '@vite-pwa/nuxt',
     '@vueuse/nuxt',
     'nuxt-icons',
     'nuxt-splide',
+    'nuxt-time',
   ],
   routeRules: {
     '/': { swr: true },
@@ -39,6 +41,8 @@ export default defineNuxtConfig({
     },
     private: {
       rootDir: '',
+      notionApiKey: '',
+      notionDbId: '',
     },
   },
   nitro: {
@@ -54,6 +58,17 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: {
         lang: 'en',
+      },
+    },
+  },
+  content: {
+    build: {
+      markdown: {
+        rehypePlugins: {
+          'rehype-external-links': {
+            options: { target: '_blank', rel: ['noopener'] },
+          },
+        },
       },
     },
   },

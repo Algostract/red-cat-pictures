@@ -35,7 +35,7 @@ async function toggleFullScreen() {
         :source="currentVideo.sources"
         :disable-picture-in-picture="true"
         controls-list="nodownload"
-        :autoplay="true"
+        :autoplay="false"
         :muted="true"
         :playsinline="true"
         preload="metadata"

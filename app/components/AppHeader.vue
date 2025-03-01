@@ -13,20 +13,23 @@ function onNavigate(section: string) {
         <NuxtIcon name="logo-full" filled class="text-[80px] md:text-[112px]" />
       </NuxtLink>
       <ul class="hidden translate-y-1 justify-center gap-8 self-start whitespace-nowrap md:flex">
-        <li>
+        <!--         <li>
           <NuxtLink to="#hero" @click="onNavigate('hero')">Home</NuxtLink>
+        </li> -->
+        <li>
+          <NuxtLink to="/#gallery" @click="onNavigate('gallery')">Gallery</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="#gallery" @click="onNavigate('gallery')">Gallery</NuxtLink>
+          <NuxtLink to="/#featured-images" @click="onNavigate('featured-images')">Images</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="#featured-images" @click="onNavigate('featured-images')">Images</NuxtLink>
+          <NuxtLink to="/#featured-videos" @click="onNavigate('featured-videos')">Videos</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="#featured-videos" @click="onNavigate('featured-videos')">Videos</NuxtLink>
+          <NuxtLink to="/#pricing" @click="onNavigate('pricing')">Pricing</NuxtLink>
         </li>
         <li>
-          <NuxtLink to="#pricing" @click="onNavigate('pricing')">Pricing</NuxtLink>
+          <NuxtLink to="/episode" @click="onNavigate('episods')">Episodes</NuxtLink>
         </li>
       </ul>
       <div class="col-start-3 -translate-y-1/2 justify-self-end">

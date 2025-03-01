@@ -1,0 +1,113 @@
+<script setup lang="ts">
+const route = useRoute()
+const slug = route.params.slug!.toString()
+const { data: episode } = await useAsyncData(route.path, () => queryCollection('notion').where('id', '=', `notion/${slug}.json`).first())
+
+if (!episode.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
+
+const title = `${episode.value.title}`
+const description = `${mdToText(episode.value.content).split(' ').slice(0, 20).join(' ')}...`
+const url = 'https://redcatpictures.com'
+
+useSeoMeta({
+  title: title,
+  ogTitle: title,
+  twitterTitle: title,
+  description: description,
+  ogDescription: description,
+  twitterDescription: description,
+  ogImage: `https://ucarecdn.com/${episode.value.cover}/-/format/webp/-/scale_crop/1280x640/`,
+  twitterImage: `https://ucarecdn.com/${episode.value.cover}/-/format/webp/-/scale_crop/1280x640/`,
+  ogUrl: `${url}/blog/${slug}`,
+})
+
+const content = await parseMarkdown(episode.value.content.replaceAll('\\n\\n', '\n\n').replace(/\[embed\]\((.*?)\)/g, '<img src="$1" alt="" class="w-full aspect-video object-cover">'))
+</script>
+
+<template>
+  <div>
+    <AppHeader />
+    <main v-if="episode" class="relative mx-auto mb-4 flex min-h-screen max-w-[90rem] flex-col gap-4 overflow-hidden px-4 !pb-0 md:mb-8 lg:px-16">
+      <article class="w-full">
+        <NuxtImg provider="uploadcare" :src="episode.cover" :alt="episode.title" class="absolute left-0 aspect-[5/3] max-h-[20rem] w-screen object-cover" />
+        <div class="invisible -left-4 aspect-[5/3] max-h-[20rem] w-screen" />
+        <div class="content mx-auto max-w-4xl leading-relaxed">
+          <h1 class="mt-4">{{ episode.title }}</h1>
+          <div class="mb-2 mt-4 flex justify-between gap-8 text-black/60 dark:text-white/60 md:mt-8">
+            <NuxtTime :datetime="episode.createdAt" day="numeric" month="short" year="numeric" />
+            <span class="text-right text-base">
+              Updated on
+              <NuxtTime :datetime="episode.modifiedAt" day="numeric" month="short" year="numeric" />
+            </span>
+          </div>
+          <ContentRenderer :value="content" />
+        </div>
+      </article>
+      <AppFooter />
+    </main>
+  </div>
+</template>
+
+<style lang="css">
+.content h1 {
+  @apply my-4 text-xl font-semi-bold md:text-3xl;
+}
+
+.content h2 {
+  @apply my-3 text-2xl font-semi-bold;
+}
+
+.content h3 {
+  @apply my-2 text-xl font-semi-bold text-alert-600;
+}
+
+.content h4 {
+  @apply my-1 text-lg font-semi-bold;
+}
+
+.content p {
+  @apply my-2 font-light opacity-80 md:my-4 md:text-[1.125rem];
+}
+
+.content > img {
+  @apply mx-auto my-4 aspect-video max-h-[18rem] w-full rounded-md object-cover md:my-8;
+}
+
+.content aside {
+  @apply my-2 flex items-start gap-1 rounded bg-dark-600/20 p-4;
+}
+
+.content aside > img {
+  @apply w-7;
+}
+
+.content aside > p {
+  @apply my-0;
+}
+
+.content strong {
+  @apply font-semi-bold;
+}
+
+.content ol {
+  @apply ml-8 list-decimal;
+}
+
+.content ul {
+  @apply ml-8 list-disc;
+}
+
+.content a {
+  @apply underline underline-offset-1;
+}
+
+.content h3 > a {
+  @apply no-underline;
+}
+
+.content blockquote {
+  @apply rounded border-l-4 border-primary-500 pl-4;
+}
+</style>

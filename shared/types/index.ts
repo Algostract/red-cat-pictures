@@ -62,3 +62,41 @@ export interface ServicePrice {
 }
 
 export type Price = Record<Category, Record<Service, ServicePrice[]>>
+
+export interface NotionEpisode {
+  id: string
+  created_time: string
+  last_edited_time: string
+  cover: {
+    external: {
+      url: string
+    }
+  }
+  properties: {
+    'Client Name': {
+      select: {
+        name: string
+      }
+    }
+    Status: {
+      status: {
+        name: 'Idea' | 'Drafting' | 'Ready for Review' | 'Ready to Publish' | 'Published' | 'Unpublished'
+      }
+    }
+    'Content type': {
+      select: {
+        name: 'Blog article'
+      }
+    }
+    'Publish date': {
+      date: {
+        start: string
+      }
+    }
+    'Content name': {
+      title: {
+        plain_text: string
+      }[]
+    }
+  }
+}
