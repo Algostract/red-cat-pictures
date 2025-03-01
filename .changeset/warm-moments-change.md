@@ -1,5 +1,5 @@
 ---
-'portfolio-artarik': minor
+'red-cat-pictures': minor
 ---
 
-feat: rename blog section to episodes and update related components and types
+feat: new episode page added with its child pages

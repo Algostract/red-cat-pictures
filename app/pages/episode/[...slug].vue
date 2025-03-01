@@ -1,15 +1,16 @@
 <script setup lang="ts">
 const route = useRoute()
 const slug = route.params.slug!.toString()
-const { data: episode } = await useAsyncData(route.path, () => queryCollection('notion').where('id', '=', `notion/${slug}.json`).first())
+const { data: episode } = await useFetch(`/api/episode/${slug}`)
 
 if (!episode.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
 const title = `${episode.value.title}`
-const description = `${mdToText(episode.value.content).split(' ').slice(0, 20).join(' ')}...`
+const description = `${episode.value.description}`
 const url = 'https://redcatpictures.com'
+const image = `https://ucarecdn.com/${episode.value.cover}/-/format/webp/-/scale_crop/1280x640/`
 
 useSeoMeta({
   title: title,
@@ -18,22 +19,23 @@ useSeoMeta({
   description: description,
   ogDescription: description,
   twitterDescription: description,
-  ogImage: `https://ucarecdn.com/${episode.value.cover}/-/format/webp/-/scale_crop/1280x640/`,
-  twitterImage: `https://ucarecdn.com/${episode.value.cover}/-/format/webp/-/scale_crop/1280x640/`,
-  ogUrl: `${url}/blog/${slug}`,
+  ogImage: image,
+  twitterImage: image,
+  ogUrl: `${url}/episode/${slug}`,
 })
-
-const content = await parseMarkdown(episode.value.content.replaceAll('\\n\\n', '\n\n').replace(/\[embed\]\((.*?)\)/g, '<img src="$1" alt="" class="w-full aspect-video object-cover">'))
 </script>
 
 <template>
   <div>
     <AppHeader />
-    <main v-if="episode" class="relative mx-auto mb-4 flex min-h-screen max-w-[90rem] flex-col gap-4 overflow-hidden px-4 !pb-0 md:mb-8 lg:px-16">
+    <main v-if="episode"
+      class="relative mx-auto mb-4 flex min-h-screen max-w-[90rem] flex-col gap-4 overflow-hidden px-4 !pb-0 md:mb-8 lg:px-16">
       <article class="w-full">
-        <NuxtImg provider="uploadcare" :src="episode.cover" :alt="episode.title" class="absolute left-0 aspect-[5/3] max-h-[20rem] w-screen object-cover" />
+        <NuxtImg provider="uploadcare" :src="episode.cover" :alt="episode.title" :width="1280"
+          :height="Math.round(1280 / (16 / 9))" fit="cover" format="auto"
+          class="absolute left-0 aspect-[5/3] max-h-[20rem] w-screen object-cover" />
         <div class="invisible -left-4 aspect-[5/3] max-h-[20rem] w-screen" />
-        <div class="content mx-auto max-w-4xl leading-relaxed">
+        <div class="content relative mx-auto max-w-4xl leading-relaxed">
           <h1 class="mt-4">{{ episode.title }}</h1>
           <div class="mb-2 mt-4 flex justify-between gap-8 text-black/60 dark:text-white/60 md:mt-8">
             <NuxtTime :datetime="episode.createdAt" day="numeric" month="short" year="numeric" />
@@ -42,7 +44,7 @@ const content = await parseMarkdown(episode.value.content.replaceAll('\\n\\n', '
               <NuxtTime :datetime="episode.modifiedAt" day="numeric" month="short" year="numeric" />
             </span>
           </div>
-          <ContentRenderer :value="content" />
+          <MarkdownContent :content="episode.content" />
         </div>
       </article>
       <AppFooter />
@@ -71,7 +73,7 @@ const content = await parseMarkdown(episode.value.content.replaceAll('\\n\\n', '
   @apply my-2 font-light opacity-80 md:my-4 md:text-[1.125rem];
 }
 
-.content > img {
+.content>img {
   @apply mx-auto my-4 aspect-video max-h-[18rem] w-full rounded-md object-cover md:my-8;
 }
 
@@ -79,11 +81,11 @@ const content = await parseMarkdown(episode.value.content.replaceAll('\\n\\n', '
   @apply my-2 flex items-start gap-1 rounded bg-dark-600/20 p-4;
 }
 
-.content aside > img {
+.content aside>img {
   @apply w-7;
 }
 
-.content aside > p {
+.content aside>p {
   @apply my-0;
 }
 
@@ -103,7 +105,7 @@ const content = await parseMarkdown(episode.value.content.replaceAll('\\n\\n', '
   @apply underline underline-offset-1;
 }
 
-.content h3 > a {
+.content h3>a {
   @apply no-underline;
 }
 

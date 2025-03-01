@@ -1,4 +1,4 @@
-# portfolio-artarik
+# red-cat-pictures
 
 ## 2.2.2
 

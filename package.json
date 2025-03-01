@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "@notionhq/client": "^2.2.16",
-    "@nuxt/content": "^3.2.2",
     "@nuxt/eslint": "^1.1.0",
     "@nuxt/fonts": "^0.10.3",
     "@nuxt/image": "^1.9.0",
@@ -51,6 +50,7 @@
     "confbox": "^0.1.8",
     "eslint": "^9.21.0",
     "execa": "^9.5.2",
+    "marked": "^15.0.7",
     "notion-to-md": "^3.1.6",
     "nuxt": "^3.15.4",
     "nuxt-icons": "^3.2.1",
@@ -74,7 +74,6 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@parcel/watcher",
-      "better-sqlite3",
       "esbuild",
       "sharp"
     ]
