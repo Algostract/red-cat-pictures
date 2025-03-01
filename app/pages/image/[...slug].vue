@@ -6,17 +6,21 @@ const route = useRoute()
 const activeImageName = computed<string>(() => route.params.slug![0]!)
 const activeImage = computed(() => images.value.find(({ name }) => name === activeImageName.value))
 
-const title = `Image Gallery | ${activeImageName.value}`
+const title = `${activeImageName.value}`
 const description = `${activeImage.value?.title}`
 const url = 'https://redcatpictures.com'
+const imageUrl = `https://ucarecdn.com/${activeImage.value?.id}/-/preview/1280x640/`
 
 useSeoMeta({
   title: title,
   ogTitle: title,
+  twitterTitle: title,
   description: description,
   ogDescription: description,
-  ogImage: `https://ucarecdn.com/${activeImage.value?.id}/-/preview/1280x640/`,
-  ogUrl: url + `/images/${activeImageName.value}`,
+  twitterDescription: description,
+  ogImage: imageUrl,
+  twitterImage: imageUrl,
+  ogUrl: `${url}/image/${activeImageName.value}`,
 })
 </script>
 

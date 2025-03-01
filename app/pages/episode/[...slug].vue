@@ -10,7 +10,7 @@ if (!episode.value) {
 const title = `${episode.value.title}`
 const description = `${episode.value.description}`
 const url = 'https://redcatpictures.com'
-const image = `https://ucarecdn.com/${episode.value.cover}/-/format/webp/-/scale_crop/1280x640/`
+const imageUrl = `https://ucarecdn.com/${episode.value.cover}/-/format/webp/-/scale_crop/1280x640/`
 
 useSeoMeta({
   title: title,
@@ -19,8 +19,8 @@ useSeoMeta({
   description: description,
   ogDescription: description,
   twitterDescription: description,
-  ogImage: image,
-  twitterImage: image,
+  ogImage: imageUrl,
+  twitterImage: imageUrl,
   ogUrl: `${url}/episode/${slug}`,
 })
 </script>
@@ -28,11 +28,16 @@ useSeoMeta({
 <template>
   <div>
     <AppHeader />
-    <main v-if="episode"
-      class="relative mx-auto mb-4 flex min-h-screen max-w-[90rem] flex-col gap-4 overflow-hidden px-4 !pb-0 md:mb-8 lg:px-16">
+    <main v-if="episode" class="relative mx-auto mb-4 flex min-h-screen max-w-[90rem] flex-col gap-4 overflow-hidden px-4 !pb-0 md:mb-8 lg:px-16">
       <article class="w-full">
-        <NuxtImg provider="uploadcare" :src="episode.cover" :alt="episode.title" :width="1280"
-          :height="Math.round(1280 / (16 / 9))" fit="cover" format="auto"
+        <NuxtImg
+          provider="uploadcare"
+          :src="episode.cover"
+          :alt="episode.title"
+          :width="1280"
+          :height="Math.round(1280 / (16 / 9))"
+          fit="cover"
+          format="auto"
           class="absolute left-0 aspect-[5/3] max-h-[20rem] w-screen object-cover" />
         <div class="invisible -left-4 aspect-[5/3] max-h-[20rem] w-screen" />
         <div class="content relative mx-auto max-w-4xl leading-relaxed">
@@ -73,7 +78,7 @@ useSeoMeta({
   @apply my-2 font-light opacity-80 md:my-4 md:text-[1.125rem];
 }
 
-.content>img {
+.content > img {
   @apply mx-auto my-4 aspect-video max-h-[18rem] w-full rounded-md object-cover md:my-8;
 }
 
@@ -81,11 +86,11 @@ useSeoMeta({
   @apply my-2 flex items-start gap-1 rounded bg-dark-600/20 p-4;
 }
 
-.content aside>img {
+.content aside > img {
   @apply w-7;
 }
 
-.content aside>p {
+.content aside > p {
   @apply my-0;
 }
 
@@ -105,7 +110,7 @@ useSeoMeta({
   @apply underline underline-offset-1;
 }
 
-.content h3>a {
+.content h3 > a {
   @apply no-underline;
 }
 

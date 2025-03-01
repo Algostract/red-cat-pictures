@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import type { Category } from '~~/shared/types/index'
 
-const title = `Professional Food & Product photography/Videography in Kolkata`
+const title = `Photography & Videography`
 const description = `Nurture the essence of your food & product with our photography & videography services in Kolkata`
 const url = 'https://redcatpictures.com'
+const imageUrl = `${url}/previews/landing.webp`
 
 useSeoMeta({
   title: title,
   ogTitle: title,
+  twitterTitle: title,
   description: description,
   ogDescription: description,
-  ogImage: url + '/previews/landing.webp',
+  twitterDescription: description,
+  ogImage: `${url}/previews/landing.webp`,
+  twitterImage: imageUrl,
   ogUrl: url,
 })
 

@@ -83,6 +83,6 @@ const activeTab = ref<Service>('photo')
 }
 
 #pricing .arrow {
-  @apply bg-transparent before:absolute before:left-0 before:top-1/2 before:block before:size-16 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-xl before:bg-primary-500 before:transition-colors before:duration-500 before:ease-out before:content-[''] active:before:bg-primary-400 disabled:before:bg-light-500 dark:disabled:before:bg-dark-600;
+  @apply bg-transparent before:absolute before:left-0 before:top-1/2 before:block before:size-16 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-md before:bg-primary-500 before:transition-colors before:duration-500 before:ease-out before:content-[''] active:before:bg-primary-400 disabled:before:bg-light-500 dark:disabled:before:bg-dark-600;
 }
 </style>

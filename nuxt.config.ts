@@ -23,9 +23,10 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { swr: true },
     '/_ipx/**': { headers: { 'cache-control': 'max-age=31536000' } },
-    '/images/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/fonts/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/api/**': { cors: true },
+    '/image/**': { headers: { 'cache-control': 'max-age=31536000' } },
+    '/episode/**': { ssr: true },
   },
   build: {
     transpile: ['unified', 'remark-parse', 'remark-rehype', 'rehype-external-links', 'rehype-stringify'],

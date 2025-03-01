@@ -152,7 +152,7 @@ watch(offset, (value) => {
               'hidden md:flex lg:hidden': slideCount == '4',
               'hidden lg:flex': slideCount == '6',
             }">
-            <NuxtLink v-for="{ id, name, title } in slideImages" :key="id" :to="`/images/${name}`" class="" @click="activeImageName = name">
+            <NuxtLink v-for="{ id, name, title } in slideImages" :key="id" :to="`/image/${name}`" class="" @click="activeImageName = name">
               <NuxtImg
                 provider="uploadcare"
                 :src="id"

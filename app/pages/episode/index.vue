@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const { data: episodes } = await useFetch('/api/episode')
 
-const title = `All Episodes`
-const description = `All ${episodes.value?.length} Episodes of Red Cat Pictures`
+const title = `Episodes of all behind the Scenes & Stories`
+const description = `Read our episodes for behind-the-scenes insights, project stories, and expert tips on photography and videography.`
 const url = 'https://redcatpictures.com'
-const image = episodes.value?.length ? `https://ucarecdn.com/${episodes.value[0]?.cover}/-/format/webp/-/scale_crop/1280x640/` : `${url}/preview/landscape.webp`
+const imageUrl = episodes.value?.length ? `https://ucarecdn.com/${episodes.value[0]?.cover}/-/format/webp/-/scale_crop/1280x640/` : `${url}/preview/landscape.webp`
 
 useSeoMeta({
   title: title,
@@ -13,8 +13,8 @@ useSeoMeta({
   description: description,
   ogDescription: description,
   twitterDescription: description,
-  ogImage: image,
-  twitterImage: image,
+  ogImage: imageUrl,
+  twitterImage: imageUrl,
   ogUrl: `${url}/episode`,
 })
 </script>
