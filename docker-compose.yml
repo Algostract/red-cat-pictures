@@ -1,7 +1,7 @@
-name: 'portfolio-aratrik'
+name: 'red-cat-pictures'
 services:
   app:
-    image: 'ghcr.io/algostract/portfolio-aratrik:latest'
+    image: 'ghcr.io/algostract/red-cat-pictures:latest'
     restart: on-failure:3
     volumes:
       - type: bind

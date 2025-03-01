@@ -20,7 +20,7 @@ useSchemaOrg([
     sameAs: ['https://www.facebook.com/profile.php?id=61559002911290', 'https://www.instagram.com/redcatxpictures'],
   }),
   defineLocalBusiness({
-    name: 'Aratrik Nandy',
+    name: 'RED CAT PICTURES',
     address: {
       streetAddress: '17 NS Road, Vivekananda pally near Joyram Bhavan, rajpur sonarpur',
       addressLocality: 'Kolkata',
