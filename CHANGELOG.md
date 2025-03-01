@@ -1,5 +1,11 @@
 # red-cat-pictures
 
+## 2.3.1
+
+### Patch Changes
+
+- 612562e: chore: enhance SEO, update routing for images and episodes, and improve styles
+
 ## 2.3.0
 
 ### Minor Changes
