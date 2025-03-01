@@ -1,5 +1,11 @@
 # red-cat-pictures
 
+## 2.3.0
+
+### Minor Changes
+
+- 417f824: feat: new episode page added with its child pages
+
 ## 2.2.2
 
 ### Patch Changes
