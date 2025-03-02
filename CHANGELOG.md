@@ -1,5 +1,11 @@
 # red-cat-pictures
 
+## 2.3.2
+
+### Patch Changes
+
+- 1edfc81: chore: enhance accessibility with aria-labels, and improve layout structure, added photos alt tag
+
 ## 2.3.1
 
 ### Patch Changes
