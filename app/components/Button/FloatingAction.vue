@@ -39,6 +39,7 @@ function onClick(title: Category) {
       :key="title"
       :icon="icon"
       :title="title"
+      :aria-label="title"
       :active="title === activeCategory"
       :collapsable="true"
       class="flex-1 rounded-none md:w-52"

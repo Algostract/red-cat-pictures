@@ -10,7 +10,7 @@ if (!episode.value) {
 const title = `${episode.value.title}`
 const description = `${episode.value.description}`
 const url = 'https://redcatpictures.com'
-const imageUrl = `https://ucarecdn.com/${episode.value.cover}/-/format/webp/-/scale_crop/1280x640/`
+const imageUrl = `https://ucarecdn.com/${episode.value.cover}/-/format/auto/-/scale_crop/1280x640/center`
 
 useSeoMeta({
   title: title,
@@ -26,35 +26,29 @@ useSeoMeta({
 </script>
 
 <template>
-  <div>
-    <AppHeader />
-    <main v-if="episode" class="relative mx-auto mb-4 flex min-h-screen max-w-[90rem] flex-col gap-4 overflow-hidden px-4 !pb-0 md:mb-8 lg:px-16">
-      <article class="w-full">
-        <NuxtImg
-          provider="uploadcare"
-          :src="episode.cover"
-          :alt="episode.title"
-          :width="1280"
-          :height="Math.round(1280 / (16 / 9))"
-          fit="cover"
-          format="auto"
-          class="absolute left-0 aspect-[5/3] max-h-[20rem] w-screen object-cover" />
-        <div class="invisible -left-4 aspect-[5/3] max-h-[20rem] w-screen" />
-        <div class="content relative mx-auto max-w-4xl leading-relaxed">
-          <h1 class="mt-4">{{ episode.title }}</h1>
-          <div class="mb-2 mt-4 flex justify-between gap-8 text-black/60 dark:text-white/60 md:mt-8">
-            <NuxtTime :datetime="episode.createdAt" day="numeric" month="short" year="numeric" />
-            <span class="text-right text-base">
-              Updated on
-              <NuxtTime :datetime="episode.modifiedAt" day="numeric" month="short" year="numeric" />
-            </span>
-          </div>
-          <MarkdownContent :content="episode.content" />
-        </div>
-      </article>
-      <AppFooter />
-    </main>
-  </div>
+  <article v-if="episode" class="w-full">
+    <NuxtImg
+      provider="uploadcare"
+      :src="episode.cover"
+      :alt="episode.title"
+      :width="1280"
+      :height="Math.round(1280 / (16 / 9))"
+      fit="cover"
+      format="auto"
+      class="absolute left-0 aspect-[5/3] max-h-[20rem] w-screen object-cover" />
+    <div class="invisible -left-4 aspect-[5/3] max-h-[20rem] w-screen" />
+    <div class="content relative mx-auto max-w-4xl leading-relaxed">
+      <h1 class="mt-4">{{ episode.title }}</h1>
+      <div class="mb-2 mt-4 flex justify-between gap-8 text-black/60 dark:text-white/60 md:mt-8">
+        <NuxtTime :datetime="episode.createdAt" day="numeric" month="short" year="numeric" />
+        <span class="text-right text-base">
+          Updated on
+          <NuxtTime :datetime="episode.modifiedAt" day="numeric" month="short" year="numeric" />
+        </span>
+      </div>
+      <MarkdownContent :content="episode.content" />
+    </div>
+  </article>
 </template>
 
 <style lang="css">

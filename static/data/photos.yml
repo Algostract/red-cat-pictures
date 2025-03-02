@@ -1,70 +1,63 @@
 ---
 - name: Ecommerce-001-001
   id: a0c032b8-7f89-4b46-89e3-d02d04af15af
-  title: ''
+  title: Stainless Steel Empty Dish Drying Rack Basket with Utensil Holder
   category: ecommerce
   width: 6181
   height: 8241
 
 - name: Ecommerce-001-002
   id: d45ff086-7e90-47db-836d-920181dec1c6
-  title: ''
+  title: Benevole Stainless Steel Basket with Deep Tray for Water Collection
   category: ecommerce
   width: 6181
   height: 8241
 
 - name: Ecommerce-001-003
   id: 3a5877bb-0faf-4b0a-a707-a4ad3c504af6
-  title: ''
+  title: Ornate Benevole Stainless Steel Dish Drainer Rack with Plates and Utensils
   category: ecommerce
   width: 5661
   height: 7549
 
 - name: Ecommerce-001-004
   id: b704492f-fc2b-4d92-8fa8-6e7e48e68730
-  title: ''
+  title: Benevole Stainless Steel Basket with Deep Tray for Water Collection
   category: ecommerce
   width: 6851
   height: 9136
 
 - name: Ecommerce-002-001
   id: 74ea39ed-0696-4be5-a127-2c09024c3367
-  title: ''
+  title: Red Packaging of FANCIS Fruit & Nut Premium Chocolate Bar
   category: ecommerce
   width: 3762
   height: 5016
 
 - name: Ecommerce-002-002
   id: 46a38a64-ca22-4d9c-a3e5-7ad96b6c8f15
-  title: ''
+  title: Pink Packaging of FANCIS 50% Dark Chocolate Premium Bar
   category: ecommerce
   width: 3351
   height: 4468
 
-- name: Ecommerce-002-003
-  id: 74ea39ed-0696-4be5-a127-2c09024c3367
-  title: ''
-  category: ecommerce
-  width: 3762
-  height: 5016
-
 - name: Ecommerce-003-001
   id: 8d5fa65d-a087-41f7-a479-ec4e4c24ac18
-  title: ''
+  title: Premium Beverages Bottled Water Hydration Drink
   category: ecommerce
   width: 4887
   height: 6516
 
 - name: Ecommerce-003-002
   id: 7f64862b-29d7-4aa8-8dbb-6e73d156e3b2
-  title: ''
+  title: Ornate Multiple Bottles of 8 Elixir Water
   category: ecommerce
   width: 3072
   height: 2304
 
 - name: Ecommerce-004-001
   id: 1506613e-3f45-421c-810a-f417a757c30b
-  title: ''
+  title: Golden Peacock Pendant Necklace with Intricate Enamel Detailing
   category: ecommerce
   width: 4229
   height: 5640
@@ -148,77 +141,77 @@
 
 - name: Ecommerce-009-002
   id: 6b353010-72b8-4a08-b1d8-8f24c7a70df3
-  title: ''
+  title: A woman wearing a teal loose-fit V-neck top with lace shoulder detail, paired with blue skinny jeans and clear-heeled sandals, posing against a neutral gray background.
   category: ecommerce
   width: 4662
   height: 6993
 
 - name: Ecommerce-009-003
   id: 3b553746-7343-44e3-a31b-88e77cf0b6f6
-  title: ''
+  title: A woman wearing a teal V-neck short-sleeve top with lace shoulder detailing, paired with blue jeans, posing against a white background.
   category: ecommerce
   width: 4612
   height: 6918
 
 - name: Ecommerce-009-004
   id: 10599397-f340-4d0f-ae04-e0e8750254f6
-  title: ''
+  title: A woman in a teal short-sleeve top with lace shoulders, shown from the back with her hands behind her, wearing blue jeans against a white background.
   category: ecommerce
   width: 4328
   height: 6492
 
 - name: Ecommerce-009-005
   id: 06ad61f7-0b35-4c23-803c-d76569b48cc2
-  title: ''
+  title: A woman wearing a teal short-sleeve top with lace shoulder details and blue jeans, posed in profile against a light grey background.
   category: ecommerce
   width: 4396
   height: 6595
 
 - name: Ecommerce-010-001
   id: c96f9f76-c6d3-461e-9b15-3afc46657eaf
-  title: ''
+  title: A woman wearing a maroon V-neck short-sleeve top, blue jeans, and transparent heels, posing against a grey background.
   category: ecommerce
   width: 4516
   height: 6774
 
 - name: Ecommerce-010-002
   id: 5637ffb3-8d68-4443-8e6f-e58a869fcd2a
-  title: ''
+  title: A woman wearing a maroon short-sleeve V-neck top and blue jeans, posing with one hand near her neck against a light grey background.
   category: ecommerce
   width: 4227
   height: 6340
 
 - name: Ecommerce-010-003
   id: 9c3a6861-1672-4634-bb9d-33b41eb28e4e
-  title: ''
+  title: A woman wearing a maroon V-neck short-sleeve top, blue jeans, and open-toe brown heels, posing against a grey background.
   category: ecommerce
   width: 4417
   height: 6626
 
 - name: Ecommerce-010-004
   id: 2105bae5-ad65-4621-ad74-4eea66833547
-  title: ''
+  title: A woman wearing a maroon short-sleeve top with lace details on the shoulders and blue jeans, shown from the back against a white background.
   category: ecommerce
   width: 4318
   height: 6477
 
 - name: Ecommerce-011-001
   id: c9d7f02d-67d1-4422-8fc4-53ecba6315c9
-  title: ''
+  title: A pair of grey knee caps with velcro closures, displayed on a white background.
   category: ecommerce
   width: 5153
   height: 6872
 
 - name: Ecommerce-012-001
   id: 44f24665-0806-44e1-a8d3-b08dd486cc3c
-  title: ''
+  title: A stainless steel Louis Mont watch with a blue chronograph dial, red second hand, and date window, displayed on a light grey background.
   category: ecommerce
   width: 2688
   height: 3584
 
 - name: Ecommerce-013-001
   id: 4c801542-ad9c-42d4-8d87-237885cb1055
-  title: ''
+  title: A woman in a green T-shirt sits on a dark armchair holding a green-themed anime poster, with additional anime posters on a red wall and a rattan lamp beside her.
   category: ecommerce
   width: 5727
   height: 7636
@@ -339,84 +332,84 @@
 
 - name: Product-012-001
   id: a9a526dc-0777-49e6-9890-0b9e7cbd1f7f
-  title:
+  title: A woman wearing a green T-shirt sits on a dark armchair holding a green-themed anime poster, with more anime posters on a red wall behind her and a rattan floor lamp to the side.
   category: product
   width: 4672
   height: 6229
 
 - name: Product-013-001
   id: 87d0da49-4b19-4050-9eb9-90f111570e35
-  title:
+  title: A woman in a red blouse wearing an ornate gold choker necklace and a ring on her hand, with her hair adorned with flowers, captured in soft, dramatic lighting.
   category: product
   width: 3378
   height: 5067
 
 - name: Product-014-001
   id: 03cab521-1ea5-414a-a9a9-fb139bbb10e3
-  title:
+  title: A woman in a red blouse wears a gold necklace with a green fan-shaped pendant, her hair adorned with flowers, shown against a bright background.
   category: product
   width: 4171
   height: 6256
 
 - name: Product-014-002
   id: e6ea67c4-368a-4b0a-925e-c26b11fca6a7
-  title:
+  title: A gold necklace with a fan-shaped pendant featuring green enamel, displayed alongside gold filigree earrings and a teardrop pendant on a red background.
   category: product
   width: 4036
   height: 5382
 
 - name: Product-015-001
   id: 2e880abc-346f-4aa5-949b-0f3a6ee1e6dd
-  title:
+  title: A gold choker necklace with intricate floral detailing, matching earrings, and a ring displayed on a red background with a white hexagonal stand.
   category: product
   width: 4191
   height: 5588
 
 - name: Product-015-002
   id: f83bdafc-f1a9-4fa8-b9db-40a42454db0a
-  title:
+  title: A gold choker necklace with a tassel, matching earrings, and a ring displayed on a red background alongside a white hexagonal stand.
   category: product
   width: 6492
   height: 4868
 
 - name: Product-016-001
   id: 02eacdcb-f62d-4da4-9eeb-5c0c7db558da
-  title:
+  title: A hand picking up squares of Fancis chocolate from a purple background, surrounded by colorful chocolate bar wrappers.
   category: product
   width: 4450
   height: 5932
 
 - name: Product-016-002
   id: 41ee2d0d-5e67-4a67-84b9-0b80d66ec9b6
-  title:
+  title: A selection of brightly packaged Fancis chocolate bars arranged on a pink background, with dark chocolate squares at the center.
   category: product
   width: 4317
   height: 5755
 
 - name: Product-016-003
   id: a923d2f4-3148-4d10-8cfc-6beb4bed81c0
-  title:
+  title: A partially unwrapped Fancis Premium Dark Chocolate bar (50% cocoa) on a purple background, with scattered coffee beans and cocoa powder.
   category: product
   width: 2881
   height: 3841
 
 - name: Product-016-004
   id: aaaa706b-545a-4246-a739-c13df4b97a2a
-  title:
+  title: A partially unwrapped Fancis Fruit & Nut chocolate bar on a red background, surrounded by coffee beans, ground coffee, and cashews.
   category: product
   width: 2892
   height: 3856
 
 - name: Product-016-005
   id: c355882e-fffd-41b1-a670-d603a443b7d7
-  title:
+  title: Four vibrant Fancis chocolate packages (Milk Chocolate, Merry Mango, Rich Chocolate, and Fruit & Nut) on a cocoa powder surface with scattered cocoa beans.
   category: product
   width: 3689
   height: 4919
 
 - name: Product-016-006
   id: 6b019b67-8f28-4690-8ca3-14fd9b6e230b
-  title:
+  title: Three vibrant Fancis chocolate packages (Mango, Premium Chocolate, and Fruit & Nut) arranged on a cocoa powder surface with scattered cocoa beans.
   category: product
   width: 1280
   height: 940
@@ -544,70 +537,70 @@
 
 - name: Food-016-001
   id: ed251129-ae95-40f5-9965-e8d742891221
-  title:
+  title: Earthen pot–shaped Indian sweets arranged on a golden tray, with honey being drizzled from a wooden dipper and scattered nuts in the background.
   category: food
   width: 3995
   height: 5992
 
 - name: Food-017-001
   id: b479971b-ea5e-4be5-9700-f864d0378b5f
-  title:
+  title: Round Indian sweets topped with whole almonds in red paper liners on a golden tray, surrounded by earthen bowls and honey in the background.
   category: food
   width: 4481
   height: 6721
 
 - name: Food-018-001
   id: 2247b2c2-bfda-475e-9ab8-a6bff9c8b220
-  title:
+  title: Small Indian sweets in paper liners, topped with cashews and pistachio crumbs on a banana leaf–lined clay plate, with earthen pots and scattered nuts in the background.
   category: food
   width: 4429
   height: 6644
 
 - name: Food-019-001
   id: 88c73e18-fea5-4d8d-9b15-0dc1ecbab942
-  title:
+  title: Bright orange squares of Indian sweet on a banana leaf–lined plate, with a brass lamp and cup in the background.
   category: food
   width: 4672
   height: 7008
 
 - name: Food-020-001
   id: 137cda95-8ef7-4570-93e8-9b5b9b61c719
-  title:
+  title: Squares of white Indian barfi topped with crushed pistachios on a banana leaf–lined plate, with a brass lamp and cup in the background.
   category: food
   width: 4672
   height: 7008
 
 - name: Food-021-001
   id: cc51b7e4-ac73-4885-bc64-8295e40e3401
-  title:
+  title: Two-layered Indian sweet squares topped with crushed pistachios on a golden tray, with a brass lamp and cup in the background.
   category: food
   width: 4481
   height: 6721
 
 - name: Food-022-001
   id: a8f1b333-1898-4162-bae6-c09007a014e0
-  title:
+  title: Squares of Indian barfi garnished with crushed pistachios on a banana leaf–lined clay plate, with a brass lamp and cup in the background.
   category: food
   width: 4672
   height: 7008
 
 - name: Food-023-001
   id: 6d2b094a-f106-4e68-8334-7488113a4f96
-  title:
+  title: A white bowl with handles containing bright orange Indian sweet garnished with cashews and dried fruit, with a brass lamp and cup in the background.
   category: food
   width: 4330
   height: 6495
 
 - name: Food-024-001
   id: 9f0ea248-cb49-42db-a8d3-85351141ac85
-  title:
+  title: A round Indian sweet topped with a bright red cherry and cashews on a black plate sprinkled with crushed pistachios, with a brass lamp and cup in the background.
   category: food
   width: 4672
   height: 7008
 
 - name: Food-025-001
   id: ec53ca07-3030-47d5-8ba0-f475c7b9213e
-  title:
+  title: A hand holding a syrup-dripping gulab jamun over a bowl of golden gulab jamuns, with a small brass lamp in the background.
   category: food
   width: 4533
   height: 6800

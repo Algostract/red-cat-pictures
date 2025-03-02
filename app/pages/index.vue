@@ -42,16 +42,12 @@ function onContact(action: boolean) {
 
 <template>
   <div>
-    <AppHeader />
-    <main class="relative mx-auto mb-20 flex min-h-screen max-w-[90rem] flex-col gap-4 overflow-hidden p-4 !pb-0 md:mb-8 lg:p-16">
-      <ButtonFloatingAction :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
-      <SectionHero :video="heroVideo" @contact="onContact(true)" />
-      <SectionGallery :images="images" />
-      <SectionFeaturedImage :images="images" :active-category="activeCategory" />
-      <SectionFeaturedVideo :videos="featuredVideos" :active-category="activeCategory" />
-      <SectionPricing :active-category="activeCategory" />
-      <ModalContact :is-open="isModelContactOpen" @close="onContact(false)" />
-      <AppFooter @contact="onContact(true)" />
-    </main>
+    <ButtonFloatingAction :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
+    <SectionHero :video="heroVideo" @contact="onContact(true)" />
+    <SectionGallery :images="images" />
+    <SectionFeaturedImage :images="images" :active-category="activeCategory" />
+    <SectionFeaturedVideo :videos="featuredVideos" :active-category="activeCategory" />
+    <SectionPricing :active-category="activeCategory" />
+    <ModalContact :is-open="isModelContactOpen" @close="onContact(false)" />
   </div>
 </template>

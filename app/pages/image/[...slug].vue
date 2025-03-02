@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const { data: images } = await useFetch('/api/image', { default: () => [] })
 
+definePageMeta({
+  layout: false,
+})
+
 const route = useRoute()
 
 const activeImageName = computed<string>(() => route.params.slug![0]!)
@@ -9,7 +13,7 @@ const activeImage = computed(() => images.value.find(({ name }) => name === acti
 const title = `${activeImageName.value}`
 const description = `${activeImage.value?.title}`
 const url = 'https://redcatpictures.com'
-const imageUrl = `https://ucarecdn.com/${activeImage.value?.id}/-/preview/1280x640/`
+const imageUrl = `https://ucarecdn.com/${activeImage.value?.id}/-/format/auto/-/preview/1280x640/-/smart_resize/1280x640/center`
 
 useSeoMeta({
   title: title,
@@ -34,7 +38,7 @@ useSeoMeta({
         :width="Math.round(720 * activeImage.aspectRatio)"
         :height="720"
         fit="fill"
-        format="webp"
+        format="auto"
         loading="lazy"
         class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500 md:h-full md:w-auto" />
       <!-- <h1 class="text-center my-8">{{ activeImage.title }}</h1> -->
