@@ -4,10 +4,12 @@ export type Service = 'photo' | 'video'
 export interface FilePhoto {
   name: string
   id: string
-  title: string
-  category: Category
+  description: string
   width: number
   height: number
+  category: Category
+  gallery: null | number
+  featured: null | number
 }
 
 export interface Photo extends Omit<FilePhoto, 'width' | 'height'> {
@@ -73,7 +75,7 @@ export interface NotionEpisode {
     }
   }
   properties: {
-    'Client Name': {
+    'Client name': {
       select: {
         name: string
       }

@@ -11,9 +11,9 @@ function objectToClass({ sm, md }: { sm: Position; md: Position }, size: string)
 }
 
 const categoryImages = {
-  ecommerce: usePhoto(props.images, ['Ecommerce-012-001', 'Ecommerce-002-002', 'Product-005-001', 'Ecommerce-003-002', 'Product-010-001', 'Ecommerce-001-004', 'Ecommerce-008-002']),
-  product: usePhoto(props.images, ['Product-004-002', 'Product-015-002', 'Product-006-001', 'Product-016-006', 'Product-002-002', 'Product-013-001', 'Product-001-001']),
-  food: usePhoto(props.images, ['Food-002-002', 'Food-005-001', 'Food-003-001', 'Food-012-001', 'Food-023-001', 'Food-004-001', 'Food-001-001']),
+  ecommerce: usePhoto(props.images, { section: 'featured', category: 'ecommerce' }),
+  product: usePhoto(props.images, { section: 'featured', category: 'product' }),
+  food: usePhoto(props.images, { section: 'featured', category: 'food' }),
 }
 
 const images = computed<GalleryPhoto[]>(() =>
@@ -78,7 +78,7 @@ const images = computed<GalleryPhoto[]>(() =>
     return {
       name: categoryImages[props.activeCategory].value[index]?.name,
       id: categoryImages[props.activeCategory].value[index]?.id,
-      alt: categoryImages[props.activeCategory].value[index]?.title,
+      description: categoryImages[props.activeCategory].value[index]?.description,
       dynamicClass: objectToClass(image.position, image.size),
       aspectRatio: image.aspectRatio,
     }
@@ -92,11 +92,11 @@ const activeImageName = useState()
   <section id="featured-images" class="relative h-fit">
     <SectionLabel icon="photo" title="Featured Images" />
     <div class="relative -mx-2 grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3 lg:-mx-12">
-      <NuxtLink v-for="{ name, id, alt, dynamicClass, aspectRatio } in images" :key="id" :to="`/image/${name}`" :class="dynamicClass" class="size-full" @click="activeImageName = name">
+      <NuxtLink v-for="{ name, id, description, dynamicClass, aspectRatio } in images" :key="id" :to="`/image/${name}`" :class="dynamicClass" class="size-full" @click="activeImageName = name">
         <NuxtImg
           provider="uploadcare"
           :src="id"
-          :alt="alt"
+          :alt="description"
           :width="640"
           :height="Math.round(640 / aspectRatio)"
           fit="fill"

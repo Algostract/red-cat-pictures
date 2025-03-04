@@ -3,91 +3,7 @@ const props = defineProps<{
   images: Photo[]
 }>()
 
-const allImages = usePhoto(props.images, [
-  // 'Ecommerce-001-001',
-  'Ecommerce-001-002',
-  'Ecommerce-001-003',
-  // 'Ecommerce-002-001',
-  'Ecommerce-002-002',
-  'Ecommerce-002-003',
-  'Ecommerce-003-001',
-  'Ecommerce-004-001',
-  'Ecommerce-005-001',
-  // 'Ecommerce-005-002',
-  // 'Ecommerce-006-001',
-  'Ecommerce-006-002',
-  // 'Ecommerce-006-003',
-  'Ecommerce-006-004',
-  'Ecommerce-007-001',
-  'Ecommerce-007-002',
-  'Ecommerce-008-001',
-  'Ecommerce-008-002',
-  'Ecommerce-009-001',
-  // 'Ecommerce-009-002',
-  // 'Ecommerce-009-003',
-  // 'Ecommerce-009-004',
-  // 'Ecommerce-009-005',
-  // 'Ecommerce-010-001',
-  // 'Ecommerce-010-002',
-  'Ecommerce-010-003',
-  // 'Ecommerce-010-004',
-  'Ecommerce-011-001',
-  'Ecommerce-012-001',
-  'Ecommerce-013-001',
-  'Product-001-001',
-  // 'Product-001-002',
-  'Product-002-001',
-  // 'Product-002-002',
-  'Product-003-001',
-  'Product-004-001',
-  // 'Product-004-002',
-  'Product-005-001',
-  'Product-006-001',
-  'Product-007-001',
-  'Product-008-001',
-  'Product-009-001',
-  'Product-010-001',
-  'Product-011-001',
-  'Product-011-002',
-  'Product-011-003',
-  'Product-011-004',
-  'Product-012-001',
-  'Product-013-001',
-  'Product-014-001',
-  'Product-014-002',
-  'Product-015-001',
-  'Product-016-001',
-  'Product-016-002',
-  'Product-016-003',
-  'Product-016-004',
-  'Product-016-005',
-  'Food-001-001',
-  'Food-002-001',
-  'Food-003-001',
-  'Food-004-001',
-  'Food-005-001',
-  'Food-006-001',
-  // 'Food-006-002',
-  'Food-007-001',
-  'Food-008-001',
-  'Food-009-001',
-  'Food-010-001',
-  'Food-011-001',
-  'Food-012-001',
-  'Food-013-001',
-  'Food-014-001',
-  'Food-015-001',
-  'Food-016-001',
-  'Food-017-001',
-  'Food-018-001',
-  'Food-019-001',
-  'Food-020-001',
-  'Food-021-001',
-  'Food-022-001',
-  'Food-023-001',
-  'Food-024-001',
-  'Food-025-001',
-])
+const allImages = usePhoto(props.images, { section: 'gallery' })
 
 const activeImageName = useState()
 
@@ -95,7 +11,7 @@ const slideCounts = ['3', '4', '6'] as const
 
 const imageSlides = computed(() => {
   const slides = slideCounts.map((noOfSlides) => {
-    const slides: { id: string; name: string; title: string; aspectRatio: number }[][] = new Array(parseInt(noOfSlides)).fill(null).map((_) => [])
+    const slides: { id: string; name: string; description: string; aspectRatio: number }[][] = new Array(parseInt(noOfSlides)).fill(null).map((_) => [])
 
     allImages.value.forEach((image, index) => {
       slides[index % parseInt(noOfSlides)]!.push(image)
@@ -152,11 +68,11 @@ watch(offset, (value) => {
               'hidden md:flex lg:hidden': slideCount == '4',
               'hidden lg:flex': slideCount == '6',
             }">
-            <NuxtLink v-for="{ id, name, title } in slideImages" :key="id" :to="`/image/${name}`" class="" @click="activeImageName = name">
+            <NuxtLink v-for="{ id, name, description } in slideImages" :key="id" :to="`/image/${name}`" class="" @click="activeImageName = name">
               <NuxtImg
                 provider="uploadcare"
                 :src="id"
-                :alt="title"
+                :alt="description"
                 :width="960"
                 :height="Math.round(960 / (3 / 4))"
                 fit="cover"

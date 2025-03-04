@@ -63,16 +63,17 @@ export default defineCachedEventHandler<Promise<EpisodeDetails>>(
       const episode = _episode as unknown as NotionEpisode
       const episodeContent = await convertNotionPageToMarkdown(n2m, episode.id)
       const id = `${slugify(episode.properties['Content name'].title[0]?.plain_text ?? '')}_${episode.id}`
+      const title = episode.properties['Content name'].title.map(({ plain_text }) => plain_text ?? '').join('') as string
 
       const episodeData: EpisodeDetails = {
         id,
-        title: (episode.properties['Content name'].title[0]?.plain_text ?? '') as string,
+        title,
         cover: episode.cover?.external.url?.split('/')[3] ?? null,
         createdAt: episode.created_time as string,
         modifiedAt: episode.last_edited_time as string,
         description: `${mdToText(episodeContent.split('. ').splice(0, 2).join('. '))}...`,
         content: episodeContent,
-        url: `/episode/${id}`,
+        url: `/episode/${slugify(title)}_${id}`,
       }
 
       return episodeData
