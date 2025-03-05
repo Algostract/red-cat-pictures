@@ -604,7 +604,7 @@
   height: 940
   category: food
   gallery: null
-  featured: 4
+  featured: null
 
 - name: Food-001-001
   id: 50071c98-e75c-4673-a105-1ae104b6eb35

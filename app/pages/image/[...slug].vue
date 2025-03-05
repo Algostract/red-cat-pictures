@@ -11,7 +11,7 @@ const activeImageName = computed<string>(() => route.params.slug![0]!)
 const activeImage = computed(() => images.value.find(({ name }) => name === activeImageName.value))
 
 const title = `${activeImageName.value}`
-const description = `${activeImage.value?.title}`
+const description = `${activeImage.value?.description}`
 const url = 'https://redcatpictures.com'
 const imageUrl = `https://ucarecdn.com/${activeImage.value?.id}/-/format/auto/-/preview/1280x640/-/smart_resize/1280x640/center`
 
