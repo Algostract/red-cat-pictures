@@ -1,5 +1,11 @@
 # red-cat-pictures
 
+## 2.3.4
+
+### Patch Changes
+
+- 858fb7a: fix: update image description and adjust caching duration
+
 ## 2.3.3
 
 ### Patch Changes
