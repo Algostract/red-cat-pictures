@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  images: Photo[]
+  photos: Photo[]
   activeCategory: Category
 }>()
 
@@ -11,12 +11,12 @@ function objectToClass({ sm, md }: { sm: Position; md: Position }, size: string)
 }
 
 const categoryImages = {
-  ecommerce: usePhoto(props.images, { section: 'featured', category: 'ecommerce' }),
-  product: usePhoto(props.images, { section: 'featured', category: 'product' }),
-  food: usePhoto(props.images, { section: 'featured', category: 'food' }),
+  ecommerce: usePhoto(props.photos, { section: 'featured', category: 'ecommerce' }),
+  product: usePhoto(props.photos, { section: 'featured', category: 'product' }),
+  food: usePhoto(props.photos, { section: 'featured', category: 'food' }),
 }
 
-const images = computed<GalleryPhoto[]>(() =>
+const photos = computed<GalleryPhoto[]>(() =>
   [
     {
       position: {
@@ -74,13 +74,13 @@ const images = computed<GalleryPhoto[]>(() =>
       size: 'm',
       aspectRatio: 0.67,
     },
-  ].map((image, index) => {
+  ].map((photo, index) => {
     return {
       name: categoryImages[props.activeCategory].value[index]?.name,
       id: categoryImages[props.activeCategory].value[index]?.id,
       description: categoryImages[props.activeCategory].value[index]?.description,
-      dynamicClass: objectToClass(image.position, image.size),
-      aspectRatio: image.aspectRatio,
+      dynamicClass: objectToClass(photo.position, photo.size),
+      aspectRatio: photo.aspectRatio,
     }
   })
 )
@@ -92,7 +92,7 @@ const activeImageName = useState()
   <section id="featured-images" class="relative h-fit">
     <SectionLabel icon="photo" title="Featured Images" />
     <div class="relative -mx-2 grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3 lg:-mx-12">
-      <NuxtLink v-for="{ name, id, description, dynamicClass, aspectRatio } in images" :key="id" :to="`/image/${name}`" :class="dynamicClass" class="size-full" @click="activeImageName = name">
+      <NuxtLink v-for="{ name, id, description, dynamicClass, aspectRatio } in photos" :key="id" :to="`/photo/${name}`" :class="dynamicClass" class="size-full" @click="activeImageName = name">
         <NuxtImg
           provider="uploadcare"
           :src="id"

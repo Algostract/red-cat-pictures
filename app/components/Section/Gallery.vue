@@ -1,19 +1,19 @@
 <script setup lang="ts">
 const props = defineProps<{
-  images: Photo[]
+  photos: Photo[]
 }>()
 
-const allImages = usePhoto(props.images, { section: 'gallery' })
+const allPhotos = usePhoto(props.photos, { section: 'gallery' })
 
-const activeImageName = useState()
+const activePhotoName = useState()
 
 const slideCounts = ['3', '4', '6'] as const
 
-const imageSlides = computed(() => {
+const photoSlides = computed(() => {
   const slides = slideCounts.map((noOfSlides) => {
     const slides: { id: string; name: string; description: string; aspectRatio: number }[][] = new Array(parseInt(noOfSlides)).fill(null).map((_) => [])
 
-    allImages.value.forEach((image, index) => {
+    allPhotos.value.forEach((image, index) => {
       slides[index % parseInt(noOfSlides)]!.push(image)
     })
 
@@ -60,7 +60,7 @@ watch(offset, (value) => {
         <!-- For Small Screen Devices -->
         <template v-for="slideCount in slideCounts">
           <div
-            v-for="(slideImages, index) in imageSlides[slideCount]"
+            v-for="(slideImages, index) in photoSlides[slideCount]"
             :key="index"
             class="flex-1 flex-col gap-2"
             :class="{
@@ -68,7 +68,7 @@ watch(offset, (value) => {
               'hidden md:flex lg:hidden': slideCount == '4',
               'hidden lg:flex': slideCount == '6',
             }">
-            <NuxtLink v-for="{ id, name, description } in slideImages" :key="id" :to="`/image/${name}`" class="" @click="activeImageName = name">
+            <NuxtLink v-for="{ id, name, description } in slideImages" :key="id" :to="`/photo/${name}`" class="" @click="activePhotoName = name">
               <NuxtImg
                 provider="uploadcare"
                 :src="id"

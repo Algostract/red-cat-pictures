@@ -1,5 +1,6 @@
 ---
-- type: 'hero'
+- name: 'composition'
+  type: 'hero'
   poster: ''
   sources:
     default:
@@ -21,7 +22,8 @@
       - src: /video/hero-md-avc.mp4
         type: video/mp4
 
-- type: 'feature'
+- name: 'pixelplate-portrait'
+  type: 'feature'
   poster: ''
   sources:
     default:
@@ -34,7 +36,8 @@
       - src: /video/pixelplate-portrait-avc.mp4
         type: video/mp4
 
-- type: 'feature'
+- name: 'pixelplate-landscape'
+  type: 'feature'
   poster: ''
   sources:
     default:
@@ -47,7 +50,8 @@
       - src: /video/pixelplate-landscape-avc.mp4
         type: video/mp4
 
-- type: 'feature'
+- name: 'cookies'
+  type: 'feature'
   poster: ''
   sources:
     default:
@@ -60,7 +64,8 @@
       - src: /video/cookies-avc.mp4
         type: video/mp4
 
-- type: 'feature'
+- name: 'red-bull'
+  type: 'feature'
   poster: ''
   sources:
     default:
@@ -73,7 +78,8 @@
       - src: /video/red-bull-avc.mp4
         type: video/mp4
 
-- type: 'feature'
+- name: 'peanut-bar'
+  type: 'feature'
   poster: ''
   sources:
     default:
@@ -86,7 +92,8 @@
       - src: /video/peanut-bar-avc.mp4
         type: video/mp4
 
-- type: 'feature'
+- name: 'sweet'
+  type: 'feature'
   poster: ''
   sources:
     default:

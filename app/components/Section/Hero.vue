@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  video: VideoItem
+  video: Video
 }>()
 
 const emit = defineEmits<{

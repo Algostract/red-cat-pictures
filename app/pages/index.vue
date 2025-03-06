@@ -18,7 +18,7 @@ useSeoMeta({
   ogUrl: url,
 })
 
-const { data: images } = useFetch('/api/image', { default: () => [] })
+const { data: photos } = useFetch('/api/photo', { default: () => [] })
 const { data: videos } = useFetch('/api/video', { default: () => [] })
 
 const heroVideo = computed(() => videos.value.find(({ type }) => type === 'hero')!)
@@ -44,8 +44,8 @@ function onContact(action: boolean) {
   <div>
     <ButtonFloatingAction :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
     <SectionHero :video="heroVideo" @contact="onContact(true)" />
-    <SectionGallery :images="images" />
-    <SectionFeaturedImage :images="images" :active-category="activeCategory" />
+    <SectionGallery :photos="photos" />
+    <SectionFeaturedPhoto :photos="photos" :active-category="activeCategory" />
     <SectionFeaturedVideo :videos="featuredVideos" :active-category="activeCategory" />
     <SectionPricing :active-category="activeCategory" />
     <ModalContact :is-open="isModelContactOpen" @close="onContact(false)" />

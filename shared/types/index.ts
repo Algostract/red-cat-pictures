@@ -16,6 +16,10 @@ export interface Photo extends Omit<FilePhoto, 'width' | 'height'> {
   aspectRatio: number
 }
 
+export interface PhotoDetails extends Omit<Photo, 'featured' | 'gallery'> {
+  title: string
+}
+
 export interface GalleryPhoto {
   name: string
   id: string
@@ -39,6 +43,7 @@ export type FileSources = {
 }
 
 export interface FileVideoItem {
+  name: string
   type: 'hero' | 'feature'
   poster: string
   sources: FileSources
@@ -50,10 +55,14 @@ export interface Source {
   media: string
 }
 
-export interface VideoItem {
+export interface Video {
   type: 'hero' | 'feature'
   poster: string
   sources: Source[]
+}
+
+export interface VideoDetails extends Video {
+  name: string
 }
 
 export interface ServicePrice {
@@ -101,4 +110,18 @@ export interface NotionEpisode {
       }[]
     }
   }
+}
+
+export interface Episode {
+  id: string
+  title: string
+  cover: string
+  createdAt: string
+  modifiedAt: string
+  description: string
+  url: string
+}
+
+export interface EpisodeDetails extends Episode {
+  content: string
 }

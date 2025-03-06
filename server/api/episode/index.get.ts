@@ -1,7 +1,6 @@
 import { Client } from '@notionhq/client'
 import { NotionToMarkdown } from 'notion-to-md'
 import { convertNotionPageToMarkdown } from './[...slug].get'
-import type { Episode } from './[...slug].get'
 
 let notion: Client
 let n2m: NotionToMarkdown
@@ -47,6 +46,7 @@ export default defineCachedEventHandler<Promise<Episode[]>>(
       return results.filter((item) => item !== null)
     } catch (error: unknown) {
       console.error('API episode GET', error)
+
       throw createError({
         statusCode: 500,
         statusMessage: 'Some Unknown Error Found',

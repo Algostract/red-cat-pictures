@@ -4,20 +4,6 @@ import { NotionToMarkdown } from 'notion-to-md'
 let notion: Client
 let n2m: NotionToMarkdown
 
-export interface Episode {
-  id: string
-  title: string
-  cover: string
-  createdAt: string
-  modifiedAt: string
-  description: string
-  url: string
-}
-
-export interface EpisodeDetails extends Episode {
-  content: string
-}
-
 export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId: string) {
   try {
     const mdBlocks = await n2m.pageToMarkdown(pageId)
@@ -55,17 +41,24 @@ export default defineCachedEventHandler<Promise<EpisodeDetails>>(
 
       const [name, _ext] = slug.split('.')
       const pageId = name?.split('_').at(-1)
-      if (!pageId) {
-        throw new Error('Invalid page ID')
+
+      let episode: NotionEpisode | null = null
+      try {
+        if (!pageId) throw Error('Page Id not found')
+        episode = (await notion.pages.retrieve({ page_id: pageId })) as unknown as NotionEpisode
+      } catch {
+        console.error('Notion Episode not found')
       }
 
-      const _episode = await notion.pages.retrieve({ page_id: pageId })
-      const episode = _episode as unknown as NotionEpisode
+      if (!episode) {
+        throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
+      }
+
       const episodeContent = await convertNotionPageToMarkdown(n2m, episode.id)
       const id = `${slugify(episode.properties['Content name'].title[0]?.plain_text ?? '')}_${episode.id}`
       const title = episode.properties['Content name'].title.map(({ plain_text }) => plain_text ?? '').join('') as string
 
-      const episodeData: EpisodeDetails = {
+      return {
         id,
         title,
         cover: episode.cover?.external.url?.split('/')[3] ?? null,
@@ -74,11 +67,14 @@ export default defineCachedEventHandler<Promise<EpisodeDetails>>(
         description: `${mdToText(episodeContent.split('. ').splice(0, 2).join('. '))}...`,
         content: episodeContent,
         url: `/episode/${slugify(title)}_${id}`,
-      }
-
-      return episodeData
+      } as EpisodeDetails
     } catch (error: unknown) {
       console.error('API episode/slug GET', error)
+
+      if (error instanceof Error && 'statusCode' in error) {
+        throw error
+      }
+
       throw createError({
         statusCode: 500,
         statusMessage: 'Some Unknown Error Found',

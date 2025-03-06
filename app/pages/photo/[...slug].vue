@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: images } = await useFetch('/api/image', { default: () => [] })
+const { data: photos } = await useFetch('/api/photo', { default: () => [] })
 
 definePageMeta({
   layout: false,
@@ -7,13 +7,13 @@ definePageMeta({
 
 const route = useRoute()
 
-const activeImageName = computed<string>(() => route.params.slug![0]!)
-const activeImage = computed(() => images.value.find(({ name }) => name === activeImageName.value))
+const activePhotoName = computed<string>(() => route.params.slug![0]!)
+const activePhoto = computed(() => photos.value.find(({ name }) => name === activePhotoName.value))
 
-const title = `${activeImageName.value}`
-const description = `${activeImage.value?.description}`
+const title = `${activePhotoName.value}`
+const description = `${activePhoto.value?.description}`
 const url = 'https://redcatpictures.com'
-const imageUrl = `https://ucarecdn.com/${activeImage.value?.id}/-/format/auto/-/preview/1280x640/-/smart_resize/1280x640/center`
+const imageUrl = `https://ucarecdn.com/${activePhoto.value?.id}/-/format/auto/-/preview/1280x640/-/smart_resize/1280x640/center`
 
 useSeoMeta({
   title: title,
@@ -24,18 +24,18 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${url}/image/${activeImageName.value}`,
+  ogUrl: `${url}/photo/${activePhotoName.value}`,
 })
 </script>
 
 <template>
-  <div v-if="activeImage">
+  <div v-if="activePhoto">
     <main class="relative mx-auto flex h-screen w-screen max-w-[90rem] flex-col items-center justify-center overflow-hidden p-4 md:p-8">
       <NuxtImg
         provider="uploadcare"
-        :src="activeImage.id"
-        :alt="activeImage.title"
-        :width="Math.round(720 * activeImage.aspectRatio)"
+        :src="activePhoto.id"
+        :alt="activePhoto.description"
+        :width="Math.round(720 * activePhoto.aspectRatio)"
         :height="720"
         fit="fill"
         format="auto"

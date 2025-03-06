@@ -30,7 +30,7 @@ function convertSources(sources: FileSources): Source[] {
   return result
 }
 
-export default defineCachedEventHandler<Promise<VideoItem[]>>(
+export default defineCachedEventHandler<Promise<Video[]>>(
   async () => {
     try {
       const videos = await readYamlFile<FileVideoItem>('videos.yml')
