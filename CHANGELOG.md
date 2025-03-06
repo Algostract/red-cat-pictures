@@ -1,5 +1,11 @@
 # red-cat-pictures
 
+## 2.3.5
+
+### Patch Changes
+
+- a1dec55: refactor: add new media assets and update API for photos and videos
+
 ## 2.3.4
 
 ### Patch Changes
