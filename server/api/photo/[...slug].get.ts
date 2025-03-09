@@ -1,7 +1,8 @@
 export default defineCachedEventHandler<Promise<PhotoDetails>>(
   async (event) => {
     try {
-      const slug = getRouterParam(event, 'slug')!.toString()
+      const slug = getRouterParam(event, 'slug')!.toString().replace(/,$/, '')
+
       const photos = await readYamlFile<FilePhoto>('photos.yml')
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })

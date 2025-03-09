@@ -30,7 +30,7 @@ export default defineCachedEventHandler<Promise<EpisodeDetails>>(
   async (event) => {
     try {
       const config = useRuntimeConfig()
-      const slug = getRouterParam(event, 'slug')!.toString()
+      const slug = getRouterParam(event, 'slug')!.toString().replace(/,$/, '')
 
       if (!config.private.notionApiKey) {
         throw new Error('Notion API Key Not Found')

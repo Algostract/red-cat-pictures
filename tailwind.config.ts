@@ -1,6 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['components/**/*.{vue,js,ts}', 'layouts/**/*.vue', 'pages/**/*.vue', 'App.{js,ts,vue}', 'app.{js,ts,vue}', 'Error.{js,ts,vue}', 'error.{js,ts,vue}', 'content/**/*.md'],
+  content: [
+    'app/components/**/*.{vue,js,ts}',
+    'app/layouts/**/*.{vue,js,ts}',
+    'app/pages/**/*.{vue,js,ts}',
+    'app/App.{js,ts,vue}',
+    'app/app.{js,ts,vue}',
+    'app/Error.{js,ts,vue}',
+    'app/error.{js,ts,vue}',
+    'app/content/**/*.md',
+  ],
   darkMode: 'class',
   theme: {
     fontSize: {

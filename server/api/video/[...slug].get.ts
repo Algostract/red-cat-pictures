@@ -1,7 +1,8 @@
 export default defineCachedEventHandler<Promise<VideoDetails>>(
   async (event) => {
     try {
-      const slug = getRouterParam(event, 'slug')!.toString()
+      const slug = getRouterParam(event, 'slug')!.toString().replace(/,$/, '')
+
       const videos = await readYamlFile<FileVideoItem>('videos.yml')
 
       if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
