@@ -1,5 +1,11 @@
 # red-cat-pictures
 
+## 2.3.6
+
+### Patch Changes
+
+- 6092a36: chore: update Tailwind CSS content paths and dependencies
+
 ## 2.3.5
 
 ### Patch Changes
