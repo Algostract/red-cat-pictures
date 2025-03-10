@@ -1,5 +1,11 @@
 # red-cat-pictures
 
+## 2.3.7
+
+### Patch Changes
+
+- 4877b3f: feat: update episode sorted by published date, redirect statusCode updated to 301
+
 ## 2.3.6
 
 ### Patch Changes
