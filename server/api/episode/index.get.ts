@@ -37,13 +37,14 @@ export default defineCachedEventHandler<Promise<Episode[]>>(
             cover: episode.cover?.external.url?.split('/')[3] ?? null,
             createdAt: episode.created_time as string,
             modifiedAt: episode.last_edited_time as string,
+            publishedAt: episode.properties['Publish date'].date.start as string,
             description: `${mdToText(episodeContent.split('. ').splice(0, 2).join('. '))}...`,
             url: `/episode/${slugify(title)}_${id}`,
           }
         })
       )
 
-      return results.filter((item) => item !== null)
+      return results.filter((item) => item !== null).toSorted((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     } catch (error: unknown) {
       console.error('API episode GET', error)
 

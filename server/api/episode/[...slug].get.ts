@@ -64,6 +64,7 @@ export default defineCachedEventHandler<Promise<EpisodeDetails>>(
         cover: episode.cover?.external.url?.split('/')[3] ?? null,
         createdAt: episode.created_time as string,
         modifiedAt: episode.last_edited_time as string,
+        publishedAt: episode.properties['Publish date'].date.start as string,
         description: `${mdToText(episodeContent.split('. ').splice(0, 2).join('. '))}...`,
         content: episodeContent,
         url: `/episode/${slugify(title)}_${id}`,

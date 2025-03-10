@@ -118,6 +118,7 @@ export interface Episode {
   cover: string
   createdAt: string
   modifiedAt: string
+  publishedAt: string
   description: string
   url: string
 }
