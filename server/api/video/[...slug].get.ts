@@ -31,5 +31,5 @@ export default defineCachedEventHandler<Promise<VideoDetails>>(
       })
     }
   },
-  { maxAge: 0 * 60 }
+  { maxAge: 60 * 60 }
 )

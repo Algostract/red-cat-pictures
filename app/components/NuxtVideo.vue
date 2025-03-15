@@ -26,6 +26,8 @@ const props = withDefaults(
 )
 
 const emit = defineEmits<{
+  started: []
+  progress: [value: number]
   ended: []
 }>()
 
@@ -67,6 +69,8 @@ watch(
   }
 )
 
+const progress = ref(0)
+
 function handleError(e?: Error) {
   console.error('Video Error occurred:', e)
 }
@@ -83,9 +87,19 @@ function handlePause() {
   // console.log('Video paused')
 }
 
-function handleProgress() {}
+function handleProgress() {
+  if (!videoRef.value) return
+
+  const { currentTime, duration } = videoRef.value
+  if (duration > 0) {
+    progress.value = currentTime / duration
+    emit('progress', progress.value)
+  }
+}
 
 function handleEnded() {
+  progress.value = 1
+  emit('progress', progress.value)
   emit('ended')
 }
 </script>
@@ -94,7 +108,7 @@ function handleEnded() {
   <!-- @loadedmetadata="" -->
   <video
     ref="videoRef"
-    class="h-full w-full"
+    class="size-full bg-black"
     :poster="poster"
     :controlsList="controlsList"
     :preload="preload"
@@ -107,7 +121,7 @@ function handleEnded() {
     @canplay="handleCanPlay"
     @play="handlePlay"
     @pause="handlePause"
-    @progress="handleProgress"
+    @timeupdate="handleProgress"
     @ended="handleEnded">
     <template v-if="Array.isArray(source)">
       <source v-for="{ src, type, media } of source" :key="src" :src="src" :type="type" :media="media" />

@@ -41,7 +41,7 @@ function onContact(action: boolean) {
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col gap-4">
     <ButtonFloatingAction :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
     <SectionHero :video="heroVideo" @contact="onContact(true)" />
     <SectionGallery :photos="photos" />

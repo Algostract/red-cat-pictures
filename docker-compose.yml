@@ -3,6 +3,14 @@ services:
   app:
     image: 'ghcr.io/algostract/red-cat-pictures:latest'
     restart: on-failure:3
+    # runtime: nvidia # Enable NVIDIA GPU support
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
     volumes:
       - type: bind
         source: ./static
