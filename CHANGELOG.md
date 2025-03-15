@@ -1,5 +1,15 @@
 # red-cat-pictures
 
+## 2.4.0
+
+### Minor Changes
+
+- f57afd3: feat: add video navigation buttons and progress tracking, enhance video component with status bar
+
+### Patch Changes
+
+- 608ea43: chore: enhance video handling with chunked streaming, update video component state management
+
 ## 2.3.7
 
 ### Patch Changes
