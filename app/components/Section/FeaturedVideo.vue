@@ -4,11 +4,11 @@ const props = defineProps<{
   activeCategory: Category
 }>()
 
-const currentVideoIndex = ref(0)
-const currentVideo = computed(() => ({ ...props.videos[currentVideoIndex.value]! }))
+const activeVideoIndex = ref(0)
+const activeVideo = computed(() => ({ ...props.videos[activeVideoIndex.value]! }))
 
 async function updateVideoIndex() {
-  currentVideoIndex.value = (currentVideoIndex.value + 1) % props.videos.length
+  activeVideoIndex.value = (activeVideoIndex.value + 1) % props.videos.length
 }
 
 const videoContainerRef = useTemplateRef<HTMLVideoElement>('videoContainerRef')
@@ -22,20 +22,33 @@ async function toggleFullScreen() {
   videoRef.value.muted = !isFullscreen.value
   videoRef.value.play()
 }
+
+const featuredVideos = useTemplateRef<HTMLDivElement>('featured-videos')
+const isAutoplay = shallowRef(false)
+const isPlay = shallowRef(false)
+
+function onIntersectionObserver([entry]: IntersectionObserverEntry[]) {
+  isAutoplay.value = entry?.isIntersecting || false
+  isPlay.value = isAutoplay.value
+  console.log({ isAutoplay: isAutoplay.value })
+}
+
+useIntersectionObserver(featuredVideos, onIntersectionObserver)
 </script>
 
 <template>
-  <section id="featured-videos" class="pb-4">
+  <section id="featured-videos" ref="featured-videos" class="pb-4">
     <SectionLabel icon="movie" title="Featured Videos" />
     <div v-if="videos.length" class="relative left-1/2 flex h-screen w-screen -translate-x-1/2 items-center justify-center overflow-hidden bg-black">
       <NuxtVideo
         ref="videoContainerRef"
-        :key="currentVideoIndex"
-        :poster="currentVideo.poster"
-        :source="currentVideo.sources"
+        :key="activeVideoIndex"
+        :poster="activeVideo.poster"
+        :source="activeVideo.sources"
         :disable-picture-in-picture="true"
         controls-list="nodownload"
-        :autoplay="false"
+        :autoplay="isAutoplay"
+        :state="isPlay ? 'play' : 'pause'"
         :muted="true"
         :playsinline="true"
         preload="metadata"

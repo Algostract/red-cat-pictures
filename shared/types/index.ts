@@ -33,13 +33,17 @@ export interface Position {
   col: { start: number; span: number }
 }
 
-export type BreakpointKey = 'default' | 'md' | 'lg' | 'xl' | '2xl'
+export interface FileSourceItem {
+  src: string
+  type: string
+}
 
 export type FileSources = {
-  [key in BreakpointKey]?: {
-    src: string
-    type: string
-  }[]
+  [codec in Codec]?: {
+    [resolution in Resolution]?: {
+      [orientation in Orientation]?: FileSourceItem[]
+    }
+  }
 }
 
 export interface FileVideoItem {
@@ -53,9 +57,12 @@ export interface Source {
   src: string
   type: string
   media: string
+  codec: Codec
+  resolution: Resolution
 }
 
 export interface Video {
+  name: string
   type: 'hero' | 'feature'
   poster: string
   sources: Source[]

@@ -7,6 +7,7 @@ const props = withDefaults(
     preload?: 'none' | 'metadata' | 'auto'
     controls?: boolean
     autoplay?: boolean
+    state?: 'play' | 'pause' | 'stop'
     muted?: boolean
     playsinline?: boolean
     disablePictureInPicture?: boolean
@@ -17,6 +18,7 @@ const props = withDefaults(
     preload: 'auto',
     controls: false,
     autoplay: false,
+    state: 'stop',
     muted: false,
     playsinline: false,
     disablePictureInPicture: false,
@@ -43,6 +45,25 @@ watch(
     videoRef.value.pause()
     videoRef.value.currentTime = 0
     await videoRef.value.play()
+  }
+)
+
+watch(
+  () => props.state,
+  async (value) => {
+    switch (value) {
+      case 'play':
+        await videoRef.value?.play()
+        break
+      case 'pause':
+        await videoRef.value?.pause()
+        break
+      case 'stop':
+        await videoRef.value?.pause()
+        break
+      default:
+        break
+    }
   }
 )
 

@@ -1,3 +1,5 @@
+import { convertSources } from './index.get'
+
 export default defineCachedEventHandler<Promise<VideoDetails>>(
   async (event) => {
     try {
@@ -13,10 +15,8 @@ export default defineCachedEventHandler<Promise<VideoDetails>>(
       }
 
       return {
-        name: video.name,
-        poster: video.poster,
-        type: video.type,
-        sources: video.sources,
+        ...video,
+        sources: convertSources(video.sources),
       } as VideoDetails
     } catch (error: unknown) {
       console.error('API video/slug GET', error)
@@ -31,5 +31,5 @@ export default defineCachedEventHandler<Promise<VideoDetails>>(
       })
     }
   },
-  { maxAge: 60 * 60 }
+  { maxAge: 0 * 60 }
 )

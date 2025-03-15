@@ -10,7 +10,7 @@ if (!episode.value) {
 const title = `${episode.value.title}`
 const description = `${episode.value.description}`
 const url = 'https://redcatpictures.com'
-const imageUrl = `https://ucarecdn.com/${episode.value.cover}/-/format/jpeg/-/scale_crop/1280x640/center`
+const imageUrl = `https://ucarecdn.com/${episode.value.cover}/-/format/auto/-/preview/1200x630/center`
 
 useSeoMeta({
   title: title,

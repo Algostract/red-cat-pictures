@@ -13,7 +13,7 @@ const activePhoto = computed(() => photos.value.find(({ name }) => name === acti
 const title = `${activePhotoName.value}`
 const description = `${activePhoto.value?.description}`
 const url = 'https://redcatpictures.com'
-const imageUrl = `https://ucarecdn.com/${activePhoto.value?.id}/-/format/jpeg/-/preview/1280x640/-/smart_resize/1280x640/center`
+const imageUrl = `https://ucarecdn.com/${activePhoto.value?.id}/-/format/auto/-/scale_crop/${activePhoto.value?.aspectRatio ? Math.round(720 * activePhoto.value.aspectRatio) : 1200}x720/center`
 
 useSeoMeta({
   title: title,

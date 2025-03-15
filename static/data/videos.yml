@@ -3,105 +3,377 @@
   type: 'hero'
   poster: ''
   sources:
-    default:
-      - src: /video/hero-default-av1.webm
-        type: video/webm
+    av1:
+      '720p':
+        portrait:
+          - src: hero-portrait-av1-720p-portrait.webm
+            type: video/webm
+        landscape:
+          - src: hero-landscape-av1-720p-landscape.webm
+            type: video/webm
+      '1080p':
+        portrait:
+          - src: hero-portrait-av1-1080p-portrait.webm
+            type: video/webm
+        landscape:
+          - src: hero-landscape-av1-1080p-landscape.webm
+            type: video/webm
+      '1440p':
+        portrait:
+          - src: hero-portrait-av1-1440p-portrait.webm
+            type: video/webm
+        landscape:
+          - src: hero-landscape-av1-1440p-landscape.webm
+            type: video/webm
+    vp9:
+      '720p':
+        portrait:
+          - src: hero-portrait-vp9-720p-portrait.webm
+            type: video/webm
+        landscape:
+          - src: hero-landscape-vp9-720p-landscape.webm
+            type: video/webm
+      '1080p':
+        portrait:
+          - src: hero-portrait-vp9-1080p-portrait.webm
+            type: video/webm
+        landscape:
+          - src: hero-landscape-vp9-1080p-landscape.webm
+            type: video/webm
+      '1440p':
+        portrait:
+          - src: hero-portrait-vp9-1440p-portrait.webm
+            type: video/webm
+        landscape:
+          - src: hero-landscape-vp9-1440p-landscape.webm
+            type: video/webm
+    avc:
+      '720p':
+        portrait:
+          - src: hero-portrait-avc-720p-portrait.mp4
+            type: video/mp4
+        landscape:
+          - src: hero-landscape-avc-720p-landscape.mp4
+            type: video/mp4
+      '1080p':
+        portrait:
+          - src: hero-portrait-avc-1080p-portrait.mp4
+            type: video/mp4
+        landscape:
+          - src: hero-landscape-avc-1080p-landscape.mp4
+            type: video/mp4
+      '1440p':
+        portrait:
+          - src: hero-portrait-avc-1440p-portrait.mp4
+            type: video/mp4
+        landscape:
+          - src: hero-landscape-avc-1440p-landscape.mp4
+            type: video/mp4
+    hevc:
+      '720p':
+        portrait:
+          - src: hero-portrait-hevc-720p-portrait.mp4
+            type: video/mp4
+        landscape:
+          - src: hero-landscape-hevc-720p-landscape.mp4
+            type: video/mp4
+      '1080p':
+        portrait:
+          - src: hero-portrait-hevc-1080p-portrait.mp4
+            type: video/mp4
+        landscape:
+          - src: hero-landscape-hevc-1080p-landscape.mp4
+            type: video/mp4
+      '1440p':
+        portrait:
+          - src: hero-portrait-hevc-1440p-portrait.mp4
+            type: video/mp4
+        landscape:
+          - src: hero-landscape-hevc-1440p-landscape.mp4
+            type: video/mp4
 
-      - src: /video/hero-default-vp9.webm
-        type: video/webm
-
-      - src: /video/hero-default-avc.mp4
-        type: video/mp4
-    md:
-      - src: /video/hero-md-av1.webm
-        type: video/webm
-
-      - src: /video/hero-md-vp9.webm
-        type: video/webm
-
-      - src: /video/hero-md-avc.mp4
-        type: video/mp4
-
-- name: 'pixelplate-portrait'
+- name: 'pixelplate'
   type: 'feature'
   poster: ''
   sources:
-    default:
-      - src: /video/pixelplate-portrait-av1.webm
-        type: video/webm
-
-      - src: /video/pixelplate-portrait-vp9.webm
-        type: video/webm
-
-      - src: /video/pixelplate-portrait-avc.mp4
-        type: video/mp4
-
-- name: 'pixelplate-landscape'
-  type: 'feature'
-  poster: ''
-  sources:
-    default:
-      - src: /video/pixelplate-landscape-av1.webm
-        type: video/webm
-
-      - src: /video/pixelplate-landscape-vp9.webm
-        type: video/webm
-
-      - src: /video/pixelplate-landscape-avc.mp4
-        type: video/mp4
+    av1:
+      '720p':
+        portrait:
+          - src: pixelplate-portrait-av1-720p-portrait.webm
+            type: video/webm
+        landscape:
+          - src: pixelplate-landscape-av1-720p.webm
+            type: video/webm
+      '1080p':
+        portrait:
+          - src: pixelplate-portrait-av1-1080p-portrait.webm
+            type: video/webm
+        landscape:
+          - src: pixelplate-landscape-av1-1080p.webm
+            type: video/webm
+      '1440p':
+        portrait:
+          - src: pixelplate-portrait-av1-1440p-portrait.webm
+            type: video/webm
+        landscape:
+          - src: pixelplate-landscape-av1-1440p.webm
+            type: video/webm
+    vp9:
+      '720p':
+        portrait:
+          - src: pixelplate-portrait-vp9-720p-portrait.webm
+            type: video/webm
+        landscape:
+          - src: pixelplate-landscape-vp9-720p.webm
+            type: video/webm
+      '1080p':
+        portrait:
+          - src: pixelplate-portrait-vp9-1080p-portrait.webm
+            type: video/webm
+        landscape:
+          - src: pixelplate-landscape-vp9-1080p.webm
+            type: video/webm
+      '1440p':
+        portrait:
+          - src: pixelplate-portrait-vp9-1440p-portrait.webm
+            type: video/webm
+        landscape:
+          - src: pixelplate-landscape-vp9-1440p.webm
+            type: video/webm
+    avc:
+      '720p':
+        portrait:
+          - src: pixelplate-portrait-avc-720p-portrait.mp4
+            type: video/mp4
+        landscape:
+          - src: pixelplate-landscape-avc-720p.mp4
+            type: video/mp4
+      '1080p':
+        portrait:
+          - src: pixelplate-portrait-avc-1080p-portrait.mp4
+            type: video/mp4
+        landscape:
+          - src: pixelplate-landscape-avc-1080p.mp4
+            type: video/mp4
+      '1440p':
+        portrait:
+          - src: pixelplate-portrait-avc-1440p-portrait.mp4
+            type: video/mp4
+        landscape:
+          - src: pixelplate-landscape-avc-1440p.mp4
+            type: video/mp4
 
 - name: 'cookies'
   type: 'feature'
   poster: ''
   sources:
-    default:
-      - src: /video/cookies-av1.webm
-        type: video/webm
-
-      - src: /video/cookies-vp9.webm
-        type: video/webm
-
-      - src: /video/cookies-avc.mp4
-        type: video/mp4
+    av1:
+      '720p':
+        landscape:
+          - src: cookies-av1-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: cookies-av1-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: cookies-av1-1440p.webm
+            type: video/webm
+    vp9:
+      '720p':
+        landscape:
+          - src: cookies-vp9-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: cookies-vp9-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: cookies-vp9-1440p.webm
+            type: video/webm
+    avc:
+      '720p':
+        landscape:
+          - src: cookies-avc-720p.mp4
+            type: video/mp4
+      '1080p':
+        landscape:
+          - src: cookies-avc-1080p.mp4
+            type: video/mp4
+      '1440p':
+        landscape:
+          - src: cookies-avc-1440p.mp4
+            type: video/mp4
+    hevc:
+      '720p':
+        landscape:
+          - src: cookies-hevc-720p.mp4
+            type: video/mp4
+      '1080p':
+        landscape:
+          - src: cookies-hevc-1080p.mp4
+            type: video/mp4
+      '1440p':
+        landscape:
+          - src: cookies-hevc-1440p.mp4
+            type: video/mp4
 
 - name: 'red-bull'
   type: 'feature'
   poster: ''
   sources:
-    default:
-      - src: /video/red-bull-av1.webm
-        type: video/webm
-
-      - src: /video/red-bull-vp9.webm
-        type: video/webm
-
-      - src: /video/red-bull-avc.mp4
-        type: video/mp4
+    av1:
+      '720p':
+        landscape:
+          - src: red-bull-av1-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: red-bull-av1-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: red-bull-av1-1440p.webm
+            type: video/webm
+    vp9:
+      '720p':
+        landscape:
+          - src: red-bull-vp9-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: red-bull-vp9-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: red-bull-vp9-1440p.webm
+            type: video/webm
+    avc:
+      '720p':
+        landscape:
+          - src: red-bull-avc-720p.mp4
+            type: video/mp4
+      '1080p':
+        landscape:
+          - src: red-bull-avc-1080p.mp4
+            type: video/mp4
+      '1440p':
+        landscape:
+          - src: red-bull-avc-1440p.mp4
+            type: video/mp4
+    hevc:
+      '720p':
+        landscape:
+          - src: red-bull-hevc-720p.mp4
+            type: video/mp4
+      '1080p':
+        landscape:
+          - src: red-bull-hevc-1080p.mp4
+            type: video/mp4
+      '1440p':
+        landscape:
+          - src: red-bull-hevc-1440p.mp4
+            type: video/mp4
 
 - name: 'peanut-bar'
   type: 'feature'
   poster: ''
   sources:
-    default:
-      - src: /video/peanut-bar-av1.webm
-        type: video/webm
-
-      - src: /video/peanut-bar-vp9.webm
-        type: video/webm
-
-      - src: /video/peanut-bar-avc.mp4
-        type: video/mp4
+    av1:
+      '720p':
+        landscape:
+          - src: peanut-bar-av1-720p.mp4
+            type: video/mp4
+      '1080p':
+        landscape:
+          - src: peanut-bar-av1-1080p.mp4
+            type: video/mp4
+      '1440p':
+        landscape:
+          - src: peanut-bar-av1-1440p.mp4
+            type: video/mp4
+    vp9:
+      '720p':
+        landscape:
+          - src: peanut-bar-vp9-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: peanut-bar-vp9-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: peanut-bar-vp9-1440p.webm
+            type: video/webm
+    avc:
+      '720p':
+        landscape:
+          - src: peanut-bar-avc-720p.mp4
+            type: video/mp4
+      '1080p':
+        landscape:
+          - src: peanut-bar-avc-1080p.mp4
+            type: video/mp4
+      '1440p':
+        landscape:
+          - src: peanut-bar-avc-1440p.mp4
+            type: video/mp4
+    hevc:
+      '720p':
+        landscape:
+          - src: peanut-bar-hevc-720p.mp4
+            type: video/mp4
+      '1080p':
+        landscape:
+          - src: peanut-bar-hevc-1080p.mp4
+            type: video/mp4
+      '1440p':
+        landscape:
+          - src: peanut-bar-hevc-1440p.mp4
+            type: video/mp4
 
 - name: 'sweet'
   type: 'feature'
   poster: ''
   sources:
-    default:
-      - src: /video/sweet-av1.webm
-        type: video/webm
-
-      - src: /video/sweet-vp9.webm
-        type: video/webm
-
-      - src: /video/sweet-avc.mp4
-        type: video/mp4
+    av1:
+      '720p':
+        landscape:
+          - src: sweet-av1-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: sweet-av1-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: sweet-av1-1440p.webm
+            type: video/webm
+    vp9:
+      '720p':
+        landscape:
+          - src: sweet-vp9-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: sweet-vp9-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: sweet-vp9-1440p.webm
+            type: video/webm
+    avc:
+      '720p':
+        landscape:
+          - src: sweet-avc-720p.mp4
+            type: video/mp4
+      '1080p':
+        landscape:
+          - src: sweet-avc-1080p.mp4
+            type: video/mp4
+      '1440p':
+        landscape:
+          - src: sweet-avc-1440p.mp4
+            type: video/mp4

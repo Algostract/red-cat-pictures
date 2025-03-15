@@ -4,7 +4,7 @@ const { data: episodes } = await useFetch('/api/episode')
 const title = `Episodes of all behind the Scenes & Stories`
 const description = `Read our episodes for behind-the-scenes insights, project stories, and expert tips on photography and videography.`
 const url = 'https://redcatpictures.com'
-const imageUrl = episodes.value?.length ? `https://ucarecdn.com/${episodes.value[0]?.cover}/-/format/auto/-/scale_crop/1280x640/` : `${url}/preview/landscape.webp`
+const imageUrl = episodes.value?.length ? `https://ucarecdn.com/${episodes.value[0]?.cover}/-/format/auto/-/scale_crop/1200x630/` : `${url}/preview/landscape.webp`
 
 useSeoMeta({
   title: title,
