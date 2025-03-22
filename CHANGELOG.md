@@ -1,5 +1,11 @@
 # red-cat-pictures
 
+## 2.4.1
+
+### Patch Changes
+
+- 1f06f0d: fix: added 404 for individual images, modified prices, added new photos and videos
+
 ## 2.4.0
 
 ### Minor Changes
