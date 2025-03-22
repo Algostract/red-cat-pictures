@@ -377,3 +377,135 @@
         landscape:
           - src: sweet-avc-1440p.mp4
             type: video/mp4
+
+- name: 'gulab-jamun'
+  type: 'feature'
+  poster: ''
+  sources:
+    av1:
+      '720p':
+        landscape:
+          - src: gulab-jamun-av1-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: gulab-jamun-av1-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: gulab-jamun-av1-1440p.webm
+            type: video/webm
+    vp9:
+      '720p':
+        landscape:
+          - src: gulab-jamun-vp9-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: gulab-jamun-vp9-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: gulab-jamun-vp9-1440p.webm
+            type: video/webm
+    avc:
+      '720p':
+        landscape:
+          - src: gulab-jamun-avc-720p.mp4
+            type: video/mp4
+      '1080p':
+        landscape:
+          - src: gulab-jamun-avc-1080p.mp4
+            type: video/mp4
+      '1440p':
+        landscape:
+          - src: gulab-jamun-avc-1440p.mp4
+            type: video/mp4
+
+- name: 'valley-strong-tea'
+  type: 'feature'
+  poster: ''
+  sources:
+    av1:
+      '720p':
+        landscape:
+          - src: valley-strong-tea-av1-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: valley-strong-tea-av1-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: valley-strong-tea-av1-1440p.webm
+            type: video/webm
+    vp9:
+      '720p':
+        landscape:
+          - src: valley-strong-tea-vp9-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: valley-strong-tea-vp9-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: valley-strong-tea-vp9-1440p.webm
+            type: video/webm
+    avc:
+      '720p':
+        landscape:
+          - src: valley-strong-tea-avc-720p.mp4
+            type: video/mp4
+      '1080p':
+        landscape:
+          - src: valley-strong-tea-avc-1080p.mp4
+            type: video/mp4
+      '1440p':
+        landscape:
+          - src: valley-strong-tea-avc-1440p.mp4
+            type: video/mp4
+
+- name: 'wallet'
+  type: 'feature'
+  poster: ''
+  sources:
+    av1:
+      '720p':
+        landscape:
+          - src: wallet-av1-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: wallet-av1-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: wallet-av1-1440p.webm
+            type: video/webm
+    vp9:
+      '720p':
+        landscape:
+          - src: wallet-vp9-720p.webm
+            type: video/webm
+      '1080p':
+        landscape:
+          - src: wallet-vp9-1080p.webm
+            type: video/webm
+      '1440p':
+        landscape:
+          - src: wallet-vp9-1440p.webm
+            type: video/webm
+    avc:
+      '720p':
+        landscape:
+          - src: wallet-avc-720p.mp4
+            type: video/mp4
+      '1080p':
+        landscape:
+          - src: wallet-avc-1080p.mp4
+            type: video/mp4
+      '1440p':
+        landscape:
+          - src: wallet-avc-1440p.mp4
+            type: video/mp4

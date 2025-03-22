@@ -59,7 +59,7 @@ ecommerce:
 product:
   photo:
     - title: 'Standard Photography'
-      price: 5500
+      price: 6500
       unit: 'session'
       points:
         - icon: 'photo'
@@ -70,8 +70,8 @@ product:
           title: 'Upto 2 Theme setup'
 
     - title: 'Premium Photography'
-      price: 7000
-      unit: 'photo'
+      price: 7500
+      unit: 'session'
       points:
         - icon: 'photo'
           title: 'Upto 10 Photos'
@@ -82,7 +82,7 @@ product:
 
     - title: 'Product & Model Photography'
       price: 15000
-      unit: 'video'
+      unit: 'session'
       points:
         - icon: 'photo'
           title: 'Upto 10 Photos'
@@ -98,6 +98,17 @@ product:
       points:
         - icon: 'youtube'
           title: 'Upto 45 second Video'
+        - icon: 'youtube'
+          title: 'Extensive editing, and color grading'
+        - icon: 'youtube'
+          title: 'Upto 3 Theme setup'
+
+    - title: 'Premium VFX Videography'
+      price: 10000
+      unit: 'session'
+      points:
+        - icon: 'youtube'
+          title: 'Upto 30 second Video'
         - icon: 'youtube'
           title: 'Extensive editing, and color grading'
         - icon: 'youtube'

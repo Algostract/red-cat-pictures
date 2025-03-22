@@ -123,7 +123,7 @@ export default async function (
 
     const ffmpegProcess = execa(
       'ffmpeg',
-      ['-i', `./static/videos/source/${fileName}`, ...parseArgs(selectedArgs), `./static/videos/${fileName.split('.')[0]}-${presetName.toLowerCase()}.${extension}`, '-progress', 'pipe:1'],
+      ['-y', '-i', `./static/videos/source/${fileName}`, ...parseArgs(selectedArgs), `./static/videos/${fileName.split('.')[0]}-${presetName.toLowerCase()}.${extension}`, '-progress', 'pipe:1'],
       { stdout: 'pipe', stderr: 'pipe' }
     )
 
@@ -162,7 +162,7 @@ export default async function (
     if (onUpdate)
       onUpdate({
         fileName,
-        status: `process-${presetName}`,
+        status: `complete-${presetName}`,
         completion: 100,
         eta: 0,
         fps: 0,

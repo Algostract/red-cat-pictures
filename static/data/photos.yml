@@ -550,6 +550,87 @@
   gallery: 20
   featured: null
 
+- name: Product-018-001
+  id: 262323f8-1cc4-4229-b26c-03b6846daa28
+  description: Luxurious gold bracelet with square-cut stones and delicate pearl details displayed on a dark wooden hand sculpture against a warm golden background.
+  width: 3878
+  height: 4848
+  category: product
+  gallery: 21
+  featured: null
+
+- name: Product-018-002
+  id: 34558490-b3f0-4dd2-92a0-80b5d0e9229a
+  description: Exquisite gold and pearl bracelet with square-cut stones displayed on a dark wooden surface against a warm golden backdrop
+  width: 3511
+  height: 4390
+  category: product
+  gallery: 22
+  featured: null
+
+- name: Product-019-001
+  id: 227a26db-b815-4723-a82a-88c3f6ffbcbb
+  description: Opulent gold earrings featuring deep red center stones and sparkling diamonds, displayed on a dark wooden surface against a warm golden backdrop.
+  width: 2638
+  height: 3298
+  category: product
+  gallery: 23
+  featured: null
+
+- name: Product-020-001
+  id: 640c4dc6-b8b7-42bf-af65-57c1c00034dc
+  description: Exquisite teardrop gold earrings adorned with deep blue gemstones and sparkling diamonds, displayed on a wooden branch against a soft gradient backdrop.
+  width: 3572
+  height: 4464
+  category: product
+  gallery: 24
+  featured: null
+
+- name: Product-021-001
+  id: e7403629-0524-4125-9746-c8c2b1edb149
+  description: Exquisite rectangular gold ring adorned with vibrant green gemstones, resting on a stone surface against a muted backdrop.
+  width: 3662
+  height: 4578
+  category: product
+  gallery: 25
+  featured: null
+
+- name: Product-022-001
+  id: b99399ed-8042-49b9-90ed-67cf89ef2d4f
+  description: Delicate circular gold earrings featuring floral diamond studs, showcased on a rustic wooden surface in natural light.
+  width: 3034
+  height: 3792
+  category: product
+  gallery: 26
+  featured: null
+
+- name: Product-023-001
+  id: 06573245-efd5-40e2-99ea-a5cb9aa5d0e9
+  description: Pair of sleek gold bangles embellished with baguette diamonds, displayed on a smooth cylinder against a dark grey backdrop.
+  width: 2082
+  height: 2601
+  category: product
+  gallery: 27
+  featured: null
+
+- name: Product-024-001
+  id: 2a9d2f76-835d-4ea6-a744-2d1c8ffab26c
+  description: Elegant gold and diamond-studded hoop earrings with marquise and baguette-cut stones, artistically displayed against a modern backdrop.
+  width: 2306
+  height: 2883
+  category: product
+  gallery: 28
+  featured: null
+
+- name: Product-025-001
+  id: b8d25971-a297-466d-830b-e6b1515e9fca
+  description: Exquisite drop earrings featuring pear-shaped emeralds and diamond clusters, displayed on a rustic wooden branch against a dark backdrop.
+  width: 3513
+  height: 4392
+  category: product
+  gallery: 29
+  featured: null
+
 # Food
 
 - name: Product-016-001

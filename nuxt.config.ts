@@ -47,7 +47,8 @@ export default defineNuxtConfig({
     private: {
       rootDir: '',
       notionApiKey: '',
-      notionDbId: '',
+      notionClientDbId: '',
+      notionContentDbId: '',
     },
   },
   nitro: {

@@ -17,7 +17,7 @@ export default defineCachedEventHandler<Promise<Episode[]>>(
       n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })
 
       const data = await notion.databases.query({
-        database_id: config.private.notionDbId,
+        database_id: config.private.notionClientDbId,
       })
 
       const episodes = data.results as unknown as NotionEpisode[]
