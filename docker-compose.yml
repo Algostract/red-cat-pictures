@@ -1,8 +1,8 @@
-name: 'red-cat-pictures-dev'
+name: 'red-cat-pictures'
 services:
   app:
     build: .
-    # image: 'ghcr.io/algostract/red-cat-pictures:latest'
+    image: 'ghcr.io/algostract/red-cat-pictures:latest'
     restart: on-failure:3
     # runtime: nvidia # Enable NVIDIA GPU support
     # deploy:
@@ -21,18 +21,18 @@ services:
     ports:
       - 4102:3000
 
-  directus:
-    image: directus/directus:11
-    ports:
-      - 8055:8055
-    volumes:
-      - ./directus/database:/directus/database
-      - ./directus/uploads:/directus/uploads
-      - ./directus/extensions:/directus/extensions
-    environment:
-      SECRET: 'replace-with-secure-random-value'
-      ADMIN_EMAIL: 'admin@example.com'
-      ADMIN_PASSWORD: 'd1r3ctu5'
-      DB_CLIENT: 'sqlite3'
-      DB_FILENAME: '/directus/database/data.db'
-      WEBSOCKETS_ENABLED: 'true'
+  # directus:
+  #   image: directus/directus:11
+  #   ports:
+  #     - 8055:8055
+  #   volumes:
+  #     - ./directus/database:/directus/database
+  #     - ./directus/uploads:/directus/uploads
+  #     - ./directus/extensions:/directus/extensions
+  #   environment:
+  #     SECRET: 'replace-with-secure-random-value'
+  #     ADMIN_EMAIL: 'admin@example.com'
+  #     ADMIN_PASSWORD: 'd1r3ctu5'
+  #     DB_CLIENT: 'sqlite3'
+  #     DB_FILENAME: '/directus/database/data.db'
+  #     WEBSOCKETS_ENABLED: 'true'
