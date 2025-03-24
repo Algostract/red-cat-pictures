@@ -13,23 +13,6 @@ useSeoMeta({
 })
 
 useSchemaOrg([
-  definePerson({
-    name: 'Aratrik Nandy',
-    description: 'He is a Professional Food & Product Photographer/Videographer',
-    image: url + '/logo.png',
-    sameAs: ['https://www.facebook.com/profile.php?id=61559002911290', 'https://www.instagram.com/redcatxpictures'],
-  }),
-  defineLocalBusiness({
-    name: 'RED CAT PICTURES',
-    address: {
-      streetAddress: '17 NS Road, Vivekananda pally near Joyram Bhavan, rajpur sonarpur',
-      addressLocality: 'Kolkata',
-      addressRegion: 'WB',
-      postalCode: '700146',
-      addressCountry: 'IN',
-    },
-    image: url + '/logo.png',
-  }),
   defineWebPage({
     datePublished: new Date(2024, 1, 1).toISOString(),
     dateModified: new Date(2024, 1, 1).toISOString(),
@@ -39,6 +22,28 @@ useSchemaOrg([
     url: url,
     name: title,
     description: description,
+  }),
+  defineLocalBusiness({
+    '@type': 'EntertainmentBusiness',
+    name: 'RED CAT PICTURES',
+    description: description,
+    image: `${url}/previews/landing.webp`,
+    logo: url + '/logo.png',
+    url: 'https://redcatpictures.com',
+    address: {
+      streetAddress: '17 NS Road, Vivekananda pally near Joyram Bhavan, rajpur sonarpur',
+      addressLocality: 'Kolkata',
+      addressRegion: 'WB',
+      postalCode: '700146',
+      addressCountry: 'IN',
+    },
+    sameAs: ['https://wa.me/c/918910489578', 'https://www.facebook.com/redcatxpictures', 'https://www.instagram.com/redcatxpictures', 'https://maps.app.goo.gl/uWqh8LjcF5ez4WZY8'],
+  }),
+  defineBreadcrumb({
+    itemListElement: [
+      { name: 'Home', item: '/' },
+      { name: 'Episode', item: '/episode' },
+    ],
   }),
 ])
 </script>

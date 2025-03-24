@@ -23,6 +23,17 @@ useSeoMeta({
   twitterImage: imageUrl,
   ogUrl: `${url}/episode/${slug}`,
 })
+
+useSchemaOrg([
+  defineArticle({
+    headline: title,
+    description: description,
+    thumbnailUrl: imageUrl,
+    datePublished: episode.value.publishedAt,
+    dateModified: episode.value.modifiedAt,
+    keywords: [],
+  }),
+])
 </script>
 
 <template>

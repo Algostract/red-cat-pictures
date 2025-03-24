@@ -30,6 +30,16 @@ useSeoMeta({
   twitterImage: imageUrl,
   ogUrl: `${url}/photo/${activePhotoName.value}`,
 })
+
+useSchemaOrg([
+  defineImage({
+    image: `/photo/${activePhotoName.value}`,
+    contentUrl: `${url}/photo/${activePhotoName.value}`,
+    caption: description,
+    height: Math.round(720 * activePhoto.value.aspectRatio),
+    width: 720,
+  }),
+])
 </script>
 
 <template>

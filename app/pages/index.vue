@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { Category } from '~~/shared/types/index'
 
-const title = `Photography & Videography`
-const description = `Nurture the essence of your food & product with our photography & videography services in Kolkata`
+const title = `Photography & Videography in Kolkata`
+const description = `Nurture the essence of your food & product with our photography & videography services in kolkata`
 const url = 'https://redcatpictures.com'
 const imageUrl = `${url}/previews/landing.webp`
 
