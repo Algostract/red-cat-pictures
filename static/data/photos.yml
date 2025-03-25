@@ -140,7 +140,7 @@
   width: 4535
   height: 6803
   category: ecommerce
-  gallery: 10
+  gallery: 9
   featured: null
 
 - name: Ecommerce-007-002
@@ -158,7 +158,7 @@
   width: 4429
   height: 6644
   category: ecommerce
-  gallery: 12
+  gallery: 10
   featured: null
 
 - name: Ecommerce-008-002
@@ -167,7 +167,7 @@
   width: 4287
   height: 6431
   category: ecommerce
-  gallery: 13
+  gallery: 11
   featured: 7
 
 - name: Ecommerce-009-001
@@ -176,7 +176,7 @@
   width: 4414
   height: 6620
   category: ecommerce
-  gallery: 14
+  gallery: 12
   featured: null
 
 - name: Ecommerce-009-002
@@ -257,7 +257,7 @@
   width: 5153
   height: 6872
   category: ecommerce
-  gallery: 16
+  gallery: 13
   featured: null
 
 - name: Ecommerce-012-001
@@ -266,7 +266,7 @@
   width: 2688
   height: 3584
   category: ecommerce
-  gallery: 17
+  gallery: 14
   featured: 1
 
 - name: Ecommerce-013-001
@@ -275,7 +275,7 @@
   width: 5727
   height: 7636
   category: ecommerce
-  gallery: 18
+  gallery: 15
   featured: null
 
 - name: Ecommerce-014-001
@@ -284,7 +284,7 @@
   width: 4672
   height: 7008
   category: ecommerce
-  gallery: 22
+  gallery: 16
   featured: null
 
 - name: Ecommerce-014-002
@@ -293,7 +293,7 @@
   width: 4672
   height: 7008
   category: ecommerce
-  gallery: 24
+  gallery: 17
   featured: null
 
 - name: Ecommerce-014-003
@@ -302,7 +302,7 @@
   width: 4324
   height: 6487
   category: ecommerce
-  gallery: 23
+  gallery: 18
   featured: null
 
 - name: Ecommerce-014-004
@@ -311,7 +311,7 @@
   width: 4464
   height: 6696
   category: ecommerce
-  gallery: 25
+  gallery: 19
   featured: null
 
 - name: Ecommerce-015-002
@@ -320,7 +320,7 @@
   width: 3907
   height: 3907
   category: ecommerce
-  gallery: 26
+  gallery: 20
   featured: null
 
 - name: Ecommerce-015-001
@@ -329,7 +329,7 @@
   width: 1080
   height: 1080
   category: ecommerce
-  gallery: 27
+  gallery: 21
   featured: null
 
 - name: Product-009-001
@@ -338,7 +338,7 @@
   width: 7008
   height: 4672
   category: ecommerce
-  gallery: 20
+  gallery: 22
   featured: null
 
 - name: Product-005-001
@@ -347,7 +347,7 @@
   width: 4533
   height: 4533
   category: ecommerce
-  gallery: 21
+  gallery: 23
   featured: 3
 
 - name: Product-010-001
@@ -356,7 +356,7 @@
   width: 7008
   height: 4672
   category: ecommerce
-  gallery: 19
+  gallery: 24
   featured: 5
 
 # Product
@@ -430,7 +430,7 @@
   width: 5633
   height: 3755
   category: product
-  gallery: 6
+  gallery: 5
   featured: 3
 
 - name: Product-008-001
@@ -439,7 +439,7 @@
   width: 9502
   height: 5345
   category: product
-  gallery: 7
+  gallery: 6
   featured: null
 
 - name: Product-011-001
@@ -448,7 +448,7 @@
   width: 4673
   height: 4672
   category: product
-  gallery: 10
+  gallery: 7
   featured: null
 
 - name: Product-011-002
@@ -457,7 +457,7 @@
   width: 4506
   height: 4506
   category: product
-  gallery: 11
+  gallery: 8
   featured: null
 
 - name: Product-011-003
@@ -466,7 +466,7 @@
   width: 3750
   height: 3750
   category: product
-  gallery: 12
+  gallery: 9
   featured: null
 
 - name: Product-011-004
@@ -475,7 +475,7 @@
   width: 3947
   height: 3947
   category: product
-  gallery: 13
+  gallery: 10
   featured: null
 
 - name: Product-012-001
@@ -484,7 +484,25 @@
   width: 4672
   height: 6229
   category: product
-  gallery: 14
+  gallery: 11
+  featured: null
+
+- name: Product-017-004
+  id: 7be09bba-af52-426a-bef3-43ecd91b9b82
+  description: Two premium brown leather wallets placed on a gray surface, accompanied by a pen, showcasing a sophisticated handcrafted design.
+  width: 4672
+  height: 4672
+  category: product
+  gallery: 12
+  featured: 4
+
+- name: Product-017-005
+  id: 6c540f29-02f3-424d-a148-b96e7055d4d6
+  description: A premium black leather wallet showcased in a branded gift box, highlighting handcrafted quality and elegant design.
+  width: 4672
+  height: 4672
+  category: product
+  gallery: 13
   featured: null
 
 - name: Product-013-001
@@ -493,7 +511,7 @@
   width: 3378
   height: 5067
   category: product
-  gallery: 15
+  gallery: 14
   featured: 6
 
 - name: Product-014-001
@@ -502,7 +520,34 @@
   width: 4171
   height: 6256
   category: product
+  gallery: 15
+  featured: null
+
+- name: Product-026-001
+  id: cafbd907-114e-4d85-9c7b-80c01c2f7a67
+  description: Smiling woman wearing an elegant gold necklace and matching earrings, captured in a warm, softly lit setting.
+  width: 3638
+  height: 4549
+  category: product
   gallery: 16
+  featured: null
+
+- name: Product-027-001
+  id: b19c1258-6c4a-487d-96b5-3abc7b219fd4
+  description: Smiling woman in a white traditional outfit wearing an intricate gold and diamond necklace with matching earrings, set against a warm golden background.
+  width: 3209
+  height: 4011
+  category: product
+  gallery: 17
+  featured: null
+
+- name: Product-027-002
+  id: 6aa23832-0eb9-46ae-944d-9d9f71112c3d
+  description: Smiling woman in a white traditional outfit wearing an elegant diamond and blue gemstone necklace with matching earrings, set against a warm golden background.
+  width: 3136
+  height: 3920
+  category: product
+  gallery: 18
   featured: null
 
 - name: Product-014-002
@@ -511,7 +556,7 @@
   width: 4036
   height: 5382
   category: product
-  gallery: 17
+  gallery: 19
   featured: null
 
 - name: Product-015-001
@@ -520,7 +565,7 @@
   width: 4191
   height: 5588
   category: product
-  gallery: 18
+  gallery: 20
   featured: null
 
 - name: Product-015-002
@@ -531,24 +576,6 @@
   category: product
   gallery: null
   featured: 2
-
-- name: Product-017-004
-  id: 7be09bba-af52-426a-bef3-43ecd91b9b82
-  description: Two premium brown leather wallets placed on a gray surface, accompanied by a pen, showcasing a sophisticated handcrafted design.
-  width: 4672
-  height: 4672
-  category: product
-  gallery: 19
-  featured: 4
-
-- name: Product-017-005
-  id: 6c540f29-02f3-424d-a148-b96e7055d4d6
-  description: A premium black leather wallet showcased in a branded gift box, highlighting handcrafted quality and elegant design.
-  width: 4672
-  height: 4672
-  category: product
-  gallery: 20
-  featured: null
 
 - name: Product-018-001
   id: 262323f8-1cc4-4229-b26c-03b6846daa28
@@ -565,7 +592,7 @@
   width: 3511
   height: 4390
   category: product
-  gallery: 22
+  gallery: null
   featured: null
 
 - name: Product-019-001
@@ -574,7 +601,7 @@
   width: 2638
   height: 3298
   category: product
-  gallery: 23
+  gallery: 22
   featured: null
 
 - name: Product-020-001
@@ -583,7 +610,7 @@
   width: 3572
   height: 4464
   category: product
-  gallery: 24
+  gallery: 23
   featured: null
 
 - name: Product-021-001
@@ -592,7 +619,7 @@
   width: 3662
   height: 4578
   category: product
-  gallery: 25
+  gallery: 24
   featured: null
 
 - name: Product-022-001
@@ -601,7 +628,7 @@
   width: 3034
   height: 3792
   category: product
-  gallery: 26
+  gallery: 25
   featured: null
 
 - name: Product-023-001
@@ -610,7 +637,7 @@
   width: 2082
   height: 2601
   category: product
-  gallery: 27
+  gallery: 26
   featured: null
 
 - name: Product-024-001
@@ -619,7 +646,7 @@
   width: 2306
   height: 2883
   category: product
-  gallery: 28
+  gallery: 27
   featured: null
 
 - name: Product-025-001
@@ -628,7 +655,70 @@
   width: 3513
   height: 4392
   category: product
+  gallery: 28
+  featured: null
+
+- name: Product-028-001
+  id: 4646bbd5-d5ce-4b5e-96e5-dc7b36339522
+  description: Exquisite diamond and emerald bangles displayed on a rustic wooden branch against a warm golden background.
+  width: 3234
+  height: 4044
+  category: product
   gallery: 29
+  featured: null
+
+- name: Product-029-001
+  id: 4169cfa7-a652-4ace-9566-21763abf148b
+  description: Gold bangles with intricate circular diamond settings placed on a light fabric near an orange rose.
+  width: 4326
+  height: 5408
+  category: product
+  gallery: 30
+  featured: null
+
+- name: Product-030-001
+  id: 493aa666-cc31-4330-b53a-01c886966107
+  description: Statement gold necklace adorned with rectangular crystals, showcased in dappled sunlight against a neutral background.
+  width: 4206
+  height: 5257
+  category: product
+  gallery: 31
+  featured: null
+
+- name: Product-031-001
+  id: 529bf051-bf7f-4fc2-9756-ec440a45e8fd
+  description: Delicate gold necklace with sparkling diamond pendants displayed on a deep navy satin background.
+  width: 3584
+  height: 4480
+  category: product
+  gallery: 32
+  featured: null
+
+- name: Product-032-001
+  id: 69ebd2d9-20a8-49a4-8e4c-241119055a5c
+  description: Stunning silver-toned drop earrings with red gemstones and diamond accents, displayed against a curved neutral backdrop with a red gradient.
+  width: 3743
+  height: 4679
+  category: product
+  gallery: 33
+  featured: null
+
+- name: Product-033-001
+  id: 2d092daa-1bed-4183-9a53-5054796bb1ec
+  description: Intricate gold necklace with a net-like diamond design and matching drop earrings, displayed on a white background.
+  width: 4340
+  height: 5425
+  category: product
+  gallery: 34
+  featured: null
+
+- name: Product-034-001
+  id: 4d21668d-dbe7-4e17-8d8f-f04f705d96f5
+  description: Intricately designed silver bangles with circular diamond patterns displayed on a white background.
+  width: 2310
+  height: 2888
+  category: product
+  gallery: 35
   featured: null
 
 # Food

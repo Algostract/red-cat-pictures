@@ -19,7 +19,7 @@ renderer.link = ({ href, title, tokens }) => {
 
 marked.use({ renderer })
 
-const containerRef = ref<HTMLElement | null>(null)
+const containerRef = useTemplateRef<HTMLDivElement>('containerRef')
 const hoveredLink = ref<{
   href: string
   title: string

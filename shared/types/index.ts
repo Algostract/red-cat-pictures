@@ -39,10 +39,8 @@ export interface FileSourceItem {
 }
 
 export type FileSources = {
-  [codec in Codec]?: {
-    [resolution in Resolution]?: {
-      [orientation in Orientation]?: FileSourceItem[]
-    }
+  [codec in Codec]?: { type: string } & {
+    [resolution in Resolution]?: Orientation[]
   }
 }
 
@@ -59,6 +57,7 @@ export interface Source {
   media: string
   codec: Codec
   resolution: Resolution
+  orientation: Orientation
 }
 
 export interface Video {

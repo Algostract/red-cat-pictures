@@ -1,34 +1,28 @@
 import type { Codec, Resolution } from '~~/server/utils/transcode-video'
 
-export function convertSources(sources: FileSources): Source[] {
+export function convertSources(name: string, sources: FileSources): Source[] {
   const result: Source[] = []
-  // Iterate over each codec key (e.g. "av1", "vp9", "avc", "hevc")
   for (const codec of Object.keys(sources) as Codec[]) {
     const codecSources = sources[codec]
     if (!codecSources) continue
-
-    for (const resolution of Object.keys(codecSources) as Resolution[]) {
-      const resSources = codecSources[resolution]
-      if (!resSources) continue
-
-      const orientationKeys = Object.keys(resSources) as ('landscape' | 'portrait')[]
-
-      const hasBoth = orientationKeys.includes('landscape') && orientationKeys.includes('portrait')
-
-      for (const orientation of orientationKeys) {
-        const files = resSources[orientation]
-        if (!files) continue
-
+    const mimeType = codecSources.type
+    const extension = mimeType === 'video/webm' ? 'webm' : mimeType === 'video/mp4' ? 'mp4' : ''
+    const resolutionKeys = Object.keys(codecSources).filter((key) => key !== 'type') as Resolution[]
+    for (const resolution of resolutionKeys) {
+      const orientations = codecSources[resolution]
+      if (!orientations || !Array.isArray(orientations)) continue
+      const hasBoth = orientations.includes('landscape') && orientations.includes('portrait')
+      for (const orientation of orientations) {
         const media = hasBoth ? (orientation === 'landscape' ? '(orientation: landscape)' : '(orientation: portrait)') : ''
-        for (const file of files) {
-          result.push({
-            src: '/media/video/' + file.src,
-            type: file.type,
-            media,
-            codec, // attach codec info
-            resolution, // attach resolution info
-          })
-        }
+        const src = `/media/video/${name}-${codec}-${resolution}-${orientation}.${extension}`
+        result.push({
+          src,
+          type: mimeType,
+          orientation,
+          media,
+          codec,
+          resolution,
+        })
       }
     }
   }
@@ -40,9 +34,10 @@ export default defineCachedEventHandler<Promise<Video[]>>(
     try {
       const videos = await readYamlFile<FileVideoItem>('videos.yml')
       if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
-      return videos.map(({ sources, ...rest }) => ({
+      return videos.map(({ name, sources, ...rest }) => ({
+        name,
         ...rest,
-        sources: convertSources(sources),
+        sources: convertSources(name, sources),
       }))
     } catch (error: unknown) {
       console.error('API video GET', error)

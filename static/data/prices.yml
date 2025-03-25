@@ -104,15 +104,15 @@ product:
           title: 'Upto 3 Theme setup'
 
     - title: 'Premium VFX Videography'
-      price: 10000
+      price: 12000
       unit: 'session'
       points:
         - icon: 'youtube'
           title: 'Upto 30 second Video'
         - icon: 'youtube'
-          title: 'Extensive editing, and color grading'
+          title: 'High Fidelity VFX editing'
         - icon: 'youtube'
-          title: 'Upto 3 Theme setup'
+          title: 'Premium Infographic animation'
 
     - title: 'Product & Model Videography'
       price: 15000
