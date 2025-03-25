@@ -28,7 +28,7 @@ useSchemaOrg([
     name: 'RED CAT PICTURES',
     description: description,
     image: `${url}/previews/landing.webp`,
-    logo: url + '/logo.png',
+    logo: url + '/logo-dark.png',
     url: 'https://redcatpictures.com',
     address: {
       streetAddress: '17 NS Road, Vivekananda pally near Joyram Bhavan, rajpur sonarpur',

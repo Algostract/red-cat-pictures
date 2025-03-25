@@ -1,7 +1,6 @@
 name: 'red-cat-pictures'
 services:
   app:
-    build: .
     image: 'ghcr.io/algostract/red-cat-pictures:latest'
     restart: on-failure:3
     # runtime: nvidia # Enable NVIDIA GPU support

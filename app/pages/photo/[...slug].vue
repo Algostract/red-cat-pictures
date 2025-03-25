@@ -33,11 +33,11 @@ useSeoMeta({
 
 useSchemaOrg([
   defineImage({
-    image: `/photo/${activePhotoName.value}`,
-    contentUrl: `${url}/photo/${activePhotoName.value}`,
+    url: `${url}/photo/${activePhotoName.value}`,
+    contentUrl: imageUrl,
     caption: description,
-    height: Math.round(720 * activePhoto.value.aspectRatio),
     width: 720,
+    height: Math.round(720 * activePhoto.value.aspectRatio),
   }),
 ])
 </script>

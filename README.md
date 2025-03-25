@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./public/logo.png" lt="Logo" width="80" />
+  <img src="./public/logo-light.png" lt="Logo" width="80" />
 <p>
 
 # RED CAT PICTURES

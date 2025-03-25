@@ -341,23 +341,23 @@
   gallery: 22
   featured: null
 
-- name: Product-005-001
-  id: 9a34beb4-211d-418b-afe4-727b36a64039
-  description: Black keyboard with rainbow LED backlight on a white background
-  width: 4533
-  height: 4533
-  category: ecommerce
-  gallery: 23
-  featured: 3
-
 - name: Product-010-001
   id: 0804d546-ba52-45fe-98b9-064d9231dc74
   description: A small, weatherproof enclosure housing a solar sensor with four terminal connectors.
   width: 7008
   height: 4672
   category: ecommerce
-  gallery: 24
+  gallery: 23
   featured: 5
+
+- name: Product-005-001
+  id: 9a34beb4-211d-418b-afe4-727b36a64039
+  description: Black keyboard with rainbow LED backlight on a white background
+  width: 4533
+  height: 4533
+  category: ecommerce
+  gallery: 24
+  featured: 3
 
 # Product
 
@@ -523,20 +523,20 @@
   gallery: 15
   featured: null
 
-- name: Product-026-001
-  id: cafbd907-114e-4d85-9c7b-80c01c2f7a67
-  description: Smiling woman wearing an elegant gold necklace and matching earrings, captured in a warm, softly lit setting.
-  width: 3638
-  height: 4549
-  category: product
-  gallery: 16
-  featured: null
-
 - name: Product-027-001
   id: b19c1258-6c4a-487d-96b5-3abc7b219fd4
   description: Smiling woman in a white traditional outfit wearing an intricate gold and diamond necklace with matching earrings, set against a warm golden background.
   width: 3209
   height: 4011
+  category: product
+  gallery: 16
+  featured: null
+
+- name: Product-026-001
+  id: cafbd907-114e-4d85-9c7b-80c01c2f7a67
+  description: Smiling woman wearing an elegant gold necklace and matching earrings, captured in a warm, softly lit setting.
+  width: 3638
+  height: 4549
   category: product
   gallery: 17
   featured: null

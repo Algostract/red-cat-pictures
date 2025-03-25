@@ -29,8 +29,8 @@ useSchemaOrg([
     headline: title,
     description: description,
     thumbnailUrl: imageUrl,
-    datePublished: episode.value.publishedAt,
-    dateModified: episode.value.modifiedAt,
+    datePublished: new Date(episode.value.publishedAt).toISOString(),
+    dateModified: new Date(episode.value.modifiedAt).toISOString(),
     keywords: [],
   }),
 ])

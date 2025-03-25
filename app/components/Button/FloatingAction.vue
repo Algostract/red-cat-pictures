@@ -33,7 +33,7 @@ function onClick(title: Category) {
 </script>
 
 <template>
-  <ul class="fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-0.5 overflow-hidden rounded bg-white drop-shadow dark:bg-dark-600">
+  <div class="fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-0.5 overflow-hidden rounded bg-white drop-shadow dark:bg-dark-600">
     <ButtonLabel
       v-for="{ icon, title } in categories"
       :key="title"
@@ -44,5 +44,5 @@ function onClick(title: Category) {
       :collapsable="true"
       class="flex-1 rounded-none md:w-52"
       @click="onClick(title)" />
-  </ul>
+  </div>
 </template>
