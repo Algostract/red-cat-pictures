@@ -1,5 +1,15 @@
 # red-cat-pictures
 
+## 2.5.0
+
+### Minor Changes
+
+- 4552798: feat: update schema.org definitions and enhance gallery functionality
+
+### Patch Changes
+
+- 2100592: chore: refactor video source conversion and update gallery component structure, new photos added
+
 ## 2.4.1
 
 ### Patch Changes
