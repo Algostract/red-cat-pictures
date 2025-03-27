@@ -1,5 +1,12 @@
 # red-cat-pictures
 
+## 2.5.1
+
+### Patch Changes
+
+- 8ae44f9: refactor: add load testing script refactor navigation for mobile support
+- dfe496c: fix: update logo references and improve accessibility in navigation
+
 ## 2.5.0
 
 ### Minor Changes
