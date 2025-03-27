@@ -1,42 +1,9 @@
 <script setup lang="ts">
-const { proxy: gaProxy } = useScriptGoogleAnalytics()
+const mobileMenuOpen = ref(false)
 
-function onNavigate(section: string) {
-  gaProxy.gtag('event', 'navigate', { section })
+function toggleMobileMenu(value?: boolean) {
+  mobileMenuOpen.value = value === undefined ? !mobileMenuOpen.value : value
 }
-
-const urls = ref([
-  /* {
-    "url": "#hero",
-    "id": "hero",
-    "title": "Home"
-  }, */
-  {
-    url: '/#gallery',
-    id: 'gallery',
-    title: 'Gallery',
-  },
-  {
-    url: '/#featured-images',
-    id: 'featured-images',
-    title: 'Images',
-  },
-  {
-    url: '/#featured-videos',
-    id: 'featured-videos',
-    title: 'Videos',
-  },
-  {
-    url: '/#pricing',
-    id: 'pricing',
-    title: 'Pricing',
-  },
-  {
-    url: '/episode',
-    id: 'episods',
-    title: 'Episodes',
-  },
-])
 </script>
 
 <template>
@@ -45,13 +12,12 @@ const urls = ref([
       <NuxtLink to="/" class="size-fit" aria-label="home">
         <NuxtIcon name="logo-full" filled class="text-[80px] md:text-[112px]" />
       </NuxtLink>
-      <ul class="hidden translate-y-1 justify-center gap-8 self-start whitespace-nowrap md:flex">
-        <li v-for="{ id, url, title } of urls" :key="id">
-          <NuxtLink :to="url" class="p-2" @click="onNavigate(id)">{{ title }}</NuxtLink>
-        </li>
-      </ul>
-      <div class="col-start-3 -translate-y-1/2 justify-self-end">
-        <ButtonColorMode />
+      <AppNavbar :is-open="mobileMenuOpen" @close="toggleMobileMenu(false)" />
+      <div class="col-start-3 -translate-y-1/4 justify-self-end md:-translate-y-1/2">
+        <button class="p-4 focus:outline-none md:hidden" @click="toggleMobileMenu(true)">
+          <NuxtIcon name="hamburger" class="text-[32px]" />
+        </button>
+        <ButtonColorMode class="hidden md:block" />
       </div>
     </nav>
   </header>
