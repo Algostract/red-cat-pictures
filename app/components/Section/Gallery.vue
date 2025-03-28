@@ -54,7 +54,7 @@ const { height: sliderHeight } = useElementSize(slider)
               'hidden md:flex lg:hidden': slideCount == '4',
               'hidden lg:flex': slideCount == '6',
             }">
-            <template v-for="dupIndex in [1, 2]">
+            <template v-for="dupIndex in [1, 2]" :key="dupIndex">
               <NuxtLink v-for="{ id, name, description } in slideImages" :key="`${dupIndex}-${id}`" :to="`/photo/${name}`" class="" @click="activePhotoName = name">
                 <NuxtImg
                   provider="uploadcare"

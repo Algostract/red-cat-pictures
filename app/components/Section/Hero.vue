@@ -29,7 +29,10 @@ const emit = defineEmits<{
       <p class="mx-auto max-w-screen-sm text-lg leading-9 tracking-wide md:text-xl lg:mx-0 lg:mb-8">Nurture the essence of your product with our photography & videography services</p>
       <ButtonCTA class="hidden lg:flex" @click="emit('contact')" />
     </div>
-    <ButtonCTA class="col-start-2 row-start-4 items-center justify-self-center lg:hidden" @click="emit('contact')" />
+    <div class="relative bottom-[5rem] col-span-full col-start-1 row-start-4 flex flex-col items-center gap-4 self-end">
+      <ButtonCTA class="items-center justify-self-center lg:hidden" @click="emit('contact')" />
+      <BrandSlider />
+    </div>
   </section>
 </template>
 
