@@ -1,5 +1,11 @@
 # red-cat-pictures
 
+## 2.5.2
+
+### Patch Changes
+
+- 483ecfa: feat: add BrandSlider component and line SVG, improve client fetching and caching
+
 ## 2.5.1
 
 ### Patch Changes
