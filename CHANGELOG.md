@@ -1,5 +1,11 @@
 # red-cat-pictures
 
+## 2.5.3
+
+### Patch Changes
+
+- d5d3659: fix(Hero): adjust layout and button alignment for improved responsiveness
+
 ## 2.5.2
 
 ### Patch Changes
