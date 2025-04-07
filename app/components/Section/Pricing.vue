@@ -5,7 +5,7 @@ defineProps<{
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
-const { data: prices } = useFetch('/api/price')
+const { data: prices } = await useFetch('/api/price')
 
 const splideOption = computed(() => ({
   mediaQuery: 'min',
@@ -66,10 +66,10 @@ const activeTab = ref<Service>('photo')
       </SplideTrack>
       <div class="splide__arrows absolute left-0 right-0 top-1/2 flex justify-between text-[24px] text-white">
         <button class="splide__arrow splide__arrow--prev arrow relative">
-          <NuxtIcon name="chevron-bold" class="relative z-10" />
+          <NuxtIcon name="local:chevron-bold" class="relative z-10" />
         </button>
         <button class="splide__arrow splide__arrow--next arrow relative scale-x-[-1]">
-          <NuxtIcon name="chevron-bold" class="relative z-10" />
+          <NuxtIcon name="local:chevron-bold" class="relative z-10" />
         </button>
       </div>
     </Splide>

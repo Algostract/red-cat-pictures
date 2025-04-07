@@ -84,7 +84,7 @@ html {
 }
 
 body {
-  @apply relative min-h-screen overflow-x-hidden bg-light-400 font-main text-black dark:bg-dark-400 dark:text-white;
+  @apply relative min-h-screen overflow-x-hidden bg-light-400 fill-black font-main text-black dark:bg-dark-400 dark:fill-white dark:text-white;
 }
 
 .nuxt-icon > svg {

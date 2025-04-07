@@ -41,6 +41,11 @@ export default defineCachedEventHandler<Promise<Video[]>>(
       }))
     } catch (error: unknown) {
       console.error('API video GET', error)
+
+      if (error instanceof Error && 'statusCode' in error) {
+        throw error
+      }
+
       throw createError({
         statusCode: 500,
         statusMessage: 'Some Unknown Error Found',

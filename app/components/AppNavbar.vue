@@ -35,7 +35,7 @@ const isAnimate = ref(false)
             to="/"
             class="bg-white p-6 pb-14 pl-14 [mask-image:url('assets/images/logo-container.svg')] [mask-position:center] [mask-repeat:no-repeat] [mask-size:102%]"
             @click="onNavigate(id)">
-            <NuxtIcon name="logo-dark" filled class="text-[112px]" />
+            <NuxtIcon name="local:logo-dark" filled class="text-[112px]" />
           </NuxtLink>
           <ul class="font-semibold flex flex-col gap-4 p-6 text-right text-xl">
             <li v-for="{ id, url, title } of urls" :key="id" class="py-2">

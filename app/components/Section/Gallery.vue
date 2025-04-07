@@ -74,7 +74,7 @@ const { height: sliderHeight } = useElementSize(slider)
         <!-- For Large Screen Devices -->
       </div>
       <!-- <div class="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full items-center justify-center text-primary-500">
-          <NuxtIcon name="logo-full" filled class="text-[196px] drop-shadow-md md:text-[356px]" />
+          <NuxtIcon name="local:logo-full" filled class="text-[196px] drop-shadow-md md:text-[356px]" />
         </div> -->
     </div>
   </section>

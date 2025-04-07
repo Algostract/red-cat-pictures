@@ -18,16 +18,20 @@ const { data: clients } = await useFetch('/api/client')
         </div>
       </div>
       <div class="-mr-14 flex gap-5 overflow-visible md:-ml-12">
-        <div class="h-20 w-2 rotate-45 scale-y-125 bg-[url('assets/images/line.svg')]" />
-        <div class="h-20 w-2 rotate-45 scale-y-125 bg-[url('assets/images/line.svg')]" />
-        <div class="h-20 w-2 rotate-45 scale-y-125 bg-[url('assets/images/line.svg')]" />
+        <div class="strip" />
+        <div class="strip" />
+        <div class="strip" />
       </div>
-      <span class="ml-32 hidden whitespace-nowrap text-2xl font-semi-bold text-black dark:text-white lg:inline">Worked with Us</span>
+      <span class="ml-32 hidden whitespace-nowrap text-2xl font-semi-bold text-white lg:inline">Worked with Us</span>
     </div>
   </section>
 </template>
 
 <style scoped>
+.strip {
+  @apply h-20 w-2 rotate-45 scale-y-125 bg-[url('assets/images/line.svg')];
+}
+
 .overlay {
   @apply after:fixed after:left-0 after:top-0 after:z-20 after:h-screen after:w-screen after:bg-gradient-to-b after:from-black/40 after:from-[3%] after:via-transparent after:via-20% after:to-black/40 after:to-[97%] after:content-[''];
 }

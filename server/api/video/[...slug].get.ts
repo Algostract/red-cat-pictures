@@ -16,7 +16,7 @@ export default defineCachedEventHandler<Promise<VideoDetails>>(
 
       return {
         ...video,
-        sources: convertSources(video.sources),
+        sources: convertSources(video.name, video.sources),
       } as VideoDetails
     } catch (error: unknown) {
       console.error('API video/slug GET', error)

@@ -18,8 +18,8 @@ useSeoMeta({
   ogUrl: url,
 })
 
-const { data: photos } = useFetch('/api/photo', { default: () => [] })
-const { data: videos } = useFetch('/api/video', { default: () => [] })
+const { data: photos } = await useFetch('/api/photo', { default: () => [] })
+const { data: videos } = await useFetch('/api/video', { default: () => [] })
 
 const heroVideo = computed(() => videos.value.find(({ type }) => type === 'hero')!)
 const featuredVideos = computed(() => videos.value.filter(({ type }) => type === 'feature'))

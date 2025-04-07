@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxt/fonts',
+    '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxt/test-utils/module',
@@ -16,7 +17,6 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@vite-pwa/nuxt',
     '@vueuse/nuxt',
-    'nuxt-icons',
     'nuxt-splide',
     'nuxt-time',
   ],
@@ -71,6 +71,17 @@ export default defineNuxtConfig({
       },
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon-v2.ico' }],
     },
+  },
+  icon: {
+    componentName: 'NuxtIcon',
+    provider: 'server',
+    mode: 'svg',
+    customCollections: [
+      {
+        prefix: 'local',
+        dir: './app/assets/icons',
+      },
+    ],
   },
   image: {
     uploadcare: {

@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
     const metaData = await storage.getMeta(`videos/${slug}`)
     const bufferData = await storage.getItemRaw(`videos/${slug}`)
 
-    if (!bufferData) throw createError({ statusCode: 500, statusMessage: 'video is undefined' })
+    if (!bufferData) throw createError({ statusCode: 404, statusMessage: `video ${slug} not found` })
 
     const bufferSize = metaData.size as number
     const { chunkStart, chunkEnd, chunkSize } = calculateChunkRange(range, bufferSize)
@@ -60,6 +60,10 @@ export default defineEventHandler(async (event) => {
     return sendStream(event, bufferStream)
   } catch (error) {
     console.error('Route video GET', error)
+
+    if (error instanceof Error && 'statusCode' in error) {
+      throw error
+    }
 
     throw createError({
       statusCode: 500,
