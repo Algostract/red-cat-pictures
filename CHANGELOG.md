@@ -1,5 +1,21 @@
 # red-cat-pictures
 
+## v2.5.4
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.3...v2.5.4)
+
+### 🩹 Fixes
+
+- Correct syntax in CI condition for job execution ([a5cffdc](https://github.com/Algostract/red-cat-pictures/commit/a5cffdc))
+
+### 💅 Refactors
+
+- Ci/cd pipeline modified, nuxt icon module migrated ([ab998ed](https://github.com/Algostract/red-cat-pictures/commit/ab998ed))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## 2.5.3
 
 ### Patch Changes
