@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.5.5
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.4...v2.5.5)
+
+### 🩹 Fixes
+
+- Update CI conditions and fixed NuxtIcon sizing issue, photo name slugify ([2a2d122](https://github.com/Algostract/red-cat-pictures/commit/2a2d122))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.5.4
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.3...v2.5.4)
