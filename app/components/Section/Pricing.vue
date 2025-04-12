@@ -64,7 +64,7 @@ const activeTab = ref<Service>('photo')
           <CardPrice :active="index === activeSlideIndex" :title="title" :price="price" :unit="unit" :points="points" @contact="onContact(true)" />
         </SplideSlide>
       </SplideTrack>
-      <div class="splide__arrows absolute left-0 right-0 top-1/2 flex justify-between text-[24px] text-white">
+      <div class="splide__arrows absolute left-0 right-0 top-1/2 flex justify-between fill-white text-[24px]">
         <button class="splide__arrow splide__arrow--prev arrow relative">
           <NuxtIcon name="local:chevron-bold" class="relative z-10" />
         </button>

@@ -7,14 +7,19 @@ definePageMeta({
 
 const route = useRoute()
 
-const activePhotoName = computed<string>(() => route.params.slug![0]!)
+const activePhotoName = computed<string>(() => slugify(route.params.slug![0]!))
+
 const activePhoto = computed(() => photos.value.find(({ name }) => name === activePhotoName.value))
 
 if (!activePhoto.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const title = `${activePhotoName.value}`
+if (activePhotoName.value !== route.params.slug![0]!) {
+  await navigateTo('/photo/' + activePhotoName.value, { redirectCode: 301 })
+}
+
+const title = `${activePhotoName.value.charAt(0).toUpperCase() + activePhotoName.value.slice(1)}`
 const description = `${activePhoto.value.description}`
 const url = 'https://redcatpictures.com'
 const imageUrl = `https://ucarecdn.com/${activePhoto.value.id}/-/format/auto/-/scale_crop/${Math.round(720 * activePhoto.value.aspectRatio)}x720/center`
