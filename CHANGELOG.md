@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.5.8
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.7...v2.5.8)
+
+### 🤖 CI
+
+- Comment out DockerHub image reference in deploy workflow ([e0124fd](https://github.com/Algostract/red-cat-pictures/commit/e0124fd))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.5.7
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.5...v2.5.7)
