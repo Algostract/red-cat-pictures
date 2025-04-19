@@ -1,5 +1,29 @@
 # red-cat-pictures
 
+## v2.5.6
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.5...v2.5.6)
+
+### 🩹 Fixes
+
+- Update CI conditions and fixed NuxtIcon sizing issue, photo name slugify ([2a2d122](https://github.com/Algostract/red-cat-pictures/commit/2a2d122))
+
+### 🎨 Styles
+
+- Fixed icon colors, padding margin standardized ([a4c96de](https://github.com/Algostract/red-cat-pictures/commit/a4c96de))
+- Update color palette in tailwind configuration, update loading indicator color ([3de977a](https://github.com/Algostract/red-cat-pictures/commit/3de977a))
+
+### 🤖 CI
+
+- **release:** Update version ([1b3320d](https://github.com/Algostract/red-cat-pictures/commit/1b3320d))
+- Enhance workflow readability with emoji labels and update pnpm setup ([1aca945](https://github.com/Algostract/red-cat-pictures/commit/1aca945))
+- Remove version specification for pnpm setup in workflows ([af8bdcc](https://github.com/Algostract/red-cat-pictures/commit/af8bdcc))
+- Remove production flag from pnpm install command ([912bf94](https://github.com/Algostract/red-cat-pictures/commit/912bf94))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.5.5
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.4...v2.5.5)
