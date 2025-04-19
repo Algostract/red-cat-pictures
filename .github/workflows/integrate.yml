@@ -37,7 +37,7 @@ jobs:
           cache: 'pnpm'
 
       - name: 📦 Install Dependencies
-        run: pnpm install --frozen-lockfile --production
+        run: pnpm install --frozen-lockfile
 
       - name: ⚙️ Build Artifacts
         run: pnpm build
