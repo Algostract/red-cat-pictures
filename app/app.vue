@@ -52,7 +52,7 @@ useSchemaOrg([
   <NuxtRouteAnnouncer />
   <NuxtPwaManifest />
   <NuxtPwaAssets />
-  <NuxtLoadingIndicator />
+  <NuxtLoadingIndicator color="#CD2D2D" />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>

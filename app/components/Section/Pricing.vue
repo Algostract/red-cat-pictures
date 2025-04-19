@@ -54,7 +54,7 @@ const activeTab = ref<Service>('photo')
 </script>
 
 <template>
-  <section id="pricing" class="relative -left-4 w-screen md:left-0 md:w-full">
+  <section id="pricing" class="relative -left-4 mx-auto w-screen md:left-0 md:w-[calc(100vw-8rem)]">
     <div class="mx-auto mb-4 flex w-fit gap-4 md:mb-12">
       <ButtonLabel v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="title === activeTab" @click="activeTab = title" />
     </div>
@@ -83,6 +83,6 @@ const activeTab = ref<Service>('photo')
 }
 
 #pricing .arrow {
-  @apply bg-transparent before:absolute before:left-0 before:top-1/2 before:block before:size-16 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-md before:bg-primary-500 before:transition-colors before:duration-500 before:ease-out before:content-[''] active:before:bg-primary-400 disabled:before:bg-light-500 dark:disabled:before:bg-dark-600;
+  @apply bg-transparent before:absolute before:left-0 before:top-1/2 before:block before:size-16 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-md before:bg-primary-500 before:transition-colors before:duration-500 before:ease-out before:content-[''] active:before:bg-primary-400 disabled:before:bg-light-600 dark:disabled:before:bg-dark-600;
 }
 </style>
