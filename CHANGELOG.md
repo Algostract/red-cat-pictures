@@ -2,19 +2,7 @@
 
 ## v2.5.7
 
-[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.6...v2.5.7)
-
-### 🤖 CI
-
-- Comment out DockerHub login step in deploy workflow ([a28ece5](https://github.com/Algostract/red-cat-pictures/commit/a28ece5))
-
-### ❤️ Contributors
-
-- Shba007 ([@shba007](https://github.com/shba007))
-
-## v2.5.6
-
-[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.5...v2.5.6)
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.5...v2.5.7)
 
 ### 🩹 Fixes
 
@@ -24,6 +12,7 @@
 
 - Fixed icon colors, padding margin standardized ([a4c96de](https://github.com/Algostract/red-cat-pictures/commit/a4c96de))
 - Update color palette in tailwind configuration, update loading indicator color ([3de977a](https://github.com/Algostract/red-cat-pictures/commit/3de977a))
+- Comment out DockerHub login step in deploy workflow ([a28ece5](https://github.com/Algostract/red-cat-pictures/commit/a28ece5))
 
 ### 🤖 CI
 
