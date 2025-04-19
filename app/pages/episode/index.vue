@@ -20,8 +20,8 @@ useSeoMeta({
 </script>
 
 <template>
-  <section class="mb-8 flex-1">
-    <ul v-if="episodes?.length" class="mx-auto mt-24 grid w-fit max-w-[76rem] grid-cols-1 justify-center gap-10 sm:grid-cols-2 lg:grid-cols-3">
+  <section class="my-10 flex-1">
+    <ul v-if="episodes?.length" class="mx-auto mt-20 grid w-fit max-w-[76rem] grid-cols-1 justify-center gap-10 sm:grid-cols-2 lg:grid-cols-3">
       <li v-for="{ id, cover, title, description, url, createdAt } in episodes" :key="id">
         <CardEpisode :cover="cover" :title="title" :description="description" :url="url" :created-at="createdAt" />
       </li>

@@ -12,12 +12,17 @@ function onContact(action: boolean) {
     gaProxy.gtag('event', 'contact_close')
   }
 }
+
+const route = useRoute()
+
+const hasFloatingActionBar = computed(() => route.path === '/')
+const hasCoverImage = computed(() => route.path === '/' || route.path.includes('/episode/'))
 </script>
 
 <template>
   <div>
-    <AppHeader />
-    <main class="relative mx-auto mb-20 flex min-h-screen max-w-[90rem] flex-col gap-4 overflow-hidden p-4 !pb-0 md:mb-8 lg:p-16">
+    <AppHeader :is-light-mode="hasCoverImage" />
+    <main class="relative mx-auto flex min-h-screen max-w-[90rem] flex-col gap-4 overflow-hidden px-4 md:mb-8" :class="hasFloatingActionBar ? 'mb-20' : 'mb-2'">
       <slot />
       <ModalContact :is-open="isModelContactOpen" @close="onContact(false)" />
       <AppFooter @contact="onContact(true)" />

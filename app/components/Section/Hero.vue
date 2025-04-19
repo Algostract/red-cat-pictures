@@ -9,9 +9,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <section
-    id="hero"
-    class="grid h-[calc(100vh-1rem)] grid-cols-3 grid-rows-[repeat(3,min-content)] items-center gap-y-[4.5rem] overflow-hidden pt-24 text-white md:pt-32 lg:h-[calc(100vh-4rem)] lg:grid-rows-1 lg:pt-0">
+  <section id="hero" class="grid h-screen grid-cols-3 grid-rows-[repeat(3,min-content)] items-center gap-y-[4.5rem] overflow-hidden pt-24 text-white md:px-16 md:pt-32 lg:grid-rows-1 lg:pt-0">
     <NuxtVideo
       v-if="video"
       class="absolute left-1/2 top-0 col-span-full col-start-1 row-span-full row-start-1 h-screen w-screen -translate-x-1/2 object-cover"

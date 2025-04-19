@@ -94,8 +94,11 @@ function isLandscapeOriented(deviceOrientation: string, videoOrientation: string
       <StatusBar :total="videos.length" :active-index="activeVideoIndex" :active-percent="activeVideoProgress" class="absolute left-1/2 top-4 z-0 -translate-x-1/2" />
       <ButtonSlide class="absolute bottom-20 left-1/2 z-0 -translate-x-1/2 md:bottom-12 md:left-16 md:translate-x-0" @click="(value) => updateVideoIndex(value === 'left' ? -1 : 1)" />
       <NuxtIcon
-        :name="`local:speaker-${isMuted ? 'muted' : 'unmuted'}`"
+        v-for="iconName in ['muted', 'unmuted']"
+        :key="iconName"
+        :name="`local:speaker-${iconName}`"
         class="absolute right-4 top-16 z-10 rounded-full bg-white fill-black p-1 text-[20px] md:right-16 md:text-[28px]"
+        :class="{ hidden: isMuted ? iconName == 'unmuted' : iconName == 'muted' }"
         @click="toggleMute" />
     </div>
   </section>

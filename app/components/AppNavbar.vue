@@ -49,7 +49,7 @@ const isAnimate = ref(false)
       </div>
     </Transition>
   </div>
-  <ul class="hidden translate-y-1 justify-center gap-8 self-start whitespace-nowrap md:flex">
+  <ul class="hidden justify-center gap-8 whitespace-nowrap md:flex">
     <li v-for="{ id, url, title } of urls" :key="id">
       <NuxtLink :to="url" class="p-2" active-class="" @click="onNavigate(id)">{{ title }} </NuxtLink>
     </li>
