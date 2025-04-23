@@ -1,5 +1,19 @@
 # red-cat-pictures
 
+## v2.5.9
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.8...v2.5.9)
+
+### 💅 Refactors
+
+- Runtime change from node to bun, photo page header added, added view transition ([c81c2fe](https://github.com/Algostract/red-cat-pictures/commit/c81c2fe))
+- Update workflows to use Bun instead of pnpm for setup and dependency management ([cc520f0](https://github.com/Algostract/red-cat-pictures/commit/cc520f0))
+- Replace pnpm with Bun for linting and formatting in husky hooks ([d965d10](https://github.com/Algostract/red-cat-pictures/commit/d965d10))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.5.8
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.5...v2.5.8)
