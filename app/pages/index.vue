@@ -38,14 +38,16 @@ function onContact(action: boolean) {
     gaProxy.gtag('event', 'contact_close')
   }
 }
+
+const activePhotoName = useState()
 </script>
 
 <template>
   <div class="flex flex-col gap-4">
     <ButtonFloatingAction :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
     <SectionHero :video="heroVideo" @contact="onContact(true)" />
-    <SectionGallery :photos="photos" />
-    <SectionFeaturedPhoto :photos="photos" :active-category="activeCategory" />
+    <SectionGallery :photos="photos" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
+    <SectionFeaturedPhoto :photos="photos" :active-category="activeCategory" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
     <SectionFeaturedVideo :videos="featuredVideos" :active-category="activeCategory" />
     <SectionPricing :active-category="activeCategory" />
     <ModalContact :is-open="isModelContactOpen" @close="onContact(false)" />

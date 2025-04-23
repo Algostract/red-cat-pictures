@@ -5,13 +5,21 @@ interface NotionProjectClient {
   created_time: Date
   last_edited_time: Date
   cover: null
-  icon: {
-    type: string
-    file: {
-      url: string
-      expiry_time: string
-    }
-  } | null
+  icon:
+    | {
+        type: 'file'
+        file: {
+          url: string
+          expiry_time: string
+        }
+      }
+    | {
+        type: 'external'
+        external: {
+          url: string
+        }
+      }
+    | null
   properties: {
     Name: {
       title: {
@@ -70,13 +78,21 @@ interface NotionProject {
   created_time: Date
   last_edited_time: Date
   cover: null
-  icon: {
-    type: string
-    file: {
-      url: string
-      expiry_time: string
-    }
-  } | null
+  icon:
+    | {
+        type: 'file'
+        file: {
+          url: string
+          expiry_time: string
+        }
+      }
+    | {
+        type: 'external'
+        external: {
+          url: string
+        }
+      }
+    | null
   properties: {
     Name: {
       title: {
@@ -125,13 +141,10 @@ export default defineCachedEventHandler<Promise<ProjectClient[]>>(
           projectClients.map(async ({ id, icon, properties }): Promise<ProjectClient | null> => {
             const name = properties.Name.title.map(({ plain_text }) => plain_text ?? '').join('') as string
 
-            if (!icon?.file) return null
+            if (icon?.type !== 'external') return null
 
             const projects = await Promise.all(
               properties.Project.relation.map(async () => {
-                // const data = await notion.databases.query({
-                //   database_id: id,
-                // })
                 const data = { results: { properties: { Name: { title: [{ plain_text: '' }] } } } }
 
                 const project = data.results as unknown as NotionProject
@@ -139,7 +152,7 @@ export default defineCachedEventHandler<Promise<ProjectClient[]>>(
               })
             )
 
-            return { id, name, projects, website: properties.Website.url, logo: icon?.file.url }
+            return { id, name, projects, website: properties.Website.url, logo: icon.external.url }
           })
         )
       ).filter((item) => item !== null)

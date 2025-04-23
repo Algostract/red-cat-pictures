@@ -5,11 +5,16 @@ defineProps<{
   createdAt: string
   description: string
   url: string
+  isActive: boolean
+}>()
+
+const emit = defineEmits<{
+  active: []
 }>()
 </script>
 
 <template>
-  <NuxtLink :href="url" class="flex aspect-[32/28] max-w-[318px] flex-col overflow-hidden border border-primary-500 bg-light-500 dark:bg-dark-500">
+  <NuxtLink :href="url" class="flex aspect-[32/28] max-w-[318px] flex-col overflow-hidden border border-primary-500 bg-light-500 dark:bg-dark-500" @click="emit('active')">
     <NuxtImg
       provider="uploadcare"
       :src="cover ?? ''"
@@ -20,7 +25,8 @@ defineProps<{
       format="auto"
       loading="lazy"
       quality="smart"
-      class="aspect-[13/7] h-full w-full overflow-hidden rounded-sm bg-light-600 object-cover dark:bg-dark-500" />
+      class="cover-img aspect-[13/7] h-full w-full overflow-hidden rounded-sm bg-light-600 object-cover dark:bg-dark-500"
+      :class="{ active: isActive }" />
     <div class="p-2 md:px-4">
       <!-- <FormattedDate date={time} class="uppercase text-sm opacity-60" /> -->
       <h2 class="my-1.5 line-clamp-2 text-lg font-semi-bold">{{ title }}</h2>
@@ -28,3 +34,9 @@ defineProps<{
     </div>
   </NuxtLink>
 </template>
+
+<style scoped>
+.cover-img.active {
+  view-transition-name: selected-episode;
+}
+</style>

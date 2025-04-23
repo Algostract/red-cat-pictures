@@ -46,7 +46,7 @@ useSchemaOrg([
       :height="Math.round(1280 / (16 / 9))"
       fit="cover"
       format="auto"
-      class="absolute left-0 aspect-[5/3] max-h-[20rem] w-screen object-cover" />
+      class="cover-img absolute left-0 aspect-[5/3] max-h-[20rem] w-screen object-cover" />
     <div class="invisible -left-4 aspect-[5/3] max-h-[20rem] w-screen" />
     <div class="content relative mx-auto max-w-4xl leading-relaxed">
       <h1 class="mt-4">{{ episode.title }}</h1>
@@ -61,6 +61,12 @@ useSchemaOrg([
     </div>
   </article>
 </template>
+
+<style scoped>
+.cover-img {
+  view-transition-name: selected-episode;
+}
+</style>
 
 <style lang="css">
 .content h1 {

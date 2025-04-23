@@ -4,6 +4,9 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
+  experimental: {
+    viewTransition: true,
+  },
   devtools: { enabled: true },
   modules: [
     '@nuxt/eslint',
@@ -31,10 +34,16 @@ export default defineNuxtConfig({
     '/video/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/blogs/**': { redirect: { to: '/episode/**', statusCode: 301 } },
     '/blog/**': { redirect: { to: '/episode/**', statusCode: 301 } },
-    '/episode/sweet-stories-in-the-spotlight-the-new-sitala-mishtanna-bhandar-ad-shoot_1a515a2f-8cf0-80d6-8a8c-ea590bb15204': {
-      redirect: { to: '/episode/sweet-photography-in-kolkata-the-new-sitala-mishtanna-bhandar-ad-shoot_1a515a2f-8cf0-80d6-8a8c-ea590bb15204', statusCode: 301 },
-    },
     '/episode/metal-poster-shoot-unveiling-vfx-magic-for-pixelplate_1a615a2f-8cf0-807c-aaba-d1c77fa9b621': { redirect: { to: '/episode/', statusCode: 301 } },
+    '/episode/sweet-stories-in-the-spotlight-the-new-sitala-mishtanna-bhandar-ad-shoot_1a515a2f-8cf0-80d6-8a8c-ea590bb15204': {
+      redirect: { to: '/episode/ad-film-product-videography-in-kolkata-capturing-sweet-craftsmanship-for-new-sitala-mishtanna-bhandar_1a515a2f-8cf0-80d6-8a8c-ea590bb15204', statusCode: 301 },
+    },
+    '/episode/sweet-photography-in-kolkata-the-new-sitala-mishtanna-bhandar-ad-shoot_1a515a2f-8cf0-80d6-8a8c-ea590bb15204': {
+      redirect: { to: '/episode/ad-film-product-videography-in-kolkata-capturing-sweet-craftsmanship-for-new-sitala-mishtanna-bhandar_1a515a2f-8cf0-80d6-8a8c-ea590bb15204', statusCode: 301 },
+    },
+    '/episode/factory-video-shoot-in-kolkata-capturing-the-sweet-art-of-culinary-craftsmanship-for-new-sitala-mishtanna-bhandar_1ab15a2f-8cf0-80be-87bc-cf50582fa2ea': {
+      redirect: { to: '/episode/factory-videography-shoot-in-kolkata-cinematic-storytelling-for-new-sitala-mishtanna-bhandar_1ab15a2f-8cf0-80be-87bc-cf50582fa2ea', statusCode: 301 },
+    },
     '/episode/**': { ssr: true },
   },
   runtimeConfig: {

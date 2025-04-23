@@ -17,13 +17,15 @@ useSeoMeta({
   twitterImage: imageUrl,
   ogUrl: `${url}/episode`,
 })
+
+const activeEpisode = useState()
 </script>
 
 <template>
   <section class="my-10 flex-1">
     <ul v-if="episodes?.length" class="mx-auto mt-20 grid w-fit max-w-[76rem] grid-cols-1 justify-center gap-10 sm:grid-cols-2 lg:grid-cols-3">
       <li v-for="{ id, cover, title, description, url, createdAt } in episodes" :key="id">
-        <CardEpisode :cover="cover" :title="title" :description="description" :url="url" :created-at="createdAt" />
+        <CardEpisode :id="id" :cover="cover" :title="title" :description="description" :url="url" :created-at="createdAt" :is-active="activeEpisode === id" @active="activeEpisode = id" />
       </li>
     </ul>
     <div v-else class="mx-auto h-full w-fit max-w-[76rem] items-center justify-center">No Episode Published Yet!</div>

@@ -1,6 +1,11 @@
 <script setup lang="ts">
 const props = defineProps<{
   photos: Photo[]
+  activePhoto?: string
+}>()
+
+const emit = defineEmits<{
+  active: [value: string]
 }>()
 
 const allUniquePhotos = usePhoto(props.photos, { section: 'gallery' })
@@ -11,8 +16,6 @@ const allPhotos = computed(() => {
 
   return allUniquePhotos.value.concat(extra)
 })
-
-const activePhotoName = useState()
 
 const slideCounts = ['3', '4', '6'] as const
 
@@ -55,7 +58,7 @@ const { height: sliderHeight } = useElementSize(slider)
               'hidden lg:flex': slideCount == '6',
             }">
             <template v-for="dupIndex in [1, 2]" :key="dupIndex">
-              <NuxtLink v-for="{ id, name, description } in slideImages" :key="`${dupIndex}-${id}`" :to="`/photo/${name}`" class="" @click="activePhotoName = name">
+              <NuxtLink v-for="{ id, name, description } in slideImages" :key="`${dupIndex}-${id}`" :to="`/photo/${name}`" @click="emit('active', `${dupIndex}-${name}`)">
                 <NuxtImg
                   provider="uploadcare"
                   :src="id"
@@ -66,7 +69,8 @@ const { height: sliderHeight } = useElementSize(slider)
                   format="auto"
                   loading="lazy"
                   quality="smart"
-                  class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500" />
+                  class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500"
+                  :class="{ active: activePhoto === `${dupIndex}-${name}` }" />
               </NuxtLink>
             </template>
           </div>
@@ -81,6 +85,10 @@ const { height: sliderHeight } = useElementSize(slider)
 </template>
 
 <style scoped>
+img.active {
+  view-transition-name: selected-photo;
+}
+
 .overlay {
   @apply after:fixed after:left-0 after:top-0 after:z-20 after:h-screen after:w-screen after:bg-gradient-to-b after:from-black/40 after:from-[3%] after:via-transparent after:via-20% after:to-black/40 after:to-[97%] after:content-[''];
 }

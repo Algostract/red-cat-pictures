@@ -2,6 +2,11 @@
 const props = defineProps<{
   photos: Photo[]
   activeCategory: Category
+  activePhoto?: string
+}>()
+
+const emit = defineEmits<{
+  active: [value: string]
 }>()
 
 function objectToClass({ sm, md }: { sm: Position; md: Position }, size: string) {
@@ -84,15 +89,13 @@ const photos = computed<GalleryPhoto[]>(() =>
     }
   })
 )
-
-const activeImageName = useState()
 </script>
 
 <template>
   <section id="featured-images" class="relative h-fit">
     <SectionLabel icon="photo" title="Featured Images" />
     <div class="relative grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3">
-      <NuxtLink v-for="{ name, id, description, dynamicClass, aspectRatio } in photos" :key="id" :to="`/photo/${name}`" :class="dynamicClass" class="size-full" @click="activeImageName = name">
+      <NuxtLink v-for="{ name, id, description, dynamicClass, aspectRatio } in photos" :key="id" :to="`/photo/${name}`" :class="dynamicClass" class="size-full" @click="emit('active', name)">
         <NuxtImg
           provider="uploadcare"
           :src="id"
@@ -103,11 +106,18 @@ const activeImageName = useState()
           format="auto"
           loading="lazy"
           :query="{ preview: `640x${Math.round(640 / aspectRatio)}` }"
-          class="size-full overflow-hidden rounded-sm bg-light-600 dark:bg-dark-500" />
+          class="size-full overflow-hidden rounded-sm bg-light-600 dark:bg-dark-500"
+          :class="{ active: activePhoto === name }" />
       </NuxtLink>
     </div>
   </section>
 </template>
+
+<style scoped>
+img.active {
+  view-transition-name: selected-photo;
+}
+</style>
 
 <style>
 .img-dynamic {

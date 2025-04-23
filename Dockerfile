@@ -1,21 +1,18 @@
-FROM node:lts-alpine AS builder
+FROM oven/bun:1-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json bun.lock ./
 
-RUN npm install -g pnpm
+ENV NITRO_PRESET=bun
 
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN bun install
 
 COPY . .
 
-RUN pnpm build
+RUN bun run build
 
-FROM node:lts-alpine AS runner
+FROM oven/bun:1-alpine AS runner
 
 ARG VERSION
 ARG BUILD_TIME
@@ -31,4 +28,4 @@ ENV NUXT_APP_VERSION=$VERSION
 
 EXPOSE 3000
 
-ENTRYPOINT ["node", ".output/server/index.mjs"]
+ENTRYPOINT ["bun", ".output/server/index.mjs"]
