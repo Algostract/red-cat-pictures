@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.6.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.9...v2.6.0)
+
+### 🚀 Enhancements
+
+- Implement web push notifications and subscription management ([ae1ae70](https://github.com/Algostract/red-cat-pictures/commit/ae1ae70))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.5.9
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.8...v2.5.9)
