@@ -14,7 +14,7 @@ renderer.link = ({ href, title, tokens }) => {
 
   const parsedText = marked.parseInline(text, { async: false })
 
-  return `<a href="${href}" target="_blank" rel="noopener"/>${title || parsedText}</a/>`
+  return `<a href="${href}?utm_source=redcatpictures.com" target="_blank" rel="noopener"/>${title || parsedText}</a/>`
 }
 
 marked.use({ renderer })
@@ -26,6 +26,10 @@ const hoveredLink = ref<{
   top: number
   left: number
 } | null>(null)
+
+watch(hoveredLink, (value) => {
+  console.log('hoveredLink', value)
+})
 </script>
 
 <template>

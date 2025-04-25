@@ -34,7 +34,12 @@ export default defineNuxtConfig({
     '/video/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/blogs/**': { redirect: { to: '/episode/**', statusCode: 301 } },
     '/blog/**': { redirect: { to: '/episode/**', statusCode: 301 } },
-    '/episode/metal-poster-shoot-unveiling-vfx-magic-for-pixelplate_1a615a2f-8cf0-807c-aaba-d1c77fa9b621': { redirect: { to: '/episode/', statusCode: 301 } },
+    '/episode/brewing-creativity-the-valley-strong-tea-photoshoot-experience_1a515a2f-8cf0-803d-ae7c-f294f1fbab74': {
+      redirect: { to: '/episode/tea-product-videography-from-darjeeling-brewing-creativity-for-valley-strong-tea_1a515a2f-8cf0-803d-ae7c-f294f1fbab74', statusCode: 301 },
+    },
+    '/episode/metal-poster-shoot-unveiling-vfx-magic-for-pixelplate_1a615a2f-8cf0-807c-aaba-d1c77fa9b621': {
+      redirect: { to: '/episode/metal-poster-photography-videography-in-kolkata-unveiling-vfx-magic-for-pixelplate_1a615a2f-8cf0-807c-aaba-d1c77fa9b621', statusCode: 301 },
+    },
     '/episode/sweet-stories-in-the-spotlight-the-new-sitala-mishtanna-bhandar-ad-shoot_1a515a2f-8cf0-80d6-8a8c-ea590bb15204': {
       redirect: { to: '/episode/ad-film-product-videography-in-kolkata-capturing-sweet-craftsmanship-for-new-sitala-mishtanna-bhandar_1a515a2f-8cf0-80d6-8a8c-ea590bb15204', statusCode: 301 },
     },
@@ -56,12 +61,16 @@ export default defineNuxtConfig({
           id: '',
         },
       },
+      vapidKey: '',
     },
     private: {
       rootDir: '',
       notionApiKey: '',
       notionClientDbId: '',
       notionContentDbId: '',
+      vapidKey: '',
+      vapidSubject: '',
+      serverValidationKey: '',
     },
   },
   nitro: {
@@ -71,6 +80,12 @@ export default defineNuxtConfig({
         driver: 'fs',
         base: './static',
       },
+    },
+    experimental: {
+      tasks: true,
+    },
+    scheduledTasks: {
+      '* * * * *': ['watch:episode'],
     },
   },
   app: {
@@ -284,6 +299,7 @@ export default defineNuxtConfig({
         },
       ],
       navigateFallback: undefined,
+      importScripts: ['/push-sw.js'],
     },
     client: {
       installPrompt: true,

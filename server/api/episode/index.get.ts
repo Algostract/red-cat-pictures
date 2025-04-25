@@ -24,7 +24,7 @@ export default defineCachedEventHandler<Promise<Episode[]>>(
 
       const results = await Promise.all(
         episodes.map(async ({ id, properties }) => {
-          if (properties['Content type'].select?.name !== 'Blog article') return null
+          if (properties['Content type'].select?.name !== 'Episode') return null
           if (properties.Status.status.name !== 'Published') return null
 
           const episode = (await notion.pages.retrieve({ page_id: id })) as unknown as NotionEpisode

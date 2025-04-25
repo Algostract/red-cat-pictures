@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useRuntimeConfig } from '#app'
+
 const title = `RED CAT PICTURES | Elevate Your Brand Image`
 const description = `Nurture the essence of your product with our photography & videography services in kolkata`
 const url = 'https://redcatpictures.com'
@@ -46,6 +48,37 @@ useSchemaOrg([
     ],
   }),
 ])
+
+useWebNotification()
+
+async function getExistingSubscription() {
+  const config = useRuntimeConfig()
+  const vapidKey = config.public.vapidKey
+
+  const registration = await navigator.serviceWorker.ready
+  let subscription = await registration.pushManager.getSubscription()
+
+  if (!subscription) {
+    subscription = await registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: vapidKey,
+    })
+    await $fetch('/api/notification/subscription', {
+      method: 'POST',
+      body: subscription.toJSON(),
+    })
+  } else {
+    await $fetch('/api/notification/subscription', {
+      method: 'POST',
+      body: subscription.toJSON(),
+    })
+  }
+  return subscription
+}
+
+onMounted(async () => {
+  await getExistingSubscription()
+})
 </script>
 
 <template>

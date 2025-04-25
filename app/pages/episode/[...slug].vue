@@ -68,21 +68,21 @@ useSchemaOrg([
 }
 </style>
 
-<style lang="css">
+<style>
 .content h1 {
   @apply my-4 text-xl font-semi-bold md:text-3xl;
 }
 
 .content h2 {
-  @apply my-3 text-2xl font-semi-bold;
+  @apply my-3 text-lg font-semi-bold md:text-2xl;
 }
 
 .content h3 {
-  @apply my-2 text-xl font-semi-bold text-alert-600;
+  @apply my-2 text-base font-semi-bold text-alert-600 md:text-xl;
 }
 
 .content h4 {
-  @apply my-1 text-lg font-semi-bold;
+  @apply my-1 text-sm font-semi-bold md:text-lg;
 }
 
 .content p {

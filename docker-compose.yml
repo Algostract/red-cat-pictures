@@ -2,6 +2,7 @@ name: 'red-cat-pictures'
 services:
   app:
     image: 'ghcr.io/algostract/red-cat-pictures:latest'
+    # build: .
     restart: on-failure:3
     # runtime: nvidia # Enable NVIDIA GPU support
     # deploy:
@@ -15,6 +16,9 @@ services:
       - type: bind
         source: ./static
         target: /app/static
+      - type: bind
+        source: ./.data
+        target: /app/.data
     env_file:
       - .env.prod
     ports:

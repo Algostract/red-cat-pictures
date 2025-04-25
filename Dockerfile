@@ -6,7 +6,7 @@ COPY package.json bun.lock ./
 
 ENV NITRO_PRESET=bun
 
-RUN bun install
+RUN bun install --frozen-lockfile
 
 COPY . .
 

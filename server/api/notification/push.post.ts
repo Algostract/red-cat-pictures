@@ -1,0 +1,63 @@
+import webpush from 'web-push'
+
+interface PushNotification {
+  title: string
+  body: string
+  url: string
+  icon?: string
+}
+
+export async function pushNotification(payload: PushNotification, subscriptions: PushSubscription[]) {
+  try {
+    const config = useRuntimeConfig()
+
+    webpush.setVapidDetails(config.private.vapidSubject, config.public.vapidKey, config.private.vapidKey)
+
+    await Promise.all(subscriptions.map((sub) => webpush.sendNotification(sub, JSON.stringify(payload))))
+
+    return true
+  } catch (error) {
+    console.error('function pushNotification', error)
+    return false
+  }
+}
+
+function extractBearerToken(headerValue: string | undefined) {
+  if (typeof headerValue !== 'string') return null
+  const parts = headerValue.split(' ') // split on the space :contentReference[oaicite:0]{index=0}
+  if (parts.length !== 2 || parts[0] !== 'Bearer') return null
+  return parts[1] // the token is the second element
+}
+
+export default defineEventHandler(async (event) => {
+  try {
+    const config = useRuntimeConfig()
+    const authHeader = getRequestHeader(event, 'authorization')
+
+    if (extractBearerToken(authHeader) !== config.private.vapidKey) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: "Server Validation Key does't match",
+      })
+    }
+
+    const body = await readBody<PushNotification>(event)
+    const notificationStorage = useStorage<PushSubscription>('data:notification:subscription')
+
+    const subscriptions = (await Promise.all((await notificationStorage.getKeys()).map((key) => notificationStorage.getItem(key)))).filter((item) => item !== null)
+    await pushNotification(body, subscriptions)
+
+    return { success: true }
+  } catch (error: unknown) {
+    if (error instanceof Error && 'statusCode' in error) {
+      throw error
+    }
+
+    console.error('API notification/push GET', error)
+
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Some Unknown Error Found',
+    })
+  }
+})

@@ -102,7 +102,7 @@ export interface NotionEpisode {
     }
     'Content type': {
       select: {
-        name: 'Blog article'
+        name: 'Episode' | 'Blog'
       }
     }
     'Publish date': {
