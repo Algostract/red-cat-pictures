@@ -55,7 +55,7 @@ export default defineCachedEventHandler<Promise<EpisodeDetails>>(
       }
 
       const episodeContent = await convertNotionPageToMarkdown(n2m, episode.id)
-      const id = `${slugify(episode.properties['Content name'].title[0]?.plain_text ?? '')}_${episode.id}`
+      const id = episode.id
       const title = episode.properties['Content name'].title.map(({ plain_text }) => plain_text ?? '').join('') as string
 
       return {

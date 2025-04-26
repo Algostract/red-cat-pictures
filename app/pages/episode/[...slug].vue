@@ -1,10 +1,14 @@
 <script setup lang="ts">
 const route = useRoute()
 const slug = route.params.slug!.toString()
-const { data: episode } = await useFetch(`/api/episode/${slug}`)
+const { data: episode } = await useFetch<EpisodeDetails>(`/api/episode/${slug}`)
 
 if (!episode.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+}
+
+if (episode.value.url !== '/episode/' + slug) {
+  await navigateTo(episode.value.url, { redirectCode: 301 })
 }
 
 const title = `${episode.value.title}`

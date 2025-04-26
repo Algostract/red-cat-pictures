@@ -1,21 +1,21 @@
 <script setup lang="ts">
-const { data: photos } = await useFetch('/api/photo', { default: () => [] })
-
 definePageMeta({
   layout: false,
 })
 
 const route = useRoute()
-
-const activePhotoName = computed<string>(() => slugify(route.params.slug![0]!))
+const slug = route.params.slug!.toString()
+const { data: photos } = await useFetch('/api/photo', { default: () => [] })
 
 const activePhoto = computed(() => photos.value.find(({ name }) => name === activePhotoName.value))
+
+const activePhotoName = computed<string>(() => slugify(slug))
 
 if (!activePhoto.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-if (activePhotoName.value !== route.params.slug![0]!) {
+if (activePhotoName.value !== slug) {
   await navigateTo('/photo/' + activePhotoName.value, { redirectCode: 301 })
 }
 
