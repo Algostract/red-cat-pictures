@@ -1,5 +1,29 @@
 # red-cat-pictures
 
+## v2.7.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.6.0...v2.7.0)
+
+### 🚀 Enhancements
+
+- Add blog and refactor episode to content api ([b854b38](https://github.com/Algostract/red-cat-pictures/commit/b854b38))
+
+### 🩹 Fixes
+
+- Update notification title format for new content releases ([1f4f5d8](https://github.com/Algostract/red-cat-pictures/commit/1f4f5d8))
+
+### 💅 Refactors
+
+- Improve episode redirection ([8a9c956](https://github.com/Algostract/red-cat-pictures/commit/8a9c956))
+
+### 🎨 Styles
+
+- Fixed content page brightness issue ([01f9d52](https://github.com/Algostract/red-cat-pictures/commit/01f9d52))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.6.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.5.9...v2.6.0)
