@@ -20,7 +20,7 @@ export default defineTask({
 
       newContents.forEach(async ({ id, title, description, url }) => {
         console.log('Processing new content →', title)
-        await pushNotification({ title: 'New Episode Release | ' + title, body: `${description.split('. ')[0]}...`, url }, subscriptions)
+        await pushNotification({ title: `New ${contentType} release | ${title}`, body: `${description.split('. ')[0]}...`, url }, subscriptions)
         await contentStorage.setItem(id, title)
       })
     }
