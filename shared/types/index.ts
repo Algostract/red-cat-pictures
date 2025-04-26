@@ -80,7 +80,7 @@ export interface ServicePrice {
 
 export type Price = Record<Category, Record<Service, ServicePrice[]>>
 
-export interface NotionEpisode {
+export interface NotionContent {
   id: string
   created_time: string
   last_edited_time: string
@@ -118,7 +118,7 @@ export interface NotionEpisode {
   }
 }
 
-export interface Episode {
+export interface Content {
   id: string
   title: string
   cover: string
@@ -129,6 +129,6 @@ export interface Episode {
   url: string
 }
 
-export interface EpisodeDetails extends Episode {
+export interface ContentDetails extends Content {
   content: string
 }

@@ -71,7 +71,7 @@ export default defineNuxtConfig({
       tasks: true,
     },
     scheduledTasks: {
-      '* * * * *': ['watch:episode'],
+      '* * * * *': ['watch:content'],
     },
   },
   app: {

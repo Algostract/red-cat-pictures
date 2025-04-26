@@ -1,5 +1,6 @@
 import { Client } from '@notionhq/client'
 import { NotionToMarkdown } from 'notion-to-md'
+import { z } from 'zod'
 
 let notion: Client
 let n2m: NotionToMarkdown
@@ -26,15 +27,21 @@ export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId:
   }
 }
 
-export default defineCachedEventHandler<Promise<EpisodeDetails>>(
+export default defineCachedEventHandler<Promise<ContentDetails>>(
   async (event) => {
     try {
       const config = useRuntimeConfig()
-      const slug = getRouterParam(event, 'slug')!.toString().replace(/,$/, '')
-
       if (!config.private.notionApiKey) {
         throw new Error('Notion API Key Not Found')
       }
+
+      const { content: contentType, slug } = await getValidatedRouterParams(
+        event,
+        z.object({
+          content: z.enum(['episode', 'blog']),
+          slug: z.string().min(1),
+        }).parse
+      )
 
       notion = notion ?? new Client({ auth: config.private.notionApiKey })
       n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })
@@ -42,10 +49,10 @@ export default defineCachedEventHandler<Promise<EpisodeDetails>>(
       const [name, _ext] = slug.split('.')
       const pageId = name?.split('_').at(-1)
 
-      let episode: NotionEpisode | null = null
+      let episode: NotionContent | null = null
       try {
         if (!pageId) throw Error('Page Id not found')
-        episode = (await notion.pages.retrieve({ page_id: pageId })) as unknown as NotionEpisode
+        episode = (await notion.pages.retrieve({ page_id: pageId })) as unknown as NotionContent
       } catch {
         console.error('Notion Episode not found')
       }
@@ -54,7 +61,7 @@ export default defineCachedEventHandler<Promise<EpisodeDetails>>(
         throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
       }
 
-      const episodeContent = await convertNotionPageToMarkdown(n2m, episode.id)
+      const content = await convertNotionPageToMarkdown(n2m, episode.id)
       const id = episode.id
       const title = episode.properties['Content name'].title.map(({ plain_text }) => plain_text ?? '').join('') as string
 
@@ -65,10 +72,10 @@ export default defineCachedEventHandler<Promise<EpisodeDetails>>(
         createdAt: episode.created_time as string,
         modifiedAt: episode.last_edited_time as string,
         publishedAt: episode.properties['Publish date'].date.start as string,
-        description: `${mdToText(episodeContent.split('. ').splice(0, 2).join('. '))}...`,
-        content: episodeContent,
-        url: `/episode/${slugify(title)}_${id}`,
-      } as EpisodeDetails
+        description: `${mdToText(content.split('. ').splice(0, 2).join('. '))}...`,
+        content: content,
+        url: `/${contentType}/${slugify(title)}_${id}`,
+      } as ContentDetails
     } catch (error: unknown) {
       console.error('API episode/slug GET', error)
 

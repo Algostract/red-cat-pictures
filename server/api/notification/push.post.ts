@@ -13,7 +13,7 @@ export async function pushNotification(payload: PushNotification, subscriptions:
 
     webpush.setVapidDetails(config.private.vapidSubject, config.public.vapidKey, config.private.vapidKey)
 
-    await Promise.all(subscriptions.map((sub) => webpush.sendNotification(sub, JSON.stringify(payload))))
+    await Promise.allSettled(subscriptions.map((sub) => webpush.sendNotification(sub, JSON.stringify(payload))))
 
     return true
   } catch (error) {

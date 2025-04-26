@@ -20,6 +20,7 @@ const urls = ref([
   { url: '/#featured-videos', id: 'featured-videos', title: 'Videos' },
   { url: '/#pricing', id: 'pricing', title: 'Pricing' },
   { url: '/episode', id: 'episodes', title: 'Episodes' },
+  { url: '/blog', id: 'blogs', title: 'Blogs' },
 ])
 
 const isAnimate = ref(false)

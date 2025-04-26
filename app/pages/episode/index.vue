@@ -25,7 +25,7 @@ const activeEpisode = useState()
   <section class="my-10 contents grow">
     <ul v-if="episodes?.length" class="mx-auto mt-28 grid h-full w-fit max-w-[76rem] grow grid-cols-1 justify-center gap-10 sm:grid-cols-2 lg:grid-cols-3">
       <li v-for="{ id, cover, title, description, url, createdAt } in episodes" :key="id">
-        <CardEpisode :id="id" :cover="cover" :title="title" :description="description" :url="url" :created-at="createdAt" :is-active="activeEpisode === id" @active="activeEpisode = id" />
+        <CardContent :id="id" :cover="cover" :title="title" :description="description" :url="url" :created-at="createdAt" :is-active="activeEpisode === id" @active="activeEpisode = id" />
       </li>
     </ul>
     <div v-else class="mx-auto flex h-full w-full max-w-[76rem] grow items-center justify-center">
