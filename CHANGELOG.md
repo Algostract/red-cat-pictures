@@ -1,5 +1,21 @@
 # red-cat-pictures
 
+## v2.8.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.7.0...v2.8.0)
+
+### 🚀 Enhancements
+
+- Photo page added, meta api endpoint added, LinkToolTip component added ([77f7def](https://github.com/Algostract/red-cat-pictures/commit/77f7def))
+
+### 🩹 Fixes
+
+- Update social media links and improve accessibility attributes ([042b228](https://github.com/Algostract/red-cat-pictures/commit/042b228))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.7.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.6.0...v2.7.0)
