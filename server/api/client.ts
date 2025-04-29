@@ -152,7 +152,7 @@ export default defineCachedEventHandler<Promise<ProjectClient[]>>(
               })
             )
 
-            return { id, name, projects, website: properties.Website.url, logo: icon.external.url }
+            return { id, name, projects, website: properties.Website.url ?? properties.Instagram.url, logo: icon.external.url }
           })
         )
       ).filter((item) => item !== null)
@@ -165,5 +165,5 @@ export default defineCachedEventHandler<Promise<ProjectClient[]>>(
       })
     }
   },
-  { maxAge: 1 * 60 }
+  { maxAge: 60 * 1 }
 )

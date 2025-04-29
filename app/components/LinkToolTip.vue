@@ -22,8 +22,9 @@ const image = computed<string>(() => data.value?.ogImage?.toString() ?? 'https:/
     leave-from-class="opacity-100 translate-y-0 scale-100"
     leave-to-class="opacity-0 translate-y-2 scale-95">
     <NuxtLink
-      :href="url"
+      :to="url"
       :style="{ left: position.x + 'px', top: position.y + 'px' }"
+      external
       target="_blank"
       rel="noopener"
       class="absolute z-50 flex w-[256px] -translate-x-1/2 flex-col overflow-hidden !whitespace-normal border border-black bg-light-500 !no-underline dark:bg-dark-500 md:w-[320px]"

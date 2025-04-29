@@ -30,7 +30,7 @@ function toggleMobileMenu(value?: boolean) {
       </NuxtLink>
       <AppNavbar :is-open="mobileMenuOpen" @close="toggleMobileMenu(false)" />
       <div class="col-start-3 justify-self-end">
-        <button class="p-4 focus:outline-none md:hidden" @click="toggleMobileMenu(true)">
+        <button aria-label="menu" class="p-4 focus:outline-none md:hidden" @click="toggleMobileMenu(true)">
           <NuxtIcon name="local:hamburger" class="text-[32px]" />
         </button>
         <ButtonColorMode class="hidden md:block" />

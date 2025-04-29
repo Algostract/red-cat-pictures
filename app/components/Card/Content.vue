@@ -14,7 +14,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <NuxtLink :href="url" class="flex aspect-[32/28] max-w-[318px] flex-col overflow-hidden border border-primary-500 bg-light-500 dark:bg-dark-500" @click="emit('active')">
+  <NuxtLink :to="url" class="flex aspect-[32/28] max-w-[318px] flex-col overflow-hidden border border-primary-500 bg-light-500 dark:bg-dark-500" @click="emit('active')">
     <NuxtImg
       provider="uploadcare"
       :src="cover ?? ''"
