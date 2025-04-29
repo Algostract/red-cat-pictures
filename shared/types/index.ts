@@ -130,5 +130,5 @@ export interface Content {
 }
 
 export interface ContentDetails extends Content {
-  content: string
+  markdown: string
 }

@@ -1,12 +1,10 @@
 import { Client } from '@notionhq/client'
 import { NotionToMarkdown } from 'notion-to-md'
-import { convertNotionPageToMarkdown } from './[...slug].get'
 import { z } from 'zod'
+import { convertNotionPageToMarkdown } from './[...slug].get'
 
 let notion: Client
 let n2m: NotionToMarkdown
-
-type Content = 'Episode' | 'Blog'
 
 export default defineCachedEventHandler<Promise<Content[]>>(
   async (event) => {
@@ -30,25 +28,25 @@ export default defineCachedEventHandler<Promise<Content[]>>(
         database_id: config.private.notionClientDbId,
       })
 
-      const episodes = data.results as unknown as NotionContent[]
+      const contents = data.results as unknown as NotionContent[]
 
       const results = await Promise.all(
-        episodes.map(async ({ id, properties }) => {
+        contents.map(async ({ id, properties }) => {
           if (properties['Content type'].select?.name.toLowerCase() !== contentType) return null
           if (properties.Status.status.name !== 'Published') return null
 
-          const episode = (await notion.pages.retrieve({ page_id: id })) as unknown as NotionContent
-          const episodeContent = await convertNotionPageToMarkdown(n2m, id)
+          const content = (await notion.pages.retrieve({ page_id: id })) as unknown as NotionContent
+          const markdown = await convertNotionPageToMarkdown(notion, n2m, id)
           const title = properties['Content name'].title.map(({ plain_text }) => plain_text ?? '').join('') as string
 
           return {
             id,
             title,
-            cover: episode.cover?.external.url?.split('/')[3] ?? null,
-            createdAt: episode.created_time as string,
-            modifiedAt: episode.last_edited_time as string,
-            publishedAt: episode.properties['Publish date'].date.start as string,
-            description: `${mdToText(episodeContent.split('. ').splice(0, 2).join('. '))}...`,
+            cover: content.cover?.external.url?.split('/')[3] ?? null,
+            createdAt: content.created_time as string,
+            modifiedAt: content.last_edited_time as string,
+            publishedAt: content.properties['Publish date'].date.start as string,
+            description: `${mdToText(markdown.split('. ').splice(0, 2).join('. '))}...`,
             url: `/${contentType}/${slugify(title)}_${id}`,
           }
         })
@@ -64,5 +62,5 @@ export default defineCachedEventHandler<Promise<Content[]>>(
       })
     }
   },
-  { maxAge: 5 * 60 }
+  { maxAge: 60 * 5 }
 )

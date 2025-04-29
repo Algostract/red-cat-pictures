@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useRuntimeConfig } from '#app'
-
 const title = `RED CAT PICTURES | Elevate Your Brand Image`
 const description = `Nurture the essence of your product with our photography & videography services in kolkata`
 const url = 'https://redcatpictures.com'
@@ -40,12 +38,6 @@ useSchemaOrg([
       addressCountry: 'IN',
     },
     sameAs: ['https://wa.me/c/918910489578', 'https://www.facebook.com/redcatxpictures', 'https://www.instagram.com/redcatxpictures', 'https://maps.app.goo.gl/uWqh8LjcF5ez4WZY8'],
-  }),
-  defineBreadcrumb({
-    itemListElement: [
-      { name: 'Home', item: '/' },
-      { name: 'Episode', item: '/episode' },
-    ],
   }),
 ])
 
@@ -104,10 +96,6 @@ onMounted(async () => {
   @apply block size-[6px] bg-light-400 dark:bg-dark-400;
 }
 
-body::-webkit-scrollbar {
-  @apply hidden;
-}
-
 *::-webkit-scrollbar-thumb {
   @apply rounded-md bg-light-600 dark:bg-dark-600;
 }
@@ -124,14 +112,7 @@ svg.iconify--local {
   @apply !m-0 !box-content;
 }
 
-.scrollbar-hidden {
-  -ms-overflow-style: none;
-  /* Internet Explorer 10+ */
-  scrollbar-width: none;
-  /* Firefox */
-}
-
 .scrollbar-hidden::-webkit-scrollbar {
-  @apply /* Safari and Chrome */ hidden;
+  display: none;
 }
 </style>

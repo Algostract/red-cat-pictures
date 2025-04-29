@@ -52,8 +52,8 @@ useSchemaOrg([
       format="auto"
       class="cover-img absolute left-0 aspect-[5/3] max-h-[20rem] w-screen object-cover" />
     <div class="invisible -left-4 aspect-[5/3] max-h-[20rem] w-screen" />
-    <div class="content relative mx-auto max-w-4xl leading-relaxed">
-      <h1 class="mt-4">{{ episode.title }}</h1>
+    <div class="relative mx-auto max-w-4xl leading-relaxed">
+      <h1 class="my-4 text-xl font-semi-bold md:text-3xl">{{ episode.title }}</h1>
       <div class="mb-2 mt-4 flex justify-between gap-8 text-black/60 dark:text-white/60 md:mt-8">
         <NuxtTime :datetime="episode.publishedAt" day="numeric" month="short" year="numeric" />
         <span class="text-right text-base">
@@ -61,7 +61,7 @@ useSchemaOrg([
           <NuxtTime :datetime="episode.modifiedAt" day="numeric" month="short" year="numeric" />
         </span>
       </div>
-      <MarkdownContent :content="episode.content" />
+      <MarkdownContent :content="episode.markdown" />
     </div>
   </article>
 </template>
@@ -69,67 +69,5 @@ useSchemaOrg([
 <style scoped>
 .cover-img {
   view-transition-name: selected-episode;
-}
-</style>
-
-<style>
-.content h1 {
-  @apply my-4 text-xl font-semi-bold md:text-3xl;
-}
-
-.content h2 {
-  @apply my-3 text-lg font-semi-bold md:text-2xl;
-}
-
-.content h3 {
-  @apply my-2 text-base font-semi-bold text-alert-600 md:text-xl;
-}
-
-.content h4 {
-  @apply my-1 text-sm font-semi-bold md:text-lg;
-}
-
-.content p {
-  @apply my-2 font-light md:my-4 md:text-[1.125rem];
-}
-
-.content > img {
-  @apply mx-auto my-4 aspect-video max-h-[18rem] w-full rounded-md object-cover md:my-8;
-}
-
-.content aside {
-  @apply my-2 flex items-start gap-1 rounded bg-dark-600/20 p-4;
-}
-
-.content aside > img {
-  @apply w-7;
-}
-
-.content aside > p {
-  @apply my-0;
-}
-
-.content strong {
-  @apply font-semi-bold;
-}
-
-.content ol {
-  @apply ml-8 list-decimal;
-}
-
-.content ul {
-  @apply ml-8 list-disc;
-}
-
-.content a {
-  @apply underline underline-offset-1;
-}
-
-.content h3 > a {
-  @apply no-underline;
-}
-
-.content blockquote {
-  @apply rounded border-l-4 border-primary-500 pl-4;
 }
 </style>

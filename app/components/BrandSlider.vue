@@ -7,7 +7,7 @@ function extractId(url: string | undefined): string | undefined {
 </script>
 
 <template>
-  <section v-if="clients" class="w-full text-white">
+  <section v-if="clients" class="w-full px-2 text-white">
     <div class="max-auto flex items-center gap-0">
       <div class="h-20 w-2 bg-[url('assets/images/line.svg')]" />
       <div class="w-full overflow-hidden md:max-w-[700px]">

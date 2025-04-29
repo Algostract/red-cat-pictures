@@ -49,7 +49,7 @@ const { height: sliderHeight } = useElementSize(slider)
         <!-- For Small Screen Devices -->
         <template v-for="slideCount in slideCounts">
           <div
-            v-for="(slideImages, index) in photoSlides[slideCount]"
+            v-for="(slidePhotos, index) in photoSlides[slideCount]"
             :key="index"
             class="flex-1 flex-col gap-2"
             :class="{
@@ -58,7 +58,7 @@ const { height: sliderHeight } = useElementSize(slider)
               'hidden lg:flex': slideCount == '6',
             }">
             <template v-for="dupIndex in [1, 2]" :key="dupIndex">
-              <NuxtLink v-for="{ id, name, description } in slideImages" :key="`${dupIndex}-${id}`" :to="`/photo/${name}`" @click="emit('active', `${dupIndex}-${name}`)">
+              <NuxtLink v-for="{ id, name, description } in slidePhotos" :key="`${dupIndex}-${id}`" :to="`/photo/${name}`" @click="emit('active', `${dupIndex}-${name}`)">
                 <NuxtImg
                   provider="uploadcare"
                   :src="id"

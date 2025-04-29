@@ -16,7 +16,7 @@ function onNavigate(section: string) {
 
 const urls = ref([
   { url: '/#gallery', id: 'gallery', title: 'Gallery' },
-  { url: '/#featured-images', id: 'featured-images', title: 'Images' },
+  { url: '/photo', id: 'photos', title: 'Photos' },
   { url: '/#featured-videos', id: 'featured-videos', title: 'Videos' },
   { url: '/#pricing', id: 'pricing', title: 'Pricing' },
   { url: '/episode', id: 'episodes', title: 'Episodes' },

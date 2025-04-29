@@ -5,20 +5,40 @@ import { z } from 'zod'
 let notion: Client
 let n2m: NotionToMarkdown
 
-export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId: string) {
+interface NotionResource {
+  id: string
+  created_time: string
+  last_edited_time: string
+  properties: {
+    Name: { type: 'title'; title: string[] }
+    Email: { type: 'email'; email: string }
+    Phone: { type: 'phone_number'; phone_number: string }
+    Instagram: { type: 'url'; url: string }
+    Website: { type: 'url'; url: string }
+    Project: { type: 'relation'; relation: string[]; has_more: false }
+  }
+}
+
+export async function convertNotionPageToMarkdown(notion: Client, n2m: NotionToMarkdown, pageId: string, replaceNotionLinks: boolean = false) {
   try {
     const mdBlocks = await n2m.pageToMarkdown(pageId)
     let mdString = n2m.toMarkdownString(mdBlocks).parent
 
-    // Replace literal "\n" with actual newlines
-    mdString = mdString?.replace(/\\n/g, '\n')
+    if (mdString) {
+      // literal "\n" → actual newlines
+      mdString = mdString.replace(/\\n/g, '\n')
+      // collapse 3+ newlines → 2
+      mdString = mdString.replace(/\n{3,}/g, '\n\n').replaceAll('\\n\\n', '\n\n')
 
-    // Collapse triple (or more) newlines to double
-    mdString = mdString?.replace(/\n{3,}/g, '\n\n')
-    mdString = mdString?.replaceAll('\\n\\n', '\n\n')
+      // async-replace all Notion links, unpacking (fullMatch, linkText, pageId)
+      if (replaceNotionLinks)
+        mdString = await replaceAsync(mdString, /\[([^\]]+)\]\(https?:\/\/(?:www\.)?notion\.so\/(?:[^\s/()]+-)?([0-9a-fA-F]{32})(?:\S*)?\)/g, async ([_fullMatch, linkText, pageId]) => {
+          const content = (await notion.pages.retrieve({ page_id: pageId })) as unknown as NotionResource
+          return `[${linkText}](${content.properties?.Website?.url ?? content.properties?.Instagram?.url})`
+        })
 
-    // Trim any extra whitespace
-    mdString = mdString?.trim()
+      mdString = mdString.trim()
+    }
 
     return mdString
   } catch (error) {
@@ -49,31 +69,35 @@ export default defineCachedEventHandler<Promise<ContentDetails>>(
       const [name, _ext] = slug.split('.')
       const pageId = name?.split('_').at(-1)
 
-      let episode: NotionContent | null = null
-      try {
-        if (!pageId) throw Error('Page Id not found')
-        episode = (await notion.pages.retrieve({ page_id: pageId })) as unknown as NotionContent
-      } catch {
-        console.error('Notion Episode not found')
-      }
-
-      if (!episode) {
+      if (!pageId) {
         throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
       }
 
-      const content = await convertNotionPageToMarkdown(n2m, episode.id)
-      const id = episode.id
-      const title = episode.properties['Content name'].title.map(({ plain_text }) => plain_text ?? '').join('') as string
+      let content: NotionContent
+      try {
+        content = (await notion.pages.retrieve({ page_id: pageId })) as unknown as NotionContent
+      } catch {
+        console.error('Notion Episode not found')
+        throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
+      }
+
+      if (!content) {
+        throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
+      }
+
+      const id = content.id
+      const markdown = await convertNotionPageToMarkdown(notion, n2m, id, true)
+      const title = content.properties['Content name'].title.map(({ plain_text }) => plain_text ?? '').join('') as string
 
       return {
         id,
         title,
-        cover: episode.cover?.external.url?.split('/')[3] ?? null,
-        createdAt: episode.created_time as string,
-        modifiedAt: episode.last_edited_time as string,
-        publishedAt: episode.properties['Publish date'].date.start as string,
-        description: `${mdToText(content.split('. ').splice(0, 2).join('. '))}...`,
-        content: content,
+        cover: content.cover?.external.url?.split('/')[3] ?? null,
+        createdAt: content.created_time as string,
+        modifiedAt: content.last_edited_time as string,
+        publishedAt: content.properties['Publish date'].date.start as string,
+        description: `${mdToText(markdown.split('. ').splice(0, 2).join('. '))}...`,
+        markdown,
         url: `/${contentType}/${slugify(title)}_${id}`,
       } as ContentDetails
     } catch (error: unknown) {

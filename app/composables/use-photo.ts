@@ -5,7 +5,7 @@ export default function (photos: Photo[] | Ref<globalThis.Photo[] | null>, prope
     food: 2,
   }
 
-  const filteredImages = computed(
+  const filteredPhotos = computed(
     () =>
       toValue(photos)
         ?.filter(({ category, gallery, featured }) => {
@@ -27,5 +27,5 @@ export default function (photos: Photo[] | Ref<globalThis.Photo[] | null>, prope
         }) ?? []
   )
 
-  return filteredImages
+  return filteredPhotos
 }

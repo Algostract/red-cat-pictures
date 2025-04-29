@@ -30,7 +30,7 @@ const emit = defineEmits<{
     <div class="p-2 md:px-4">
       <!-- <FormattedDate date={time} class="uppercase text-sm opacity-60" /> -->
       <h2 class="my-1.5 line-clamp-2 text-lg font-semi-bold">{{ title }}</h2>
-      <p class="line-clamp-2 opacity-60">{{ mdToText(description).split('.').slice(0, 2).join('.') }}</p>
+      <p class="line-clamp-2 opacity-60">{{ description }}</p>
     </div>
   </NuxtLink>
 </template>

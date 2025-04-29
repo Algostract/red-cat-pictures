@@ -15,7 +15,7 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${url}/episode`,
+  ogUrl: `${url}/blog`,
 })
 
 const activeBlog = useState()

@@ -1,7 +1,12 @@
 <script setup lang="ts">
-defineProps<{
-  isLightMode: boolean
-}>()
+withDefaults(
+  defineProps<{
+    colorMode: 'light' | 'dark' | 'auto'
+  }>(),
+  {
+    colorMode: 'auto',
+  }
+)
 
 const mobileMenuOpen = ref(false)
 
@@ -11,11 +16,17 @@ function toggleMobileMenu(value?: boolean) {
 </script>
 
 <template>
-  <header class="absolute left-0 right-0 top-4 mx-auto max-w-[90rem] px-4 md:px-16" :class="[isLightMode ? 'fill-white text-white' : 'fill-black text-black dark:fill-white dark:text-white']">
+  <header
+    class="absolute left-0 right-0 top-4 mx-auto max-w-[90rem] px-4 md:px-16"
+    :class="{ 'fill-white text-white': colorMode === 'light', 'fill-black text-black': colorMode === 'dark', 'fill-black text-black dark:fill-white dark:text-white': colorMode === 'auto' }">
     <nav class="relative z-20 grid grid-cols-3 items-center">
       <NuxtLink to="/" class="size-fit" aria-label="home">
-        <NuxtIcon name="local:logo" filled class="text-[64px] md:text-[96px]" :class="isLightMode ? 'inline' : 'hidden dark:inline'" />
-        <NuxtIcon name="local:logo-dark" filled class="text-[64px] md:text-[96px]" :class="isLightMode ? 'hidden' : 'inline dark:hidden'" />
+        <NuxtIcon name="local:logo" filled class="text-[64px] md:text-[96px]" :class="{ inline: colorMode === 'light', hidden: colorMode === 'dark', 'hidden dark:inline': colorMode === 'auto' }" />
+        <NuxtIcon
+          name="local:logo-dark"
+          filled
+          class="text-[64px] md:text-[96px]"
+          :class="{ hidden: colorMode === 'light', inline: colorMode === 'dark', 'inline dark:hidden': colorMode === 'auto' }" />
       </NuxtLink>
       <AppNavbar :is-open="mobileMenuOpen" @close="toggleMobileMenu(false)" />
       <div class="col-start-3 justify-self-end">

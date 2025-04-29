@@ -28,7 +28,7 @@ const categories = ref<
 
 function onClick(title: Category) {
   emit('update', title)
-  document.getElementById('featured-images')!.scrollIntoView({ behavior: 'smooth', inline: 'center' })
+  document.getElementById('featured-photos')!.scrollIntoView({ behavior: 'smooth', inline: 'center' })
 }
 </script>
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { Category } from '~~/shared/types/index'
 
-const title = `Photography & Videography in Kolkata`
-const description = `Nurture the essence of your food & product with our photography & videography services in kolkata`
+const title = `Product Photography & Videography in Kolkata`
+const description = `Nurture the essence of your food & product with our professional food & product photography & videography services in kolkata`
 const url = 'https://redcatpictures.com'
 const imageUrl = `${url}/previews/landing.webp`
 
@@ -17,6 +17,16 @@ useSeoMeta({
   twitterImage: imageUrl,
   ogUrl: url,
 })
+
+useSchemaOrg([
+  defineBreadcrumb({
+    itemListElement: [
+      { name: 'Home', item: '/' },
+      { name: 'Episode', item: '/episode' },
+      { name: 'Blog', item: '/blog' },
+    ],
+  }),
+])
 
 const { data: photos } = await useFetch('/api/photo', { default: () => [] })
 const { data: videos } = await useFetch('/api/video', { default: () => [] })
@@ -39,7 +49,13 @@ function onContact(action: boolean) {
   }
 }
 
-const activePhotoName = useState()
+const activePhotoName = useState<string>()
+
+useHead({
+  bodyAttrs: {
+    class: 'scrollbar-hidden',
+  },
+})
 </script>
 
 <template>

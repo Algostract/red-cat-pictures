@@ -5,35 +5,44 @@ const props = defineProps<{
   position: { x: number; y: number }
 }>()
 
-const description = ref<string>('')
-const image = ref<string>('https://ucarecdn.com/27adefaa-f613-4d53-b60d-a58431a757b3/-/format/auto/-/scale_crop/2560x1440/center/')
+const url = computed(() => props.url)
+const { data } = await useFetch('/api/external/meta', { query: { url } })
 
-watch(
-  () => props,
-  () => {
-    console.log({ url: props.url, title: props.title, position: props.position })
-  }
-)
+const title = computed(() => props.title ?? data.value?.ogTitle)
+const description = computed(() => data.value?.ogDescription)
+const image = computed<string>(() => data.value?.ogImage?.toString() ?? 'https://ucarecdn.com/771d0695-2196-4c98-b9eb-4f29acd6506f/-/format/auto/-/scale_crop/2560x1440/center/')
 </script>
 
 <template>
-  <NuxtLink
-    :href="url"
-    :style="{ position: 'absolute', top: position.x + 'px', left: position.y + 'px' }"
-    class="flex aspect-square max-w-[318px] flex-col overflow-hidden border border-black bg-light-500 dark:bg-dark-500">
-    <NuxtImg
-      :src="image ?? ''"
-      :alt="title"
-      :width="640"
-      :height="Math.round(640 / (16 / 9))"
-      fit="cover"
-      format="auto"
-      loading="lazy"
-      quality="smart"
-      class="aspect-[13/7] w-full overflow-hidden rounded-sm bg-light-600 object-cover dark:bg-dark-500" />
-    <div class="p-2 md:px-4">
-      <h5 class="mb-2 mt-2 line-clamp-2 text-lg font-regular !no-underline md:mb-4 md:mt-[0.625rem]">{{ title }}</h5>
-      <p class="line-clamp-3 opacity-60">{{ description }}</p>
-    </div>
-  </NuxtLink>
+  <Transition
+    enter-active-class="transition duration-200 ease-out"
+    enter-from-class="opacity-0 translate-y-2 scale-95"
+    enter-to-class="opacity-100 translate-y-0 scale-100"
+    leave-active-class="transition duration-150 ease-in"
+    leave-from-class="opacity-100 translate-y-0 scale-100"
+    leave-to-class="opacity-0 translate-y-2 scale-95">
+    <NuxtLink
+      :href="url"
+      :style="{ left: position.x + 'px', top: position.y + 'px' }"
+      target="_blank"
+      rel="noopener"
+      class="absolute z-50 flex w-[256px] -translate-x-1/2 flex-col overflow-hidden !whitespace-normal border border-black bg-light-500 !no-underline dark:bg-dark-500 md:w-[320px]"
+      tabindex="-1">
+      <NuxtImg
+        :src="image"
+        :alt="title"
+        :width="640"
+        :height="Math.round(640 / (16 / 9))"
+        fit="cover"
+        format="auto"
+        loading="lazy"
+        quality="smart"
+        class="aspect-[13/7] w-full overflow-hidden rounded-sm bg-light-600 dark:bg-dark-500"
+        :class="!data?.ogImage ? 'object-cover' : 'object-contain'" />
+      <div class="p-2 md:px-4">
+        <h5 class="mb-2 mt-2 line-clamp-2 text-lg md:mb-4 md:mt-[0.625rem]">{{ title }}</h5>
+        <p class="text-md line-clamp-3 opacity-60">{{ description }}</p>
+      </div>
+    </NuxtLink>
+  </Transition>
 </template>

@@ -15,7 +15,7 @@ function objectToClass({ sm, md }: { sm: Position; md: Position }, size: string)
 	col-start-${sm.col.start} md:col-start-${md.col.start} col-span-${sm.col.span} md:col-span-${md.col.span} aspect-[${aspectRatio}]`
 }
 
-const categoryImages = {
+const categoryPhotos = {
   ecommerce: usePhoto(props.photos, { section: 'featured', category: 'ecommerce' }),
   product: usePhoto(props.photos, { section: 'featured', category: 'product' }),
   food: usePhoto(props.photos, { section: 'featured', category: 'food' }),
@@ -81,9 +81,9 @@ const photos = computed<GalleryPhoto[]>(() =>
     },
   ].map((photo, index) => {
     return {
-      name: categoryImages[props.activeCategory].value[index]?.name,
-      id: categoryImages[props.activeCategory].value[index]?.id,
-      description: categoryImages[props.activeCategory].value[index]?.description,
+      name: categoryPhotos[props.activeCategory].value[index]?.name,
+      id: categoryPhotos[props.activeCategory].value[index]?.id,
+      description: categoryPhotos[props.activeCategory].value[index]?.description,
       dynamicClass: objectToClass(photo.position, photo.size),
       aspectRatio: photo.aspectRatio,
     }
@@ -92,8 +92,8 @@ const photos = computed<GalleryPhoto[]>(() =>
 </script>
 
 <template>
-  <section id="featured-images" class="relative h-fit">
-    <SectionLabel icon="photo" title="Featured Images" />
+  <section id="featured-photos" class="relative h-fit">
+    <SectionLabel icon="photo" title="Featured Photos" />
     <div class="relative grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3">
       <NuxtLink v-for="{ name, id, description, dynamicClass, aspectRatio } in photos" :key="id" :to="`/photo/${name}`" :class="dynamicClass" class="size-full" @click="emit('active', name)">
         <NuxtImg
