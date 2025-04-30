@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.8.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.8.0...v2.8.1)
+
+### 💅 Refactors
+
+- Video filed change, sitemap dynamic urls added ([570179d](https://github.com/Algostract/red-cat-pictures/commit/570179d))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.8.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.7.0...v2.8.0)
