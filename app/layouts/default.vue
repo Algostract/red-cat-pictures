@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
-const isModelContactOpen = ref<boolean>(false)
+const isModelContactOpen = useState<boolean>('isModelContactOpen', () => false)
 
 function onContact(action: boolean) {
   if (action) {
@@ -22,11 +22,11 @@ const isDarkMode = computed(() => route.path.includes('/photo') || route.path.in
 
 <template>
   <div>
-    <AppHeader :color-mode="isLightMode ? 'light' : isDarkMode ? 'dark' : 'auto'" />
+    <LazyAppHeader hydrate-on-idle :color-mode="isLightMode ? 'light' : isDarkMode ? 'dark' : 'auto'" />
     <main class="relative mx-auto flex min-h-screen max-w-[90rem] flex-col gap-4 overflow-hidden px-2 md:mb-8 md:px-4" :class="hasFloatingActionBar ? 'mb-20' : 'mb-2'">
       <slot />
-      <ModalContact :is-open="isModelContactOpen" @close="onContact(false)" />
-      <AppFooter @contact="onContact(true)" />
+      <LazyAppFooter hydrate-on-visible @contact="onContact(true)" />
+      <LazyModalContact v-show="isModelContactOpen" hydrate-on-visible :is-open="isModelContactOpen" @close="onContact(false)" />
     </main>
   </div>
 </template>

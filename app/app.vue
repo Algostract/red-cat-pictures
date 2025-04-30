@@ -83,7 +83,7 @@ onMounted(async () => {
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
-  <AppInstallPrompt />
+  <LazyAppInstallPrompt hydrate-on-idle />
 </template>
 
 <style>

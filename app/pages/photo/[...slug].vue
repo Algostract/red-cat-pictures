@@ -59,7 +59,7 @@ useSchemaOrg([
           <NuxtIcon name="local:logo-dark" filled class="inline text-[64px] dark:hidden md:text-[96px]" />
         </NuxtLink>
         <div class="col-start-3 justify-self-end">
-          <ButtonColorMode />
+          <LazyButtonColorMode hydrate-on-visible />
         </div>
       </nav>
     </header>

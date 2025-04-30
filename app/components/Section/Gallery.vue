@@ -21,7 +21,7 @@ const slideCounts = ['3', '4', '6'] as const
 
 const photoSlides = computed(() => {
   const slides = slideCounts.map((noOfSlides) => {
-    const slides: { id: string; name: string; description: string; aspectRatio: number }[][] = new Array(parseInt(noOfSlides)).fill(null).map((_) => [])
+    const slides: Photo[][] = new Array(parseInt(noOfSlides)).fill(null).map((_) => [])
 
     allPhotos.value.forEach((image, index) => {
       slides[index % parseInt(noOfSlides)]!.push(image)
@@ -58,7 +58,7 @@ const { height: sliderHeight } = useElementSize(slider)
               'hidden lg:flex': slideCount == '6',
             }">
             <template v-for="dupIndex in [1, 2]" :key="dupIndex">
-              <NuxtLink v-for="{ id, name, description } in slidePhotos" :key="`${dupIndex}-${id}`" :to="`/photo/${name}`" @click="emit('active', `${dupIndex}-${name}`)">
+              <NuxtLink v-for="{ id, title, description, url } in slidePhotos" :key="`${dupIndex}-${id}`" :to="url" @click="emit('active', `${dupIndex}-${title}`)">
                 <NuxtImg
                   provider="uploadcare"
                   :src="id"
@@ -70,7 +70,7 @@ const { height: sliderHeight } = useElementSize(slider)
                   loading="lazy"
                   quality="smart"
                   class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500"
-                  :class="{ active: activePhoto === `${dupIndex}-${name}` }" />
+                  :class="{ active: activePhoto === `${dupIndex}-${title}` }" />
               </NuxtLink>
             </template>
           </div>

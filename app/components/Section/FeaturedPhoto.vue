@@ -21,6 +21,12 @@ const categoryPhotos = {
   food: usePhoto(props.photos, { section: 'featured', category: 'food' }),
 }
 
+onMounted(() => {
+  // console.log(props.photos)
+  console.log('Featured Photo', categoryPhotos.ecommerce.value)
+  console.log('Featured Photo', photos.value)
+})
+
 const photos = computed<GalleryPhoto[]>(() =>
   [
     {
@@ -86,6 +92,7 @@ const photos = computed<GalleryPhoto[]>(() =>
       description: categoryPhotos[props.activeCategory].value[index]?.description,
       dynamicClass: objectToClass(photo.position, photo.size),
       aspectRatio: photo.aspectRatio,
+      url: categoryPhotos[props.activeCategory].value[index]?.url,
     }
   })
 )
@@ -95,7 +102,7 @@ const photos = computed<GalleryPhoto[]>(() =>
   <section id="featured-photos" class="relative h-fit">
     <SectionLabel icon="photo" title="Featured Photos" />
     <div class="relative grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3">
-      <NuxtLink v-for="{ title: name, id, description, dynamicClass, aspectRatio } in photos" :key="id" :to="`/photo/${name}`" :class="dynamicClass" class="size-full" @click="emit('active', name)">
+      <NuxtLink v-for="{ title, id, description, dynamicClass, aspectRatio, url } in photos" :key="id" :to="url" :class="dynamicClass" class="size-full" @click="emit('active', title)">
         <NuxtImg
           provider="uploadcare"
           :src="id"
@@ -107,7 +114,7 @@ const photos = computed<GalleryPhoto[]>(() =>
           loading="lazy"
           :query="{ preview: `640x${Math.round(640 / aspectRatio)}` }"
           class="size-full overflow-hidden rounded-sm bg-light-600 dark:bg-dark-500"
-          :class="{ active: activePhoto === name }" />
+          :class="{ active: activePhoto === title }" />
       </NuxtLink>
     </div>
   </section>

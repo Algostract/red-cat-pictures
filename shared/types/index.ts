@@ -27,6 +27,7 @@ export interface GalleryPhoto {
   description: string
   dynamicClass: string
   aspectRatio: number
+  url: string
 }
 
 export interface Position {

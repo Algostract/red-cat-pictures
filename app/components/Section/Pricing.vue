@@ -28,7 +28,7 @@ const splideOption = computed(() => ({
 }))
 
 const activeSlideIndex = ref(1)
-const isModelContactOpen = ref<boolean>(false)
+const isModelContactOpen = useState<boolean>('isModelContactOpen', () => false)
 
 function onContact(action: boolean) {
   if (action) {
@@ -73,7 +73,6 @@ const activeTab = ref<Service>('photo')
         </button>
       </div>
     </Splide>
-    <ModalContact :is-open="isModelContactOpen" @close="onContact(false)" />
   </section>
 </template>
 

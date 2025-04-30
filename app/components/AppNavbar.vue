@@ -44,14 +44,14 @@ const isAnimate = ref(false)
               </NuxtLink>
             </li>
           </ul>
-          <ButtonColorMode class="m-6" />
+          <LazyButtonColorMode hydrate-on-visible class="m-6" />
         </div>
       </div>
     </Transition>
   </div>
   <ul class="hidden justify-center gap-8 whitespace-nowrap md:flex">
     <li v-for="{ id, url, title } of urls" :key="id">
-      <NuxtLink :to="url" class="p-2" active-class="" @click="onNavigate(id)">{{ title }} </NuxtLink>
+      <NuxtLink :to="url" class="p-2" active-class="" @click="onNavigate(id)">{{ title }}</NuxtLink>
     </li>
   </ul>
 </template>

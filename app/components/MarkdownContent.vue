@@ -75,11 +75,12 @@ function hideTooltip(event: TouchEvent | MouseEvent | FocusEvent) {
       @mouseover.capture="showTooltip"
       @mouseleave.capture="hideTooltip"
       v-html="marked(props.content, { async: false })" />
-    <LinkToolTip
+    <LazyLinkToolTip
       v-if="hoveredLink"
       :url="hoveredLink.url"
       :title="hoveredLink.title"
       :position="{ x: hoveredLink.left, y: hoveredLink.top }"
+      hydrate-on-visible
       @touchstart.self="showTooltip"
       @touchend.self="hideTooltip"
       @touchcancel.self="hideTooltip"

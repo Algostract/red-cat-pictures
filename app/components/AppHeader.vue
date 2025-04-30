@@ -21,19 +21,15 @@ function toggleMobileMenu(value?: boolean) {
     :class="{ 'fill-white text-white': colorMode === 'light', 'fill-black text-black': colorMode === 'dark', 'fill-black text-black dark:fill-white dark:text-white': colorMode === 'auto' }">
     <nav class="relative z-20 grid grid-cols-3 items-center">
       <NuxtLink to="/" class="size-fit" aria-label="home">
-        <NuxtIcon name="local:logo" filled class="text-[64px] md:text-[96px]" :class="{ inline: colorMode === 'light', hidden: colorMode === 'dark', 'hidden dark:inline': colorMode === 'auto' }" />
-        <NuxtIcon
-          name="local:logo-dark"
-          filled
-          class="text-[64px] md:text-[96px]"
-          :class="{ hidden: colorMode === 'light', inline: colorMode === 'dark', 'inline dark:hidden': colorMode === 'auto' }" />
+        <NuxtIcon name="local:logo" filled class="text-[64px] md:text-[96px]" :class="{ hidden: colorMode === 'dark', 'hidden dark:inline': colorMode === 'auto' }" />
+        <NuxtIcon name="local:logo-dark" filled class="text-[64px] md:text-[96px]" :class="{ hidden: colorMode === 'light', 'inline dark:hidden': colorMode === 'auto' }" />
       </NuxtLink>
       <AppNavbar :is-open="mobileMenuOpen" @close="toggleMobileMenu(false)" />
       <div class="col-start-3 justify-self-end">
         <button aria-label="menu" class="p-4 focus:outline-none md:hidden" @click="toggleMobileMenu(true)">
           <NuxtIcon name="local:hamburger" class="text-[32px]" />
         </button>
-        <ButtonColorMode class="hidden md:block" />
+        <LazyButtonColorMode hydrate-on-visible class="hidden md:block" />
       </div>
     </nav>
   </header>

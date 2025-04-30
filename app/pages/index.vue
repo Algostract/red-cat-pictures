@@ -38,8 +38,9 @@ const featuredVideos = computed(() => videos.value.filter(({ type }) => type ===
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
-const isModelContactOpen = ref<boolean>(false)
 const activeCategory = ref<Category>('ecommerce')
+const activePhotoName = useState<string>()
+const isModelContactOpen = useState<boolean>('isModelContactOpen', () => false)
 
 function onContact(action: boolean) {
   if (action) {
@@ -51,8 +52,6 @@ function onContact(action: boolean) {
   }
 }
 
-const activePhotoName = useState<string>()
-
 useHead({
   bodyAttrs: {
     class: 'scrollbar-hidden',
@@ -62,12 +61,11 @@ useHead({
 
 <template>
   <div class="flex flex-col gap-4">
-    <ButtonFloatingAction :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
-    <SectionHero :video="heroVideo" @contact="onContact(true)" />
-    <SectionGallery :photos="photos" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
-    <SectionFeaturedPhoto :photos="photos" :active-category="activeCategory" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
-    <SectionFeaturedVideo :videos="featuredVideos" :active-category="activeCategory" />
-    <SectionPricing :active-category="activeCategory" />
-    <ModalContact :is-open="isModelContactOpen" @close="onContact(false)" />
+    <LazyButtonFloatingAction hydrate-on-idle :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
+    <LazySectionHero hydrate-on-visible :video="heroVideo" @contact="onContact(true)" />
+    <LazySectionGallery hydrate-on-visible :photos="photos" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
+    <LazySectionFeaturedPhoto hydrate-on-visible :photos="photos" :active-category="activeCategory" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
+    <LazySectionFeaturedVideo hydrate-on-visible :videos="featuredVideos" :active-category="activeCategory" />
+    <LazySectionPricing hydrate-on-visible :active-category="activeCategory" />
   </div>
 </template>
