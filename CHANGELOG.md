@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.8.2
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.8.1...v2.8.2)
+
+### 🔥 Performance
+
+- Implement lazy loading for components and add URL to GalleryPhoto type ([35c5a34](https://github.com/Algostract/red-cat-pictures/commit/35c5a34))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.8.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.8.0...v2.8.1)
