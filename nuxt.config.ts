@@ -41,6 +41,7 @@ export default defineNuxtConfig({
       version: '',
     },
     public: {
+      siteUrl: '',
       scripts: {
         googleAnalytics: {
           id: '',
@@ -111,7 +112,11 @@ export default defineNuxtConfig({
   },
   site: {
     name: 'RED CAT PICTURES',
-    url: 'https://redcatpictures.com',
+    url: process.env.NUXT_PUBLIC_SITE_URL,
+  },
+  sitemap: {
+    autoLastmod: true,
+    sources: ['/api/__sitemap__/urls'],
   },
   robots: {
     disallow: ['/_nuxt/'],

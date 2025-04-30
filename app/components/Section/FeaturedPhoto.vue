@@ -81,7 +81,7 @@ const photos = computed<GalleryPhoto[]>(() =>
     },
   ].map((photo, index) => {
     return {
-      name: categoryPhotos[props.activeCategory].value[index]?.name,
+      name: categoryPhotos[props.activeCategory].value[index]?.title,
       id: categoryPhotos[props.activeCategory].value[index]?.id,
       description: categoryPhotos[props.activeCategory].value[index]?.description,
       dynamicClass: objectToClass(photo.position, photo.size),
@@ -95,7 +95,7 @@ const photos = computed<GalleryPhoto[]>(() =>
   <section id="featured-photos" class="relative h-fit">
     <SectionLabel icon="photo" title="Featured Photos" />
     <div class="relative grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3">
-      <NuxtLink v-for="{ name, id, description, dynamicClass, aspectRatio } in photos" :key="id" :to="`/photo/${name}`" :class="dynamicClass" class="size-full" @click="emit('active', name)">
+      <NuxtLink v-for="{ title: name, id, description, dynamicClass, aspectRatio } in photos" :key="id" :to="`/photo/${name}`" :class="dynamicClass" class="size-full" @click="emit('active', name)">
         <NuxtImg
           provider="uploadcare"
           :src="id"

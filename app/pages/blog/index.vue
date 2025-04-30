@@ -3,8 +3,10 @@ const { data: blogs } = await useFetch('/api/blog')
 
 const title = `Blogs`
 const description = `Read our Blogs for expert tips on photography and videography.`
-const url = 'https://redcatpictures.com'
-const imageUrl = blogs.value?.length ? `https://ucarecdn.com/${blogs.value[0]?.cover}/-/format/auto/-/scale_crop/1200x630/` : `${url}/preview/landscape.webp`
+const {
+  public: { siteUrl },
+} = useRuntimeConfig()
+const imageUrl = blogs.value?.length ? `https://ucarecdn.com/${blogs.value[0]?.cover}/-/format/auto/-/scale_crop/1200x630/` : `${siteUrl}/preview/landscape.webp`
 
 useSeoMeta({
   title: title,
@@ -15,7 +17,7 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${url}/blog`,
+  ogUrl: `${siteUrl}/blog`,
 })
 
 const activeBlog = useState()

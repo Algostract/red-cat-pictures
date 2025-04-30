@@ -1,7 +1,9 @@
 <script setup lang="ts">
 const title = `RED CAT PICTURES | Elevate Your Brand Image`
 const description = `Nurture the essence of your product with our photography & videography services in kolkata`
-const url = 'https://redcatpictures.com'
+const {
+  public: { siteUrl },
+} = useRuntimeConfig()
 
 useSeoMeta({
   ogType: 'profile',
@@ -19,7 +21,7 @@ useSchemaOrg([
     author: 'Shirsendu Bairagi',
   }),
   defineWebSite({
-    url: url,
+    url: siteUrl,
     name: title,
     description: description,
   }),
@@ -27,9 +29,9 @@ useSchemaOrg([
     '@type': 'EntertainmentBusiness',
     name: 'RED CAT PICTURES',
     description: description,
-    image: `${url}/previews/landing.webp`,
-    logo: url + '/logo-dark.png',
-    url: 'https://redcatpictures.com',
+    image: `${siteUrl}/previews/landing.webp`,
+    logo: siteUrl + '/logo-dark.png',
+    url: siteUrl,
     address: {
       streetAddress: '17 NS Road, Vivekananda pally near Joyram Bhavan, rajpur sonarpur',
       addressLocality: 'Kolkata',

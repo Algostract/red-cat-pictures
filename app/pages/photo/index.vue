@@ -3,8 +3,10 @@ const { data: photos } = await useFetch('/api/photo', { default: () => [] })
 
 const title = `Photos`
 const description = `Photo Gallery`
-const url = 'https://redcatpictures.com'
-const imageUrl = photos.value?.length ? `https://ucarecdn.com/${photos.value[0]?.id}/-/format/auto/-/scale_crop/1200x630/` : `${url}/preview/landscape.webp`
+const {
+  public: { siteUrl },
+} = useRuntimeConfig()
+const imageUrl = photos.value?.length ? `https://ucarecdn.com/${photos.value[0]?.id}/-/format/auto/-/scale_crop/1200x630/` : `${siteUrl}/preview/landscape.webp`
 
 useSeoMeta({
   title: title,
@@ -15,7 +17,7 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${url}/photo`,
+  ogUrl: `${siteUrl}/photo`,
 })
 
 const allUniquePhotos = usePhoto(photos, { section: 'gallery' })
@@ -31,10 +33,10 @@ const slideCounts = ['3', '4', '6'] as const
 
 const photoSlides = computed(() => {
   const slides = slideCounts.map((noOfSlides) => {
-    const slides: { id: string; name: string; description: string; aspectRatio: number }[][] = new Array(parseInt(noOfSlides)).fill(null).map((_) => [])
+    const slides: Photo[][] = new Array(parseInt(noOfSlides)).fill(null).map((_) => [])
 
-    allPhotos.value.forEach((image, index) => {
-      slides[index % parseInt(noOfSlides)]!.push(image)
+    allPhotos.value.forEach((photo, index) => {
+      slides[index % parseInt(noOfSlides)]!.push(photo)
     })
 
     return slides
@@ -65,7 +67,7 @@ const activePhotoName = useState()
               'hidden md:flex lg:hidden': slideCount == '4',
               'hidden lg:flex': slideCount == '6',
             }">
-            <NuxtLink v-for="{ id, name, description } in slidePhotos" :key="id" :to="`/photo/${name}`" @click="activePhotoName = name">
+            <NuxtLink v-for="{ id, title, description, url } in slidePhotos" :key="id" :to="url" @click="activePhotoName = title">
               <NuxtImg
                 provider="uploadcare"
                 :src="id"
@@ -77,7 +79,7 @@ const activePhotoName = useState()
                 loading="lazy"
                 quality="smart"
                 class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500"
-                :class="{ active: activePhotoName === name }" />
+                :class="{ active: activePhotoName === title }" />
             </NuxtLink>
           </div>
         </template>

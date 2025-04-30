@@ -3,8 +3,10 @@ import type { Category } from '~~/shared/types/index'
 
 const title = `Product Photography & Videography in Kolkata`
 const description = `Nurture the essence of your food & product with our professional food & product photography & videography services in kolkata`
-const url = 'https://redcatpictures.com'
-const imageUrl = `${url}/previews/landing.webp`
+const {
+  public: { siteUrl },
+} = useRuntimeConfig()
+const imageUrl = `${siteUrl}/previews/landing.webp`
 
 useSeoMeta({
   title: title,
@@ -13,9 +15,9 @@ useSeoMeta({
   description: description,
   ogDescription: description,
   twitterDescription: description,
-  ogImage: `${url}/previews/landing.webp`,
+  ogImage: `${siteUrl}/previews/landing.webp`,
   twitterImage: imageUrl,
-  ogUrl: url,
+  ogUrl: siteUrl,
 })
 
 useSchemaOrg([

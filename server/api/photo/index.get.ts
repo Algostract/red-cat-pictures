@@ -11,9 +11,9 @@ export default defineCachedEventHandler<Promise<Photo[]>>(
       }
 
       return photos
-        .map(({ name, ...rest }) => ({ name: slugify(name), ...rest }))
+        .map(({ title, ...rest }) => ({ title: slugify(title), url: slugify(`/photo/${title}`), ...rest }))
         .toSorted((a, b) => order[a.category] - order[b.category])
-        .map(({ width, height, ...rest }) => ({ aspectRatio: width / height, ...rest }))
+        .map<Photo>(({ width, height, ...rest }) => ({ aspectRatio: width / height, ...rest }))
     } catch (error: unknown) {
       console.error('API photo GET', error)
 

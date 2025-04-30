@@ -32,12 +32,13 @@ export function convertSources(name: string, sources: FileSources): Source[] {
 export default defineCachedEventHandler<Promise<Video[]>>(
   async () => {
     try {
-      const videos = await readYamlFile<FileVideoItem>('videos.yml')
+      const videos = await readYamlFile<FileVideo>('videos.yml')
       if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
-      return videos.map(({ name, sources, ...rest }) => ({
-        name,
+      return videos.map<Video>(({ title, sources, ...rest }) => ({
+        title,
         ...rest,
-        sources: convertSources(name, sources),
+        sources: convertSources(title, sources),
+        url: slugify(`/video/${title}`),
       }))
     } catch (error: unknown) {
       console.error('API video GET', error)

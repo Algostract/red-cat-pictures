@@ -13,7 +13,9 @@ if (episode.value.url !== '/episode/' + slug) {
 
 const title = `${episode.value.title}`
 const description = `${episode.value.description}`
-const url = 'https://redcatpictures.com'
+const {
+  public: { siteUrl },
+} = useRuntimeConfig()
 const imageUrl = `https://ucarecdn.com/${episode.value.cover}/-/format/auto/-/preview/1200x630/center`
 
 useSeoMeta({
@@ -25,7 +27,7 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${url}/episode/${slug}`,
+  ogUrl: `${siteUrl}/episode/${slug}`,
 })
 
 useSchemaOrg([

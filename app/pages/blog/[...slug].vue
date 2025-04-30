@@ -13,7 +13,9 @@ if (blog.value.url !== '/blog/' + slug) {
 
 const title = `${blog.value.title}`
 const description = `${blog.value.description}`
-const url = 'https://redcatpictures.com'
+const {
+  public: { siteUrl },
+} = useRuntimeConfig()
 const imageUrl = `https://ucarecdn.com/${blog.value.cover}/-/format/auto/-/preview/1200x630/center`
 
 useSeoMeta({
@@ -25,7 +27,7 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${url}/blog/${slug}`,
+  ogUrl: `${siteUrl}/blog/${slug}`,
 })
 
 useSchemaOrg([

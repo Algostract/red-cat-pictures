@@ -1,5 +1,7 @@
 ---
-- name: 'composition'
+- id: 'composition'
+  title: 'composition'
+  description: ''
   type: 'hero'
   poster: ''
   sources:
@@ -48,7 +50,9 @@
         - landscape
         - portrait
 
-- name: 'pixelplate-reel'
+- id: 'pixelplate-reel'
+  title: 'pixelplate-reel'
+  description: ''
   type: 'feature'
   poster: ''
   sources:
@@ -85,7 +89,9 @@
       '1440p':
         - portrait
 
-- name: 'peanut-bar'
+- id: 'peanut-bar'
+  title: 'peanut-bar'
+  description: ''
   type: 'feature'
   poster: ''
   sources:
@@ -122,7 +128,9 @@
       '1440p':
         - landscape
 
-- name: 'wallet'
+- id: 'wallet'
+  title: 'wallet'
+  description: ''
   type: 'feature'
   poster: ''
   sources:
@@ -159,7 +167,9 @@
       '1440p':
         - landscape
 
-- name: 'valley-strong-tea'
+- id: 'valley-strong-tea'
+  title: 'valley-strong-tea'
+  description: ''
   type: 'feature'
   poster: ''
   sources:
@@ -196,7 +206,9 @@
       '1440p':
         - landscape
 
-- name: 'sweet'
+- id: 'sweet'
+  title: 'sweet'
+  description: ''
   type: 'feature'
   poster: ''
   sources:
@@ -233,7 +245,9 @@
       '1440p':
         - landscape
 
-- name: 'red-bull'
+- id: 'red-bull'
+  title: 'red-bull'
+  description: ''
   type: 'feature'
   poster: ''
   sources:
@@ -270,7 +284,9 @@
       '1440p':
         - landscape
 
-- name: 'gulab-jamun'
+- id: 'gulab-jamun'
+  title: 'gulab-jamun'
+  description: ''
   type: 'feature'
   poster: ''
   sources:
@@ -307,7 +323,9 @@
       '1440p':
         - landscape
 
-- name: 'pixelplate'
+- id: 'pixelplate'
+  title: 'pixelplate'
+  description:
   type: 'feature'
   poster: ''
   sources:
@@ -343,7 +361,10 @@
         - landscape
       '1440p':
         - landscape
-# - name: 'cookies'
+#
+# - id: 'cookies'
+#   title: 'cookies'
+#   description: ''
 #   type: 'feature'
 #   poster: ''
 #   sources:

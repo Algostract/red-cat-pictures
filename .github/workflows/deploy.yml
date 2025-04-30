@@ -20,6 +20,7 @@ env:
   REPO: ${{ github.repository }}
   USERNAME: ${{ vars.USERNAME }}
   VERSION: ${{ github.ref_name }}
+  SITE_URL: ${{ vars.SITE_URL }}
 
 jobs:
   build-web:
@@ -89,6 +90,7 @@ jobs:
           build-args: |
             VERSION=${{ steps.metadata.outputs.version }}
             BUILD_TIME=${{ steps.metadata.outputs.buildtime }}
+            SITE_URL=${{ env.SITE_URL }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

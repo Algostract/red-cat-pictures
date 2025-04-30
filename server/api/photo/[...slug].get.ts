@@ -7,15 +7,14 @@ export default defineCachedEventHandler<Promise<PhotoDetails>>(
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })
 
-      const photo = photos.find(({ name }) => name === slug)
+      const photo = photos.find(({ title }) => slugify(title) === slug)
       if (!photo) {
         throw createError({ statusCode: 404, statusMessage: `photo ${slug} not found` })
       }
 
       return {
-        name: photo.name,
         id: photo.id,
-        title: photo.name,
+        title: photo.title,
         description: photo.description,
         category: photo.category,
         aspectRatio: photo.width / photo.height,

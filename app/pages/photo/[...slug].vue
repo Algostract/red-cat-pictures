@@ -7,7 +7,7 @@ const route = useRoute()
 const slug = route.params.slug!.toString()
 const { data: photos } = await useFetch('/api/photo', { default: () => [] })
 
-const activePhoto = computed(() => photos.value.find(({ name }) => name === activePhotoName.value))
+const activePhoto = computed(() => photos.value.find(({ title }) => title === activePhotoName.value))
 
 const activePhotoName = computed<string>(() => slugify(slug))
 
@@ -21,7 +21,9 @@ if (activePhotoName.value !== slug) {
 
 const title = `${activePhotoName.value.charAt(0).toUpperCase() + activePhotoName.value.slice(1)}`
 const description = `${activePhoto.value.description}`
-const url = 'https://redcatpictures.com'
+const {
+  public: { siteUrl },
+} = useRuntimeConfig()
 const imageUrl = `https://ucarecdn.com/${activePhoto.value.id}/-/format/auto/-/scale_crop/${Math.round(720 * activePhoto.value.aspectRatio)}x720/center`
 
 useSeoMeta({
@@ -33,12 +35,12 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${url}/photo/${activePhotoName.value}`,
+  ogUrl: `${siteUrl}/photo/${activePhotoName.value}`,
 })
 
 useSchemaOrg([
   defineImage({
-    url: `${url}/photo/${activePhotoName.value}`,
+    url: `${siteUrl}/photo/${activePhotoName.value}`,
     contentUrl: imageUrl,
     caption: description,
     width: 720,

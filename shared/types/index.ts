@@ -2,8 +2,8 @@ export type Category = 'ecommerce' | 'product' | 'food'
 export type Service = 'photo' | 'video'
 
 export interface FilePhoto {
-  name: string
   id: string
+  title: string
   description: string
   width: number
   height: number
@@ -14,6 +14,7 @@ export interface FilePhoto {
 
 export interface Photo extends Omit<FilePhoto, 'width' | 'height'> {
   aspectRatio: number
+  url: string
 }
 
 export interface PhotoDetails extends Omit<Photo, 'featured' | 'gallery'> {
@@ -21,9 +22,9 @@ export interface PhotoDetails extends Omit<Photo, 'featured' | 'gallery'> {
 }
 
 export interface GalleryPhoto {
-  name: string
   id: string
-  alt: string
+  title: string
+  description: string
   dynamicClass: string
   aspectRatio: number
 }
@@ -33,19 +34,16 @@ export interface Position {
   col: { start: number; span: number }
 }
 
-export interface FileSourceItem {
-  src: string
-  type: string
-}
-
 export type FileSources = {
   [codec in Codec]?: { type: string } & {
     [resolution in Resolution]?: Orientation[]
   }
 }
 
-export interface FileVideoItem {
-  name: string
+export interface FileVideo {
+  id: string
+  title: string
+  description: string
   type: 'hero' | 'feature'
   poster: string
   sources: FileSources
@@ -60,15 +58,13 @@ export interface Source {
   orientation: Orientation
 }
 
-export interface Video {
-  name: string
-  type: 'hero' | 'feature'
-  poster: string
+export interface Video extends Omit<FileVideo, 'sources'> {
   sources: Source[]
+  url: string
 }
 
 export interface VideoDetails extends Video {
-  name: string
+  title: string
 }
 
 export interface ServicePrice {
@@ -121,11 +117,11 @@ export interface NotionContent {
 export interface Content {
   id: string
   title: string
+  description: string
   cover: string
   createdAt: string
   modifiedAt: string
   publishedAt: string
-  description: string
   url: string
 }
 
