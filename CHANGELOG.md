@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.8.3
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.8.2...v2.8.3)
+
+### 🔥 Performance
+
+- Nuxt-image added placeholder image ([e1c0dc6](https://github.com/Algostract/red-cat-pictures/commit/e1c0dc6))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.8.2
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.8.1...v2.8.2)
