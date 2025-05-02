@@ -33,7 +33,7 @@ const emit = defineEmits<{
     </span>
     <ul class="flex w-full flex-col gap-3 md:gap-5">
       <li v-for="{ icon, title } in points" :key="icon" class="relative flex w-full items-center gap-3 overflow-hidden rounded bg-light-400 px-4 py-3 text-center dark:bg-dark-400">
-        <NuxtIcon :name="`local:${icon}`" class="fill-primary-500 text-[24px] md:text-[36px]" />
+        <NuxtIcon :name="`local:${icon}`" class="shrink-0 fill-primary-500 text-[24px] md:text-[36px]" />
         <span class="text-left text-2xs md:text-base">{{ title }}</span>
       </li>
     </ul>

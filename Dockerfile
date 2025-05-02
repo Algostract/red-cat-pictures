@@ -3,7 +3,6 @@ FROM oven/bun:1-alpine AS builder
 WORKDIR /app
 
 COPY package.json bun.lock ./
-
 COPY nuxt.config.ts ./
 
 ENV NITRO_PRESET=bun
@@ -21,8 +20,6 @@ ARG VERSION
 ARG BUILD_TIME
 
 WORKDIR /app
-
-RUN apk add --no-cache ffmpeg
 
 COPY --from=builder /app/.output ./.output
 

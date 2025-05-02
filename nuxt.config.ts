@@ -94,10 +94,13 @@ export default defineNuxtConfig({
     ],
   },
   image: {
+    provider: 'uploadcare',
     uploadcare: {
       cdnURL: 'https://ucarecdn.com',
       quality: 'smart',
       format: 'auto',
+      progressive: 'yes',
+      strip_meta: 'all',
     },
   },
   scripts: {

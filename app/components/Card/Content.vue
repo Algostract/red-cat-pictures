@@ -16,15 +16,13 @@ const emit = defineEmits<{
 <template>
   <NuxtLink :to="url" class="flex aspect-[32/28] max-w-[318px] flex-col overflow-hidden border border-primary-500 bg-light-500 dark:bg-dark-500" @click="emit('active')">
     <NuxtImg
-      provider="uploadcare"
       :src="cover ?? ''"
       :alt="title"
       :width="640"
       :height="Math.round(640 / (16 / 9))"
       fit="cover"
-      format="auto"
       loading="lazy"
-      quality="smart"
+      :placeholder="[160, Math.round(160 / (16 / 9)), 'lightest', 25]"
       class="cover-img aspect-[13/7] h-full w-full overflow-hidden rounded-sm bg-light-600 object-cover dark:bg-dark-500"
       :class="{ active: isActive }" />
     <div class="p-2 md:px-4">

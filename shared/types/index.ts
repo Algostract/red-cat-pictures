@@ -94,7 +94,7 @@ export interface NotionContent {
     }
     Status: {
       status: {
-        name: 'Idea' | 'Drafting' | 'Ready for Review' | 'Ready to Publish' | 'Published' | 'Unpublished'
+        name: 'Plan' | 'Draft' | 'Ready' | 'Publish' | 'Unpublish'
       }
     }
     'Content type': {

@@ -65,14 +65,13 @@ useSchemaOrg([
     </header>
     <!-- App Header -->
     <NuxtImg
-      provider="uploadcare"
       :src="activePhoto.id"
       :alt="activePhoto.description"
       :width="Math.round(720 * activePhoto.aspectRatio)"
       :height="720"
       fit="fill"
-      format="auto"
-      loading="lazy"
+      loading="eager"
+      :placeholder="[Math.round(180 * activePhoto.aspectRatio), 180, 'lightest', 25]"
       class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500 md:h-full md:w-auto" />
     <!-- <h1 class="text-center my-8">{{ activeImage.title }}</h1> -->
   </main>

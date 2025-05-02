@@ -62,10 +62,10 @@ useHead({
 <template>
   <div class="flex flex-col gap-4">
     <LazyButtonFloatingAction hydrate-on-idle :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
-    <LazySectionHero hydrate-on-visible :video="heroVideo" @contact="onContact(true)" />
-    <LazySectionGallery hydrate-on-visible :photos="photos" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
+    <SectionHero :video="heroVideo" @contact="onContact(true)" />
+    <SectionGallery :photos="photos" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
     <LazySectionFeaturedPhoto hydrate-on-visible :photos="photos" :active-category="activeCategory" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
     <LazySectionFeaturedVideo hydrate-on-visible :videos="featuredVideos" :active-category="activeCategory" />
-    <LazySectionPricing hydrate-on-visible :active-category="activeCategory" />
+    <SectionPricing :active-category="activeCategory" />
   </div>
 </template>

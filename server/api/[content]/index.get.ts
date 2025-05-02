@@ -33,7 +33,7 @@ export default defineCachedEventHandler<Promise<Content[]>>(
       const results = await Promise.all(
         contents.map(async ({ id, properties }) => {
           if (properties['Content type'].select?.name.toLowerCase() !== contentType) return null
-          if (properties.Status.status.name !== 'Published') return null
+          if (properties.Status.status.name !== 'Publish') return null
 
           const content = (await notion.pages.retrieve({ page_id: id })) as unknown as NotionContent
           const markdown = await convertNotionPageToMarkdown(notion, n2m, id)

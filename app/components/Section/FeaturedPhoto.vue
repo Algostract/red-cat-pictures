@@ -21,12 +21,6 @@ const categoryPhotos = {
   food: usePhoto(props.photos, { section: 'featured', category: 'food' }),
 }
 
-onMounted(() => {
-  // console.log(props.photos)
-  console.log('Featured Photo', categoryPhotos.ecommerce.value)
-  console.log('Featured Photo', photos.value)
-})
-
 const photos = computed<GalleryPhoto[]>(() =>
   [
     {
@@ -85,14 +79,14 @@ const photos = computed<GalleryPhoto[]>(() =>
       size: 'm',
       aspectRatio: 0.67,
     },
-  ].map((photo, index) => {
+  ].map((photo, index): GalleryPhoto => {
     return {
-      name: categoryPhotos[props.activeCategory].value[index]?.title,
-      id: categoryPhotos[props.activeCategory].value[index]?.id,
-      description: categoryPhotos[props.activeCategory].value[index]?.description,
+      id: categoryPhotos[props.activeCategory].value[index]!.id,
+      title: categoryPhotos[props.activeCategory].value[index]!.title,
+      description: categoryPhotos[props.activeCategory].value[index]!.description,
       dynamicClass: objectToClass(photo.position, photo.size),
       aspectRatio: photo.aspectRatio,
-      url: categoryPhotos[props.activeCategory].value[index]?.url,
+      url: categoryPhotos[props.activeCategory].value[index]!.url,
     }
   })
 )
@@ -104,15 +98,13 @@ const photos = computed<GalleryPhoto[]>(() =>
     <div class="relative grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3">
       <NuxtLink v-for="{ title, id, description, dynamicClass, aspectRatio, url } in photos" :key="id" :to="url" :class="dynamicClass" class="size-full" @click="emit('active', title)">
         <NuxtImg
-          provider="uploadcare"
           :src="id"
           :alt="description"
           :width="640"
           :height="Math.round(640 / aspectRatio)"
           fit="fill"
-          format="auto"
           loading="lazy"
-          :query="{ preview: `640x${Math.round(640 / aspectRatio)}` }"
+          :placeholder="[160, Math.round(160 / aspectRatio), 'lightest', 25]"
           class="size-full overflow-hidden rounded-sm bg-light-600 dark:bg-dark-500"
           :class="{ active: activePhoto === title }" />
       </NuxtLink>

@@ -45,7 +45,7 @@ const { height: sliderHeight } = useElementSize(slider)
   <section id="gallery" class="relative z-0 h-screen overflow-hidden bg-light-400 dark:bg-dark-400">
     <SectionLabel icon="grid" title="Image Gallery" />
     <div class="overflow-hidden">
-      <div ref="slider" class="autoscroll relative z-10 flex gap-2" :style="{ animationDuration: 0.008 * sliderHeight + 's' }">
+      <div ref="slider" class="autoscroll-y relative z-10 flex gap-2" :style="{ animationDuration: 0.008 * sliderHeight + 's' }">
         <!-- For Small Screen Devices -->
         <template v-for="slideCount in slideCounts">
           <div
@@ -66,9 +66,8 @@ const { height: sliderHeight } = useElementSize(slider)
                   :width="480"
                   :height="Math.round(480 / (3 / 4))"
                   fit="cover"
-                  format="auto"
                   loading="lazy"
-                  quality="smart"
+                  :placeholder="[120, Math.round(120 / (3 / 4)), 'lightest', 25]"
                   class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500"
                   :class="{ active: activePhoto === `${dupIndex}-${title}` }" />
               </NuxtLink>
@@ -87,23 +86,5 @@ const { height: sliderHeight } = useElementSize(slider)
 <style scoped>
 img.active {
   view-transition-name: selected-photo;
-}
-
-.overlay {
-  @apply after:fixed after:left-0 after:top-0 after:z-20 after:h-screen after:w-screen after:bg-gradient-to-b after:from-black/40 after:from-[3%] after:via-transparent after:via-20% after:to-black/40 after:to-[97%] after:content-[''];
-}
-
-.autoscroll {
-  animation: scroll linear infinite;
-}
-
-@keyframes scroll {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-50%);
-  }
 }
 </style>

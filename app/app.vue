@@ -43,7 +43,7 @@ useSchemaOrg([
   }),
 ])
 
-useWebNotification()
+const { isSupported, permissionGranted } = useWebNotification()
 
 async function getExistingSubscription() {
   const config = useRuntimeConfig()
@@ -57,21 +57,21 @@ async function getExistingSubscription() {
       userVisibleOnly: true,
       applicationServerKey: vapidKey,
     })
-    await $fetch('/api/notification/subscription', {
-      method: 'POST',
-      body: subscription.toJSON(),
-    })
-  } else {
-    await $fetch('/api/notification/subscription', {
-      method: 'POST',
-      body: subscription.toJSON(),
-    })
   }
+
+  await $fetch('/api/notification/subscription', {
+    method: 'POST',
+    body: subscription.toJSON(),
+  })
   return subscription
 }
 
 onMounted(async () => {
-  await getExistingSubscription()
+  if (isSupported.value && permissionGranted.value) await getExistingSubscription()
+})
+
+watch(permissionGranted, async (value) => {
+  if (value) await getExistingSubscription()
 })
 </script>
 
@@ -116,5 +116,42 @@ svg.iconify--local {
 
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.overlay {
+  @apply after:fixed after:left-0 after:top-0 after:z-20 after:h-screen after:w-screen after:bg-gradient-to-b after:from-black/40 after:from-[3%] after:via-transparent after:via-20% after:to-black/40 after:to-[97%] after:content-[''];
+}
+
+.autoscroll-x {
+  animation: scroll-x linear infinite;
+}
+
+.autoscroll-y {
+  animation: scroll-y linear infinite;
+}
+
+@keyframes scroll-x {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-y {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-50%);
+  }
 }
 </style>

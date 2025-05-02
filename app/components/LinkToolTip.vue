@@ -35,9 +35,8 @@ const image = computed<string>(() => data.value?.ogImage?.toString() ?? 'https:/
         :width="640"
         :height="Math.round(640 / (16 / 9))"
         fit="cover"
-        format="auto"
         loading="lazy"
-        quality="smart"
+        :placeholder="[160, Math.round(160 / (16 / 9)), 'lightest', 25]"
         class="aspect-[13/7] w-full overflow-hidden rounded-sm bg-light-600 dark:bg-dark-500"
         :class="!data?.ogImage ? 'object-cover' : 'object-contain'" />
       <div class="p-2 md:px-4">

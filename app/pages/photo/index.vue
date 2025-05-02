@@ -69,15 +69,13 @@ const activePhotoName = useState()
             }">
             <NuxtLink v-for="{ id, title, description, url } in slidePhotos" :key="id" :to="url" @click="activePhotoName = title">
               <NuxtImg
-                provider="uploadcare"
                 :src="id"
                 :alt="description"
                 :width="480"
                 :height="Math.round(480 / (3 / 4))"
                 fit="cover"
-                format="auto"
                 loading="lazy"
-                quality="smart"
+                :placeholder="[120, Math.round(120 / (3 / 4)), 'lightest', 25]"
                 class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500"
                 :class="{ active: activePhotoName === title }" />
             </NuxtLink>

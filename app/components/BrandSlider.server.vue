@@ -11,7 +11,7 @@ function extractId(url: string | undefined): string | undefined {
     <div class="max-auto flex items-center gap-0">
       <div class="h-20 w-2 bg-[url('assets/images/line.svg')]" />
       <div class="w-full overflow-hidden md:max-w-[700px]">
-        <div class="autoscroll flex w-fit gap-12 md:gap-16" :style="{ animationDuration: 3.0 * clients.length + 's' }">
+        <div class="autoscroll-x flex w-fit gap-12 md:gap-16" :style="{ animationDuration: 3.0 * clients.length + 's' }">
           <template v-for="dupIndex in [1, 2]" :key="dupIndex">
             <template v-for="{ id, name, website, logo } in clients" :key="id">
               <NuxtLink
@@ -20,7 +20,7 @@ function extractId(url: string | undefined): string | undefined {
                 target="__blank"
                 external
                 class="relative size-16 overflow-hidden rounded-full bg-white">
-                <NuxtImg provider="uploadcare" :src="extractId(logo)" :alt="name" :width="64" :height="64" fit="contain" format="auto" loading="lazy" quality="smart" />
+                <NuxtImg :src="extractId(logo)" :alt="name" :width="64" :height="64" fit="contain" loading="lazy" />
               </NuxtLink>
             </template>
           </template>
@@ -39,23 +39,5 @@ function extractId(url: string | undefined): string | undefined {
 <style scoped>
 .strip {
   @apply h-20 w-2 rotate-45 scale-y-125 bg-[url('assets/images/line.svg')];
-}
-
-.overlay {
-  @apply after:fixed after:left-0 after:top-0 after:z-20 after:h-screen after:w-screen after:bg-gradient-to-b after:from-black/40 after:from-[3%] after:via-transparent after:via-20% after:to-black/40 after:to-[97%] after:content-[''];
-}
-
-.autoscroll {
-  animation: scroll linear infinite;
-}
-
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-  }
 }
 </style>
