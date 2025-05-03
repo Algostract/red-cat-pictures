@@ -1,114 +1,5 @@
 import { Client } from '@notionhq/client'
-
-interface NotionProjectClient {
-  id: string
-  created_time: Date
-  last_edited_time: Date
-  cover: null
-  icon:
-    | {
-        type: 'file'
-        file: {
-          url: string
-          expiry_time: string
-        }
-      }
-    | {
-        type: 'external'
-        external: {
-          url: string
-        }
-      }
-    | null
-  properties: {
-    Name: {
-      title: {
-        type: string
-        text: {
-          content: string
-          link: null
-        }
-        plain_text: string
-        href: null
-      }[]
-    }
-    'Point of Contact': {
-      id: string
-      type: string
-      select: {
-        id: string
-        name: string
-        color: string
-      }
-    }
-    Website: {
-      url: string
-    }
-    Instagram: {
-      url: string
-    }
-    Email: {
-      email: string
-    }
-    Phone: {
-      phone_number: string
-    }
-    Project: {
-      id: string
-      type: string
-      relation: { id: string }[]
-      has_more: boolean
-    }
-    Profit: {
-      id: string
-      type: string
-      rollup: {
-        type: string
-        number: null
-        function: string
-      }
-    }
-  }
-  url: string
-  public_url: null
-}
-
-interface NotionProject {
-  id: string
-  created_time: Date
-  last_edited_time: Date
-  cover: null
-  icon:
-    | {
-        type: 'file'
-        file: {
-          url: string
-          expiry_time: string
-        }
-      }
-    | {
-        type: 'external'
-        external: {
-          url: string
-        }
-      }
-    | null
-  properties: {
-    Name: {
-      title: {
-        type: string
-        text: {
-          content: string
-          link: null
-        }
-        plain_text: string
-        href: null
-      }[]
-    }
-  }
-  url: string
-  public_url: null
-}
+import type { NotionDB, NotionProjectClient, NotionProject } from '~~/server/types'
 
 interface ProjectClient {
   id: string
@@ -127,12 +18,11 @@ export default defineCachedEventHandler<Promise<ProjectClient[]>>(
       if (!config.private.notionApiKey) {
         throw new Error('Notion API Key Not Found')
       }
+      const notionDbId = config.private.notionDbId as unknown as NotionDB
 
       notion = notion ?? new Client({ auth: config.private.notionApiKey })
 
-      const data = await notion.databases.query({
-        database_id: config.private.notionContentDbId,
-      })
+      const data = await notion.databases.query({ database_id: notionDbId.content })
 
       const projectClients = data.results as unknown as NotionProjectClient[]
 
@@ -143,14 +33,12 @@ export default defineCachedEventHandler<Promise<ProjectClient[]>>(
 
             if (icon?.type !== 'external') return null
 
-            const projects = await Promise.all(
-              properties.Project.relation.map(async () => {
-                const data = { results: { properties: { Name: { title: [{ plain_text: '' }] } } } }
+            const projects = properties.Project.relation.map(() => {
+              const data = { results: { properties: { Name: { title: [{ plain_text: '' }] } } } }
 
-                const project = data.results as unknown as NotionProject
-                return project.properties.Name.title.map(({ plain_text }) => plain_text ?? '').join('') as string
-              })
-            )
+              const project = data.results as unknown as NotionProject
+              return project.properties.Name.title.map(({ plain_text }) => plain_text ?? '').join('') as string
+            })
 
             return { id, name, projects, website: properties.Website.url ?? properties.Instagram.url, logo: icon.external.url }
           })

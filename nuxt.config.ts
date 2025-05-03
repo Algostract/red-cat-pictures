@@ -52,8 +52,7 @@ export default defineNuxtConfig({
     private: {
       rootDir: '',
       notionApiKey: '',
-      notionClientDbId: '',
-      notionContentDbId: '',
+      notionDbId: '',
       vapidKey: '',
       vapidSubject: '',
       serverValidationKey: '',
@@ -95,6 +94,7 @@ export default defineNuxtConfig({
   },
   image: {
     provider: 'uploadcare',
+    ipx: {},
     uploadcare: {
       cdnURL: 'https://ucarecdn.com',
       quality: 'smart',

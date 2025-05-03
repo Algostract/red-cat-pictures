@@ -1,6 +1,7 @@
 import { Client } from '@notionhq/client'
 import { NotionToMarkdown } from 'notion-to-md'
 import { z } from 'zod'
+import type { NotionContent, NotionDB, NotionProject, NotionProjectClient } from '~~/server/types'
 
 let notion: Client
 let n2m: NotionToMarkdown
@@ -17,10 +18,15 @@ interface NotionResource {
     Website: { type: 'url'; url: string }
     Project: { type: 'relation'; relation: string[]; has_more: false }
   }
+  url: string
+  public_url: null
 }
 
 export async function convertNotionPageToMarkdown(notion: Client, n2m: NotionToMarkdown, pageId: string, replaceNotionLinks: boolean = false) {
   try {
+    const config = useRuntimeConfig()
+    const notionDbId = config.private.notionDbId as unknown as NotionDB
+
     const mdBlocks = await n2m.pageToMarkdown(pageId)
     let mdString = n2m.toMarkdownString(mdBlocks).parent
 
@@ -31,11 +37,46 @@ export async function convertNotionPageToMarkdown(notion: Client, n2m: NotionToM
       mdString = mdString.replace(/\n{3,}/g, '\n\n').replaceAll('\\n\\n', '\n\n')
 
       // async-replace all Notion links, unpacking (fullMatch, linkText, pageId)
-      if (replaceNotionLinks)
-        mdString = await replaceAsync(mdString, /\[([^\]]+)\]\(https?:\/\/(?:www\.)?notion\.so\/(?:[^\s/()]+-)?([0-9a-fA-F]{32})(?:\S*)?\)/g, async ([_fullMatch, linkText, pageId]) => {
-          const content = (await notion.pages.retrieve({ page_id: pageId })) as unknown as NotionResource
-          return `[${linkText}](${content.properties?.Website?.url ?? content.properties?.Instagram?.url})`
+      if (replaceNotionLinks) {
+        const tasks = {
+          client: notion.databases.query({ database_id: notionDbId.client }) as unknown as NotionProjectClient[],
+          project: notion.databases.query({ database_id: notionDbId.project }) as unknown as NotionProject[],
+          content: notion.databases.query({ database_id: notionDbId.content }) as unknown as NotionContent[],
+          model: notion.databases.query({ database_id: notionDbId.model }) as unknown as NotionResource[],
+          studio: notion.databases.query({ database_id: notionDbId.studio }) as unknown as NotionResource[],
+        }
+
+        const results = await Promise.allSettled(Object.values(tasks))
+
+        type TaskKey = keyof typeof tasks
+        type TaskRecord = NotionProjectClient | NotionProject | NotionContent | NotionResource
+
+        const lookup = new Map<string, { r: TaskRecord; t: TaskKey }>()
+
+        results.forEach((res, idx) => {
+          const type = Object.keys(tasks)[idx] as keyof typeof tasks
+          if (res.status === 'fulfilled') {
+            res.value.results.forEach((r) => lookup.set(r.id.replaceAll('-', ''), { r, t: type }))
+          } else {
+            console.error(`Notion fetch failed for ${type}:`, res.reason)
+          }
         })
+
+        return mdString.replace(/\[([^\]]+)\]\(https?:\/\/(?:www\.)?notion\.so\/(?:[^\s/()]+-)?([0-9A-Fa-f]{32})(?:\S*)?\)/g, (_full, text, pageId) => {
+          const entry = lookup.get(pageId)
+          if (!entry) return text
+
+          const { r: res, t: type } = entry
+          if (type === 'project' || type === 'content') {
+            const title = (res.properties as { 'Content name': { title: { plain_text: string }[] } })['Content name'].title.map((t) => t.plain_text).join('')
+            const contentType = (res.properties as { 'Content type': { select: { name: string } } })['Content type']?.select?.name.toLowerCase()
+            return `[${text}](/${contentType}/${slugify(title)}_${res.id})`
+          } else {
+            const url = res.properties?.Website?.url || res.properties?.Instagram?.url || '#'
+            return `[${text}](${url})`
+          }
+        })
+      }
 
       mdString = mdString.trim()
     }

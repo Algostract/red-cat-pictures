@@ -5,12 +5,18 @@ const props = defineProps<{
   position: { x: number; y: number }
 }>()
 
+const {
+  public: { siteUrl },
+} = useRuntimeConfig()
+
 const url = computed(() => props.url)
 const { data } = await useFetch('/api/external/meta', { query: { url } })
+const isDark = useDark()
 
 const title = computed(() => props.title ?? data.value?.ogTitle)
 const description = computed(() => data.value?.ogDescription)
 const image = computed<string>(() => data.value?.ogImage?.toString() ?? 'https://ucarecdn.com/771d0695-2196-4c98-b9eb-4f29acd6506f/-/format/auto/-/scale_crop/2560x1440/center/')
+const logo = computed<string>(() => data.value?.logo?.toString() ?? siteUrl + (isDark.value ? '/logo-light.png' : '/logo-dark.png'))
 </script>
 
 <template>
@@ -30,18 +36,27 @@ const image = computed<string>(() => data.value?.ogImage?.toString() ?? 'https:/
       class="absolute z-50 flex w-[256px] -translate-x-1/2 flex-col overflow-hidden !whitespace-normal border border-black bg-light-500 !no-underline dark:bg-dark-500 md:w-[320px]"
       tabindex="-1">
       <NuxtImg
+        provider="ipx"
         :src="image"
         :alt="title"
         :width="640"
         :height="Math.round(640 / (16 / 9))"
         fit="cover"
         loading="lazy"
-        :placeholder="[160, Math.round(160 / (16 / 9)), 'lightest', 25]"
-        class="aspect-[13/7] w-full overflow-hidden rounded-sm bg-light-600 dark:bg-dark-500"
-        :class="!data?.ogImage ? 'object-cover' : 'object-contain'" />
-      <div class="p-2 md:px-4">
-        <h5 class="mb-2 mt-2 line-clamp-2 text-lg md:mb-4 md:mt-[0.625rem]">{{ title }}</h5>
-        <p class="text-md line-clamp-3 opacity-60">{{ description }}</p>
+        class="aspect-[13/7] w-full overflow-hidden bg-light-600 dark:bg-dark-500"
+        :class="!data?.ogImage ? 'object-cover' : 'object-cover'" />
+      <div class="relative flex flex-col gap-2 p-6 pb-4">
+        <NuxtImg
+          provider="ipx"
+          :src="logo"
+          :alt="title"
+          :width="32"
+          :height="32"
+          fit="cover"
+          loading="lazy"
+          class="absolute left-0 top-0 z-10 aspect-square -translate-y-1/2 translate-x-1/2 overflow-hidden" />
+        <h5 class="!m-0 line-clamp-2 !text-lg">{{ title }}</h5>
+        <p class="!m-0 line-clamp-3 !text-sm opacity-60">{{ description }}</p>
       </div>
     </NuxtLink>
   </Transition>

@@ -33,8 +33,9 @@ export default defineCachedEventHandler(
       const ogTitle = titleNode?.properties?.content ?? null
       const ogDescription = descNode?.properties?.content ?? null
       const ogImage = imgNode?.properties?.content ?? null
+      const logo = null
 
-      return { ogTitle, ogDescription, ogImage }
+      return { ogTitle, ogDescription, ogImage, logo }
     } catch (error: unknown) {
       console.error('API og GET', error)
 

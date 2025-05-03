@@ -10,6 +10,9 @@ renderer.link = ({ href, title, tokens }) => {
 
   if (title == 'embed' || text == 'embed') {
     return `<img src="${href}" alt="${text}" class="w-full aspect-video object-cover" />`
+  } else if (title == 'video' || text == 'video') {
+    const videoId = href.split('/').pop()
+    return `<iframe src="https://www.youtube.com/embed/${videoId}?si=lG674PPCuncqyX85&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
   }
 
   const parsedText = marked.parseInline(text, { async: false })
@@ -150,5 +153,9 @@ function hideTooltip(event: TouchEvent | MouseEvent | FocusEvent) {
 
 .content blockquote {
   @apply rounded border-l-4 border-primary-500 pl-4;
+}
+
+.content iframe {
+  @apply relative block aspect-video w-full;
 }
 </style>
