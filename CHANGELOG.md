@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.8.4
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.8.3...v2.8.4)
+
+### 🩹 Fixes
+
+- [content]/[...slug].get.ts updated notion link crawling algorithm from o(n) -> o(1) ([28661d1](https://github.com/Algostract/red-cat-pictures/commit/28661d1))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.8.3
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.8.2...v2.8.3)
