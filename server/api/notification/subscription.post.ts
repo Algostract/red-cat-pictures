@@ -9,9 +9,9 @@ interface PushSubscription {
 
 export default defineEventHandler(async (event) => {
   try {
-    const body = await readBody<PushSubscription>(event)
-
     const notificationStorage = useStorage('data:notification:subscription')
+
+    const body = await readBody<PushSubscription>(event)
 
     if (await notificationStorage.getItem(body.keys.auth)) {
       return { success: true }

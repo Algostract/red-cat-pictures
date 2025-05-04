@@ -70,7 +70,7 @@ export default defineNuxtConfig({
       tasks: true,
     },
     scheduledTasks: {
-      '* * * * *': ['watch:content'],
+      '*/5 * * * *': ['fetch:resource', 'notify:content'],
     },
   },
   app: {

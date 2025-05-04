@@ -1,32 +1,13 @@
 import { Client } from '@notionhq/client'
 import { NotionToMarkdown } from 'notion-to-md'
 import { z } from 'zod'
-import type { NotionContent, NotionDB, NotionProject, NotionProjectClient } from '~~/server/types'
 
 let notion: Client
 let n2m: NotionToMarkdown
 
-interface NotionResource {
-  id: string
-  created_time: string
-  last_edited_time: string
-  properties: {
-    Name: { type: 'title'; title: string[] }
-    Email: { type: 'email'; email: string }
-    Phone: { type: 'phone_number'; phone_number: string }
-    Instagram: { type: 'url'; url: string }
-    Website: { type: 'url'; url: string }
-    Project: { type: 'relation'; relation: string[]; has_more: false }
-  }
-  url: string
-  public_url: null
-}
-
-export async function convertNotionPageToMarkdown(notion: Client, n2m: NotionToMarkdown, pageId: string, replaceNotionLinks: boolean = false) {
+export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId: string, replaceNotionLinks: boolean = false) {
   try {
-    const config = useRuntimeConfig()
-    const notionDbId = config.private.notionDbId as unknown as NotionDB
-
+    const resourceStorage = useStorage<Resource>(`data:resource`)
     const mdBlocks = await n2m.pageToMarkdown(pageId)
     let mdString = n2m.toMarkdownString(mdBlocks).parent
 
@@ -38,43 +19,43 @@ export async function convertNotionPageToMarkdown(notion: Client, n2m: NotionToM
 
       // async-replace all Notion links, unpacking (fullMatch, linkText, pageId)
       if (replaceNotionLinks) {
-        const tasks = {
-          client: notion.databases.query({ database_id: notionDbId.client }) as unknown as NotionProjectClient[],
-          project: notion.databases.query({ database_id: notionDbId.project }) as unknown as NotionProject[],
-          content: notion.databases.query({ database_id: notionDbId.content }) as unknown as NotionContent[],
-          model: notion.databases.query({ database_id: notionDbId.model }) as unknown as NotionResource[],
-          studio: notion.databases.query({ database_id: notionDbId.studio }) as unknown as NotionResource[],
-        }
+        mdString = await replaceAsync(mdString, /\[([^\]]+)\]\(https?:\/\/(?:www\.)?notion\.so\/(?:[^\s/()]+-)?([0-9A-Fa-f]{32})(?:\S*)?\)/g, async ([full, text, pageId]): Promise<string> => {
+          let resource: Resource | null = null
 
-        const results = await Promise.allSettled(Object.values(tasks))
+          for (const type of resourceTypes) {
+            const item = await resourceStorage.getItem<Resource>(`${type}:${pageId}`)
 
-        type TaskKey = keyof typeof tasks
-        type TaskRecord = NotionProjectClient | NotionProject | NotionContent | NotionResource
-
-        const lookup = new Map<string, { r: TaskRecord; t: TaskKey }>()
-
-        results.forEach((res, idx) => {
-          const type = Object.keys(tasks)[idx] as keyof typeof tasks
-          if (res.status === 'fulfilled') {
-            res.value.results.forEach((r) => lookup.set(r.id.replaceAll('-', ''), { r, t: type }))
-          } else {
-            console.error(`Notion fetch failed for ${type}:`, res.reason)
+            if (item) {
+              resource = item
+              break
+            }
           }
-        })
 
-        return mdString.replace(/\[([^\]]+)\]\(https?:\/\/(?:www\.)?notion\.so\/(?:[^\s/()]+-)?([0-9A-Fa-f]{32})(?:\S*)?\)/g, (_full, text, pageId) => {
-          const entry = lookup.get(pageId)
-          if (!entry) return text
+          if (!resource) return text
+          const { type, record } = resource
 
-          const { r: res, t: type } = entry
-          if (type === 'project' || type === 'content') {
-            const title = (res.properties as { 'Content name': { title: { plain_text: string }[] } })['Content name'].title.map((t) => t.plain_text).join('')
-            const contentType = (res.properties as { 'Content type': { select: { name: string } } })['Content type']?.select?.name.toLowerCase()
-            return `[${text}](/${contentType}/${slugify(title)}_${res.id})`
-          } else {
-            const url = res.properties?.Website?.url || res.properties?.Instagram?.url || '#'
-            return `[${text}](${url})`
+          switch (type) {
+            case 'project':
+            case 'content': {
+              if (!('Type' in record.properties)) return full
+
+              const title = record.properties['Name'].title.map((t: { plain_text: string }) => t.plain_text).join('')
+              const contentType = record.properties['Type']?.select?.name.toLowerCase()
+              return `[${text}](/${contentType}/${slugify(title)}_${record.id})`
+            }
+            case 'client':
+            case 'model':
+            case 'studio': {
+              const url = ('Website' in record.properties ? record.properties.Website.url : null) ?? ('Instagram' in record.properties ? record.properties.Instagram.url : null)
+              if (!url) return full
+
+              return `[${text}](${url})`
+            }
+            default:
+              break
           }
+
+          return full
         })
       }
 
@@ -117,23 +98,22 @@ export default defineCachedEventHandler<Promise<ContentDetails>>(
       let content: NotionContent
       try {
         content = (await notion.pages.retrieve({ page_id: pageId })) as unknown as NotionContent
+        if (!content || content.properties.Status.status.name !== 'Publish') {
+          throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
+        }
       } catch {
         console.error('Notion Episode not found')
         throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
       }
 
-      if (!content) {
-        throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
-      }
-
       const id = content.id
-      const markdown = await convertNotionPageToMarkdown(notion, n2m, id, true)
-      const title = content.properties['Content name'].title.map(({ plain_text }) => plain_text ?? '').join('') as string
+      const markdown = await convertNotionPageToMarkdown(n2m, id, true)
+      const title = content.properties['Name'].title.map(({ plain_text }) => plain_text ?? '').join('') as string
 
       return {
         id,
         title,
-        cover: content.cover?.external.url?.split('/')[3] ?? null,
+        cover: content.cover?.type === 'external' ? content.cover.external.url.split('/')[3] : null,
         createdAt: content.created_time as string,
         modifiedAt: content.last_edited_time as string,
         publishedAt: content.properties['Publish date'].date.start as string,

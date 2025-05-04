@@ -1,5 +1,4 @@
 import { Client } from '@notionhq/client'
-import type { NotionDB, NotionProjectClient, NotionProject } from '~~/server/types'
 
 interface ProjectClient {
   id: string
@@ -22,7 +21,7 @@ export default defineCachedEventHandler<Promise<ProjectClient[]>>(
 
       notion = notion ?? new Client({ auth: config.private.notionApiKey })
 
-      const data = await notion.databases.query({ database_id: notionDbId.content })
+      const data = await notion.databases.query({ database_id: notionDbId.client })
 
       const projectClients = data.results as unknown as NotionProjectClient[]
 

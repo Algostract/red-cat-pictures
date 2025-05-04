@@ -2,7 +2,6 @@ import { Client } from '@notionhq/client'
 import { NotionToMarkdown } from 'notion-to-md'
 import { z } from 'zod'
 import { convertNotionPageToMarkdown } from './[...slug].get'
-import type { NotionContent, NotionDB } from '~~/server/types'
 
 let notion: Client
 let n2m: NotionToMarkdown
@@ -34,18 +33,18 @@ export default defineCachedEventHandler<Promise<Content[]>>(
       const contents = data.results as unknown as NotionContent[]
 
       const results = await Promise.all(
-        contents.map(async ({ id, properties }) => {
-          if (properties['Content type'].select?.name.toLowerCase() !== contentType) return null
+        contents.map(async ({ id, properties }): Promise<Content | null> => {
+          if (properties['Type'].select?.name.toLowerCase() !== contentType) return null
           if (properties.Status.status.name !== 'Publish') return null
 
           const content = (await notion.pages.retrieve({ page_id: id })) as unknown as NotionContent
-          const markdown = await convertNotionPageToMarkdown(notion, n2m, id)
-          const title = properties['Content name'].title.map(({ plain_text }) => plain_text ?? '').join('') as string
+          const markdown = await convertNotionPageToMarkdown(n2m, id)
+          const title = properties['Name'].title.map(({ plain_text }) => plain_text ?? '').join('') as string
 
           return {
             id,
             title,
-            cover: content.cover?.external.url?.split('/')[3] ?? null,
+            cover: content.cover?.type === 'external' ? content.cover.external.url.split('/')[3] : null,
             createdAt: content.created_time as string,
             modifiedAt: content.last_edited_time as string,
             publishedAt: content.properties['Publish date'].date.start as string,

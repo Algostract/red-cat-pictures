@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { Category } from '~~/shared/types/index'
-
 const title = `Product Photography & Videography in Kolkata`
 const description = `Nurture the essence of your food & product with our professional food & product photography & videography services in kolkata`
 const {

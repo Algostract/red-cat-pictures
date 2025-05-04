@@ -21,6 +21,8 @@ ARG BUILD_TIME
 
 WORKDIR /app
 
+RUN apk add --no-cache ffmpeg
+
 COPY --from=builder /app/.output ./.output
 
 ENV NODE_ENV=production

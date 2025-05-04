@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
     const body = await readBody<PushNotification>(event)
     const notificationStorage = useStorage<PushSubscription>('data:notification:subscription')
 
-    const subscriptions = (await Promise.all((await notificationStorage.getKeys()).map((key) => notificationStorage.getItem(key)))).filter((item) => item !== null)
+    const subscriptions = (await notificationStorage.getItems(await notificationStorage.getKeys())).flatMap(({ value }) => value)
     await pushNotification(body, subscriptions)
 
     return { success: true }

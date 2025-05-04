@@ -17,7 +17,7 @@ const route = useRoute()
 
 const hasFloatingActionBar = computed(() => route.path === '/')
 const isLightMode = computed(() => route.path === '/' || route.path.includes('/episode/'))
-const isDarkMode = computed(() => route.path.includes('/photo') || route.path.includes('/blog/'))
+const isDarkMode = computed(() => route.path.includes('/blog/'))
 </script>
 
 <template>

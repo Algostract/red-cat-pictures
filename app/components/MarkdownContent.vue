@@ -26,9 +26,8 @@ const containerRef = useTemplateRef<HTMLDivElement>('containerRef')
 const hoveredLink = ref<{
   url: string
   title: string
-  top: number
-  left: number
-} | null>(null)
+  position: { x: number; y: number }
+}>()
 
 function showTooltip(event: TouchEvent | MouseEvent | FocusEvent) {
   const target = (event.target as HTMLElement).closest('a') as HTMLAnchorElement | null
@@ -43,15 +42,17 @@ function showTooltip(event: TouchEvent | MouseEvent | FocusEvent) {
         : {
             url: target.href,
             title: target.title || target.textContent || '',
-            top: Math.round(linkRect.top - containerRect.top + linkRect.height),
-            left: Math.round(linkRect.left - containerRect.left + linkRect.width / 2),
+            position: {
+              x: Math.round(linkRect.left - containerRect.left + linkRect.width / 2),
+              y: Math.round(linkRect.top - containerRect.top + linkRect.height),
+            },
           }
   }
 }
 
 const { start, stop } = useTimeoutFn(
   () => {
-    hoveredLink.value = null
+    hoveredLink.value = undefined
   },
   100,
   { immediate: false }
@@ -79,11 +80,8 @@ function hideTooltip(event: TouchEvent | MouseEvent | FocusEvent) {
       @mouseleave.capture="hideTooltip"
       v-html="marked(props.content, { async: false })" />
     <LazyLinkToolTip
-      v-if="hoveredLink"
-      :url="hoveredLink.url"
-      :title="hoveredLink.title"
-      :position="{ x: hoveredLink.left, y: hoveredLink.top }"
-      hydrate-on-visible
+      :active-link="hoveredLink"
+      hydrate-on-idle
       @touchstart.self="showTooltip"
       @touchend.self="hideTooltip"
       @touchcancel.self="hideTooltip"
