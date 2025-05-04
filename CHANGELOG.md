@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.8.5
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.8.4...v2.8.5)
+
+### 💅 Refactors
+
+- Resource caching, external meta api migrated to task, photo page design changed ([02aa3d5](https://github.com/Algostract/red-cat-pictures/commit/02aa3d5))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.8.4
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.8.3...v2.8.4)
