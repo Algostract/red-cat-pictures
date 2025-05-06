@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.9.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.8.5...v2.9.0)
+
+### 🚀 Enhancements
+
+- About page added, breadcrumbs added ([120b488](https://github.com/Algostract/red-cat-pictures/commit/120b488))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.8.5
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.8.4...v2.8.5)
