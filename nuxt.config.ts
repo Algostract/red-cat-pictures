@@ -1,3 +1,5 @@
+import vue from '@vitejs/plugin-vue'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
@@ -22,19 +24,39 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-splide',
   ],
+  nitro: {
+    compressPublicAssets: true,
+    storage: {
+      fs: {
+        driver: 'fs',
+        base: './static',
+      },
+    },
+    rollupConfig: {
+      plugins: [vue()],
+    },
+    experimental: {
+      tasks: true,
+    },
+    scheduledTasks: {
+      '*/5 * * * *': ['fetch:resource', 'notify:content'],
+    },
+  },
   routeRules: {
     '/': { swr: true },
     '/_ipx/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/fonts/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/api/**': { cors: true },
-    '/images/**': { redirect: { to: '/photo/**', statusCode: 301 } },
     '/image/**': { redirect: { to: '/photo/**', statusCode: 301 } },
+    '/photos/**': { redirect: { to: '/photo/**', statusCode: 301 } },
     '/photo/**': { headers: { 'cache-control': 'max-age=31536000' } },
+    '/videos/**': { redirect: { to: '/video/**', statusCode: 301 } },
     '/video/**': { headers: { 'cache-control': 'max-age=31536000' } },
-    '/blogs/**': { redirect: { to: '/blog/**', statusCode: 301 } },
-    '/blog/**': { ssr: true },
     '/episodes/**': { redirect: { to: '/episode/**', statusCode: 301 } },
     '/episode/**': { ssr: true },
+    '/blogs/**': { redirect: { to: '/blog/**', statusCode: 301 } },
+    '/blog/**': { ssr: true },
+    '/about': { ssr: true },
   },
   runtimeConfig: {
     app: {
@@ -56,21 +78,6 @@ export default defineNuxtConfig({
       vapidKey: '',
       vapidSubject: '',
       serverValidationKey: '',
-    },
-  },
-  nitro: {
-    compressPublicAssets: true,
-    storage: {
-      fs: {
-        driver: 'fs',
-        base: './static',
-      },
-    },
-    experimental: {
-      tasks: true,
-    },
-    scheduledTasks: {
-      '*/5 * * * *': ['fetch:resource', 'notify:content'],
     },
   },
   app: {

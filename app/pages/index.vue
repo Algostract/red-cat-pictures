@@ -6,6 +6,12 @@ const {
 } = useRuntimeConfig()
 const imageUrl = `${siteUrl}/previews/landing.webp`
 
+useHead({
+  bodyAttrs: {
+    class: 'scrollbar-hidden',
+  },
+})
+
 useSeoMeta({
   title: title,
   ogTitle: title,
@@ -22,8 +28,10 @@ useSchemaOrg([
   defineBreadcrumb({
     itemListElement: [
       { name: 'Home', item: '/' },
+      { name: 'Photo', item: '/photo' },
       { name: 'Episode', item: '/episode' },
       { name: 'Blog', item: '/blog' },
+      { name: 'About Us', item: '/about' },
     ],
   }),
 ])
@@ -49,12 +57,6 @@ function onContact(action: boolean) {
     gaProxy.gtag('event', 'contact_close')
   }
 }
-
-useHead({
-  bodyAttrs: {
-    class: 'scrollbar-hidden',
-  },
-})
 </script>
 
 <template>

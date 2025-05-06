@@ -21,7 +21,10 @@ const urls = ref([
   { url: '/#pricing', id: 'pricing', title: 'Pricing' },
   { url: '/episode', id: 'episodes', title: 'Episodes' },
   { url: '/blog', id: 'blogs', title: 'Blogs' },
+  { url: '/about', id: 'about', title: 'About us' },
 ])
+
+const route = useRoute()
 
 const isAnimate = ref(false)
 </script>
@@ -39,7 +42,7 @@ const isAnimate = ref(false)
           </NuxtLink>
           <ul class="font-semibold flex flex-col gap-4 p-6 text-right text-xl">
             <li v-for="{ id, url, title } of urls" :key="id" class="py-2">
-              <NuxtLink :to="url" class="block hover:underline" @click="onNavigate(id)">
+              <NuxtLink :to="url" class="inline-block hover:underline" :active-class="route.name !== 'index' ? 'underline' : ''" @click="onNavigate(id)">
                 {{ title }}
               </NuxtLink>
             </li>
@@ -51,7 +54,7 @@ const isAnimate = ref(false)
   </div>
   <ul class="hidden justify-center gap-8 whitespace-nowrap md:flex">
     <li v-for="{ id, url, title } of urls" :key="id">
-      <NuxtLink :to="url" class="p-2" active-class="" @click="onNavigate(id)">{{ title }}</NuxtLink>
+      <NuxtLink :to="url" class="p-2 hover:underline" :active-class="route.name !== 'index' ? 'underline' : ''" @click="onNavigate(id)">{{ title }} </NuxtLink>
     </li>
   </ul>
 </template>

@@ -1,9 +1,5 @@
 <script setup lang="ts">
 const { data: clients } = await useFetch('/api/client')
-
-function extractId(url: string | undefined): string | undefined {
-  return url?.match(/^https:\/\/ucarecdn\.com\/([^/]+)(?:\/|$)/)?.[1]
-}
 </script>
 
 <template>
@@ -15,12 +11,12 @@ function extractId(url: string | undefined): string | undefined {
           <template v-for="dupIndex in [1, 2]" :key="dupIndex">
             <template v-for="{ id, name, website, logo } in clients" :key="id">
               <NuxtLink
-                v-if="extractId(logo)"
+                v-if="extractUploadcareId(logo)"
                 :href="website ? `${website}?utm_source=redcatpictures.com` : ''"
                 target="__blank"
                 external
                 class="relative size-16 overflow-hidden rounded-full bg-white">
-                <NuxtImg :src="extractId(logo)" :alt="name" :width="64" :height="64" fit="contain" loading="lazy" />
+                <NuxtImg :src="extractUploadcareId(logo)" :alt="name" :width="64" :height="64" fit="contain" loading="lazy" />
               </NuxtLink>
             </template>
           </template>

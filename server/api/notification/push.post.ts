@@ -22,19 +22,12 @@ export async function pushNotification(payload: PushNotification, subscriptions:
   }
 }
 
-function extractBearerToken(headerValue: string | undefined) {
-  if (typeof headerValue !== 'string') return null
-  const parts = headerValue.split(' ') // split on the space :contentReference[oaicite:0]{index=0}
-  if (parts.length !== 2 || parts[0] !== 'Bearer') return null
-  return parts[1] // the token is the second element
-}
-
 export default defineEventHandler(async (event) => {
   try {
     const config = useRuntimeConfig()
     const authHeader = getRequestHeader(event, 'authorization')
 
-    if (extractBearerToken(authHeader) !== config.private.vapidKey) {
+    if (extractBearerToken(authHeader) !== config.private.serverValidationKey) {
       throw createError({
         statusCode: 400,
         statusMessage: "Server Validation Key does't match",
