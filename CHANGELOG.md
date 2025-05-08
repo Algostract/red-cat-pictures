@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.10.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.9.0...v2.10.0)
+
+### 🚀 Enhancements
+
+- Integrate nodemailer + @vue-email for email outreach functionality ([620a8ea](https://github.com/Algostract/red-cat-pictures/commit/620a8ea))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.9.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.8.5...v2.9.0)
