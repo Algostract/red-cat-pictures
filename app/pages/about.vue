@@ -2,7 +2,7 @@
 // import { differenceInYears, formatDuration } from 'date-fns'
 
 const title = `About Us`
-const description = `Details About Aratrik Nandy Professional Product Photographer`
+const description = `We turn your brand’s story into vivid visual experiences. From concept to delivery, our expert team crafts stunning product, food, and lifestyle photography & videography that drives engagement and boosts sales.`
 const {
   public: { siteUrl },
 } = useRuntimeConfig()
@@ -37,7 +37,7 @@ const { data: clients } = await useFetch('/api/client')
     <div class="mb-4 mt-28 flex flex-col justify-center gap-4 px-4 lg:mb-12 lg:mt-36 lg:pl-8">
       <h1 class="text-xl font-semi-bold lg:text-2xl">Hello,</h1>
       <h2 class="text-2xl lg:text-4xl">I'm Aratrik Nandy</h2>
-      <h2 class="text-lg lg:text-2xl">CEO & Product Photographer</h2>
+      <h2 class="text-lg lg:text-2xl">CEO & Lead Product Photographer</h2>
       <h3>Our Story</h3>
       <p>
         RED CAT PICTURES opened with the ambition to transform how brands present their products through compelling imagery, through our Product and Food Photography and Product Videography we create
@@ -71,7 +71,7 @@ const { data: clients } = await useFetch('/api/client')
       </p>
       <h3>Meet the Team</h3>
       <p>
-        <strong>Aratrik Nandy, CEO & Product Photographer</strong> Aratrik brings a keen eye for detail and a passion for storytelling through images.
+        <strong>Aratrik Nandy, CEO & Lead Product Photographer</strong> Aratrik brings a keen eye for detail and a passion for storytelling through images.
         <strong>Swarup Ghosh, VFX Specialist</strong> Swarup has experience in VFX industry for around 5 years and worked for several well known brands.
         <strong>Kinjal Adhikary, Assistant Director</strong> Kinjal brings his immersive knowledge about film-making. His insights and unique sense of creativity regarding our product videography
         always adds an extra layer to our projects.
@@ -79,15 +79,17 @@ const { data: clients } = await useFetch('/api/client')
       <h3>Our Clients</h3>
       <p>
         We’ve had the privilege of working with brands such as
-        <template v-for="({ id, name, website, logo }, index) in clients" :key="id">
-          <NuxtLink
-            v-if="extractUploadcareId(logo)"
-            :href="website ? `${website}?utm_source=redcatpictures.com` : ''"
-            target="__blank"
-            external
-            class="relative size-16 overflow-hidden whitespace-nowrap rounded-full bg-white px-3 py-1 transition-colors duration-200 ease-in-out hover:!bg-primary-400 hover:!text-white dark:bg-black">
-            {{ name }} </NuxtLink
-          >{{ index !== clients.length - 1 ? ', ' : '' }}
+        <template v-if="clients">
+          <template v-for="({ id, name, website, logo }, index) in clients" :key="id">
+            <NuxtLink
+              v-if="extractUploadcareId(logo)"
+              :href="website ? `${website}?utm_source=redcatpictures.com` : ''"
+              target="__blank"
+              external
+              class="relative size-16 overflow-hidden whitespace-nowrap rounded-full bg-white px-3 py-1 transition-colors duration-200 ease-in-out hover:!bg-primary-400 hover:!text-white dark:bg-black">
+              {{ name }} </NuxtLink
+            >{{ index !== clients.length - 1 ? ', ' : '' }}
+          </template>
         </template>
         —delivering versatile, professional imagery that drives results.
       </p>
@@ -99,11 +101,11 @@ const { data: clients } = await useFetch('/api/client')
         <NuxtImg
           provider="ipx"
           src="/images/hero-1.webp"
-          alt="Aratrik Nandy, CEO & Product Photographer"
+          alt="Aratrik Nandy, CEO & Lead Product Photographer"
           :width="576"
           :height="Math.round(576 / (3 / 4))"
           class="aspect-[3/4] w-full object-cover object-top grayscale hover:grayscale-0" />
-        <figcaption>Aratrik Nandy, CEO & Product Photographer</figcaption>
+        <figcaption>Aratrik Nandy, CEO & Lead Product Photographer</figcaption>
       </figure>
       <figure class="w-full">
         <NuxtImg

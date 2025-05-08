@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const title = `Product Photography & Videography in Kolkata`
-const description = `Nurture the essence of your food & product with our professional food & product photography & videography services in kolkata`
+const description = `Nurture the essence of your food & product with our professional photography & videography services in kolkata`
 const {
   public: { siteUrl },
 } = useRuntimeConfig()

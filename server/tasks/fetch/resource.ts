@@ -31,6 +31,7 @@ export default defineTask({
     notion = notion ?? new Client({ auth: config.private.notionApiKey })
 
     const resources: ResourceQueries = {
+      prospect: notion.databases.query({ database_id: notionDbId.prospect }) as unknown as NotionQuery<NotionProspect>,
       client: notion.databases.query({ database_id: notionDbId.client }) as unknown as NotionQuery<NotionProjectClient>,
       project: notion.databases.query({ database_id: notionDbId.project }) as unknown as NotionQuery<NotionProject>,
       content: notion.databases.query({ database_id: notionDbId.content }) as unknown as NotionQuery<NotionContent>,

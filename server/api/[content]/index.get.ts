@@ -39,7 +39,7 @@ export default defineCachedEventHandler<Promise<Content[]>>(
 
           const content = (await notion.pages.retrieve({ page_id: id })) as unknown as NotionContent
           const markdown = await convertNotionPageToMarkdown(n2m, id)
-          const title = properties['Name'].title.map(({ plain_text }) => plain_text ?? '').join('') as string
+          const title = properties.Name.title.map(({ plain_text }) => plain_text ?? '').join('') as string
 
           return {
             id,

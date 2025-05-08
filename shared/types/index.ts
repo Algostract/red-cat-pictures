@@ -100,12 +100,12 @@ export interface MetaData {
 }
 
 /* Server Only */
-
-export const resourceTypes = ['client', 'project', 'content', 'model', 'studio'] as const
+export const resourceTypes = ['prospect', 'client', 'project', 'content', 'model', 'studio'] as const
 
 export type ResourceType = (typeof resourceTypes)[number]
 
 export interface ResourceRecordMap {
+  prospect: NotionProspect
   client: NotionProjectClient
   project: NotionProject
   content: NotionContent
@@ -136,6 +136,30 @@ type NotionMediaAsset =
       }
     }
   | null
+
+export interface NotionProspect {
+  id: string
+  created_time: Date
+  last_edited_time: Date
+  cover: NotionMediaAsset
+  icon: NotionMediaAsset
+  properties: {
+    Name: {
+      title: {
+        type: string
+        text: {
+          content: string
+          link: null
+        }
+        plain_text: string
+        href: null
+      }[]
+    }
+    Email: { type: 'email'; email: string }
+  }
+  url: string
+  public_url: null
+}
 
 export interface NotionProjectClient {
   id: string

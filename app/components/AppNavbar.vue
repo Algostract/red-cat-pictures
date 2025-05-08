@@ -21,7 +21,7 @@ const urls = ref([
   { url: '/#pricing', id: 'pricing', title: 'Pricing' },
   { url: '/episode', id: 'episodes', title: 'Episodes' },
   { url: '/blog', id: 'blogs', title: 'Blogs' },
-  { url: '/about', id: 'about', title: 'About us' },
+  { url: '/about', id: 'about', title: 'About Us' },
 ])
 
 const route = useRoute()

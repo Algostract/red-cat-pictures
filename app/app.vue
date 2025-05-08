@@ -47,7 +47,6 @@ const { isSupported, permissionGranted } = useWebNotification()
 
 async function getExistingSubscription() {
   const config = useRuntimeConfig()
-  const vapidKey = config.public.vapidKey
 
   const registration = await navigator.serviceWorker.ready
   let subscription = await registration.pushManager.getSubscription()
@@ -55,7 +54,7 @@ async function getExistingSubscription() {
   if (!subscription) {
     subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: vapidKey,
+      applicationServerKey: config.public.vapidKey,
     })
   }
 
@@ -63,6 +62,7 @@ async function getExistingSubscription() {
     method: 'POST',
     body: subscription.toJSON(),
   })
+
   return subscription
 }
 
@@ -88,10 +88,9 @@ watch(permissionGranted, async (value) => {
 
 <style>
 * {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
   scrollbar-width: 6px;
+  @apply antialiased;
 }
 
 *::-webkit-scrollbar {

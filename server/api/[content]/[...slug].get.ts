@@ -95,14 +95,8 @@ export default defineCachedEventHandler<Promise<ContentDetails>>(
         throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
       }
 
-      let content: NotionContent
-      try {
-        content = (await notion.pages.retrieve({ page_id: pageId })) as unknown as NotionContent
-        if (!content || content.properties.Status.status.name !== 'Publish') {
-          throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
-        }
-      } catch {
-        console.error('Notion Episode not found')
+      const content = (await notion.pages.retrieve({ page_id: pageId })) as unknown as NotionContent
+      if (!content || content.properties.Status.status.name !== 'Publish') {
         throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
       }
 

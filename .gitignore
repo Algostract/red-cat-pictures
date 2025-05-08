@@ -27,6 +27,7 @@ logs
 static/**/*.*
 !static/**/*.gitkeep
 !static/data/*
+static/data/emails.yml
 
 photography
 videography

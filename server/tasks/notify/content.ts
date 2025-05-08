@@ -1,7 +1,7 @@
 import { Client } from '@notionhq/client'
 import { NotionToMarkdown } from 'notion-to-md'
-import { pushNotification } from '~~/server/api/notification/push.post'
 import { convertNotionPageToMarkdown } from '~~/server/api/[content]/[...slug].get'
+import { pushNotification } from '~~/server/api/notification/push.post'
 
 let notion: Client
 let n2m: NotionToMarkdown
@@ -9,7 +9,7 @@ let n2m: NotionToMarkdown
 export default defineTask({
   meta: {
     name: 'notify:content',
-    description: 'Monitor new episodes and blog posts; send alerts via push, email, whatsApp, newsletter',
+    description: 'Monitor new episodes and blog posts; send alerts via push, email, whatsApp',
   },
   async run() {
     const config = useRuntimeConfig()
@@ -20,7 +20,7 @@ export default defineTask({
     n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })
     let subscriptions: PushSubscription[] = []
 
-    await Promise.all(
+    await Promise.allSettled(
       (await contentStorage.getItems(await contentStorage.getKeys())).map(async ({ value: content }) => {
         if (!content || content.notificationStatus == true) return
         if (content.record.properties.Status.status.name !== 'Publish') return
@@ -36,6 +36,7 @@ export default defineTask({
 
         console.log(`Publishing new ${contentType} content →`, title)
         await pushNotification({ title: `New ${contentType} release | ${title}`, body: `${description.split('. ')[0]}...`, url }, subscriptions)
+        // await sendEmail()
 
         content.notificationStatus = true
         await contentStorage.setItem(normalizeNotionId(id), content)

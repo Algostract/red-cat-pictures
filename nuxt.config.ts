@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@vite-pwa/nuxt',
     '@vueuse/nuxt',
+    'nuxt-nodemailer',
     'nuxt-splide',
   ],
   nitro: {
@@ -33,13 +34,14 @@ export default defineNuxtConfig({
       },
     },
     rollupConfig: {
+      // @ts-expect-error Type instantiation is excessively deep and possibly infinite.
       plugins: [vue()],
     },
     experimental: {
       tasks: true,
     },
     scheduledTasks: {
-      '*/5 * * * *': ['fetch:resource', 'notify:content'],
+      '*/5 * * * *': ['fetch:resource', 'notify:content', 'marketing'],
     },
   },
   routeRules: {
@@ -61,6 +63,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     app: {
       version: '',
+      buildTime: '',
     },
     public: {
       siteUrl: '',
@@ -78,6 +81,9 @@ export default defineNuxtConfig({
       vapidKey: '',
       vapidSubject: '',
       serverValidationKey: '',
+      oauthClientId: '',
+      oauthClientSecret: '',
+      oauthRefreshToken: '',
     },
   },
   app: {
@@ -299,7 +305,7 @@ export default defineNuxtConfig({
         },
       ],
       navigateFallback: undefined,
-      importScripts: ['/push-sw.js'],
+      importScripts: ['/sw-push.js'],
     },
     client: {
       installPrompt: true,
@@ -310,6 +316,19 @@ export default defineNuxtConfig({
       enabled: false,
       suppressWarnings: false,
       navigateFallback: undefined,
+    },
+  },
+  nodemailer: {
+    host: '',
+    port: 0,
+    secure: false,
+    auth: {
+      user: '',
+      pass: '',
+    },
+    tls: {
+      rejectUnauthorized: false,
+      minVersion: 'TLSv1.2',
     },
   },
   splide: {
