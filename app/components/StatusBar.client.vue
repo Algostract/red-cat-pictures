@@ -14,8 +14,8 @@ function getBarWidth(index: number): number {
 </script>
 
 <template>
-  <div class="left-0 top-8 flex w-[calc(100vw-2rem)] -translate-x-1/2 items-center space-x-2 md:w-[calc(100vw-8rem)]">
-    <div v-for="(bar, i) in total" :key="i" class="relative h-0.5 flex-1 overflow-hidden rounded bg-white text-black">
+  <div class="flex h-0.5 items-center gap-2">
+    <div v-for="(bar, i) in total" :key="i" class="relative h-full w-full flex-1 overflow-hidden rounded bg-white text-black">
       <!-- Filled portion -->
       <div
         class="absolute left-0 top-0 h-full bg-primary-500"

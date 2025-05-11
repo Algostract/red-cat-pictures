@@ -1,8 +1,8 @@
-import { sendEmail } from '~~/server/api/notification/email.post'
+import { sendEmail } from '~~/server/api/subscription/[id]/email.post'
 
 export default defineTask({
   meta: {
-    name: 'outreach',
+    name: 'marketing',
     description: 'Outreach agencies via email, instagram, whatsApp',
   },
   async run() {
@@ -16,12 +16,13 @@ export default defineTask({
 
         if (!email || prospect.notificationStatus == true) return
 
-        console.log({ companyName, email })
-        await sendEmail('outreach', {
-          toEmail: email,
-          toCompanyName: companyName,
-          toPersonName: companyName,
-        })
+        await sendEmail('prospect', [
+          {
+            toEmail: email,
+            toCompanyName: companyName,
+            toPersonName: companyName,
+          },
+        ])
 
         prospect.notificationStatus = true
         await prospectStorage.setItem(normalizeNotionId(id), prospect)

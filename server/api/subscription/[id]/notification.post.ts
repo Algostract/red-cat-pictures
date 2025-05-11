@@ -7,7 +7,7 @@ interface PushNotification {
   icon?: string
 }
 
-export async function pushNotification(payload: PushNotification, subscriptions: PushSubscription[]) {
+export async function pushNotification(payload: PushNotification, subscriptions: NotificationSubscription[]) {
   try {
     const config = useRuntimeConfig()
 
@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const body = await readBody<PushNotification>(event)
-    const notificationStorage = useStorage<PushSubscription>('data:notification:subscription')
+    const notificationStorage = useStorage<NotificationSubscription>('data:subscription:notification')
 
     const subscriptions = (await notificationStorage.getItems(await notificationStorage.getKeys())).flatMap(({ value }) => value)
     await pushNotification(body, subscriptions)

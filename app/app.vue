@@ -5,6 +5,19 @@ const {
   public: { siteUrl },
 } = useRuntimeConfig()
 
+useHead({
+  htmlAttrs: {
+    lang: 'en',
+  },
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico',
+    },
+  ],
+})
+
 useSeoMeta({
   ogType: 'profile',
   ogImageWidth: 1280,
@@ -12,6 +25,13 @@ useSeoMeta({
   fbAppId: 966242223397117,
   twitterCard: 'summary_large_image',
   colorScheme: 'light dark',
+  viewport: {
+    initialScale: 1.0,
+    maximumScale: 1.0,
+    minimumScale: 1.0,
+    userScalable: 'no',
+    viewportFit: 'cover',
+  },
 })
 
 useSchemaOrg([
@@ -39,7 +59,13 @@ useSchemaOrg([
       postalCode: '700146',
       addressCountry: 'IN',
     },
-    sameAs: ['https://wa.me/c/918910489578', 'https://www.facebook.com/redcatxpictures', 'https://www.instagram.com/redcatxpictures', 'https://maps.app.goo.gl/uWqh8LjcF5ez4WZY8'],
+    sameAs: [
+      'https://wa.me/c/918910489578',
+      'https://www.facebook.com/redcatxpictures',
+      'https://www.instagram.com/redcatxpictures',
+      'https://www.youtube.com/@red_cat_pictures',
+      'https://maps.app.goo.gl/uWqh8LjcF5ez4WZY8',
+    ],
   }),
 ])
 
@@ -58,7 +84,7 @@ async function getExistingSubscription() {
     })
   }
 
-  await $fetch('/api/notification/subscription', {
+  await $fetch('/api/subscription', {
     method: 'POST',
     body: subscription.toJSON(),
   })

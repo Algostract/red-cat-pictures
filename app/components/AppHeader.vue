@@ -1,7 +1,7 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    colorMode: 'light' | 'dark' | 'auto'
+    colorMode?: 'light' | 'dark' | 'auto'
   }>(),
   {
     colorMode: 'auto',

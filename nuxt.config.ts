@@ -86,14 +86,6 @@ export default defineNuxtConfig({
       oauthRefreshToken: '',
     },
   },
-  app: {
-    head: {
-      htmlAttrs: {
-        lang: 'en',
-      },
-      // link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    },
-  },
   icon: {
     componentName: 'NuxtIcon',
     provider: 'server',

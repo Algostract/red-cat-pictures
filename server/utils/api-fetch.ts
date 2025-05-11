@@ -32,8 +32,6 @@ export default async function apiFetch<T>(
 
       const basicAuth = Buffer.from(`${safeId}:${safeSecret}`).toString('base64')
 
-      console.log({ basicAuth })
-
       const tokens = await $fetch<{ access_token: string; refresh_token: string }>('/token', {
         baseURL: 'https://oauth2.googleapis.com',
         method: 'POST',

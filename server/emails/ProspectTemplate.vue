@@ -8,14 +8,14 @@ defineProps<{
   fromCompanyLogo: string
   fromCompanyPhone: string
   fromCompanyLink: string
-  fromFeaturedPhotos: string[]
+  fromFeaturedPhotos: { id: string; title: string; description: string }[]
   emailSubject: string
   toCompanyName: string
   toPersonName: string
   toEmail: string
 }>()
 
-const referTag = '?ref=outreach-mail'
+const referTag = '?ref=mail-prospect'
 
 const tailwindConfig = {
   darkMode: 'class',
@@ -84,18 +84,9 @@ const tailwindConfig = {
 </script>
 
 <template>
-  <Tailwind :config="tailwindConfig">
-    <Html lang="en">
+  <Html lang="en">
+    <Tailwind :config="tailwindConfig">
       <Head>
-        <Font
-          font-family="Oxanium"
-          fallback-font-family="Verdana"
-          :web-font="{
-            url: 'https://fonts.gstatic.com/s/oxanium/v19/RrQQboN_4yJ0JmiMe2zE0YBB.woff2',
-            format: 'woff2',
-          }"
-          :font-weight="400"
-          font-style="normal" />
         <Font
           font-family="Oxanium"
           fallback-font-family="Verdana"
@@ -110,7 +101,7 @@ const tailwindConfig = {
       <Preview>{{ emailSubject }}</Preview>
 
       <Body class="font-body bg-white text-black">
-        <Container class="px-6 py-8">
+        <Container class="px-3 py-5">
           <!-- Heading -->
           <Section>
             <Text class="font-head mb-6 text-left text-2xl leading-tight">
@@ -119,29 +110,30 @@ const tailwindConfig = {
           </Section>
           <!-- Logo -->
           <Section class="mb-2 flex justify-center">
-            <Img :src="fromCompanyLogo" alt="Red Cat Pictures" class="h-auto w-24" />
+            <Img :src="fromCompanyLogo" alt="{{ fromCompanyName }} logo" class="mx-auto size-24" width="96" height="96" />
           </Section>
           <!-- Intro copy -->
           <Section class="mb-2 space-y-4">
             <Text class="text-base leading-relaxed"> Hello {{ toCompanyName }} Team, </Text>
             <Text class="text-base leading-relaxed">
               I’m {{ fromPersonName }} from
-              <Link :href="fromCompanyLink + referTag" :title="fromCompanyName" class="inline-block text-primary-400 underline" target="_blank">{{ fromCompanyName }}</Link
+              <Link :href="`${fromCompanyLink}${referTag}`" :title="fromCompanyName" class="inline-block text-primary-400 underline" target="_blank">{{ fromCompanyName }}</Link
               >. We specialize in product videography and photography—delivering crisp, high‑resolution
-              <Link :href="fromCompanyLink + '/#featured-photos' + referTag" class="inline-block text-primary-400 underline" target="_blank">photos</Link>
+              <Link :href="`${fromCompanyLink}/#featured-photos`" class="inline-block text-primary-400 underline" target="_blank">photos</Link>
               and short‑form
-              <Link :href="fromCompanyLink + '/#featured-videos' + referTag" class="inline-block text-primary-400 underline" target="_blank">videos</Link>
+              <Link :href="`${fromCompanyLink}/#featured-videos`" class="inline-block text-primary-400 underline" target="_blank">videos</Link>
               <br />
               for e‑commerce, social media, and advertising. Whether on‑location or in‑studio, our full production and post‑production services ensure top‑quality assets, on time and within budget.
               Here are some of our work
             </Text>
             <!-- Product images row -->
-            <Section class="mb-4 flex space-x-4">
-              <Img v-for="(src, i) in fromFeaturedPhotos" :key="i" :src="src" alt="Product shot" class="inline h-full w-1/4 object-cover" />
+            <Section class="relative mb-4 flex flex-row">
+              <Link v-for="{ id, title, description } in fromFeaturedPhotos" :key="id" :href="`${fromCompanyLink}/photo/${title.toLowerCase()}${referTag}`" class="inline-block w-1/4" target="_blank">
+                <Img :src="`https://ucarecdn.com/${id}/-/smart_resize/960x1440/`" :alt="description" class="w-full object-cover" />
+              </Link>
             </Section>
             <Section class="mb-4 text-center">
-              <!-- ← add text-center here -->
-              <Link :href="fromCompanyLink + '/photo' + referTag" + class="inline-block rounded-full bg-primary-500 px-4 py-1 text-white" target="_blank"> Show More </Link>
+              <Link :href="`${fromCompanyLink}/photo${referTag}`" class="inline-block rounded bg-primary-500 px-4 py-1 text-white" target="_blank"> Show More </Link>
             </Section>
             <Text class="text-base leading-relaxed"
               >I would appreciate a brief call to discuss strategies for enhancing your clients' visual marketing campaigns. Please advise on your availability.</Text
@@ -154,13 +146,13 @@ const tailwindConfig = {
               Best regards,<br />
               {{ fromPersonName }} (Lead Photographer)<br />
               Website:
-              <Link :href="fromCompanyLink + referTag" :title="fromCompanyName" class="inline-block underline" target="_blank">{{ fromCompanyLink }}</Link
+              <Link :href="`${fromCompanyLink}${referTag}`" :title="fromCompanyName" class="inline-block underline" target="_blank">{{ fromCompanyLink }}</Link
               ><br />
               Phone: {{ fromCompanyPhone }}
             </Text>
           </Section>
         </Container>
       </Body>
-    </Html>
-  </Tailwind>
+    </Tailwind>
+  </Html>
 </template>

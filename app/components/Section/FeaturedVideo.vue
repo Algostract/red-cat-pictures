@@ -91,8 +91,12 @@ function isLandscapeOriented(deviceOrientation: string, videoOrientation: string
         @ended="updateVideoIndex()"
         @click="toggleMute" />
       <!-- @click="toggleFullScreen()" -->
-      <StatusBar :total="videos.length" :active-index="activeVideoIndex" :active-percent="activeVideoProgress" class="absolute left-1/2 top-4 z-0 -translate-x-1/2" />
-      <ButtonSlide class="absolute bottom-20 left-1/2 z-0 -translate-x-1/2 md:bottom-12 md:left-16 md:translate-x-0" @click="(value) => updateVideoIndex(value === 'left' ? -1 : 1)" />
+      <StatusBar
+        :total="videos.length"
+        :active-index="activeVideoIndex"
+        :active-percent="activeVideoProgress"
+        class="absolute left-1/2 top-8 z-0 w-[calc(100vw-2rem)] -translate-x-1/2 md:w-[calc(100vw-8rem)]" />
+      <ButtonSlide class="absolute bottom-20 left-1/2 z-10 -translate-x-1/2 md:bottom-12 md:left-16 md:translate-x-0" @click="(value) => updateVideoIndex(value === 'left' ? -1 : 1)" />
       <NuxtIcon
         v-for="iconName in ['muted', 'unmuted']"
         :key="iconName"

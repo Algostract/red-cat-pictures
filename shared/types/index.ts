@@ -311,3 +311,17 @@ export interface NotionStudio {
   url: string
   public_url: null
 }
+
+export interface NotificationSubscription {
+  endpoint: string
+  expirationTime: null
+  keys: {
+    p256dh: string
+    auth: string
+  }
+}
+
+export interface EmailSubscription {
+  name: string
+  email: string
+}

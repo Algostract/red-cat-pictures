@@ -1,14 +1,10 @@
 import { Buffer } from 'buffer'
 import { render } from '@vue-email/render'
-import emailTemplate from '~~/shared/emails'
+import emailTemplate, { type EmailTemplateData } from '~~/server/emails'
 
-interface TransactionalEmail {
-  template: 'outreach'
-  data: {
-    toCompanyName: string
-    toPersonName: string
-    toEmail: string
-  }
+interface TransactionalEmail<T extends keyof EmailTemplateData> {
+  template: T
+  data: EmailTemplateData[T]
 }
 
 function buildRawMessage({ to, from, subject, text, html }: { to: string; from: string; subject: string; text: string; html: string }) {
@@ -46,46 +42,53 @@ async function saveAsDraft(rawMessage: string) {
   return res
 }
 
-export async function sendEmail(
-  template: 'outreach',
-  data: {
-    toCompanyName: string
-    toPersonName: string
-    toEmail: string
-  },
-  isDraft: boolean = true
-) {
-  const finalData = await emailTemplate[template].data(data)
+export async function sendEmail<T extends keyof EmailTemplateData>(template: T, data: EmailTemplateData[T][], isDraft = true) {
+  try {
+    const module = emailTemplate[template] as {
+      data(arg: EmailTemplateData[T]): Promise<{
+        [key: string]: string
+      }>
+    }
 
-  const html = await render(emailTemplate[template].template, finalData)
-  const text = await render(emailTemplate[template].template, finalData, { plainText: true })
+    await Promise.allSettled(
+      data.map(async (item) => {
+        const finalData = await module.data(item)
 
-  if (isDraft) {
-    // Save to Draft
-    const raw = buildRawMessage({
-      from: `"${finalData.fromCompanyName}" <${finalData.fromEmail}>`,
-      to: finalData.toEmail,
-      subject: finalData.emailSubject,
-      html,
-      text,
-    })
+        const html = await render(emailTemplate[template].template, finalData)
+        const text = await render(emailTemplate[template].template, finalData, { plainText: true })
 
-    const draft = await saveAsDraft(raw)
-    console.log('Mail Draft saved with ID', draft.id)
-  } else {
-    // Send email Directly
-    const { transport } = useNodeMailer()
+        if (isDraft) {
+          // Save to Draft
+          const raw = buildRawMessage({
+            from: `"${finalData.fromCompanyName}" <${finalData.fromEmail}>`,
+            to: finalData.toEmail,
+            subject: finalData.emailSubject,
+            html,
+            text,
+          })
 
-    await transport.verify()
+          await saveAsDraft(raw)
+        } else {
+          // Send email Directly
+          const { transport } = useNodeMailer()
 
-    await transport.sendMail({
-      from: `"${finalData.fromCompanyName}" <${finalData.fromEmail}>`,
-      to: finalData.toEmail,
-      subject: finalData.emailSubject,
-      html,
-      text,
-    })
-    console.log('Mail Send')
+          await transport.verify()
+
+          await transport.sendMail({
+            from: `"${finalData.fromCompanyName}" <${finalData.fromEmail}>`,
+            to: finalData.toEmail,
+            subject: finalData.emailSubject,
+            html,
+            text,
+          })
+        }
+      })
+    )
+
+    return true
+  } catch (error) {
+    console.error('function sendEmail', error)
+    return false
   }
 }
 
@@ -101,8 +104,8 @@ export default defineEventHandler<Promise<{ success: boolean }>>(async (event) =
       })
     }
 
-    const body = await readBody<TransactionalEmail>(event)
-    await sendEmail(body.template, body.data)
+    const body = await readBody<TransactionalEmail<keyof EmailTemplateData>>(event)
+    await sendEmail(body.template, [body.data], false)
 
     return { success: true }
   } catch (error: unknown) {

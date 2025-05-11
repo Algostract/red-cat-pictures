@@ -1,17 +1,8 @@
-interface PushSubscription {
-  endpoint: string
-  expirationTime: null
-  keys: {
-    p256dh: string
-    auth: string
-  }
-}
-
 export default defineEventHandler(async (event) => {
   try {
-    const notificationStorage = useStorage('data:notification:subscription')
+    const notificationStorage = useStorage<NotificationSubscription>('data:subscription:notification')
 
-    const body = await readBody<PushSubscription>(event)
+    const body = await readBody<NotificationSubscription>(event)
 
     if (await notificationStorage.getItem(body.keys.auth)) {
       return { success: true }
@@ -21,7 +12,7 @@ export default defineEventHandler(async (event) => {
 
     return { success: true }
   } catch (error: unknown) {
-    console.error('API notification/subscription POST', error)
+    console.error('API subscription/notification POST', error)
 
     if (error instanceof Error && 'statusCode' in error) {
       throw error
