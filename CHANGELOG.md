@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.11.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.10.0...v2.11.0)
+
+### 🚀 Enhancements
+
+- Implement email and notification subscription APIs, add email templates, update outreach task ([7a33069](https://github.com/Algostract/red-cat-pictures/commit/7a33069))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.10.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.9.0...v2.10.0)
