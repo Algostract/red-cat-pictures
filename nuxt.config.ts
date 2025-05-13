@@ -41,7 +41,7 @@ export default defineNuxtConfig({
       tasks: true,
     },
     scheduledTasks: {
-      '*/5 * * * *': ['fetch:resource', 'notify:content', 'marketing'],
+      '*/5 * * * *': ['fetch:resource', 'notify:content', 'prospect:marketing'],
     },
   },
   routeRules: {

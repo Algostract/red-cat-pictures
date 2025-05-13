@@ -15,7 +15,7 @@ export default defineTask({
   async run() {
     const config = useRuntimeConfig()
     const contentStorage = useStorage<Resource<'content'>>(`data:resource:content`)
-    const subscriptionStorage = useStorage('data:subscription:')
+    const subscriptionStorage = useStorage('data:subscription')
 
     notion = notion ?? new Client({ auth: config.private.notionApiKey })
     n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })

@@ -1,8 +1,88 @@
+import puppeteer from 'puppeteer'
+import { unified } from 'unified'
 import type { Nodes } from 'hast'
 import { fromHtml } from 'hast-util-from-html'
 import { select } from 'hast-util-select'
+import rehypeRemark from 'rehype-remark'
+import remarkStringify from 'remark-stringify'
+import rehypeParse from 'rehype-parse'
 
-function extractOgData(tree: Nodes, baseUrl: string) {
+export async function scrapeData(url: string, format: 'html' | 'tree' | 'markdown', engine: 'fetch' | 'browser' = 'fetch') {
+  // 1. Fetch raw HTML
+  let html = ''
+
+  if (engine === 'browser') {
+    const browser = await puppeteer.launch({ headless: false })
+    try {
+      const page = await browser.newPage()
+      await page.setViewport({ width: 1280, height: 960 })
+      await page.goto(url, { waitUntil: 'networkidle2' })
+
+      // Scroll to the bottom of the page to load dynamic content
+      let previousHeight = await page.evaluate('document.body.scrollHeight')
+      while (true) {
+        await page.evaluate('window.scrollTo(0, document.body.scrollHeight)')
+        await page.waitForNetworkIdle() // Wait for content to load
+        const newHeight = await page.evaluate('document.body.scrollHeight')
+        if (newHeight === previousHeight) {
+          break
+        }
+        previousHeight = newHeight
+      }
+      await page.waitForNetworkIdle()
+      html = await page.content()
+    } catch {
+      console.error('Error in scrapeData', { url })
+    } finally {
+      await browser.close()
+    }
+  } else {
+    html = await $fetch<string>(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' + '(KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'same-origin',
+        'Sec-Fetch-User': '?1',
+      },
+    })
+  }
+
+  if (!html) return html
+
+  // 2. Return raw HTML if requested
+  if (format === 'html') {
+    return html
+  }
+  // 3. Parse into your Nodes tree for both 'tree' and 'markdown'
+  else if (format === 'tree') {
+    // Just hand back the tree via callback
+    return fromHtml(html)
+  } else if (format === 'markdown') {
+    // Convert HTML->HAST->MDAST->Markdown string
+    const content = await unified()
+      .use(rehypeParse, { fragment: true }) // Parses HTML into HAST
+      .use(rehypeRemark) // Transforms HAST to MDAST
+      .use(remarkStringify) // Serializes MDAST to Markdown
+      .process(html)
+      .then((file) => String(file))
+
+    return content
+  }
+
+  // Should never reach here
+  throw new Error(`Unknown format: ${format}`)
+}
+
+function extractOgData(
+  tree: Nodes,
+  baseUrl: string
+): {
+  ogTitle: string | null
+  ogDescription: string | null
+  ogImage: string | null
+  logo: string | null
+} {
   let title = select('meta[property="og:title"]', tree)?.properties?.content || select('title', tree)?.children?.[0]?.value || select('h1', tree)?.children?.[0]?.value || null
 
   let description =
@@ -28,7 +108,7 @@ function extractOgData(tree: Nodes, baseUrl: string) {
   return {
     ogTitle: title,
     ogDescription: description,
-    ogImage: image,
+    ogImage: image as string,
     logo,
   }
 }
@@ -79,17 +159,9 @@ export default defineTask({
           }
         }
 
-        const FETCH_HEADERS = {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 ' + '(KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
-          'Sec-Fetch-Dest': 'document',
-          'Sec-Fetch-Mode': 'navigate',
-          'Sec-Fetch-Site': 'same-origin',
-          'Sec-Fetch-User': '?1',
-        }
-
         if (resource) {
           Object.assign(data, {
-            ogTitle: resource.record.properties.Name.title.map((t) => ('plan_text' in t ? t.plan_text : '')).join('') || null,
+            ogTitle: resource.record.properties.Name.title.map((title) => (typeof title !== 'string' ? title.plain_text : '')).join('') || null,
             ogDescription: null,
             ogImage:
               (resource.record.cover?.type === 'external' ? resource.record.cover.external.url : null) ?? (resource.record.cover?.type === 'file' ? resource.record.cover.file.url : null) ?? null,
@@ -97,8 +169,7 @@ export default defineTask({
           })
 
           if (source === 'auto') {
-            const html = await $fetch<string>(url, { headers: FETCH_HEADERS })
-            const tree = fromHtml(html)
+            const tree = await scrapeData(url, 'tree')
             const ext = extractOgData(tree, url)
             data.ogTitle ??= ext.ogTitle
             data.ogDescription ??= ext.ogDescription
@@ -106,9 +177,9 @@ export default defineTask({
             data.logo ??= ext.logo
           }
         } else {
-          const html = await $fetch<string>(url, { headers: FETCH_HEADERS })
-          const tree = fromHtml(html)
-          Object.assign(data, extractOgData(tree, url))
+          const tree = await scrapeData(url, 'tree')
+          const ext = extractOgData(tree, url)
+          Object.assign(data, ext)
         }
 
         await metaDataStorage.setItem(normalizeUrl(url), data)

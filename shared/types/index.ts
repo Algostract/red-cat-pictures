@@ -155,7 +155,40 @@ export interface NotionProspect {
         href: null
       }[]
     }
+    Status: {
+      type: 'status'
+      status: {
+        name: 'Unverified' | 'Verified' | 'Initiate' | 'Communicate' | 'Converted' | 'Cancelled'
+      }
+    }
+    Type: {
+      type: 'select'
+      select: {
+        name: string
+      }
+    }
+    Website: {
+      type: 'url'
+      url: string
+    }
+    Instagram: {
+      type: 'url'
+      url: string
+    }
+    LinkedIn: {
+      type: 'url'
+      url: string
+    }
     Email: { type: 'email'; email: string }
+
+    Whatsapp: {
+      type: 'url'
+      url: string
+    }
+    Phone: {
+      type: 'phone_number'
+      phone_number: string
+    }
   }
   url: string
   public_url: null
