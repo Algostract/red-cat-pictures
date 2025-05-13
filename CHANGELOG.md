@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.12.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.11.0...v2.12.0)
+
+### 🚀 Enhancements
+
+- Added prospect:fetch ([028a24b](https://github.com/Algostract/red-cat-pictures/commit/028a24b))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.11.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.10.0...v2.11.0)
