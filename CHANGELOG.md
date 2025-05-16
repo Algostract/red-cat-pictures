@@ -1,5 +1,21 @@
 # red-cat-pictures
 
+## v2.12.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.12.0...v2.12.1)
+
+### 🩹 Fixes
+
+- StatusBar fixed, notionTitleStringify function added, packages updated, docker swarm added ([1e6d643](https://github.com/Algostract/red-cat-pictures/commit/1e6d643))
+
+### 🎨 Styles
+
+- Fixed xl screen ui breaking issues ([ee9cd39](https://github.com/Algostract/red-cat-pictures/commit/ee9cd39))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.12.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.11.0...v2.12.0)
