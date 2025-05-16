@@ -19,7 +19,7 @@ export default defineTask({
     await Promise.allSettled(
       (await prospectStorage.getItems(await prospectStorage.getKeys())).map(async ({ value: prospect }) => {
         const id = prospect.record.id
-        const companyName = prospect.record.properties.Name.title.map(({ plain_text }) => plain_text ?? '').join('')
+        const companyName = notionTitleStringify(prospect.record.properties.Name.title)
         const email = prospect.record.properties.Email.email
         const status = prospect.record.properties.Status.status.name
 

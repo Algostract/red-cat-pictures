@@ -1,12 +1,11 @@
 <script setup lang="ts">
-defineProps<{
-  title: string
-  cover: string | null
-  createdAt: string
-  description: string
-  url: string
+import type { Content } from '~~/shared/types'
+
+interface ContentProp extends Content {
   isActive: boolean
-}>()
+}
+
+defineProps<ContentProp>()
 
 const emit = defineEmits<{
   active: []

@@ -1,15 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    'app/components/**/*.{vue,js,ts}',
-    'app/layouts/**/*.{vue,js,ts}',
-    'app/pages/**/*.{vue,js,ts}',
-    'app/App.{js,ts,vue}',
-    'app/app.{js,ts,vue}',
-    'app/Error.{js,ts,vue}',
-    'app/error.{js,ts,vue}',
-    'app/content/**/*.md',
-  ],
+import type { Config } from 'tailwindcss'
+
+export default <Partial<Config>>{
   darkMode: 'class',
   theme: {
     fontSize: {
@@ -70,6 +61,5 @@ export default {
         600: '#C02650',
       },
     },
-    extend: {},
   },
 }

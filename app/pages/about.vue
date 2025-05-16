@@ -17,10 +17,13 @@ useHead({
 useSeoMeta({
   title: title,
   ogTitle: title,
+  twitterTitle: title,
   description: description,
   ogDescription: description,
+  twitterDescription: description,
   ogImage: imageUrl,
-  ogUrl: siteUrl + '/about',
+  twitterImage: imageUrl,
+  ogUrl: `${siteUrl}/about`,
 })
 
 /* const DOE = '2021-01-01'

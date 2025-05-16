@@ -28,7 +28,7 @@ export default defineCachedEventHandler<Promise<ProjectClient[]>>(
       return (
         await Promise.all(
           projectClients.map(async ({ id, icon, properties }): Promise<ProjectClient | null> => {
-            const name = properties.Name.title.map(({ plain_text }) => plain_text ?? '').join('') as string
+            const name = notionTitleStringify(properties.Name.title)
 
             if (icon?.type !== 'external') return null
 
@@ -36,7 +36,7 @@ export default defineCachedEventHandler<Promise<ProjectClient[]>>(
               const data = { results: { properties: { Name: { title: [{ plain_text: '' }] } } } }
 
               const project = data.results as unknown as NotionProject
-              return project.properties.Name.title.map(({ plain_text }) => plain_text ?? '').join('') as string
+              return notionTitleStringify(project.properties.Name.title)
             })
 
             return { id, name, projects, website: properties.Website.url ?? properties.Instagram.url, logo: icon.external.url }

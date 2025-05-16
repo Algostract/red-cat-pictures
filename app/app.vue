@@ -84,7 +84,7 @@ async function getExistingSubscription() {
     })
   }
 
-  await $fetch('/api/subscription', {
+  await $fetch('/api/subscription/notification', {
     method: 'POST',
     body: subscription.toJSON(),
   })

@@ -104,6 +104,8 @@ export const resourceTypes = ['prospect', 'client', 'project', 'content', 'model
 
 export type ResourceType = (typeof resourceTypes)[number]
 
+export type NotionDB = { [K in ResourceType]: string }
+
 export interface ResourceRecordMap {
   prospect: NotionProspect
   client: NotionProjectClient
@@ -118,8 +120,6 @@ export interface Resource<T extends ResourceType = ResourceType> {
   notificationStatus: boolean
   record: ResourceRecordMap[T]
 }
-
-export type NotionDB = { [K in ResourceType]: string }
 
 type NotionMediaAsset =
   | {

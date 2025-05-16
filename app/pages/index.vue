@@ -19,7 +19,7 @@ useSeoMeta({
   description: description,
   ogDescription: description,
   twitterDescription: description,
-  ogImage: `${siteUrl}/previews/landing.webp`,
+  ogImage: imageUrl,
   twitterImage: imageUrl,
   ogUrl: siteUrl,
 })

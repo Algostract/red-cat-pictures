@@ -289,14 +289,26 @@ export default defineNuxtConfig({
       ],
     },
     workbox: {
-      globPatterns: ['**/*.{html,css,js,jpg,png,svg,webp,ico}'],
+      globPatterns: ['**/*.{html,css,js,jpg,jpeg,png,svg,webp,ico,mp3,wav,ogg,mp4,webm,mov,m4a,aac}'],
       runtimeCaching: [
         {
-          urlPattern: '/',
+          urlPattern: /\.(?:html|js|css)$/,
           handler: 'NetworkFirst',
+          options: {
+            cacheName: 'dynamic-assets',
+          },
+        },
+        {
+          urlPattern: /\.(?:png|jpg|jpeg|svg|webp|ico|mp3|wav|ogg|mp4|webm|mov|m4a|aac)$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'static-assets',
+            expiration: { maxEntries: 100, maxAgeSeconds: 7 * 24 * 60 * 60 },
+          },
         },
       ],
-      navigateFallback: undefined,
+      navigateFallback: '/',
+      cleanupOutdatedCaches: true,
       importScripts: ['/sw-push.js'],
     },
     client: {

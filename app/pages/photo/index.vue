@@ -20,8 +20,7 @@ useSeoMeta({
   ogUrl: `${siteUrl}/photo`,
 })
 
-const allPhotos = usePhoto(photos, { section: 'gallery' })
-const groupedPhotos = computed(() => Object.groupBy(allPhotos.value, (photo) => photo.category ?? 'Uncategorized'))
+const groupedPhotos = computed(() => Object.groupBy(photos.value, (photo) => photo.category ?? 'Uncategorized'))
 
 const activePhotoName = useState<string | null>()
 </script>

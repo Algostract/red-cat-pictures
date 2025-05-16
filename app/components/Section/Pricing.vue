@@ -61,7 +61,7 @@ const activeTab = ref<Service>('photo')
     <Splide :options="splideOption" tag="div" :has-track="false" @move="(slideIndex: number) => (activeSlideIndex = slideIndex)">
       <SplideTrack>
         <SplideSlide v-for="({ title, price, unit, points }, index) in prices[activeCategory][activeTab]" :key="title" class="flex justify-center">
-          <CardPrice :active="index === activeSlideIndex" :title="title" :price="price" :unit="unit" :points="points" @contact="onContact(true)" />
+          <CardPrice :is-active="index === activeSlideIndex" :title="title" :price="price" :unit="unit" :points="points" @contact="onContact(true)" />
         </SplideSlide>
       </SplideTrack>
       <div class="splide__arrows absolute left-0 right-0 top-1/2 flex justify-between fill-white text-[24px]">
