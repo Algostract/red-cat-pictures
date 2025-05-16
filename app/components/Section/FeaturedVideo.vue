@@ -70,9 +70,9 @@ function isLandscapeOriented(deviceOrientation: string, videoOrientation: string
 </script>
 
 <template>
-  <section id="featured-videos" ref="featured-videos" class="relative h-fit">
+  <section id="featured-videos" ref="featured-videos" class="relative h-fit w-full">
     <SectionLabel icon="movie" title="Featured Videos" />
-    <div v-if="videos.length" class="relative left-1/2 flex h-screen w-screen -translate-x-1/2 items-center justify-center overflow-hidden bg-black">
+    <div v-if="videos.length" class="relative left-1/2 flex h-screen -translate-x-1/2 items-center justify-center overflow-hidden bg-black">
       <NuxtVideo
         ref="videoContainerRef"
         :key="activeVideoIndex"
@@ -91,11 +91,7 @@ function isLandscapeOriented(deviceOrientation: string, videoOrientation: string
         @ended="updateVideoIndex()"
         @click="toggleMute" />
       <!-- @click="toggleFullScreen()" -->
-      <StatusBar
-        :total="videos.length"
-        :active-index="activeVideoIndex"
-        :active-percent="activeVideoProgress"
-        class="absolute left-1/2 top-8 z-0 w-[calc(100vw-2rem)] -translate-x-1/2 md:w-[calc(100vw-8rem)]" />
+      <StatusBar :total="videos.length" :active-index="activeVideoIndex" :active-percent="activeVideoProgress" class="absolute left-1/2 top-8 z-0 w-full -translate-x-1/2 px-4 md:px-16" />
       <ButtonSlide class="absolute bottom-20 left-1/2 z-10 -translate-x-1/2 md:bottom-12 md:left-16 md:translate-x-0" @click="(value) => updateVideoIndex(value === 'left' ? -1 : 1)" />
       <NuxtIcon
         v-for="iconName in ['muted', 'unmuted']"

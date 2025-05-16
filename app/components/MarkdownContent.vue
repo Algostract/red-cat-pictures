@@ -110,7 +110,7 @@ function hideTooltip(event: TouchEvent | MouseEvent | FocusEvent) {
 }
 
 .content p {
-  @apply my-2 font-light md:my-4 md:text-[1.125rem];
+  @apply my-2 font-light md:my-4 md:text-[1.125rem] xl:text-xl xl:leading-relaxed;
 }
 
 .content > img {
