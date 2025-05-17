@@ -34,7 +34,7 @@
     "tunnel": "untun tunnel --port 4300 http://localhost:4300"
   },
   "dependencies": {
-    "@notionhq/client": "^2.3.0",
+    "@notionhq/client": "^3.0.1",
     "@nuxt/eslint": "^1.4.0",
     "@nuxt/fonts": "^0.11.4",
     "@nuxt/icon": "^1.13.0",
@@ -55,7 +55,7 @@
     "@vueuse/nuxt": "^13.2.0",
     "confbox": "^0.2.2",
     "date-fns": "^4.1.0",
-    "eslint": "^9.26.0",
+    "eslint": "^9.27.0",
     "execa": "^9.5.3",
     "hast-util-from-html": "^2.0.3",
     "hast-util-select": "^6.0.4",
@@ -91,6 +91,7 @@
   "trustedDependencies": [
     "@parcel/watcher",
     "esbuild",
+    "puppeteer",
     "sharp",
     "unrs-resolver"
   ]

@@ -54,7 +54,7 @@ const activeTab = ref<Service>('photo')
 </script>
 
 <template>
-  <section id="pricing" class="max-w-screen relative -left-2 mx-auto w-full md:left-0">
+  <section id="pricing" class="max-w-screen relative -mx-2 w-[calc(100%+16px)]">
     <div class="mx-auto mb-4 flex w-fit gap-4 md:mb-12">
       <ButtonLabel v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="title === activeTab" @click="activeTab = title" />
     </div>

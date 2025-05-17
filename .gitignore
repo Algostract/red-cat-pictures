@@ -1,9 +1,9 @@
 # Nuxt dev/build outputs
-.output
+.cache
 .data
 .nuxt
 .nitro
-.cache
+.output
 dist
 
 # Node dependencies
@@ -31,5 +31,4 @@ static/data/emails.yml
 
 photography
 videography
-
 directus

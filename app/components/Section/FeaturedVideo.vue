@@ -70,7 +70,7 @@ function isLandscapeOriented(deviceOrientation: string, videoOrientation: string
 </script>
 
 <template>
-  <section id="featured-videos" ref="featured-videos" class="relative h-fit w-full">
+  <section id="featured-videos" ref="featured-videos" class="relative -mx-2 h-fit w-[calc(100%+16px)]">
     <SectionLabel icon="movie" title="Featured Videos" />
     <div v-if="videos.length" class="relative left-1/2 flex h-screen -translate-x-1/2 items-center justify-center overflow-hidden bg-black">
       <NuxtVideo

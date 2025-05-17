@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { marked } from 'marked'
 
+const {
+  public: { siteUrl },
+} = useRuntimeConfig()
+
 const props = defineProps<{ content: string }>()
 
 const renderer = new marked.Renderer()
@@ -20,6 +24,19 @@ renderer.link = ({ href, title, tokens }) => {
   return `<a href="${href}?utm_source=redcatpictures.com" target="_blank" rel="noopener">${parsedText}</a>`
 }
 
+renderer.blockquote = ({ text }) => {
+  const content = text
+    .replace(/^<p>/, '')
+    .replace(/<\/p>$/, '')
+    .trim()
+
+  if (text.toLowerCase() === 'show more photos') {
+    return `<a href="${siteUrl}/photo" class="cta secondary-btn" target="_blank" rel="noopener">${content}</button>`
+  }
+
+  return `<button class="cta secondary-btn">${content}</button>`
+}
+
 marked.use({ renderer })
 
 const containerRef = useTemplateRef<HTMLDivElement>('containerRef')
@@ -31,6 +48,9 @@ const hoveredLink = ref<{
 
 function showTooltip(event: TouchEvent | MouseEvent | FocusEvent) {
   const target = (event.target as HTMLElement).closest('a') as HTMLAnchorElement | null
+
+  if (target?.classList.contains('cta')) return
+
   if (target && containerRef.value) {
     const linkRect = target.getBoundingClientRect()
     const containerRect = containerRef.value.getBoundingClientRect()
@@ -110,7 +130,7 @@ function hideTooltip(event: TouchEvent | MouseEvent | FocusEvent) {
 }
 
 .content p {
-  @apply my-2 font-light md:my-4 md:text-[1.125rem] xl:text-xl xl:leading-relaxed;
+  @apply my-2 font-light md:my-4 md:text-[1.125rem] 2xl:text-xl 2xl:leading-relaxed;
 }
 
 .content > img {
@@ -155,5 +175,9 @@ function hideTooltip(event: TouchEvent | MouseEvent | FocusEvent) {
 
 .content iframe {
   @apply relative block aspect-video w-full;
+}
+
+.content .cta.secondary-btn {
+  @apply mx-auto block w-fit rounded bg-primary-500 px-4 py-1 text-white no-underline decoration-transparent;
 }
 </style>
