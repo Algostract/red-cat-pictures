@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.12.2
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.12.1...v2.12.2)
+
+### 🎨 Styles
+
+- Added show more button, fixed layout for 2xl screen ([8945289](https://github.com/Algostract/red-cat-pictures/commit/8945289))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.12.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.12.0...v2.12.1)
