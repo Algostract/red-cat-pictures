@@ -28,6 +28,7 @@ coverage
 .DS_Store
 .fleet
 .idea
+misc
 
 # Env files
 .env*
@@ -39,7 +40,3 @@ static/**/*.*
 # Docker files
 .dockerignore
 Dockerfile
-
-photography
-videography
-directus

@@ -3,22 +3,13 @@ import { Client } from '@notionhq/client'
 let notion: Client
 
 type ResourceQueries = {
-  [K in ResourceType]: NotionQuery<ResourceRecordMap[K]>
-}
-
-export interface NotionQuery<T> {
-  object: string
-  results: T[]
-  next_cursor: null
-  has_more: boolean
-  type: string
-  request_id: string
+  [K in ResourceType]: ResourceRecordMap[K][]
 }
 
 export default defineTask({
   meta: {
-    name: 'fetch:resource',
-    description: '',
+    name: 'sync:resource',
+    description: 'Sync Notion Resources into cache',
   },
   async run() {
     const config = useRuntimeConfig()
@@ -31,12 +22,13 @@ export default defineTask({
     notion = notion ?? new Client({ auth: config.private.notionApiKey })
 
     const resources: ResourceQueries = {
-      prospect: notion.databases.query({ database_id: notionDbId.prospect }) as unknown as NotionQuery<NotionProspect>,
-      client: notion.databases.query({ database_id: notionDbId.client }) as unknown as NotionQuery<NotionProjectClient>,
-      project: notion.databases.query({ database_id: notionDbId.project }) as unknown as NotionQuery<NotionProject>,
-      content: notion.databases.query({ database_id: notionDbId.content }) as unknown as NotionQuery<NotionContent>,
-      model: notion.databases.query({ database_id: notionDbId.model }) as unknown as NotionQuery<NotionModel>,
-      studio: notion.databases.query({ database_id: notionDbId.studio }) as unknown as NotionQuery<NotionStudio>,
+      prospect: await notionQueryDb<NotionProspect>(notion, notionDbId.prospect),
+      client: await notionQueryDb<NotionProjectClient>(notion, notionDbId.client),
+      project: await notionQueryDb<NotionProject>(notion, notionDbId.project),
+      content: await notionQueryDb<NotionContent>(notion, notionDbId.content),
+      photo: await notionQueryDb<NotionPhoto>(notion, notionDbId.photo),
+      model: await notionQueryDb<NotionModel>(notion, notionDbId.model),
+      studio: await notionQueryDb<NotionStudio>(notion, notionDbId.studio),
     }
     const results = await Promise.allSettled(Object.values(resources))
 
@@ -46,7 +38,7 @@ export default defineTask({
 
       if (res.status === 'fulfilled')
         await Promise.allSettled(
-          res.value.results.map(async (record) => {
+          res.value.map(async (record) => {
             const resource = (await resourceStorage.getItem(normalizeNotionId(record.id))) ?? {
               type,
               notificationStatus: false,

@@ -102,7 +102,7 @@ export default defineCachedEventHandler<Promise<ContentDetails>>(
 
       const id = content.id
       const markdown = await convertNotionPageToMarkdown(n2m, id, true)
-      const title = notionTitleStringify(content.properties.Name.title)
+      const title = notionTextStringify(content.properties.Name.title)
 
       return {
         id,

@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     let data = await metaDataStorage.get(normalizeUrl(url))
 
     if (!data) {
-      const { result } = await runTask<PromiseSettledResult<MetaData>[]>('fetch:meta-data', { payload: { urls: [url] } })
+      const { result } = await runTask<PromiseSettledResult<MetaData>[]>('sync:meta-data', { payload: { urls: [url] } })
       if (!result) {
         throw createError({ statusCode: 400, statusMessage: 'Result is empty' })
       }

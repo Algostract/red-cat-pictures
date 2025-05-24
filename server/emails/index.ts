@@ -71,7 +71,10 @@ export type EmailTemplateData = {
 }
 
 const emailTemplate = {
-  content: createEmailModule<Pick<ContentEmail, 'toPersonName' | 'toEmail'>, Omit<ContentEmail, 'toPersonName' | 'toEmail'>>('content', contentTemplate),
+  content: createEmailModule<
+    Pick<ContentEmail, 'toPersonName' | 'toEmail' | 'emailSubject' | 'contentTitle' | 'contentImage' | 'contentUrl'>,
+    Omit<ContentEmail, 'toPersonName' | 'toEmail' | 'emailSubject' | 'contentTitle' | 'contentImage' | 'contentUrl'>
+  >('content', contentTemplate),
   prospect: createEmailModule<
     Pick<ProspectEmail, 'toCompanyName' | 'toPersonName' | 'toEmail'>,
     Omit<ProspectEmail, 'toCompanyName' | 'toPersonName' | 'toEmail' | 'fromFeaturedPhotos'> & { fromFeaturedPhotos: string[] },

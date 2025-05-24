@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Html, Tailwind, Preview, Body, Container, Section, Text, Img, Link, Font } from '@vue-email/components'
+import { Html, Head, Preview, Body, Container, Section, Text, Tailwind, Img, Link, Font } from '@vue-email/components'
 
 defineProps<{
   fromCompanyName: string

@@ -4,6 +4,7 @@ export type Service = 'photo' | 'video'
 export interface FilePhoto {
   id: string
   title: string
+  image: string
   description: string
   width: number
   height: number
@@ -24,6 +25,7 @@ export interface PhotoDetails extends Omit<Photo, 'featured' | 'gallery'> {
 export interface GalleryPhoto {
   id: string
   title: string
+  image: string
   description: string
   dynamicClass: string
   aspectRatio: number
@@ -100,7 +102,7 @@ export interface MetaData {
 }
 
 /* Server Only */
-export const resourceTypes = ['prospect', 'client', 'project', 'content', 'model', 'studio'] as const
+export const resourceTypes = ['prospect', 'client', 'project', 'content', 'photo', 'model', 'studio'] as const
 
 export type ResourceType = (typeof resourceTypes)[number]
 
@@ -111,6 +113,7 @@ export interface ResourceRecordMap {
   client: NotionProjectClient
   project: NotionProject
   content: NotionContent
+  photo: NotionPhoto
   model: NotionModel
   studio: NotionStudio
 }
@@ -308,6 +311,51 @@ export interface NotionContent {
         name: string
       }
     }
+  }
+}
+
+export interface NotionPhoto {
+  id: string
+  created_time: string
+  last_edited_time: string
+  cover: NotionMediaAsset
+  icon: NotionMediaAsset
+  properties: {
+    Name: {
+      title: {
+        plain_text: string
+      }[]
+    }
+    Description: {
+      rich_text: {
+        text: {
+          content: string
+        }
+      }[]
+    }
+    Status: {
+      status: {
+        name: 'Plan' | 'Draft' | 'Release' | 'Archive'
+      }
+    }
+    Category: {
+      select: {
+        name: Category
+      }
+    }
+    Resolution: {
+      select: {
+        name: '7680p' | '3840p' | '2560p' | '1080p' | '720p'
+      }
+    }
+    'Aspect ratio': {
+      select: {
+        name: '16:9' | '3:2' | '4:3' | '1:1' | '3:4' | '2:3' | '9:16'
+      }
+    }
+    Gallery: { number: number }
+    Featured: { number: number }
+    Project: { relation: string[]; has_more: false }
   }
 }
 

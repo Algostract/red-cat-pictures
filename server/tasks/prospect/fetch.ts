@@ -1,7 +1,7 @@
 import { Client } from '@notionhq/client'
 import { z } from 'zod'
 import { initAI } from '@shba007/unai'
-import { scrapeData } from '~~/server/tasks/fetch/meta-data'
+import { scrapeData } from '~~/server/tasks/sync/meta-data'
 
 let notion: Client
 
@@ -36,7 +36,7 @@ export type CompanyInfo = typeof companyInfoSchema
 export default defineTask({
   meta: {
     name: 'prospect:fetch',
-    description: 'Fetches Project Info',
+    description: 'Scrapes Prospect Info',
   },
   async run(event) {
     const urls = event.payload.urls as unknown as string[]

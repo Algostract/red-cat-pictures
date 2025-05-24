@@ -26,28 +26,23 @@ export default defineCachedEventHandler<Promise<Content[]>>(
       notion = notion ?? new Client({ auth: config.private.notionApiKey })
       n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })
 
-      const data = await notion.databases.query({
-        database_id: notionDbId.content,
-      })
-
-      const contents = data.results as unknown as NotionContent[]
+      const contents = await notionQueryDb<NotionContent>(notion, notionDbId.content)
 
       const results = await Promise.all(
-        contents.map(async ({ id, properties }): Promise<Content | null> => {
+        contents.map(async ({ id, cover, properties, created_time, last_edited_time }): Promise<Content | null> => {
           if (properties['Type'].select?.name.toLowerCase() !== contentType) return null
           if (properties.Status.status.name !== 'Publish') return null
 
-          const content = (await notion.pages.retrieve({ page_id: id })) as unknown as NotionContent
           const markdown = await convertNotionPageToMarkdown(n2m, id)
-          const title = notionTitleStringify(properties.Name.title)
+          const title = notionTextStringify(properties.Name.title)
 
           return {
             id,
             title,
-            cover: content.cover?.type === 'external' ? content.cover.external.url.split('/')[3] : null,
-            createdAt: content.created_time as string,
-            modifiedAt: content.last_edited_time as string,
-            publishedAt: content.properties['Publish date'].date.start as string,
+            cover: cover?.type === 'external' ? cover.external.url.split('/')[3] : null,
+            createdAt: created_time as string,
+            modifiedAt: last_edited_time as string,
+            publishedAt: properties['Publish date'].date.start as string,
             description: `${mdToText(markdown.split('. ').splice(0, 2).join('. '))}...`,
             url: `/${contentType}/${slugify(title)}_${id}`,
           }

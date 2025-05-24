@@ -13,9 +13,7 @@ services:
     #           capabilities: [gpu]
     volumes:
       - red-cat-pictures_static:/app/static
-      - type: bind
-        source: ./.data
-        target: /app/.data
+      - red-cat-pictures_data:/app/.data
     env_file:
       - .env.prod
     ports:
@@ -39,3 +37,4 @@ services:
 volumes:
   red-cat-pictures_static:
     external: true
+  red-cat-pictures_data:

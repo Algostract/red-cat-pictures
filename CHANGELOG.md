@@ -18,7 +18,7 @@
 
 ### 🩹 Fixes
 
-- StatusBar fixed, notionTitleStringify function added, packages updated, docker swarm added ([1e6d643](https://github.com/Algostract/red-cat-pictures/commit/1e6d643))
+- StatusBar fixed, notionTextStringify function added, packages updated, docker swarm added ([1e6d643](https://github.com/Algostract/red-cat-pictures/commit/1e6d643))
 
 ### 🎨 Styles
 

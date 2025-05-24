@@ -32,7 +32,7 @@ export default defineTask({
         if (!(emailSubscriptions.length > 0)) emailSubscriptions = (await subscriptionStorage.getItems<EmailSubscription>(await subscriptionStorage.getKeys('email'))).flatMap(({ value }) => value)
 
         const id = content.record.id
-        const title = notionTitleStringify(content.record.properties.Name.title)
+        const title = notionTextStringify(content.record.properties.Name.title)
         const markdown = await convertNotionPageToMarkdown(n2m, id)
         const contentType = content.record.properties['Type'].select?.name.toLowerCase()
         const description = `${mdToText(markdown.split('. ').splice(0, 2).join('. '))}...`
@@ -45,6 +45,13 @@ export default defineTask({
           emailSubscriptions.map(({ name, email }) => ({
             toPersonName: name,
             toEmail: email,
+            emailSubject: `New ${contentType} release | ${title}`,
+            contentTitle: `${description.split('. ')[0]}...`,
+            contentImage:
+              content.record.cover?.type === 'external'
+                ? `https://ucarecdn.com/${content.record.cover.external.url.split('/')[3]}/-/scale_crop/1280x720/center/`
+                : 'https://ucarecdn.com/771d0695-2196-4c98-b9eb-4f29acd6506f/-/scale_crop/1280x720/center/',
+            contentUrl: 'https://redcatpictures.com' + url,
           }))
         )
 

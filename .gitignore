@@ -17,6 +17,7 @@ logs
 .DS_Store
 .fleet
 .idea
+misc
 
 # Local env files
 .env
@@ -28,7 +29,3 @@ static/**/*.*
 !static/**/*.gitkeep
 !static/data/*
 static/data/emails.yml
-
-photography
-videography
-directus

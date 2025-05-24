@@ -1,9 +1,10 @@
 version: '3.9'
 services:
   app:
-    image: 'ghcr.io/algostract/red-cat-pictures:latest'
+    image: ghcr.io/algostract/red-cat-pictures:latest
     volumes:
       - red-cat-pictures_static:/app/static
+      - red-cat-pictures_data:/app/.data
     env_file:
       - .env.prod
     ports:
@@ -16,9 +17,28 @@ services:
         condition: on-failure
         max_attempts: 3
 
+  backup:
+    image: offen/docker-volume-backup:latest
+    volumes:
+      # read-only mounts of your app volumes
+      - red-cat-pictures_data:/source/data:ro
+      # named volume to store the backups
+      - backup_store:/backups
+    environment:
+      # output dir inside the container (will map to backup_store)
+      - BACKUP_DIR=/backups/DB
+      # comma-separated list of volume names (keys are the subfolders under DB/)
+      - VOLUMES=red-cat-pictures_data
+      # retention in days
+      - KEEP_DAYS=30
+    deploy:
+      restart_policy:
+        condition: none
+
 volumes:
   red-cat-pictures_static:
     external: true
+  red-cat-pictures_data:
 
 networks:
   front-tier:

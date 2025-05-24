@@ -115,7 +115,7 @@ function extractOgData(
 
 export default defineTask({
   meta: {
-    name: 'fetch:meta-data',
+    name: 'sync:meta-data',
     description: 'Process an array of URLs; retrieve and return each page’s OG title, description, and image',
   },
   async run(event) {

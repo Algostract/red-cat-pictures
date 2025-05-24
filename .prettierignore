@@ -21,6 +21,7 @@ logs
 .DS_Store
 .fleet
 .idea
+misc
 
 # Env files
 .env*
@@ -30,7 +31,3 @@ logs
 static/**/*.*
 !static/**/*.gitkeep
 !static/data/*
-
-photography
-videography
-directus

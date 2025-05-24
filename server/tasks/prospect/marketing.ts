@@ -15,11 +15,12 @@ export default defineTask({
     }
 
     const prospectStorage = useStorage<Resource<'prospect'>>(`data:resource:prospect`)
+    const notificationStorage = useStorage<EmailSubscription>('data:subscription:email')
 
     await Promise.allSettled(
       (await prospectStorage.getItems(await prospectStorage.getKeys())).map(async ({ value: prospect }) => {
         const id = prospect.record.id
-        const companyName = notionTitleStringify(prospect.record.properties.Name.title)
+        const companyName = notionTextStringify(prospect.record.properties.Name.title)
         const email = prospect.record.properties.Email.email
         const status = prospect.record.properties.Status.status.name
 
@@ -35,6 +36,12 @@ export default defineTask({
             toPersonName: companyName,
           },
         ])
+
+        // Subscribe to Email Notification
+        await notificationStorage.setItem(email, {
+          name: companyName,
+          email: email,
+        })
 
         await notion.pages.update({
           page_id: id,
