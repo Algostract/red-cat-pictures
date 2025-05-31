@@ -5,7 +5,7 @@ export default defineCachedEventHandler<Promise<Photo[]>>(
       const notionDbId = config.private.notionDbId as unknown as NotionDB
 
       const photos = (await notionQueryDb<NotionAsset>(notion, notionDbId.asset))
-        .filter(({ properties }) => properties.Media.select.name === 'Photo')
+        .filter(({ properties }) => properties.Media.select.name === 'Photo' && properties.Status.status.name === 'Release')
         .toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })

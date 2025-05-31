@@ -12,13 +12,18 @@ services:
     networks:
       - front-tier
     deploy:
-      replicas: 2
+      replicas: 1
       restart_policy:
         condition: on-failure
         max_attempts: 3
 
   browserless:
     image: ghcr.io/browserless/chromium:latest
+    user: root
+    volumes:
+      - red-cat-pictures_data:/usr/src/app/user-data-dir
+    environment:
+      - CORS=true
     networks:
       - front-tier
     deploy:
@@ -48,6 +53,7 @@ volumes:
   red-cat-pictures_static:
     external: true
   red-cat-pictures_data:
+    external: true
 
 networks:
   front-tier:
