@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.13.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.13.0...v2.13.1)
+
+### 🩹 Fixes
+
+- Filter logic for photos and videos to include only released items ([1cd6eb2](https://github.com/Algostract/red-cat-pictures/commit/1cd6eb2))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.13.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.12.2...v2.13.0)
