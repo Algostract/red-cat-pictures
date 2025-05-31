@@ -1,7 +1,7 @@
 ecommerce:
   photo:
     - title: 'Standard Photography'
-      price: 100
+      price: 200
       unit: 'photo'
       points:
         - icon: 'photo'
@@ -12,7 +12,7 @@ ecommerce:
           title: White Background Photo
 
     - title: 'Premium Photography'
-      price: 150
+      price: 300
       unit: 'photo'
       points:
         - icon: 'photo'
@@ -23,7 +23,7 @@ ecommerce:
           title: White Background + Infographic Photo
 
     - title: 'Product & Model Photography'
-      price: 250
+      price: 400
       unit: 'photo'
       points:
         - icon: 'photo'
@@ -34,7 +34,7 @@ ecommerce:
           title: Single Color Background + infographic Photo
 
   video:
-    - title: 'Unboxing Videography'
+    - title: 'Product Showcasing Videography'
       price: 1000
       unit: 'video'
       points:
@@ -93,15 +93,15 @@ product:
 
   video:
     - title: 'Standard Videography'
-      price: 6500
+      price: 7500
       unit: 'session'
       points:
         - icon: 'youtube'
-          title: 'Upto 45 second Video'
+          title: 'Upto 30 second Video'
         - icon: 'youtube'
           title: 'Extensive editing, and color grading'
         - icon: 'youtube'
-          title: 'Upto 3 Theme setup'
+          title: 'Upto 2 Theme setup'
 
     - title: 'Premium VFX Videography'
       price: 12000
@@ -119,16 +119,16 @@ product:
       unit: 'session'
       points:
         - icon: 'youtube'
-          title: 'Upto 60 second Video'
+          title: 'Upto 30 second Video'
         - icon: 'youtube'
           title: 'Extensive editing, and color grading'
         - icon: 'youtube'
-          title: 'Upto 4 Theme setup'
+          title: 'Upto 3 Theme setup'
 
 food:
   photo:
     - title: 'Standard Photography'
-      price: 5000
+      price: 5500
       unit: 'session'
       points:
         - icon: 'photo'
@@ -139,7 +139,7 @@ food:
           title: 'Single Background'
 
     - title: 'Premium Photography'
-      price: 6500
+      price: 7500
       unit: 'session'
       points:
         - icon: 'photo'

@@ -1,5 +1,3 @@
-import { Client } from '@notionhq/client'
-
 interface ProjectClient {
   id: string
   name: string
@@ -8,18 +6,11 @@ interface ProjectClient {
   logo?: string
 }
 
-let notion: Client
-
 export default defineCachedEventHandler<Promise<ProjectClient[]>>(
   async () => {
     try {
       const config = useRuntimeConfig()
-      if (!config.private.notionApiKey) {
-        throw new Error('Notion API Key Not Found')
-      }
       const notionDbId = config.private.notionDbId as unknown as NotionDB
-
-      notion = notion ?? new Client({ auth: config.private.notionApiKey })
 
       const projectClients = await notionQueryDb<NotionProjectClient>(notion, notionDbId.client)
 

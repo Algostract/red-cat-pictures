@@ -17,23 +17,32 @@ services:
         condition: on-failure
         max_attempts: 3
 
-  backup:
-    image: offen/docker-volume-backup:latest
-    volumes:
-      # read-only mounts of your app volumes
-      - red-cat-pictures_data:/source/data:ro
-      # named volume to store the backups
-      - backup_store:/backups
-    environment:
-      # output dir inside the container (will map to backup_store)
-      - BACKUP_DIR=/backups/DB
-      # comma-separated list of volume names (keys are the subfolders under DB/)
-      - VOLUMES=red-cat-pictures_data
-      # retention in days
-      - KEEP_DAYS=30
+  browserless:
+    image: ghcr.io/browserless/chromium:latest
+    networks:
+      - front-tier
     deploy:
+      replicas: 1
       restart_policy:
-        condition: none
+        condition: on-failure
+        max_attempts: 3
+  # backup:
+  #   image: offen/docker-volume-backup:latest
+  #   volumes:
+  #     # read-only mounts of your app volumes
+  #     - red-cat-pictures_data:/source/data:ro
+  #     # named volume to store the backups
+  #     - backup_store:/backups
+  #   environment:
+  #     # output dir inside the container (will map to backup_store)
+  #     - BACKUP_DIR=/backups/DB
+  #     # comma-separated list of volume names (keys are the subfolders under DB/)
+  #     - VOLUMES=red-cat-pictures_data
+  #     # retention in days
+  #     - KEEP_DAYS=30
+  #   deploy:
+  #     restart_policy:
+  #       condition: none
 
 volumes:
   red-cat-pictures_static:

@@ -12,7 +12,16 @@ export async function scrapeData(url: string, format: 'html' | 'tree' | 'markdow
   let html = ''
 
   if (engine === 'browser') {
-    const browser = await puppeteer.launch({ headless: false })
+    const browser = await puppeteer.launch(
+      import.meta.env.NODE_ENV === 'production'
+        ? {
+            browserWSEndpoint: import.meta.env.BROWSER_ENDPOINT,
+            args: ['--no-sandbox', '--disable-dev-shm-usage'],
+          }
+        : {
+            headless: false,
+          }
+    )
     try {
       const page = await browser.newPage()
       await page.setViewport({ width: 1280, height: 960 })
@@ -149,7 +158,7 @@ export default defineTask({
 
             if ('Type' in props && props.Type?.select?.name) {
               const type = props.Type.select.name.toLowerCase()
-              const title = props.Name.title.map((t) => t.plain_text).join('')
+              const title = notionTextStringify(props.Name.title)
               const pattern = `/${type}/${slugify(title)}_${value.record.id}`
               if (url.includes(pattern)) resource = value
             }

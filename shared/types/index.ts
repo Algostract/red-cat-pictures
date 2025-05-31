@@ -406,3 +406,8 @@ export interface EmailSubscription {
   name: string
   email: string
 }
+
+export interface WhatsappSubscription {
+  name: string
+  phone: string
+}

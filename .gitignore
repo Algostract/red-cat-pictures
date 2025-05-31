@@ -18,6 +18,7 @@ logs
 .fleet
 .idea
 misc
+.wwebjs_*
 
 # Local env files
 .env

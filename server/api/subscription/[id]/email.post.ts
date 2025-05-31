@@ -42,7 +42,7 @@ async function saveAsDraft(rawMessage: string) {
   return res
 }
 
-export async function sendEmail<T extends keyof EmailTemplateData>(template: T, data: EmailTemplateData[T][], isDraft = true) {
+export async function sendEmail<T extends keyof EmailTemplateData>(template: T, payload: EmailTemplateData[T][], isDraft = true) {
   try {
     const module = emailTemplate[template] as {
       data(arg: EmailTemplateData[T]): Promise<{
@@ -51,7 +51,7 @@ export async function sendEmail<T extends keyof EmailTemplateData>(template: T, 
     }
 
     await Promise.allSettled(
-      data.map(async (item) => {
+      payload.map(async (item) => {
         const finalData = await module.data(item)
 
         const html = await render(emailTemplate[template].template, finalData)
@@ -109,7 +109,7 @@ export default defineEventHandler<Promise<{ success: boolean }>>(async (event) =
 
     return { success: true }
   } catch (error: unknown) {
-    console.error('API contact POST', error)
+    console.error('API subscription/[id]/email POST', error)
 
     const { code: errorCode } = error as { code?: string }
     if (errorCode === 'ESOCKET' || errorCode === 'ECONNECTION') {

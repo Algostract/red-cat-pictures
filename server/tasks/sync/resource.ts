@@ -1,7 +1,3 @@
-import { Client } from '@notionhq/client'
-
-let notion: Client
-
 type ResourceQueries = {
   [K in ResourceType]: ResourceRecordMap[K][]
 }
@@ -13,14 +9,7 @@ export default defineTask({
   },
   async run() {
     const config = useRuntimeConfig()
-    if (!config.private.notionApiKey) {
-      throw new Error('Notion API Key Not Found')
-    }
-
     const notionDbId = config.private.notionDbId as unknown as NotionDB
-
-    notion = notion ?? new Client({ auth: config.private.notionApiKey })
-
     const resources: ResourceQueries = {
       prospect: await notionQueryDb<NotionProspect>(notion, notionDbId.prospect),
       client: await notionQueryDb<NotionProjectClient>(notion, notionDbId.client),

@@ -1,9 +1,6 @@
-import { Client } from '@notionhq/client'
 import { z } from 'zod'
 import { initAI } from '@shba007/unai'
 import { scrapeData } from '~~/server/tasks/sync/meta-data'
-
-let notion: Client
 
 const ai = initAI()
 
@@ -44,19 +41,11 @@ export default defineTask({
     if (!(urls && urls.length > 0)) throw Error('urls are not defined')
 
     const config = useRuntimeConfig()
-    if (!config.private.notionApiKey) {
-      throw new Error('Notion API Key Not Found')
-    }
-
     const notionDbId = config.private.notionDbId as unknown as NotionDB
-
-    notion = notion ?? new Client({ auth: config.private.notionApiKey })
 
     const result = []
 
     for (const url of urls) {
-      console.log({ url })
-
       try {
         const markdown = await scrapeData(url, 'markdown', 'browser')
 

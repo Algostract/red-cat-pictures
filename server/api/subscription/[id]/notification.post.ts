@@ -7,7 +7,7 @@ interface PushNotification {
   icon?: string
 }
 
-export async function pushNotification(payload: PushNotification, subscriptions: NotificationSubscription[]) {
+export async function sendPushNotification(payload: PushNotification, subscriptions: NotificationSubscription[]) {
   try {
     const config = useRuntimeConfig()
 
@@ -17,7 +17,7 @@ export async function pushNotification(payload: PushNotification, subscriptions:
 
     return true
   } catch (error) {
-    console.error('function pushNotification', error)
+    console.error('function sendPushNotification', error)
     return false
   }
 }
@@ -38,7 +38,7 @@ export default defineEventHandler(async (event) => {
     const notificationStorage = useStorage<NotificationSubscription>('data:subscription:notification')
 
     const subscriptions = (await notificationStorage.getItems(await notificationStorage.getKeys())).flatMap(({ value }) => value)
-    await pushNotification(body, subscriptions)
+    await sendPushNotification(body, subscriptions)
 
     return { success: true }
   } catch (error: unknown) {
@@ -46,7 +46,7 @@ export default defineEventHandler(async (event) => {
       throw error
     }
 
-    console.error('API notification/push GET', error)
+    console.error('API subscription/[id]/notification POST', error)
 
     throw createError({
       statusCode: 500,

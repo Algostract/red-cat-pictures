@@ -1,8 +1,6 @@
-import { Client } from '@notionhq/client'
 import { NotionToMarkdown } from 'notion-to-md'
 import { z } from 'zod'
 
-let notion: Client
 let n2m: NotionToMarkdown
 
 export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId: string, replaceNotionLinks: boolean = false) {
@@ -39,7 +37,7 @@ export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId:
             case 'content': {
               if (!('Type' in record.properties)) return full
 
-              const title = record.properties['Name'].title.map((t: { plain_text: string }) => t.plain_text).join('')
+              const title = notionTextStringify(record.properties['Name'].title)
               const contentType = record.properties['Type']?.select?.name.toLowerCase()
               return `[${text}](/${contentType}/${slugify(title)}_${record.id})`
             }
@@ -72,11 +70,6 @@ export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId:
 export default defineCachedEventHandler<Promise<ContentDetails>>(
   async (event) => {
     try {
-      const config = useRuntimeConfig()
-      if (!config.private.notionApiKey) {
-        throw new Error('Notion API Key Not Found')
-      }
-
       const { content: contentType, slug } = await getValidatedRouterParams(
         event,
         z.object({
@@ -85,7 +78,6 @@ export default defineCachedEventHandler<Promise<ContentDetails>>(
         }).parse
       )
 
-      notion = notion ?? new Client({ auth: config.private.notionApiKey })
       n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })
 
       const [name, _ext] = slug.split('.')

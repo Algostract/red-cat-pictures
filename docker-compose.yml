@@ -18,6 +18,18 @@ services:
       - .env.prod
     ports:
       - 4300:3000
+    depends_on:
+      - browserless
+  browserless:
+    image: ghcr.io/browserless/chromium:latest
+    restart: on-failure:3
+    user: root
+    volumes:
+      - red-cat-pictures_data:/usr/src/app/user-data-dir
+    environment:
+      - CORS=true
+    ports:
+      - 1201:3000
   # directus:
   #   image: directus/directus:11
   #   ports:
@@ -38,3 +50,4 @@ volumes:
   red-cat-pictures_static:
     external: true
   red-cat-pictures_data:
+    external: true

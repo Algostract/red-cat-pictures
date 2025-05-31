@@ -1,19 +1,13 @@
-import { Client } from '@notionhq/client'
 import { NotionToMarkdown } from 'notion-to-md'
 import { z } from 'zod'
 import { convertNotionPageToMarkdown } from './[...slug].get'
 
-let notion: Client
 let n2m: NotionToMarkdown
 
 export default defineCachedEventHandler<Promise<Content[]>>(
   async (event) => {
     try {
       const config = useRuntimeConfig()
-      if (!config.private.notionApiKey) {
-        throw new Error('Notion API Key Not Found')
-      }
-
       const notionDbId = config.private.notionDbId as unknown as NotionDB
 
       const { content: contentType } = await getValidatedRouterParams(
@@ -23,7 +17,6 @@ export default defineCachedEventHandler<Promise<Content[]>>(
         }).parse
       )
 
-      notion = notion ?? new Client({ auth: config.private.notionApiKey })
       n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })
 
       const contents = await notionQueryDb<NotionContent>(notion, notionDbId.content)

@@ -2,7 +2,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2025-05-15',
   future: {
     compatibilityVersion: 4,
   },
@@ -34,7 +34,6 @@ export default defineNuxtConfig({
       },
     },
     rollupConfig: {
-      // @ts-expect-error Type instantiation is excessively deep and possibly infinite.
       plugins: [vue()],
     },
     experimental: {
@@ -42,6 +41,18 @@ export default defineNuxtConfig({
     },
     scheduledTasks: {
       '*/5 * * * *': ['sync:resource', 'notify:content', 'prospect:marketing'],
+    },
+  },
+  // FIXME: tempo fix remove when not needed
+  vite: {
+    $server: {
+      build: {
+        rollupOptions: {
+          output: {
+            preserveModules: true,
+          },
+        },
+      },
     },
   },
   routeRules: {
@@ -76,11 +87,10 @@ export default defineNuxtConfig({
     },
     private: {
       rootDir: '',
-      notionApiKey: '',
+      serverValidationKey: '',
       notionDbId: '',
       vapidKey: '',
       vapidSubject: '',
-      serverValidationKey: '',
       oauthClientId: '',
       oauthClientSecret: '',
       oauthRefreshToken: '',

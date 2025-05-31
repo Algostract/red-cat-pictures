@@ -16,18 +16,22 @@
 
 https://g.page/r/CaroFd9d81EjEBM/review
 
-<!-- 2:1 -> 1680:840 (Univisium) -->
+- [] Update photos and videos url slug
+- [] Modify content page to show gallery view
+- [] Whatsapp Automation
 
-16:9 -> 1680:945 (Widescreen HD) (Video)
-3:2 -> 1680:1120 (Classic) (Photo)
-
-<!-- 7:5 -> 1680:1200 (Print) -->
-
-4:3 -> 1680:1260 (Full-Screen SD) (Photo)(Video)
-
-<!-- 5:4 -> 1680:1344 (SXGA) -->
-
-1:1 -> 1680:1680 (Square) (Photo)
+- [] Facebook Automation
+- [] Update task sync:meta-data for optimistic cached update
+- [] Image Search
+- [] Update Photo page with title and description
+- [] Instagram Automation
+- [] Share Url
+- [] Modify Photo page to Project page
+- [] Videos and Video page
+- [] Modify About Us page
+- [] Like/Dislike Count Content
+- [] Add live streaming page
+- [] Audio Dictation of Content
 
 ## How to Deploy
 
