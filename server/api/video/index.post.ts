@@ -37,92 +37,6 @@ export default defineEventHandler(async (event) => {
           const resolutionLabel = getResolution(width, height)
           const aspectRatioLabel = getAspectRatio(width, height)
 
-          await notion.pages.create({
-            parent: {
-              database_id: notionDbId.photo,
-            },
-            /*  cover: {
-               type: 'external',
-               external: {
-                 url: '',
-               },
-             }, */
-            properties: {
-              Name: {
-                type: 'title',
-                title: [
-                  {
-                    type: 'text',
-                    text: {
-                      content: 'New Video',
-                    },
-                  },
-                ],
-              },
-              Slug: {
-                type: 'rich_text',
-                rich_text: [
-                  {
-                    text: {
-                      content: file.name.split('.')[0],
-                    },
-                  },
-                ],
-              },
-              /*  Description: {
-                 type: 'rich_text',
-                 rich_text: [
-                   {
-                     text: {
-                       content: '',
-                     },
-                   },
-                 ],
-               }, */
-              Media: {
-                type: 'select',
-                select: {
-                  name: 'Video',
-                },
-              },
-              Status: {
-                type: 'status',
-                status: {
-                  name: 'Plan',
-                },
-              },
-              /*  Category: {
-                 type: 'select',
-                 select: {
-                   name: category,
-                 },
-               }, */
-
-              /*  Gallery: {
-                 type: 'number',
-                 number: gallery,
-               },
-               Featured: {
-                 type: 'number',
-                 number: featured,
-               }, */
-              Resolution: {
-                type: 'select',
-                select: {
-                  name: resolutionLabel,
-                },
-              },
-              'Aspect ratio': {
-                type: 'select',
-                select: {
-                  name: aspectRatioLabel,
-                },
-              },
-            },
-          })
-
-          return
-
           const results = []
           for (const codec of targetCodecs) {
             for (const resolution of targetResolutions) {
@@ -136,7 +50,7 @@ export default defineEventHandler(async (event) => {
           // Save to notion
           await notion.pages.create({
             parent: {
-              database_id: notionDbId.photo,
+              database_id: notionDbId.asset,
             },
             /*  cover: {
                type: 'external',

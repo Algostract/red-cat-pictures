@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
 
     await notion.pages.create({
       parent: {
-        database_id: notionDbId.photo,
+        database_id: notionDbId.asset,
       },
       cover: {
         type: 'external',
