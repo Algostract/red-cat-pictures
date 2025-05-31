@@ -1,5 +1,23 @@
 # red-cat-pictures
 
+## v2.13.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.12.2...v2.13.0)
+
+### 🚀 Enhancements
+
+- Email content released ([cead272](https://github.com/Algostract/red-cat-pictures/commit/cead272))
+- Integrate WhatsApp messaging functionality ([47c5ccf](https://github.com/Algostract/red-cat-pictures/commit/47c5ccf))
+
+### 💅 Refactors
+
+- Photo and video handling to integrate Notion API, update data fetching ([11f3e33](https://github.com/Algostract/red-cat-pictures/commit/11f3e33))
+- Update Notion database ID for photo and video uploads ([971f610](https://github.com/Algostract/red-cat-pictures/commit/971f610))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.12.2
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.12.1...v2.12.2)
