@@ -15,7 +15,7 @@ export default defineTask({
       client: await notionQueryDb<NotionProjectClient>(notion, notionDbId.client),
       project: await notionQueryDb<NotionProject>(notion, notionDbId.project),
       content: await notionQueryDb<NotionContent>(notion, notionDbId.content),
-      photo: await notionQueryDb<NotionPhoto>(notion, notionDbId.photo),
+      asset: await notionQueryDb<NotionAsset>(notion, notionDbId.asset),
       model: await notionQueryDb<NotionModel>(notion, notionDbId.model),
       studio: await notionQueryDb<NotionStudio>(notion, notionDbId.studio),
     }

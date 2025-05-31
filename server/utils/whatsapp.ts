@@ -14,7 +14,7 @@ const whatsappClientSingleton = () => {
             args: ['--no-sandbox', '--disable-dev-shm-usage'],
           }
         : {
-            headless: false,
+            headless: true,
           },
   })
 }

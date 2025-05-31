@@ -102,7 +102,7 @@ export interface MetaData {
 }
 
 /* Server Only */
-export const resourceTypes = ['prospect', 'client', 'project', 'content', 'photo', 'model', 'studio'] as const
+export const resourceTypes = ['prospect', 'client', 'project', 'content', 'asset', 'model', 'studio'] as const
 
 export type ResourceType = (typeof resourceTypes)[number]
 
@@ -113,7 +113,7 @@ export interface ResourceRecordMap {
   client: NotionProjectClient
   project: NotionProject
   content: NotionContent
-  photo: NotionPhoto
+  asset: NotionAsset
   model: NotionModel
   studio: NotionStudio
 }
@@ -124,7 +124,7 @@ export interface Resource<T extends ResourceType = ResourceType> {
   record: ResourceRecordMap[T]
 }
 
-type NotionMediaAsset =
+type NotionImage =
   | {
       type: 'file'
       file: {
@@ -144,8 +144,8 @@ export interface NotionProspect {
   id: string
   created_time: Date
   last_edited_time: Date
-  cover: NotionMediaAsset
-  icon: NotionMediaAsset
+  cover: NotionImage
+  icon: NotionImage
   properties: {
     Name: {
       title: {
@@ -201,8 +201,8 @@ export interface NotionProjectClient {
   id: string
   created_time: Date
   last_edited_time: Date
-  cover: NotionMediaAsset
-  icon: NotionMediaAsset
+  cover: NotionImage
+  icon: NotionImage
   properties: {
     Name: {
       title: {
@@ -260,8 +260,8 @@ export interface NotionProject {
   id: string
   created_time: Date
   last_edited_time: Date
-  cover: NotionMediaAsset
-  icon: NotionMediaAsset
+  cover: NotionImage
+  icon: NotionImage
   properties: {
     Name: {
       title: {
@@ -283,8 +283,8 @@ export interface NotionContent {
   id: string
   created_time: string
   last_edited_time: string
-  cover: NotionMediaAsset
-  icon: NotionMediaAsset
+  cover: NotionImage
+  icon: NotionImage
   properties: {
     Name: {
       title: {
@@ -314,16 +314,23 @@ export interface NotionContent {
   }
 }
 
-export interface NotionPhoto {
+export interface NotionAsset {
   id: string
   created_time: string
   last_edited_time: string
-  cover: NotionMediaAsset
-  icon: NotionMediaAsset
+  cover: NotionImage
+  icon: NotionImage
   properties: {
     Name: {
       title: {
         plain_text: string
+      }[]
+    }
+    Slug: {
+      rich_text: {
+        text: {
+          content: string
+        }
       }[]
     }
     Description: {
@@ -333,16 +340,25 @@ export interface NotionPhoto {
         }
       }[]
     }
-    Status: {
-      status: {
-        name: 'Plan' | 'Draft' | 'Release' | 'Archive'
+    Media: {
+      select: {
+        name: 'Photo' | 'Video'
       }
     }
+    // Segment:{},
     Category: {
       select: {
         name: Category
       }
     }
+    Status: {
+      status: {
+        name: 'Plan' | 'Draft' | 'Release' | 'Archive'
+      }
+    }
+    Project: { relation: string[]; has_more: false }
+    Gallery: { number: number }
+    Featured: { number: number }
     Resolution: {
       select: {
         name: '7680p' | '3840p' | '2560p' | '1080p' | '720p'
@@ -353,9 +369,6 @@ export interface NotionPhoto {
         name: '16:9' | '3:2' | '4:3' | '1:1' | '3:4' | '2:3' | '9:16'
       }
     }
-    Gallery: { number: number }
-    Featured: { number: number }
-    Project: { relation: string[]; has_more: false }
   }
 }
 
@@ -363,8 +376,8 @@ export interface NotionModel {
   id: string
   created_time: string
   last_edited_time: string
-  cover: NotionMediaAsset
-  icon: NotionMediaAsset
+  cover: NotionImage
+  icon: NotionImage
   properties: {
     Name: { type: 'title'; title: string[] }
     Email: { type: 'email'; email: string }
@@ -380,8 +393,8 @@ export interface NotionStudio {
   id: string
   created_time: string
   last_edited_time: string
-  cover: NotionMediaAsset
-  icon: NotionMediaAsset
+  cover: NotionImage
+  icon: NotionImage
   properties: {
     Name: { type: 'title'; title: string[] }
     Email: { type: 'email'; email: string }

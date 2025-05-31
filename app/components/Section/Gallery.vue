@@ -25,12 +25,12 @@ const { height: sliderHeight } = useElementSize(slider)
   <section id="gallery" class="relative z-0 h-screen overflow-hidden bg-light-400 dark:bg-dark-400">
     <SectionLabel icon="grid" title="Image Gallery" />
     <div class="overflow-hidden">
-      <div ref="slider" class="autoscroll-y relative z-10 flex grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-6" :style="{ animationDuration: 0.008 * sliderHeight + 's' }">
+      <div ref="slider" class="autoscroll-y relative z-10 grid grid-cols-3 gap-2 md:grid-cols-4 lg:grid-cols-6" :style="{ animationDuration: 0.008 * sliderHeight + 's' }">
         <template v-for="dupIndex in [1, 2]" :key="dupIndex">
-          <NuxtLink v-for="{ id, title, description, url } in allPhotos" :key="`${dupIndex}-${id}`" :to="url" @click="emit('active', `${dupIndex}-${title}`)">
+          <NuxtLink v-for="{ id, title, image, description, url } in allPhotos" :key="`${dupIndex}-${id}`" :to="url" @click="emit('active', `${dupIndex}-${title}`)">
             <NuxtImg
               provider="uploadcare"
-              :src="id"
+              :src="image"
               :alt="description"
               :width="480"
               :height="Math.round(480 / (3 / 4))"

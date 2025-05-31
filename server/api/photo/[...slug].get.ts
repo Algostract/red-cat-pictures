@@ -1,23 +1,35 @@
 export default defineCachedEventHandler<Promise<PhotoDetails>>(
   async (event) => {
     try {
+      const config = useRuntimeConfig()
+      const notionDbId = config.private.notionDbId as unknown as NotionDB
+
       const slug = getRouterParam(event, 'slug')!.toString().replace(/,$/, '')
 
-      const photos = await readYamlFile<FilePhoto>('photos.yml')
+      const photos = (await notionQueryDb<NotionAsset>(notion, notionDbId.asset))
+        .filter(({ properties }) => properties.Media.select.name === 'Photo')
+        .toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })
 
-      const photo = photos.find(({ title }) => slugify(title) === slug)
+      const photo = photos.find(({ properties }) => notionTextStringify(properties.Slug.rich_text) === slug)
       if (!photo) {
         throw createError({ statusCode: 404, statusMessage: `photo ${slug} not found` })
       }
 
+      const id = notionTextStringify(photo.properties.Slug.rich_text)
+      const [aW, aH] = photo.properties['Aspect ratio'].select.name.split(':').map((item) => parseInt(item))
+
       return {
-        id: photo.id,
-        title: photo.title,
-        description: photo.description,
-        category: photo.category,
-        aspectRatio: photo.width / photo.height,
+        id,
+        title: notionTextStringify(photo.properties.Name.title),
+        description: notionTextStringify(photo.properties.Description.rich_text),
+        image: photo.cover?.type === 'external' ? photo.cover.external.url.split('/')[3] : '',
+        aspectRatio: aW / aH,
+        category: photo.properties.Segment.select.name,
+        featured: photo.properties.Featured.number,
+        gallery: photo.properties.Gallery.number,
+        url: `/photo/${id}`,
       } as PhotoDetails
     } catch (error: unknown) {
       console.error('API photo/slug GET', error)

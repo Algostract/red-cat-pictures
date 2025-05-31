@@ -70,6 +70,25 @@ function parseArgs(args: string): string[] {
   return result
 }
 
+async function countTotalFrames(filePath: string) {
+  try {
+    const ffmpegProcess = await execa('ffmpeg', ['-i', filePath, '-map', '0:v:0', '-f', 'null', '-'], {
+      stderr: 'pipe',
+    })
+
+    const progressLog = ffmpegProcess.stderr.toString()
+
+    const matches = [...progressLog.matchAll(/frame=\s*(\d+)/g)]
+    if (matches.length === 0) {
+      return 0
+    }
+    const lastFrameCount = parseInt(matches[matches.length - 1][1], 10)
+    return lastFrameCount
+  } catch {
+    throw Error('Unable to countTotalFrames ' + filePath)
+  }
+}
+
 export default async function (
   fileName: string,
   resolution: Resolution,
@@ -106,19 +125,7 @@ export default async function (
         fps: 0,
       })
 
-    const probe = await execa('ffprobe', [
-      '-v',
-      'error',
-      '-select_streams',
-      'v:0',
-      '-count_frames',
-      '-show_entries',
-      'stream=nb_read_frames',
-      '-of',
-      'default=noprint_wrappers=1:nokey=1',
-      `./static/videos/source/${fileName}`,
-    ])
-    const totalFrames = parseInt(probe.stdout, 10)
+    const totalFrames = await countTotalFrames(`./static/videos/source/${fileName}`)
     const progressData: Record<string, string> = {}
 
     const ffmpegProcess = execa(
@@ -170,7 +177,7 @@ export default async function (
 
     return { status: 'fulfilled', value: presetName }
   } catch (error) {
-    console.error(error)
+    console.error('transcode-video ', error)
     return {
       status: 'rejected',
       value: presetName,

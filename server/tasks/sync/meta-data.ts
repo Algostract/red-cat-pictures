@@ -19,7 +19,7 @@ export async function scrapeData(url: string, format: 'html' | 'tree' | 'markdow
             args: ['--no-sandbox', '--disable-dev-shm-usage'],
           }
         : {
-            headless: false,
+            headless: true,
           }
     )
     try {

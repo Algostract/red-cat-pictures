@@ -79,16 +79,21 @@ const photos = computed<GalleryPhoto[]>(() =>
       size: 'm',
       aspectRatio: 0.67,
     },
-  ].map((photo, index): GalleryPhoto => {
-    return {
-      id: categoryPhotos[props.activeCategory].value[index]!.id,
-      title: categoryPhotos[props.activeCategory].value[index]!.title,
-      description: categoryPhotos[props.activeCategory].value[index]!.description,
-      dynamicClass: objectToClass(photo.position, photo.size),
-      aspectRatio: photo.aspectRatio,
-      url: categoryPhotos[props.activeCategory].value[index]!.url,
-    }
-  })
+  ]
+    .map((photo, index): GalleryPhoto | null => {
+      if (!categoryPhotos[props.activeCategory]?.value[index]) return null
+
+      return {
+        id: categoryPhotos[props.activeCategory].value[index]!.id,
+        image: categoryPhotos[props.activeCategory].value[index]!.image,
+        title: categoryPhotos[props.activeCategory].value[index]!.title,
+        description: categoryPhotos[props.activeCategory].value[index]!.description,
+        dynamicClass: objectToClass(photo.position, photo.size),
+        aspectRatio: photo.aspectRatio,
+        url: categoryPhotos[props.activeCategory].value[index]!.url,
+      }
+    })
+    .filter((item) => item !== null)
 )
 </script>
 
@@ -96,9 +101,9 @@ const photos = computed<GalleryPhoto[]>(() =>
   <section id="featured-photos" class="relative h-fit">
     <SectionLabel icon="photo" title="Featured Photos" />
     <div class="relative grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3">
-      <NuxtLink v-for="{ title, id, description, dynamicClass, aspectRatio, url } in photos" :key="id" :to="url" :class="dynamicClass" class="size-full" @click="emit('active', title)">
+      <NuxtLink v-for="{ id, title, image, description, dynamicClass, aspectRatio, url } in photos" :key="id" :to="url" :class="dynamicClass" class="size-full" @click="emit('active', title)">
         <NuxtImg
-          :src="id"
+          :src="image"
           :alt="description"
           :width="640"
           :height="Math.round(640 / aspectRatio)"

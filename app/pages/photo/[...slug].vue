@@ -7,9 +7,8 @@ const route = useRoute()
 const slug = route.params.slug!.toString()
 const { data: photos } = await useFetch('/api/photo', { default: () => [] })
 
-const activePhoto = computed(() => photos.value.find(({ title }) => title === activePhotoName.value))
-
 const activePhotoName = computed<string>(() => slugify(slug))
+const activePhoto = computed(() => photos.value.find(({ id }) => id === activePhotoName.value))
 
 if (!activePhoto.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
@@ -24,7 +23,7 @@ const description = `${activePhoto.value.description}`
 const {
   public: { siteUrl },
 } = useRuntimeConfig()
-const imageUrl = `https://ucarecdn.com/${activePhoto.value.id}/-/format/auto/-/scale_crop/${Math.round(720 * activePhoto.value.aspectRatio)}x720/center`
+const imageUrl = `https://ucarecdn.com/${activePhoto.value.image}/-/format/auto/-/scale_crop/${Math.round(720 * activePhoto.value.aspectRatio)}x720/center`
 
 useSeoMeta({
   title: title,
@@ -65,7 +64,7 @@ useSchemaOrg([
     </header>
     <!-- App Header -->
     <NuxtImg
-      :src="activePhoto.id"
+      :src="activePhoto.image"
       :alt="activePhoto.description"
       :width="Math.round(720 * activePhoto.aspectRatio)"
       :height="720"

@@ -6,7 +6,7 @@ const description = `Photo Gallery`
 const {
   public: { siteUrl },
 } = useRuntimeConfig()
-const imageUrl = photos.value?.length ? `https://ucarecdn.com/${photos.value[0]?.id}/-/format/auto/-/scale_crop/1200x630/` : `${siteUrl}/preview/landscape.webp`
+const imageUrl = photos.value?.length ? `https://ucarecdn.com/${photos.value[0]?.image}/-/format/auto/-/scale_crop/1200x630/` : `${siteUrl}/preview/landscape.webp`
 
 useSeoMeta({
   title: title,
@@ -27,14 +27,15 @@ const activePhotoName = useState<string | null>()
 
 <template>
   <main class="mx-auto min-h-screen w-full pt-20 md:pt-28">
+    <LazySearchBar class="fixed bottom-4 left-1/2 z-50 -translate-x-1/2" hydrate-on-idle />
     <section class="rounded-md bg-light-400 dark:bg-dark-400">
       <div v-for="(photos, category) in groupedPhotos" :key="category" class="mb-6 flex flex-col gap-3">
         <h2 class="font-semibold text-md text-center uppercase md:text-xl">{{ category }}</h2>
         <div class="columns-3 gap-2 md:columns-4 lg:columns-6">
-          <div v-for="photo in photos" :key="photo.id" class="mb-2 break-inside-avoid-column overflow-hidden rounded-sm bg-light-600 dark:bg-dark-500">
+          <div v-for="photo in photos" :key="photo.id" class="mb-2 break-inside-avoid-column overflow-hidden rounded-sm bg-light-600 duration-200 ease-in-out hover:scale-110 dark:bg-dark-500">
             <NuxtLink :to="photo.url" @click="activePhotoName = photo.title">
               <NuxtImg
-                :src="photo.id"
+                :src="photo.image"
                 :alt="photo.description"
                 :width="480"
                 :height="Math.round(480 / photo.aspectRatio)"
@@ -52,6 +53,14 @@ const activePhotoName = useState<string | null>()
 </template>
 
 <style scoped>
+/* section {
+  @apply [&:has(img:hover)_img:not(:hover)]:grayscale [&_img]:filter [&_img]:transition [&_img]:duration-300;
+}
+
+img {
+  @apply hover:grayscale-0;
+} */
+
 img.active {
   view-transition-name: selected-photo;
 }
