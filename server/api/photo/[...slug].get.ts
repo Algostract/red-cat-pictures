@@ -1,14 +1,12 @@
 export default defineCachedEventHandler<Promise<PhotoDetails>>(
   async (event) => {
     try {
-      const config = useRuntimeConfig()
-      const notionDbId = config.private.notionDbId as unknown as NotionDB
+      const assetStorage = useStorage<Resource<'asset'>>(`data:resource:asset`)
+      const assets = (await assetStorage.getItems(await assetStorage.getKeys('asset'))).flatMap(({ value }) => value.record)
 
       const slug = getRouterParam(event, 'slug')!.toString().replace(/,$/, '')
 
-      const photos = (await notionQueryDb<NotionAsset>(notion, notionDbId.asset))
-        .filter(({ properties }) => properties.Media.select.name === 'Photo')
-        .toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
+      const photos = assets.filter(({ properties }) => properties.Type.select.name === 'Photo').toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })
 

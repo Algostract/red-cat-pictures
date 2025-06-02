@@ -9,14 +9,12 @@ interface ProjectClient {
 export default defineCachedEventHandler<Promise<ProjectClient[]>>(
   async () => {
     try {
-      const config = useRuntimeConfig()
-      const notionDbId = config.private.notionDbId as unknown as NotionDB
-
-      const projectClients = await notionQueryDb<NotionProjectClient>(notion, notionDbId.client)
+      const clientStorage = useStorage<Resource<'client'>>(`data:resource:client`)
+      const clients = (await clientStorage.getItems(await clientStorage.getKeys('client'))).flatMap(({ value }) => value.record)
 
       return (
         await Promise.all(
-          projectClients.map(async ({ id, icon, properties }): Promise<ProjectClient | null> => {
+          clients.map(async ({ id, icon, properties }): Promise<ProjectClient | null> => {
             const name = notionTextStringify(properties.Name.title)
 
             if (icon?.type !== 'external') return null

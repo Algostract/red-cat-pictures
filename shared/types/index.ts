@@ -340,7 +340,7 @@ export interface NotionAsset {
         }
       }[]
     }
-    Media: {
+    Type: {
       select: {
         name: 'Photo' | 'Video'
       }

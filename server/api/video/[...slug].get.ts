@@ -3,14 +3,12 @@ import { convertSources, heroPreset, landscapePreset, portraitPreset } from './i
 export default defineCachedEventHandler<Promise<VideoDetails>>(
   async (event) => {
     try {
-      const config = useRuntimeConfig()
-      const notionDbId = config.private.notionDbId as unknown as NotionDB
+      const assetStorage = useStorage<Resource<'asset'>>(`data:resource:asset`)
+      const assets = (await assetStorage.getItems(await assetStorage.getKeys('asset'))).flatMap(({ value }) => value.record)
 
       const slug = getRouterParam(event, 'slug')!.toString().replace(/,$/, '')
 
-      const videos = (await notionQueryDb<NotionAsset>(notion, notionDbId.asset))
-        .filter(({ properties }) => properties.Media.select.name === 'Video')
-        .toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
+      const videos = assets.filter(({ properties }) => properties.Type.select.name === 'Video').toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
 
       if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
 

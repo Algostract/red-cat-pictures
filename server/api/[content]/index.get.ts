@@ -7,9 +7,6 @@ let n2m: NotionToMarkdown
 export default defineCachedEventHandler<Promise<Content[]>>(
   async (event) => {
     try {
-      const config = useRuntimeConfig()
-      const notionDbId = config.private.notionDbId as unknown as NotionDB
-
       const { content: contentType } = await getValidatedRouterParams(
         event,
         z.object({
@@ -19,7 +16,8 @@ export default defineCachedEventHandler<Promise<Content[]>>(
 
       n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })
 
-      const contents = await notionQueryDb<NotionContent>(notion, notionDbId.content)
+      const contentStorage = useStorage<Resource<'content'>>(`data:resource:content`)
+      const contents = (await contentStorage.getItems(await contentStorage.getKeys('content'))).flatMap(({ value }) => value.record)
 
       const results = await Promise.all(
         contents.map(async ({ id, cover, properties, created_time, last_edited_time }): Promise<Content | null> => {

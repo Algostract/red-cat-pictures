@@ -29,7 +29,7 @@ services:
     environment:
       - CORS=true
     ports:
-      - 1201:3000
+      - 1203:3000
   # directus:
   #   image: directus/directus:11
   #   ports:

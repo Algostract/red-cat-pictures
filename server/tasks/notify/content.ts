@@ -12,6 +12,7 @@ export default defineTask({
     description: 'Monitor new episodes and blog posts; send alerts via push, email, whatsApp',
   },
   async run() {
+    const assetStorage = useStorage<Resource<'asset'>>(`data:resource:asset`)
     const contentStorage = useStorage<Resource<'content'>>(`data:resource:content`)
     const subscriptionStorage = useStorage('data:subscription')
 
@@ -21,9 +22,9 @@ export default defineTask({
     let whatsappSubscriptions: WhatsappSubscription[] = []
 
     await Promise.allSettled(
-      (await contentStorage.getItems(await contentStorage.getKeys())).map(async ({ value: content }) => {
+      [...(await assetStorage.getItems(await assetStorage.getKeys())), ...(await contentStorage.getItems(await contentStorage.getKeys()))].map(async ({ value: content }) => {
         if (!content || content.notificationStatus == true) return
-        if (content.record.properties.Type.select.name !== 'Episode' || content.record.properties.Status.status.name !== 'Publish') return
+        if (content.record.properties.Status.status.name !== 'Publish') return
 
         if (!(notificationSubscriptions.length > 0))
           notificationSubscriptions = (await subscriptionStorage.getItems<NotificationSubscription>(await subscriptionStorage.getKeys('notification'))).flatMap(({ value }) => value)
@@ -34,7 +35,7 @@ export default defineTask({
         const id = content.record.id
         const title = notionTextStringify(content.record.properties.Name.title)
         const markdown = await convertNotionPageToMarkdown(n2m, id)
-        const contentType = content.record.properties['Type'].select?.name.toLowerCase()
+        const contentType = content.record.properties['Type'].select?.name
         const description = `${mdToText(markdown.split('. ').splice(0, 2).join('. '))}...`
         const url = `/${contentType}/${slugify(title)}_${id}`
         const image =
@@ -43,38 +44,37 @@ export default defineTask({
             : 'https://ucarecdn.com/771d0695-2196-4c98-b9eb-4f29acd6506f/-/format/jpg/-/scale_crop/1200x630/center/'
 
         console.log(`Publishing new ${contentType} content →`, title)
-        await sendPushNotification({ title: `New ${contentType} release | ${title}`, body: `${description.split('. ')[0]}...`, url: url + '?ref=push' }, notificationSubscriptions)
 
-        const emailPayload = {
-          emailSubject: `New ${contentType} release | ${title}`,
-          contentTitle: `${description.split('. ')[0]}...`,
-          contentImage: image,
-          contentUrl: 'https://redcatpictures.com' + url,
-        }
-        await sendEmail(
-          'content',
-          emailSubscriptions.map(({ name, email }) => ({
-            toPersonName: name,
-            toEmail: email,
-            ...emailPayload,
-          }))
-        )
+        if (contentType === 'Episode' || contentType === 'Blog' || contentType === 'Photo' || contentType === 'Video')
+          await sendPushNotification({ title: `New ${contentType} release | ${title}`, body: `${description.split('. ')[0]}...`, url: url + '?ref=push' }, notificationSubscriptions)
 
-        const whatsappPayload = {
-          data: {
-            asset: image,
-            text: `New ${contentType} release | ${title}\n\n${description.split('. ')[0]}...\n\nRead More here https://redcatpictures.com${url}?ref=whatsapp`,
-          },
-        }
-        await sendWhatsappMessage(
-          whatsappSubscriptions.map(({ phone }) => ({
-            to: phone,
-            ...whatsappPayload,
-          }))
-        )
+        if (contentType === 'Episode' || contentType === 'Blog')
+          await sendEmail(
+            'content',
+            emailSubscriptions.map(({ name, email }) => ({
+              toPersonName: name,
+              toEmail: email,
+              emailSubject: `New ${contentType} release | ${title}`,
+              contentTitle: `${description.split('. ')[0]}...`,
+              contentImage: image,
+              contentUrl: 'https://redcatpictures.com' + url,
+            }))
+          )
+
+        if (contentType === 'Episode')
+          await sendWhatsappMessage(
+            whatsappSubscriptions.map(({ phone }) => ({
+              to: phone,
+              data: {
+                asset: image,
+                text: `New ${contentType} release | ${title}\n\n${description.split('. ')[0]}...\n\nRead More here https://redcatpictures.com${url}?ref=whatsapp`,
+              },
+            }))
+          )
 
         content.notificationStatus = true
-        await contentStorage.setItem(normalizeNotionId(id), content)
+        if (content.type == 'content') await contentStorage.setItem(normalizeNotionId(id), content)
+        else if (content.type == 'asset') await assetStorage.setItem(normalizeNotionId(id), content)
       })
     )
 

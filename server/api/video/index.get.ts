@@ -113,11 +113,11 @@ export function convertSources(name: string, sources: FileSources): Source[] {
 export default defineCachedEventHandler<Promise<Video[]>>(
   async () => {
     try {
-      const config = useRuntimeConfig()
-      const notionDbId = config.private.notionDbId as unknown as NotionDB
+      const assetStorage = useStorage<Resource<'asset'>>(`data:resource:asset`)
+      const assets = (await assetStorage.getItems(await assetStorage.getKeys('asset'))).flatMap(({ value }) => value.record)
 
-      const videos = (await notionQueryDb<NotionAsset>(notion, notionDbId.asset))
-        .filter(({ properties }) => properties.Media.select.name === 'Video' && properties.Status.status.name === 'Release')
+      const videos = assets
+        .filter(({ properties }) => properties.Type.select.name === 'Video' && properties.Status.status.name === 'Release')
         .toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
 
       if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })

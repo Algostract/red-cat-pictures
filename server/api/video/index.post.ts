@@ -90,7 +90,7 @@ export default defineEventHandler(async (event) => {
                    },
                  ],
                }, */
-              Media: {
+              Type: {
                 type: 'select',
                 select: {
                   name: 'Video',

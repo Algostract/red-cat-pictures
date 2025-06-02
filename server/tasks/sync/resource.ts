@@ -41,6 +41,30 @@ export default defineTask({
       else console.warn(`Notion fetch failed for ${type}:`, res.reason)
     }
 
+    const emailStorage = useStorage<EmailSubscription>('data:subscription:email')
+    const whatsappStorage = useStorage<WhatsappSubscription>('data:subscription:whatsapp')
+
+    await Promise.allSettled(
+      resources.prospect.map(async ({ properties }) => {
+        const companyName = notionTextStringify(properties.Name.title)
+        const email = properties.Email.email
+        const whatsapp = properties.Whatsapp.url.replace(/^https?:\/\/wa\.me\//, '')
+
+        // Subscribe to Email Notification
+        if (email)
+          await emailStorage.setItem(email, {
+            name: companyName,
+            email,
+          })
+        if (whatsapp)
+          // Subscribe to Whatsapp Notification
+          await whatsappStorage.setItem(whatsapp, {
+            name: companyName,
+            phone: whatsapp,
+          })
+      })
+    )
+
     return { result: 'success' }
   },
 })

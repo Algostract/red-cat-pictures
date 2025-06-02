@@ -23,7 +23,7 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${url}/photo`,
+  ogUrl: `${url}/video`,
 })
 </script>
 

@@ -1,14 +1,14 @@
 export default defineEventHandler(async (event) => {
   try {
-    const notificationStorage = useStorage<EmailSubscription>('data:subscription:email')
+    const emailStorage = useStorage<EmailSubscription>('data:subscription:email')
 
     const body = await readBody<EmailSubscription>(event)
 
-    if (await notificationStorage.getItem(body.email)) {
+    if (await emailStorage.getItem(body.email)) {
       return { success: true }
     }
 
-    await notificationStorage.setItem(body.email, body)
+    await emailStorage.setItem(body.email, body)
 
     return { success: true }
   } catch (error: unknown) {
