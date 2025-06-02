@@ -4,11 +4,11 @@ export default defineCachedEventHandler<Promise<VideoDetails>>(
   async (event) => {
     try {
       const assetStorage = useStorage<Resource<'asset'>>(`data:resource:asset`)
-      const assets = (await assetStorage.getItems(await assetStorage.getKeys('asset'))).flatMap(({ value }) => value.record)
+      const assets = (await assetStorage.getItems(await assetStorage.getKeys())).flatMap(({ value }) => value.record)
 
       const slug = getRouterParam(event, 'slug')!.toString().replace(/,$/, '')
 
-      const videos = assets.filter(({ properties }) => properties.Type.select.name === 'Video').toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
+      const videos = assets.filter(({ properties }) => properties.Type?.select.name === 'Video').toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
 
       if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
 

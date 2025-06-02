@@ -2,10 +2,10 @@ export default defineCachedEventHandler<Promise<Photo[]>>(
   async () => {
     try {
       const assetStorage = useStorage<Resource<'asset'>>(`data:resource:asset`)
-      const assets = (await assetStorage.getItems(await assetStorage.getKeys('asset'))).flatMap(({ value }) => value.record)
+      const assets = (await assetStorage.getItems(await assetStorage.getKeys())).flatMap(({ value }) => value.record)
 
       const photos = assets
-        .filter(({ properties }) => properties.Type.select.name === 'Photo' && properties.Status.status.name === 'Release')
+        .filter(({ properties }) => properties.Type?.select.name === 'Photo' && properties.Status.status.name === 'Release')
         .toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })

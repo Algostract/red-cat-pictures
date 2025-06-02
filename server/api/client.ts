@@ -10,7 +10,7 @@ export default defineCachedEventHandler<Promise<ProjectClient[]>>(
   async () => {
     try {
       const clientStorage = useStorage<Resource<'client'>>(`data:resource:client`)
-      const clients = (await clientStorage.getItems(await clientStorage.getKeys('client'))).flatMap(({ value }) => value.record)
+      const clients = (await clientStorage.getItems(await clientStorage.getKeys())).flatMap(({ value }) => value.record)
 
       return (
         await Promise.all(

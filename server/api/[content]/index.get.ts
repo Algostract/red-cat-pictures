@@ -17,11 +17,11 @@ export default defineCachedEventHandler<Promise<Content[]>>(
       n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })
 
       const contentStorage = useStorage<Resource<'content'>>(`data:resource:content`)
-      const contents = (await contentStorage.getItems(await contentStorage.getKeys('content'))).flatMap(({ value }) => value.record)
+      const contents = (await contentStorage.getItems(await contentStorage.getKeys())).flatMap(({ value }) => value.record)
 
-      const results = await Promise.all(
+      const results = await Promise.allSettled(
         contents.map(async ({ id, cover, properties, created_time, last_edited_time }): Promise<Content | null> => {
-          if (properties['Type'].select?.name.toLowerCase() !== contentType) return null
+          if (properties.Type?.select.name.toLowerCase() !== contentType) return null
           if (properties.Status.status.name !== 'Publish') return null
 
           const markdown = await convertNotionPageToMarkdown(n2m, id)
@@ -40,7 +40,10 @@ export default defineCachedEventHandler<Promise<Content[]>>(
         })
       )
 
-      return results.filter((item) => item !== null).toSorted((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+      return results
+        .filter((item): item is PromiseFulfilledResult<Content> => item.status === 'fulfilled' && item.value !== null)
+        .map((item) => item.value)
+        .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     } catch (error: unknown) {
       console.error('API episode GET', error)
 

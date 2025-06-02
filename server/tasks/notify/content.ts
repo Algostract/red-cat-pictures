@@ -12,8 +12,7 @@ export default defineTask({
     description: 'Monitor new episodes and blog posts; send alerts via push, email, whatsApp',
   },
   async run() {
-    const assetStorage = useStorage<Resource<'asset'>>(`data:resource:asset`)
-    const contentStorage = useStorage<Resource<'content'>>(`data:resource:content`)
+    const resourceStorage = useStorage<Resource>(`data:resource`)
     const subscriptionStorage = useStorage('data:subscription')
 
     n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })
@@ -22,7 +21,7 @@ export default defineTask({
     let whatsappSubscriptions: WhatsappSubscription[] = []
 
     await Promise.allSettled(
-      [...(await assetStorage.getItems(await assetStorage.getKeys())), ...(await contentStorage.getItems(await contentStorage.getKeys()))].map(async ({ value: content }) => {
+      (await resourceStorage.getItems<Resource<'asset' | 'content'>>([...(await resourceStorage.getKeys('content')), ...(await resourceStorage.getKeys('asset'))])).map(async ({ value: content }) => {
         if (!content || content.notificationStatus == true) return
         if (content.record.properties.Status.status.name !== 'Publish') return
 
@@ -73,8 +72,7 @@ export default defineTask({
           )
 
         content.notificationStatus = true
-        if (content.type == 'content') await contentStorage.setItem(normalizeNotionId(id), content)
-        else if (content.type == 'asset') await assetStorage.setItem(normalizeNotionId(id), content)
+        await resourceStorage.setItem(`${content.type}/${normalizeNotionId(id)}`, content)
       })
     )
 

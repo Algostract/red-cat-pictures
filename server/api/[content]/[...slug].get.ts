@@ -38,7 +38,7 @@ export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId:
               if (!('Type' in record.properties)) return full
 
               const title = notionTextStringify(record.properties['Name'].title)
-              const contentType = record.properties['Type']?.select?.name.toLowerCase()
+              const contentType = record.properties.Type?.select.name.toLowerCase()
               return `[${text}](/${contentType}/${slugify(title)}_${record.id})`
             }
             case 'client':
