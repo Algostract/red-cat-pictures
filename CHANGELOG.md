@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.13.2
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.13.1...v2.13.2)
+
+### 💅 Refactors
+
+- Replace Notion DB queries with kv storage for assets and notifications ([bed8cc3](https://github.com/Algostract/red-cat-pictures/commit/bed8cc3))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.13.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.13.0...v2.13.1)
