@@ -4,8 +4,9 @@ export default defineEventHandler(async (event) => {
   try {
     const formData = await readFormData(event)
     const file = formData.get('file') as File
-    const id = formData.get('id') as string
+
     const title = formData.get('title') as string
+    const fileName = title ? `${title}.${file.name.split('.').at(-1)}` : file.name
     const description = formData.get('description') as string
     const category = formData.get('category') as Category
     const gallery = parseInt(formData.get('gallery') as string)
@@ -20,16 +21,22 @@ export default defineEventHandler(async (event) => {
     }
 
     const buffer = await toUint8Array(file)
-    await storage.setItemRaw(`photos/source/${file.name}`, buffer)
-    console.log(`File Saved ${file.name}`)
+    await storage.setItemRaw(`photos/source/${fileName}`, buffer)
+    console.log(`File Saved ${fileName}`)
 
-    const { width = 0, height = 0 } = await getMediaDimensions(file.name, 'photo')
-    // Upload to uploadcare cdn
-
+    const { width = 0, height = 0 } = await getDimension(fileName, 'photo')
     const resolutionLabel = getResolution(width, height)
+    const resolution = parseInt(resolutionLabel.slice(0, -1))
     const aspectRatioLabel = getAspectRatio(width, height)
-    const aspectRatio = parseInt(aspectRatioLabel.split(':')[0]) / parseInt(aspectRatioLabel.split(':')[1])
-    const url = `https://ucarecdn.com/${id}/-/preview/${Math.min(1080, Math.round(1080 * aspectRatio))}x${Math.min(1080, Math.round(1080 / aspectRatio))}/`
+    const [aW, aH] = aspectRatioLabel.split(':').flatMap((item) => parseInt(item))
+    const aspectRatio = aW / aH
+    const { width: expectedWidth, height: expectedHeight } = calculateDimension(resolution, aspectRatio)
+    const { width: coverWidth, height: coverHeight } = calculateDimension(1080, aspectRatio)
+
+    // Transcode image
+    const imageFile = await transcodeImage(`./static/photos/source/${fileName}`, expectedWidth, expectedHeight)
+    // Upload to uploadcare cdn
+    const { file: id } = await uploadcareUploadImage(imageFile)
 
     await notion.pages.create({
       parent: {
@@ -38,7 +45,7 @@ export default defineEventHandler(async (event) => {
       cover: {
         type: 'external',
         external: {
-          url: url,
+          url: `https://ucarecdn.com/${id}/-/preview/${coverWidth}x${coverHeight}/`,
         },
       },
       properties: {
@@ -49,6 +56,16 @@ export default defineEventHandler(async (event) => {
               type: 'text',
               text: {
                 content: title,
+              },
+            },
+          ],
+        },
+        Slug: {
+          type: 'rich_text',
+          rich_text: [
+            {
+              text: {
+                content: slugify(title),
               },
             },
           ],
@@ -69,7 +86,7 @@ export default defineEventHandler(async (event) => {
             name: 'Plan',
           },
         },
-        Category: {
+        Segment: {
           type: 'select',
           select: {
             name: category,
@@ -97,6 +114,8 @@ export default defineEventHandler(async (event) => {
         },
       },
     })
+
+    return { success: true }
   } catch (error: unknown) {
     console.error('API photo POST', error)
 

@@ -1,5 +1,5 @@
 const aspectRatio = ['16:9', '3:2', '4:3', '1:1', '3:4', '2:3', '9:16'] as const
-type AspectRatio = (typeof aspectRatio)[number]
+export type AspectRatio = (typeof aspectRatio)[number]
 
 /**
  * Determine the nearest aspect-ratio bucket based on width/height.

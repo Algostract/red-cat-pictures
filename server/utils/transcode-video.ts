@@ -4,10 +4,6 @@ export const codecs = ['avc', 'vp9', 'hevc', 'av1'] as const
 export type Codec = (typeof codecs)[number]
 
 export const resolutions = ['1440p', '1080p', '720p'] as const
-export type Resolution = (typeof resolutions)[number]
-
-export const orientations = ['landscape', 'portrait'] as const
-export type Orientation = (typeof orientations)[number]
 
 export const devices = ['cpu', 'gpu'] as const
 export type Device = (typeof devices)[number]
@@ -34,11 +30,11 @@ const codecOptions = {
   },
 }
 
-const resolutionOptions: { label: Resolution; width: number; height: number }[] = [
+/* const resolutionOptions: { label: Resolution; width: number; height: number }[] = [
   { label: '1440p', width: 2560, height: 1440 },
   { label: '1080p', width: 1920, height: 1080 },
   { label: '720p', width: 1280, height: 720 },
-]
+] */
 
 interface CodecDeviceOptions {
   lib: string
@@ -49,12 +45,10 @@ interface CodecDeviceOptions {
   audio: string
 }
 
-function buildArgs(codecOptions: { cpu: CodecDeviceOptions; gpu?: CodecDeviceOptions }, res: { width: number; height: number }, orientation: Orientation, mode: 'cpu' | 'gpu'): string {
-  let { width, height } = res
-  if (orientation === 'portrait') {
-    ;[width, height] = [height, width]
-  }
+function buildArgs(codecOptions: { cpu: CodecDeviceOptions; gpu?: CodecDeviceOptions }, res: { width: number; height: number }, mode: 'cpu' | 'gpu'): string {
+  const { width, height } = res
   const scaleFilter = `scale=${width}:${height}:force_original_aspect_ratio=decrease,pad=${width}:${height}:(ow-iw)/2:(oh-ih)/2`
+  // const scaleFilter = `scale=if(gt(a\\,${width}/${height})\\,${width}\\,-2):if(gt(a\\,${width}/${height})\\,-2\\,${height}),pad=${width}:${height}:(${width}-iw)/2:(${height}-ih)/2`
   const options = codecOptions[mode]!
   const extra = mode === 'cpu' && options.extra ? ` ${options.extra}` : ''
   return `-c:v ${options.lib} -vf "${scaleFilter}" -crf ${options.crf} -b:v 0 -${options.preset ? 'preset ' + options.preset : 'deadline ' + options.deadline} ${extra} -c:a ${options.audio}`
@@ -90,28 +84,30 @@ async function countTotalFrames(filePath: string) {
 }
 
 export default async function (
-  fileName: string,
-  resolution: Resolution,
-  orientation: Orientation,
+  filePath: string,
+  outputPath: string,
+  width: number,
+  height: number,
   codec: Codec,
   device: Device = 'cpu',
   onUpdate?: (args: { fileName: string; status: string; completion: number; eta: number; fps: number }) => void
 ) {
+  const fileName = filePath.split('/').at(-1)!
   const codecOption = codecOptions[codec]
   if (!codecOption) throw new Error(`Codec ${codec} not supported`)
 
-  const resolutionOption = resolutionOptions.find((r) => r.label === resolution)
-  if (!resolutionOption) throw new Error(`Resolution ${resolution} not defined`)
+  // const resolutionOption = resolutionOptions.find((r) => r.label === resolution)
+  // if (!resolutionOption) throw new Error(`Resolution ${width}x${height} not defined`)
 
-  const presetName = `${codec}-${resolution}-${orientation}`
+  const presetName = `${codec}-${width}x${height}`
   const selectedArgs =
     device === 'gpu'
       ? 'gpu' in codecOption && codecOption.gpu
-        ? buildArgs(codecOption, resolutionOption, orientation, 'gpu')
+        ? buildArgs(codecOption, { width, height }, 'gpu')
         : (() => {
             throw new Error(`GPU not supported for codec ${codec}`)
           })()
-      : buildArgs(codecOption, resolutionOption, orientation, 'cpu')
+      : buildArgs(codecOption, { width, height }, 'cpu')
   const extension = codecOption.extension
 
   try {
@@ -125,12 +121,12 @@ export default async function (
         fps: 0,
       })
 
-    const totalFrames = await countTotalFrames(`./static/videos/source/${fileName}`)
+    const totalFrames = await countTotalFrames(filePath)
     const progressData: Record<string, string> = {}
 
     const ffmpegProcess = execa(
       'ffmpeg',
-      ['-y', '-i', `./static/videos/source/${fileName}`, ...parseArgs(selectedArgs), `./static/videos/${fileName.split('.')[0]}-${presetName.toLowerCase()}.${extension}`, '-progress', 'pipe:1'],
+      ['-y', '-i', filePath, ...parseArgs(selectedArgs), `${outputPath}/${fileName.split('.')[0]}-${presetName.toLowerCase()}.${extension}`, '-progress', 'pipe:1'],
       { stdout: 'pipe', stderr: 'pipe' }
     )
 
@@ -168,7 +164,7 @@ export default async function (
     console.log(`Conversion complete ${fileName} to ${presetName}`)
     if (onUpdate)
       onUpdate({
-        fileName,
+        fileName: fileName,
         status: `complete-${presetName}`,
         completion: 100,
         eta: 0,

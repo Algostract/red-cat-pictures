@@ -21,10 +21,10 @@ export default <Partial<Config>>{
       sub: ['Oxanium', 'sans-serif'],
     },
     fontWeight: {
-      light: 300,
-      regular: 400,
-      'semi-bold': 500,
-      bold: 600,
+      light: '300',
+      regular: '400',
+      'semi-bold': '500',
+      bold: '600',
     },
     colors: {
       transparent: 'transparent',

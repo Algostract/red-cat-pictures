@@ -1,10 +1,17 @@
-const resolutions = ['7680p', '3840p', '2560p', '1440p', '1080p', '720p'] as const
-type Resolution = (typeof resolutions)[number]
+const resolutions = ['4320p', '2160p', '1440p', '1080p', '720p', '480p'] as const
+export type Resolution = (typeof resolutions)[number]
 
 /**
- * Determine the nearest resolution bucket based on the larger image dimension.
+ * Determine the nearest resolution bucket based on the IMAGE HEIGHT (vertical "p").
  */
 export default function (width: number, height: number): Resolution {
-  const maxDim = Math.max(width, height)
-  return resolutions.find((r) => maxDim >= Number(r.slice(0, -1))) || resolutions[resolutions.length - 1]
+  const buckets = resolutions.map((r) => Number(r.slice(0, -1)))
+
+  for (const b of buckets) {
+    if (height >= b) {
+      return `${b}p` as Resolution
+    }
+  }
+
+  return resolutions[resolutions.length - 1]
 }

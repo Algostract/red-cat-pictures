@@ -4,9 +4,7 @@ export default defineCachedEventHandler<Promise<Photo[]>>(
       const assetStorage = useStorage<Resource<'asset'>>(`data:resource:asset`)
       const assets = (await assetStorage.getItems(await assetStorage.getKeys())).flatMap(({ value }) => value.record)
 
-      const photos = assets
-        .filter(({ properties }) => properties.Type?.select.name === 'Photo' && properties.Status.status.name === 'Release')
-        .toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
+      const photos = assets.filter(({ properties }) => properties.Type?.select?.name === 'Photo' && properties.Status.status?.name === 'Release')
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })
       const order = {
@@ -36,11 +34,13 @@ export default defineCachedEventHandler<Promise<Photo[]>>(
         })
       )
 
-      return results.filter((item) => item !== null).toSorted((a, b) => order[a.category] - order[b.category])
-      /* return photos
-        .map(({ title, ...rest }) => ({ title: slugify(title), url: slugify(`/photo/${title}`), ...rest }))
-        .toSorted((a, b) => order[a.category] - order[b.category])
-        .map<Photo>(({ width, height, ...rest }) => ({ aspectRatio: width / height, ...rest })) */
+      return results
+        .filter((item) => item !== null)
+        .toSorted((a, b) => {
+          const diff = order[a.category] - order[b.category]
+          if (diff) return diff
+          return (a.gallery ?? Infinity) - (b.gallery ?? Infinity)
+        })
     } catch (error: unknown) {
       console.error('API photo GET', error)
 

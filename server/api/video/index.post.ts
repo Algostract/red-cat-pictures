@@ -1,6 +1,5 @@
 import { toUint8Array } from 'undio'
-import type { Codec, Device, Orientation, Resolution } from '~~/server/utils/transcode-video'
-import transcodeVideo from '~~/server/utils/transcode-video'
+import type { Codec, Device } from '~~/server/utils/transcode-video'
 
 export default defineEventHandler(async (event) => {
   try {
@@ -12,7 +11,6 @@ export default defineEventHandler(async (event) => {
     // const file = JSON.parse(formData.get('file') as string) as { name: string; size: string }
     const targetCodecs = JSON.parse(formData.get('codecs') as string) as Codec[]
     const targetResolutions = JSON.parse(formData.get('resolutions') as string) as Resolution[]
-    const targetOrientation = formData.get('orientation') as Orientation
     const targetDevice = formData.get('device') as Device
 
     if (!file || !file.size) {
@@ -33,31 +31,44 @@ export default defineEventHandler(async (event) => {
             status: `saved`,
           })
 
-          const { width = 0, height = 0 } = await getMediaDimensions(file.name, 'video')
+          const { width = 0, height = 0 } = await getDimension(file.name, 'video')
           const resolutionLabel = getResolution(width, height)
+          const resolution = parseInt(resolutionLabel.slice(0, -1))
           const aspectRatioLabel = getAspectRatio(width, height)
+          const [aW, aH] = aspectRatioLabel.split(':').flatMap((item) => parseInt(item))
+          const aspectRatio = aW / aH
+          const { width: expectedWidth, height: expectedHeight } = calculateDimension(resolution, aspectRatio)
+          const { width: coverWidth, height: coverHeight } = calculateDimension(1080, aspectRatio)
 
           const results = []
           for (const codec of targetCodecs) {
-            for (const resolution of targetResolutions) {
-              const status = await transcodeVideo(file.name, resolution, targetOrientation, codec, targetDevice, streamResponse)
+            for (const resolutionLabel of targetResolutions) {
+              const resolution = parseInt(resolutionLabel.slice(0, -1))
+              const { width: expectedWidth, height: expectedHeight } = calculateDimension(resolution, aspectRatio)
+
+              const status = await transcodeVideo(`./static/videos/source/${file.name}`, `./static/videos`, expectedWidth, expectedHeight, codec, targetDevice, streamResponse)
               results.push(status)
             }
           }
 
           console.log(`File processed ${file.name}`)
 
+          await generateThumbnail(`./static/videos/source/${file.name}`, `./static/videos`, '00:00:00.500')
+          // Transcode image
+          const imageFile = await transcodeImage(`./static/videos/${file.name.split('.')[0]}.jpg`, expectedWidth, expectedHeight)
+          // Upload to uploadcare cdn
+          const { file: fileId } = await uploadcareUploadImage(imageFile)
           // Save to notion
           await notion.pages.create({
             parent: {
               database_id: notionDbId.asset,
             },
-            /*  cover: {
-               type: 'external',
-               external: {
-                 url: '',
-               },
-             }, */
+            cover: {
+              type: 'external',
+              external: {
+                url: `https://ucarecdn.com/${fileId}/-/preview/${coverWidth}x${coverHeight}/`,
+              },
+            },
             properties: {
               Name: {
                 type: 'title',

@@ -1,5 +1,6 @@
 export type Category = 'ecommerce' | 'product' | 'food'
 export type Service = 'photo' | 'video'
+export type Orientation = 'portrait' | 'landscape'
 
 export interface FilePhoto {
   id: string
@@ -361,12 +362,12 @@ export interface NotionAsset {
     Featured: { number: number }
     Resolution: {
       select: {
-        name: '7680p' | '3840p' | '2560p' | '1080p' | '720p'
+        name: Resolution
       }
     }
     'Aspect ratio': {
       select: {
-        name: '16:9' | '3:2' | '4:3' | '1:1' | '3:4' | '2:3' | '9:16'
+        name: AspectRatio
       }
     }
   }

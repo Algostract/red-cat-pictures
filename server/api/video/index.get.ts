@@ -1,4 +1,4 @@
-import type { Codec, Resolution } from '~~/server/utils/transcode-video'
+import type { Codec } from '~~/server/utils/transcode-video'
 
 export const heroPreset: FileSources = {
   av1: {
@@ -110,45 +110,59 @@ export function convertSources(name: string, sources: FileSources): Source[] {
   return result
 }
 
-export default defineCachedEventHandler<Promise<Video[]>>(
-  async () => {
-    try {
-      const assetStorage = useStorage<Resource<'asset'>>(`data:resource:asset`)
-      const assets = (await assetStorage.getItems(await assetStorage.getKeys())).flatMap(({ value }) => value.record)
+export default defineEventHandler<Promise<Video[]>>(async () => {
+  try {
+    const assetStorage = useStorage<Resource<'asset'>>(`data:resource:asset`)
+    const assets = (await assetStorage.getItems(await assetStorage.getKeys())).flatMap(({ value }) => value.record)
 
-      const videos = assets
-        .filter(({ properties }) => properties.Type?.select.name === 'Video' && properties.Status.status.name === 'Release')
-        .toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
+    const videos = assets
+      .filter(({ properties }) => properties.Type?.select?.name === 'Video' && properties.Status.status?.name === 'Release')
+      .toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
 
-      if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
+    if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
 
-      return videos.map<Video>(({ cover, properties }) => {
+    const settled = await Promise.allSettled(
+      videos.map<Promise<Video>>(async ({ cover, properties }) => {
         const id = notionTextStringify(properties.Slug.rich_text)
         const [aW, aH] = properties['Aspect ratio'].select.name.split(':').map((item) => parseInt(item))
         const aspectRatio = aW / aH
+
+        /*  */
+        /*  const resolution = parseInt(properties.Resolution.select.name.slice(0, -1))
+         const { width: expectedWidth, height: expectedHeight } = calculateDimension(resolution, aspectRatio)
+         const { width: coverWidth, height: coverHeight } = calculateDimension(1080, aspectRatio)
+ 
+         await generateThumbnail(`./static/videos/source/${id}.mp4`, `./static/videos`, '00:00:00.500')
+         // Transcode image
+         const imageFile = await transcodeImage(`./static/videos/${id}.jpg`, expectedWidth, expectedHeight)
+         // Upload to uploadcare cdn
+         const { file: fileId } = await uploadcareUploadImage(imageFile)
+         const cover = { type: 'external', external: { url: `https://ucarecdn.com/${fileId}/-/preview/${coverWidth}x${coverHeight}/` } } */
+        /*  */
 
         return {
           id: id,
           title: notionTextStringify(properties.Name.title),
           description: notionTextStringify(properties.Description.rich_text),
           type: id === 'hero' ? 'hero' : 'feature',
-          poster: cover?.type === 'external' ? cover.external.url.split('/')[3] : '',
+          poster: cover?.type === 'external' ? cover.external.url : '',
           sources: convertSources(id, id === 'hero' ? heroPreset : aspectRatio < 1 ? portraitPreset : landscapePreset),
           url: `/video/${id}`,
         }
       })
-    } catch (error: unknown) {
-      console.error('API video GET', error)
+    )
+    return settled.filter((result) => result.status === 'fulfilled').map((result) => result.value)
+  } catch (error: unknown) {
+    console.error('API video GET', error)
 
-      if (error instanceof Error && 'statusCode' in error) {
-        throw error
-      }
-
-      throw createError({
-        statusCode: 500,
-        statusMessage: 'Some Unknown Error Found',
-      })
+    if (error instanceof Error && 'statusCode' in error) {
+      throw error
     }
-  },
-  { maxAge: 60 * 60 }
-)
+
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Some Unknown Error Found',
+    })
+  }
+})
+// { maxAge: 60 * 60 * 0 }
