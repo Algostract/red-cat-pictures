@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.13.4
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.13.3...v2.13.4)
+
+### 💅 Refactors
+
+- Restructure utility functions of videos and photos ([e9a6c1b](https://github.com/Algostract/red-cat-pictures/commit/e9a6c1b))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.13.3
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.13.2...v2.13.3)
