@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.13.5
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.13.4...v2.13.5)
+
+### 💅 Refactors
+
+- Auth middleware added, photo api cache timeout to 1 min ([d24c528](https://github.com/Algostract/red-cat-pictures/commit/d24c528))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.13.4
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.13.3...v2.13.4)
