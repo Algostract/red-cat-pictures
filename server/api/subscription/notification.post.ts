@@ -1,3 +1,12 @@
+export interface NotificationSubscription {
+  endpoint: string
+  expirationTime: null
+  keys: {
+    p256dh: string
+    auth: string
+  }
+}
+
 export default defineEventHandler(async (event) => {
   try {
     const notificationStorage = useStorage<NotificationSubscription>('data:subscription:notification')

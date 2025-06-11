@@ -94,16 +94,7 @@ export async function sendEmail<T extends keyof EmailTemplateData>(template: T, 
 
 export default defineEventHandler<Promise<{ success: boolean }>>(async (event) => {
   try {
-    const config = useRuntimeConfig()
-    const authHeader = getRequestHeader(event, 'authorization')
-
-    if (extractBearerToken(authHeader) !== config.private.serverValidationKey) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: "Server Validation Key does't match",
-      })
-    }
-
+    // const { id } = getRouterParams(event)
     const body = await readBody<TransactionalEmail<keyof EmailTemplateData>>(event)
     await sendEmail(body.template, [body.data], false)
 

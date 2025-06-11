@@ -1,4 +1,5 @@
 import webpush from 'web-push'
+import type { NotificationSubscription } from '../notification.post'
 
 interface PushNotification {
   title: string
@@ -24,21 +25,12 @@ export async function sendPushNotification(payload: PushNotification, subscripti
 
 export default defineEventHandler(async (event) => {
   try {
-    const config = useRuntimeConfig()
-    const authHeader = getRequestHeader(event, 'authorization')
-
-    if (extractBearerToken(authHeader) !== config.private.serverValidationKey) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: "Server Validation Key does't match",
-      })
-    }
-
+    const { id } = getRouterParams(event)
     const body = await readBody<PushNotification>(event)
     const notificationStorage = useStorage<NotificationSubscription>('data:subscription:notification')
 
-    const subscriptions = (await notificationStorage.getItems(await notificationStorage.getKeys())).flatMap(({ value }) => value)
-    await sendPushNotification(body, subscriptions)
+    const subscription = (await notificationStorage.getItems(await notificationStorage.getKeys())).flatMap(({ value }) => value).filter(({ keys }) => keys.auth === id)
+    await sendPushNotification(body, subscription)
 
     return { success: true }
   } catch (error: unknown) {

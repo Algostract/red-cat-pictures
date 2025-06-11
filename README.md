@@ -4,8 +4,6 @@
 
 # RED CAT PICTURES
 
-> Nurture the essence of your product with our photography & videography services in kolkata
-
 <p align="center">
   <a href="https://redcatpictures.betteruptime.com">
     <img src="https://uptime.betterstack.com/status-badges/v3/monitor/10v2y.svg" alt="Better Stack Badge">
@@ -14,24 +12,38 @@
 
 ![Landing](public/previews/landing.webp)
 
+> Nurture the essence of your product with our photography & videography services in kolkata
+
+- 📦 SSR
+- 🖼️ OG Tags
+- 🚀 PWA
+- ✋ Push Notification
+- 🌙 Light/Dark Mode
+- 🗂️ CMS (Notion)
+- 🤖 Automation (Email, Whatsapp)
+- 🐋 Containerized
+- 🪄 CI/CD (Github Action)
+- ⚡️ API Route Caching
+- 📐 Analytics
+
 https://g.page/r/CaroFd9d81EjEBM/review
 
-- [] Update photos and videos url slug
-- [] Modify content page to show gallery view
-- [] Whatsapp Automation
+- [ ] Update photos and videos url slug
+- [ ] Modify content page to show gallery view
+- [ ] Whatsapp Automation
 
-- [] Facebook Automation
-- [] Update task sync:meta-data for optimistic cached update
-- [] Image Search
-- [] Update Photo page with title and description
-- [] Instagram Automation
-- [] Share Url
-- [] Modify Photo page to Project page
-- [] Videos and Video page
-- [] Modify About Us page
-- [] Like/Dislike Count Content
-- [] Add live streaming page
-- [] Audio Dictation of Content
+- [ ] Facebook Automation
+- [ ] Update task sync:meta-data for optimistic cached update
+- [ ] Image Search
+- [ ] Update Photo page with title and description
+- [ ] Instagram Automation
+- [ ] Share Url
+- [ ] Modify Photo page to Project page
+- [ ] Videos and Video page
+- [ ] Modify About Us page
+- [ ] Like/Dislike Count Content
+- [ ] Add live streaming page
+- [ ] Audio Dictation of Content
 
 ## How to Deploy
 
@@ -62,21 +74,28 @@ docker volume create \
   --opt type=none \
   --opt device=~/Algostract/red-cat-pictures/static \
   --opt o=bind
+
+docker volume create \
+  --name red-cat-pictures_data \
+  --driver local \
+  --opt type=none \
+  --opt device=~/Algostract/red-cat-pictures/.data \
+  --opt o=bind
 ```
 
 5. Use Docker Stack to deploy multi-container application
 
 ```bash
-export $(cat .env.prod) && docker stack deploy --compose-file docker-compose.prod.yml red-cat-pictures
+docker stack deploy --compose-file docker-compose.prod.yml red-cat-pictures
 ```
 
-6. Scale the service
+6. Scale service
 
 ```bash
-docker service scale red-cat-pictures_app=5
+docker service scale red-cat-pictures_app=2
 ```
 
-7. Check
+7. Verify
 
 ```bash
 docker service ls

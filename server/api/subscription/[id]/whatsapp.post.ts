@@ -32,19 +32,8 @@ export async function sendWhatsappMessage(payload: WhatsappMessage[]): Promise<b
 
 export default defineEventHandler(async (event) => {
   try {
-    const config = useRuntimeConfig()
-    const authHeader = getRequestHeader(event, 'authorization')
-
-    if (extractBearerToken(authHeader) !== config.private.serverValidationKey) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: "Server Validation Key does't match",
-      })
-    }
-
+    // const { id } = getRouterParams(event)
     const body = await readBody<WhatsappMessage>(event)
-    // const whatsappStorage = useStorage<WhatsappSubscription>('data:subscription:whatsapp')
-    // const subscriptions = (await whatsappStorage.getItems(await whatsappStorage.getKeys())).flatMap(({ value }) => value)
 
     await sendWhatsappMessage([body])
 
