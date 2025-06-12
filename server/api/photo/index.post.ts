@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     const file = formData.get('file') as File
 
     const title = formData.get('title') as string
-    const fileName = title ? `${title}.${file.name.split('.').at(-1)}` : file.name
+    const fileName = title ? `${title}.${file.name.split('.').at(-1)?.toLowerCase()}` : file.name
     const description = formData.get('description') as string
     const category = formData.get('category') as Category
     const gallery = parseInt(formData.get('gallery') as string)
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
     const { width: coverWidth, height: coverHeight } = calculateDimension(1080, aspectRatio)
 
     // Transcode image
-    const imageFile = await transcodeImage(`./static/photos/source/${fileName}`, expectedWidth, expectedHeight)
+    const imageFile = await transcodeImage(`./static/photos/source/${fileName}`, `./static/photos`, expectedWidth, expectedHeight)
     // Upload to uploadcare cdn
     const { file: id } = await uploadcareUploadImage(imageFile)
 
@@ -79,6 +79,12 @@ export default defineEventHandler(async (event) => {
               },
             },
           ],
+        },
+        Type: {
+          type: 'select',
+          select: {
+            name: 'Photo',
+          },
         },
         Status: {
           type: 'status',

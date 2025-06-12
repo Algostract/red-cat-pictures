@@ -127,19 +127,6 @@ export default defineEventHandler<Promise<Video[]>>(async () => {
         const [aW, aH] = properties['Aspect ratio'].select.name.split(':').map((item) => parseInt(item))
         const aspectRatio = aW / aH
 
-        /*  */
-        /*  const resolution = parseInt(properties.Resolution.select.name.slice(0, -1))
-         const { width: expectedWidth, height: expectedHeight } = calculateDimension(resolution, aspectRatio)
-         const { width: coverWidth, height: coverHeight } = calculateDimension(1080, aspectRatio)
- 
-         await generateThumbnail(`./static/videos/source/${id}.mp4`, `./static/videos`, '00:00:00.500')
-         // Transcode image
-         const imageFile = await transcodeImage(`./static/videos/${id}.jpg`, expectedWidth, expectedHeight)
-         // Upload to uploadcare cdn
-         const { file: fileId } = await uploadcareUploadImage(imageFile)
-         const cover = { type: 'external', external: { url: `https://ucarecdn.com/${fileId}/-/preview/${coverWidth}x${coverHeight}/` } } */
-        /*  */
-
         return {
           id: id,
           title: notionTextStringify(properties.Name.title),

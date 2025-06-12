@@ -4,7 +4,7 @@ export const ipx = createIPX({
   storage: ipxFSStorage({ dir: './' }),
 })
 
-export default async function (filePath: string, width: number, height: number) {
+export default async function (filePath: string, outputPath: string, width: number, height: number) {
   const fileName = filePath.split('/').at(-1)!
 
   const processor = ipx(filePath, {
@@ -18,4 +18,6 @@ export default async function (filePath: string, width: number, height: number) 
 
   const blob = new Blob([result.data], { type: 'image/webp' })
   return new File([blob], fileName.split('.')[0] + '.webp', { type: 'image/webp' })
+
+  // return { status: 'fulfilled', path: `${outputPath}/${fileName.split('.')[0]}.webp` }
 }

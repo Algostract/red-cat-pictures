@@ -53,9 +53,9 @@ export default defineEventHandler(async (event) => {
 
           console.log(`File processed ${file.name}`)
 
-          await generateThumbnail(`./static/videos/source/${file.name}`, `./static/videos`, '00:00:00.500')
+          await generateThumbnail(`./static/videos/source/${file.name}`, `./static/photos/source`, '00:00:00.500')
           // Transcode image
-          const imageFile = await transcodeImage(`./static/videos/${file.name.split('.')[0]}.jpg`, expectedWidth, expectedHeight)
+          const imageFile = await transcodeImage(`./static/photos/source/${file.name.split('.')[0]}.jpg`, `./static/photos`, expectedWidth, expectedHeight)
           // Upload to uploadcare cdn
           const { file: fileId } = await uploadcareUploadImage(imageFile)
           // Save to notion
@@ -91,16 +91,16 @@ export default defineEventHandler(async (event) => {
                   },
                 ],
               },
-              /*  Description: {
-                 type: 'rich_text',
-                 rich_text: [
-                   {
-                     text: {
-                       content: '',
-                     },
-                   },
-                 ],
-               }, */
+              Description: {
+                type: 'rich_text',
+                rich_text: [
+                  {
+                    text: {
+                      content: '',
+                    },
+                  },
+                ],
+              },
               Type: {
                 type: 'select',
                 select: {
