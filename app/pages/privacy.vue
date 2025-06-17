@@ -23,85 +23,83 @@ useSeoMeta({
   twitterImage: imageUrl,
   ogUrl: `${siteUrl}/privacy`,
 })
+
+const lastUpdated = 'June 17, 2025'
+
+const sections = [
+  {
+    title: '1. Introduction',
+    content: `
+      This Privacy Policy applies to our website and services and explains how we collect, use,
+      disclose, and protect your Personal Information. By using our site, you consent to this policy.
+    `,
+  },
+  {
+    title: '2. Information We Collect',
+    content: `
+      <ul class="list-disc list-inside">
+        <li><strong>Personal Identifiers:</strong> name, address, email, phone number, date of birth.</li>
+        <li><strong>Account Information:</strong> email, mobile number, KYC documents, bank/payment details.</li>
+        <li><strong>Customer Transaction Data:</strong> order details, transaction history.</li>
+        <li><strong>Technical Data:</strong> IP address, browser, device, cookies, usage logs.</li>
+      </ul>
+    `,
+  },
+  {
+    title: '3. How We Use Your Information',
+    content: `
+      <ul class="list-disc list-inside">
+        <li>To process payments, transactions, and deliver services.</li>
+        <li>For customer support, fraud prevention, KYC and regulatory compliance.</li>
+        <li>To send you updates, offers, and newsletters (you can unsubscribe anytime).</li>
+        <li>To analyze usage patterns, improve services, and enhance security.</li>
+      </ul>
+    `,
+  },
+  {
+    title: '4. Cookies & Tracking',
+    content: `
+      We use cookies (session and persistent) for authentication, preferences,
+      analytics, fraud detection, and security. You may disable cookies via browser settings,
+      but some features may be affected.
+    `,
+  },
+  {
+    title: '5. Third‑Party Disclosures',
+    content: `
+      We share your information with:
+      <ul class="list-disc list-inside">
+        <li>Payment processors, banks, and regulatory authorities (e.g., RBI, as required).</li>
+        <li>Affiliated and parent companies under common control.</li>
+        <li>Legal parties, such as in response to subpoenas or fraud investigations.</li>
+      </ul>
+    `,
+  },
+  {
+    title: '6. Data Security & Retention',
+    content: `
+      We implement industry-standard security measures and retain personal information only
+      as long as necessary or required by law. You may request deletion of your data subject
+      to legal/regulatory obligations.
+    `,
+  },
+  {
+    title: '7. Your Rights & Policy Changes',
+    content: `
+      You have rights to access, correct, or delete your data, withdraw consent, and file grievances.
+      We update this policy periodically; changes take effect immediately and notices are posted here.
+    `,
+  },
+]
 </script>
 
 <template>
-  <section class="mx-auto mb-10 mt-28 max-w-4xl px-4 lg:mt-36">
+  <section class="mx-auto mb-10 mt-28 max-w-4xl px-4 py-12 lg:mt-36">
     <h1 class="mx-auto mb-8 w-fit text-2xl font-semi-bold md:text-3xl">Privacy Policy</h1>
-
-    <div class="space-y-6">
-      <div>
-        <h2 class="font-semibold mb-2 text-xl text-primary-500">1. Introduction</h2>
-        <p>
-          Welcome to RED CAT PICTURES ("we", "us", "our"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when
-          you visit our website <a href="https://redcatpictures.com" class="text-blue-600 hover:underline">redcatpictures.com</a>.
-        </p>
-      </div>
-
-      <div>
-        <h2 class="font-semibold mb-2 text-xl text-primary-500">2. Information We Collect</h2>
-        <ul class="list-inside list-disc space-y-2">
-          <li><strong>Personal Data:</strong> Name, email address, phone number, and business details you provide when booking services or contacting us.</li>
-          <li>
-            <strong>Usage Data:</strong> Information about your interaction with our website, such as IP address, browser type, pages visited, and timestamps, collected via cookies and analytics
-            tools.
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <h2 class="font-semibold mb-2 text-xl text-primary-500">3. How We Use Your Information</h2>
-        <ul class="list-inside list-disc space-y-2">
-          <li>To provide, operate, and maintain our services and website.</li>
-          <li>To process bookings, inquiries, and communicate with you.</li>
-          <li>To improve user experience and personalize content.</li>
-          <li>To send you updates, newsletters, and promotional materials (you may opt out at any time).</li>
-          <li>To monitor and analyze usage trends and website performance.</li>
-        </ul>
-      </div>
-
-      <div>
-        <h2 class="font-semibold mb-2 text-xl text-primary-500">4. Cookies and Tracking Technologies</h2>
-        <p>
-          We use cookies and similar tracking technologies to track activity on our website and store certain information. You can configure your browser to refuse cookies or alert you when cookies
-          are being sent.
-        </p>
-      </div>
-
-      <div>
-        <h2 class="font-semibold mb-2 text-xl text-primary-500">5. Third-Party Services</h2>
-        <p>
-          We may share your information with third-party service providers to facilitate our services (e.g., payment processors, analytics providers). These parties are obligated to protect your
-          information and use it only for the purposes we specify.
-        </p>
-      </div>
-
-      <div>
-        <h2 class="font-semibold mb-2 text-xl text-primary-500">6. Data Security</h2>
-        <p>
-          We implement industry-standard security measures to protect your information. However, no method of transmission over the Internet is completely secure, so we cannot guarantee absolute
-          security.
-        </p>
-      </div>
-
-      <div>
-        <h2 class="font-semibold mb-2 text-xl text-primary-500">7. Children’s Privacy</h2>
-        <p>Our website is not intended for individuals under the age of 13. We do not knowingly collect personal information from children under 13.</p>
-      </div>
-
-      <div>
-        <h2 class="font-semibold mb-2 text-xl text-primary-500">8. Changes to This Privacy Policy</h2>
-        <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated "Last Updated" date.</p>
-      </div>
-
-      <div>
-        <h2 class="font-semibold mb-2 text-xl text-primary-500">9. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-        <address class="not-italic">
-          <p>RED CAT PICTURES</p>
-          <p>Email: <a href="mailto:info@redcatpictures.com" class="text-blue-600 hover:underline">redcatpictures24@gmail.com</a></p>
-        </address>
-      </div>
+    <NuxtTime :datetime="lastUpdated" day="numeric" month="short" year="numeric" class="mb-8 inline-block opacity-80"> Last updated: {{ lastUpdated }}</NuxtTime>
+    <div v-for="section in sections" :key="section.title" class="mb-8">
+      <h2 class="font-semibold mb-2 text-xl text-primary-500">{{ section.title }}</h2>
+      <div v-html="section.content" />
     </div>
   </section>
 </template>
