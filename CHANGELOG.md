@@ -1,5 +1,21 @@
 # red-cat-pictures
 
+## v2.14.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.13.5...v2.14.0)
+
+### 🚀 Enhancements
+
+- Add privacy policy page and update about page content ([158fdba](https://github.com/Algostract/red-cat-pictures/commit/158fdba))
+
+### 💅 Refactors
+
+- Update file handling and transcode paths for photo and video processing ([cf7ccaf](https://github.com/Algostract/red-cat-pictures/commit/cf7ccaf))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.13.5
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.13.4...v2.13.5)
