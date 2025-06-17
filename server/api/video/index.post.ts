@@ -8,7 +8,6 @@ export default defineEventHandler(async (event) => {
     const notionDbId = config.private.notionDbId as unknown as NotionDB
     const formData = await readFormData(event)
     const file = formData.get('file') as File
-    // const file = JSON.parse(formData.get('file') as string) as { name: string; size: string }
     const targetCodecs = JSON.parse(formData.get('codecs') as string) as Codec[]
     const targetResolutions = JSON.parse(formData.get('resolutions') as string) as Resolution[]
     const targetDevice = formData.get('device') as Device
@@ -25,16 +24,17 @@ export default defineEventHandler(async (event) => {
         try {
           const buffer = await toUint8Array(file)
           await storage.setItemRaw(`videos/source/${file.name}`, buffer)
+
           console.log(`File Saved ${file.name}`)
           await streamResponse({
-            file: file.name,
+            fileName: file.name,
             status: `saved`,
           })
 
-          const { width = 0, height = 0 } = await getDimension(file.name, 'video')
-          const resolutionLabel = getResolution(width, height)
+          const { width: originalWidth = 0, height: originalHeight = 0 } = await getDimension(file.name, 'video')
+          const resolutionLabel = getResolution(originalWidth, originalHeight)
           const resolution = parseInt(resolutionLabel.slice(0, -1))
-          const aspectRatioLabel = getAspectRatio(width, height)
+          const aspectRatioLabel = getAspectRatio(originalWidth, originalHeight)
           const [aW, aH] = aspectRatioLabel.split(':').flatMap((item) => parseInt(item))
           const aspectRatio = aW / aH
           const { width: expectedWidth, height: expectedHeight } = calculateDimension(resolution, aspectRatio)
@@ -44,9 +44,9 @@ export default defineEventHandler(async (event) => {
           for (const codec of targetCodecs) {
             for (const resolutionLabel of targetResolutions) {
               const resolution = parseInt(resolutionLabel.slice(0, -1))
-              const { width: expectedWidth, height: expectedHeight } = calculateDimension(resolution, aspectRatio)
+              const expectedDim = calculateDimension(resolution, aspectRatio)
 
-              const status = await transcodeVideo(`./static/videos/source/${file.name}`, `./static/videos`, expectedWidth, expectedHeight, codec, targetDevice, streamResponse)
+              const status = await transcodeVideo(`./static/videos/source/${file.name}`, `./static/videos`, expectedDim, codec, targetDevice, streamResponse)
               results.push(status)
             }
           }
@@ -144,7 +144,7 @@ export default defineEventHandler(async (event) => {
           })
 
           await streamResponse({
-            file: file.name,
+            fileName: file.name,
             status: `processed`,
             size: file.size,
             results,

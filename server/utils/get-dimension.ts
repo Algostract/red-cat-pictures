@@ -8,7 +8,7 @@ export default async function (fileName: string, type: 'photo' | 'video') {
 
   if (type === 'photo') {
     const meta = imageMeta(buffer)
-    return { width: meta.width, height: meta.height }
+    return { width: meta.width ?? 0, height: meta.height ?? 0 }
   } else if (type === 'video') {
     try {
       const { stdout } = await execa('ffprobe', ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', `./static/${filePath}`])

@@ -2,7 +2,7 @@
 // import { differenceInYears, formatDuration } from 'date-fns'
 
 const title = `About Us`
-const description = `We turn your brand’s story into vivid visual experiences. From concept to delivery, our expert team crafts stunning product, food, and lifestyle photography & videography that drives engagement and boosts sales.`
+const description = `Our About Us describes our team, vision, what we do and clients`
 const {
   public: { siteUrl },
 } = useRuntimeConfig()

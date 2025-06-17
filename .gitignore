@@ -20,7 +20,7 @@ logs
 misc
 .wwebjs_*
 
-# Local env files
+# Env files
 .env
 .env.*
 !.env.example

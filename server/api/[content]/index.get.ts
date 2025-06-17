@@ -30,7 +30,7 @@ export default defineCachedEventHandler<Promise<Content[]>>(
           return {
             id,
             title,
-            cover: cover?.type === 'external' ? cover.external.url.split('/')[3] : null,
+            cover: cover?.type === 'external' ? cover.external?.url.split('/')[3] : null,
             createdAt: created_time as string,
             modifiedAt: last_edited_time as string,
             publishedAt: properties['Publish date'].date.start as string,

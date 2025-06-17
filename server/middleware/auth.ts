@@ -1,13 +1,18 @@
-const protectedRoutePatterns = [
-  { pattern: /^\/api\/subscription\/[^/]+\/whatsapp\/?$/i, method: 'POST' },
-  { pattern: /^\/api\/subscription\/[^/]+\/email\/?$/i, method: 'POST' },
-  { pattern: /^\/api\/subscription\/[^/]+\/notification\/?$/i, method: 'POST' },
-  { pattern: /^\/api\/photo\/?$/i, method: 'POST' },
-  { pattern: /^\/api\/video\/?$/i, method: 'POST' },
+const protectedRoutePatterns: {
+  pattern: RegExp
+  method: ('GET' | 'POST' | 'PUT' | 'DELETE')[]
+}[] = [
+  { pattern: /^\/api\/subscription\/[^/]+\/whatsapp\/?$/i, method: ['POST'] },
+  { pattern: /^\/api\/subscription\/[^/]+\/email\/?$/i, method: ['POST'] },
+  { pattern: /^\/api\/subscription\/[^/]+\/notification\/?$/i, method: ['POST'] },
+  { pattern: /^\/api\/photo\/?$/i, method: ['POST'] },
+  { pattern: /^\/api\/video\/?$/i, method: ['POST'] },
 ]
 
 export default defineEventHandler((event) => {
-  const isProtected = protectedRoutePatterns.some(({ pattern, method }) => pattern.test(event.node.req.url || '') && event.node.req.method?.toUpperCase() === method)
+  const isProtected = protectedRoutePatterns.some(
+    ({ pattern, method }) => pattern.test(event.node.req.url || '') && method.includes(event.node.req.method!.toUpperCase() as 'GET' | 'POST' | 'PUT' | 'DELETE')
+  )
   if (!isProtected) {
     return
   }

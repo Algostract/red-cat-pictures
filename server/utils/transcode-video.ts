@@ -45,10 +45,16 @@ interface CodecDeviceOptions {
   audio: string
 }
 
-function buildArgs(codecOptions: { cpu: CodecDeviceOptions; gpu?: CodecDeviceOptions }, res: { width: number; height: number }, mode: 'cpu' | 'gpu'): string {
-  const { width, height } = res
-  const scaleFilter = `scale=${width}:${height}:force_original_aspect_ratio=decrease,pad=${width}:${height}:(ow-iw)/2:(oh-ih)/2`
-  // const scaleFilter = `scale=if(gt(a\\,${width}/${height})\\,${width}\\,-2):if(gt(a\\,${width}/${height})\\,-2\\,${height}),pad=${width}:${height}:(${width}-iw)/2:(${height}-ih)/2`
+function buildArgs(
+  codecOptions: { cpu: CodecDeviceOptions; gpu?: CodecDeviceOptions },
+  inputRes: { width: number; height: number },
+  outputRes: { width: number; height: number },
+  mode: 'cpu' | 'gpu'
+): string {
+  const { width, height } = outputRes
+  // const scaleFilter = `scale=${width}:${height}:force_original_aspect_ratio=decrease,pad=${width}:${height}:(ow-iw)/2:(oh-ih)/2`
+  const padFilter = inputRes.width < width || inputRes.height < height ? `,pad=${width}:${height}:(ow-iw)/2:(oh-ih)/2` : ``
+  const scaleFilter = `scale=${width}:${height}:force_original_aspect_ratio=decrease:force_divisible_by=2${padFilter}`
   const options = codecOptions[mode]!
   const extra = mode === 'cpu' && options.extra ? ` ${options.extra}` : ''
   return `-c:v ${options.lib} -vf "${scaleFilter}" -crf ${options.crf} -b:v 0 -${options.preset ? 'preset ' + options.preset : 'deadline ' + options.deadline} ${extra} -c:a ${options.audio}`
@@ -86,28 +92,32 @@ async function countTotalFrames(filePath: string) {
 export default async function (
   filePath: string,
   outputPath: string,
-  width: number,
-  height: number,
+  expectedDim: {
+    width: number
+    height: number
+  },
   codec: Codec,
   device: Device = 'cpu',
   onUpdate?: (args: { fileName: string; status: string; completion: number; eta: number; fps: number }) => void
 ) {
   const fileName = filePath.split('/').at(-1)!
+  const originalDim = await getDimension(fileName, 'video')
+
   const codecOption = codecOptions[codec]
   if (!codecOption) throw new Error(`Codec ${codec} not supported`)
 
   // const resolutionOption = resolutionOptions.find((r) => r.label === resolution)
   // if (!resolutionOption) throw new Error(`Resolution ${width}x${height} not defined`)
 
-  const presetName = `${codec}-${width}x${height}`
+  const presetName = `${codec}-${expectedDim.height}p-${expectedDim.width >= expectedDim.height ? 'landscape' : 'portrait'}`
   const selectedArgs =
     device === 'gpu'
       ? 'gpu' in codecOption && codecOption.gpu
-        ? buildArgs(codecOption, { width, height }, 'gpu')
+        ? buildArgs(codecOption, originalDim, expectedDim, 'gpu')
         : (() => {
             throw new Error(`GPU not supported for codec ${codec}`)
           })()
-      : buildArgs(codecOption, { width, height }, 'cpu')
+      : buildArgs(codecOption, originalDim, expectedDim, 'cpu')
   const extension = codecOption.extension
 
   try {

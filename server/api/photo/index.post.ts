@@ -3,22 +3,21 @@ import { toUint8Array } from 'undio'
 export default defineEventHandler(async (event) => {
   try {
     const formData = await readFormData(event)
-    const file = formData.get('file') as File
 
+    const file = formData.get('file') as File
     const title = formData.get('title') as string
-    const fileName = title ? `${title}.${file.name.split('.').at(-1)?.toLowerCase()}` : file.name
-    const description = formData.get('description') as string
+    const description = (formData.get('description') ?? '') as string
     const category = formData.get('category') as Category
     const gallery = parseInt(formData.get('gallery') as string)
     const featured = parseInt(formData.get('featured') as string)
-    const storage = useStorage('fs')
-
-    const config = useRuntimeConfig()
-    const notionDbId = config.private.notionDbId as unknown as NotionDB
+    const fileName = title ? `${title}.${file.name.split('.').at(-1)?.toLowerCase()}` : file.name
 
     if (!file || !file.size) {
       throw createError({ statusCode: 400, message: 'No file provided' })
     }
+    const storage = useStorage('fs')
+    const config = useRuntimeConfig()
+    const notionDbId = config.private.notionDbId as unknown as NotionDB
 
     const buffer = await toUint8Array(file)
     await storage.setItemRaw(`photos/source/${fileName}`, buffer)
