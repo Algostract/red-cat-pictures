@@ -16,6 +16,8 @@ export const messageTemplates = {
 }
 
 export default defineNitroPlugin(async () => {
+  if (!(import.meta.env.NODE_ENV === 'production' && import.meta.env.PLATFORM_ENV !== 'native' && whatsapp)) return
+
   consola.info('Whatsapp Bot Initializing...')
 
   whatsapp.on('authenticated', () => {

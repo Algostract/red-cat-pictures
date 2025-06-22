@@ -29,6 +29,7 @@ COPY --from=builder /app/.output ./.output
 
 ENV NODE_ENV=production
 ENV NUXT_APP_VERSION=$VERSION
+ENV NUXT_APP_BUILD_TIME=$BUILD_TIME
 
 EXPOSE 3000
 

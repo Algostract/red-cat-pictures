@@ -1,5 +1,6 @@
 <script setup lang="ts">
 // import { differenceInYears, formatDuration } from 'date-fns'
+import type { Member } from '~/components/Card/Member.vue'
 
 const title = `About Us`
 const description = `Our About Us describes our team, vision, what we do and clients`
@@ -33,110 +34,115 @@ const experience = computed(() => {
 }) */
 
 const { data: clients } = await useFetch('/api/client')
+
+const members: Member[] = [
+  {
+    name: 'Aratrik Nandy',
+    designation: 'CEO & Lead Photographer',
+    content: `Aratrik brings a keen eye for detail and a passion for storytelling through photos and videos.`,
+    image: `/images/hero-1.webp`,
+    socials: {
+      linkedin: 'https://www.linkedin.com/in/aratrik-nandy-b72288323/',
+    },
+    isHero: true,
+  },
+  {
+    name: 'Kinjal Adhikary',
+    designation: 'Assistant Director',
+    content: `Kinjal brings his immersive knowledge about film-making. His unique sense brings adds an extra layer to our projects.`,
+    image: `/images/hero-2.webp`,
+    socials: {},
+    isHero: false,
+  },
+  {
+    name: 'Swarup Ghosh',
+    designation: 'Art Director',
+    content: `Swarup has experience in VFX industry for around 5 years and worked for several well known brands.`,
+    image: `/images/hero-3.webp`,
+    socials: {
+      linkedin: 'https://www.linkedin.com/in/swarup-ghosh-48910425b',
+    },
+    isHero: false,
+  },
+  {
+    name: 'Shirsendu Bairagi',
+    designation: 'CTO',
+    content: `I Design, Develop, Deploy & Repeat`,
+    image: `/images/hero-4.webp`,
+    socials: {
+      instagram: 'https://www.instagram.com/shirsendu_bairagi/',
+      youtube: 'https://www.youtube.com/@shirsendu_bairagi',
+      x: 'https://x.com/shirsendu_baira',
+      linkedin: 'https://www.linkedin.com/in/shirsendu-bairagi/',
+      website: 'https://shirsendu-bairagi.dev/',
+    },
+    isHero: false,
+  },
+]
 </script>
 
 <template>
   <section class="relative flex flex-col justify-between lg:flex-row">
-    <div class="mb-4 mt-28 flex flex-col justify-center gap-4 px-4 lg:mb-12 lg:mt-36 lg:pl-8">
-      <h1 class="text-xl font-semi-bold lg:text-2xl">Hello,</h1>
-      <h2 class="text-2xl lg:text-4xl">I'm Aratrik Nandy</h2>
-      <h2 class="text-lg lg:text-2xl">CEO & Lead Product Photographer</h2>
-      <h3>Our Story</h3>
-      <p>
-        RED CAT PICTURES opened with the ambition to transform how brands present their products through compelling imagery, through our Product and Food Photography and Product Videography we create
-        brands that connect with their customers. The studio was founded by Aratrik Nandy renowned for his expertise in food and product photography.
-      </p>
-      <h3>Mission & Vision</h3>
-      <p>
-        Our mission is to nurture the essence of your brand by crafting high-quality product photography and videography that resonate with audiences and boost conversions. We envision setting new
-        benchmarks in visual storytelling, marrying artistic creativity with cutting-edge technical excellence.
-      </p>
-      <h3>What We Do</h3>
-      <p>
-        At Red Cat Pictures, we specialize in: <br /><strong>Product & Food Photography</strong> From e-commerce flat-lays to gourmet food spreads, we highlight every detail and texture. <br /><strong
-          >Product and Food Videography:</strong
-        >
-        Short advertisement films, commercials, and social media reels designed to engage and inform potential clients. RED CAT PICTURES excels at industry leading product videography in India.
-        <br /><strong>CGI-Like Imagery:</strong> Premium product photos with depth and separation achieved through controlled lighting and post-production <br /><strong
-          >Creative Direction & Styling:</strong
-        >
-        Art direction, prop styling, and bespoke concepts aligned with your brand’s core identity.
-      </p>
-      <h3>Our Studio</h3>
-      <p>
-        Based in Kolkata, our in-house facility features cutting-edge cameras, controlled lighting environments, and a variety of backdrops—ideal for lifestyle shots, white-background e-commerce
-        images, and everything in between that makes RED CAT PICTURES Kolkata’s best product photography and videography studio.
-      </p>
-      <h3>Our Approach</h3>
-      <p>
-        We blend meticulous planning with spontaneous creativity: every shoot begins with a collaborative briefing to define objectives, followed by precise lighting setups and artful styling to
-        capture your product’s best side. Post-production ensures pixel-perfect results, all delivered with a fast turnaround and transparent pricing.
-      </p>
-      <h3>Meet the Team</h3>
-      <p>
-        <strong>Aratrik Nandy, CEO & Lead Product Photographer</strong> Aratrik brings a keen eye for detail and a passion for storytelling through images.
-        <strong>Swarup Ghosh, VFX Specialist</strong> Swarup has experience in VFX industry for around 5 years and worked for several well known brands.
-        <strong>Kinjal Adhikary, Assistant Director</strong> Kinjal brings his immersive knowledge about film-making. His insights and unique sense of creativity regarding our product videography
-        always adds an extra layer to our projects.
-      </p>
-      <h3>Our Clients</h3>
-      <p>
-        We’ve had the privilege of working with brands such as
-        <template v-if="clients">
-          <template v-for="({ id, name, website, logo }, index) in clients" :key="id">
-            <NuxtLink
-              v-if="extractUploadcareId(logo)"
-              :href="website ? `${website}?utm_source=redcatpictures.com` : ''"
-              target="__blank"
-              external
-              class="relative size-16 overflow-hidden whitespace-nowrap rounded-full bg-white px-3 py-1 transition-colors duration-200 ease-in-out hover:!bg-primary-400 hover:!text-white dark:bg-black">
-              {{ name }} </NuxtLink
-            >{{ index !== clients.length - 1 ? ', ' : '' }}
+    <div class="mb-4 mt-28 grid grid-flow-col grid-cols-6 justify-center gap-6 px-4 md:grid-flow-row md:grid-rows-[repeat(auto,2)] lg:mb-12 lg:mt-36 lg:pl-8">
+      <CardMember
+        v-for="({ name, designation, content, image, socials, isHero }, index) in members"
+        :key="name"
+        :name="name"
+        :designation="designation"
+        :content="content"
+        :image="image"
+        :socials="socials"
+        :is-hero="isHero"
+        class="col-span-full"
+        :class="isHero ? 'md:col-span-3 md:col-start-4' : `md:col-span-2 md:row-start-2 md:col-start-${index * 2 - 1}`" />
+      <div class="col-span-full md:col-span-3 md:col-start-1 md:row-start-1 lg:mr-32">
+        <h2 class="pb-8 text-2xl text-primary-500 lg:text-4xl">Our Story</h2>
+        <p>
+          RED CAT PICTURES was founded by Aratrik Nandy to revolutionize brand imagery. Through our product and food photography and videography, we help brands forge deeper connections with their
+          audience.
+        </p>
+
+        <h3>Mission & Vision</h3>
+        <p>Our mission is to elevate your brand with striking visuals that drive engagement and sales. We aim to lead the industry in creative storytelling backed by technical mastery.</p>
+
+        <h3>What We Do</h3>
+        <p>
+          At Red Cat Pictures, we specialize in:<br />
+          <strong>Product & Food Photography:</strong> From e-commerce flat-lays to gourmet spreads, we capture every nuance.<br />
+          <strong>Videography:</strong> Short ads, commercials, and social reels that captivate.<br />
+          <strong>CGI-Style Imagery:</strong> High-end shots with dynamic lighting and expert retouching.<br />
+          <strong>Creative Direction:</strong> Art direction, styling, and custom concepts aligned with your identity.
+        </p>
+
+        <h3>Our Studio</h3>
+        <p>Located in Kolkata, our studio boasts advanced cameras, versatile backdrops, and controlled lighting—perfect for everything from clean white-background shots to lifestyle scenes.</p>
+
+        <h3>Our Approach</h3>
+        <p>We start each project with a collaborative briefing, follow with precise lighting and styling, and finish with meticulous post-production. Expect fast turnarounds and clear pricing.</p>
+
+        <h3>Our Clients</h3>
+        <p>
+          We’ve had the privilege of working with brands such as
+          <template v-if="clients">
+            <template v-for="({ id, name, website, logo }, index) in clients" :key="id">
+              <NuxtLink
+                v-if="extractUploadcareId(logo)"
+                :href="website ? `${website}?utm_source=redcatpictures.com` : ''"
+                target="__blank"
+                external
+                class="relative size-16 overflow-hidden whitespace-nowrap rounded-full bg-white px-3 py-1 transition-colors duration-200 ease-in-out hover:!bg-primary-400 hover:!text-white dark:bg-black">
+                {{ name }} </NuxtLink
+              >{{ index !== clients.length - 1 ? ', ' : '' }}
+            </template>
           </template>
-        </template>
-        —delivering versatile, professional imagery that drives results.
-      </p>
-      <h3>Get Started</h3>
-      <p>Ready to elevate your brand imagery? Book a session today and let Red Cat Pictures bring your products to life through stunning photography and videography.</p>
-    </div>
-    <div class="relative -left-2 z-10 flex h-fit w-screen shrink-0 flex-col items-end justify-start bg-black lg:left-9 lg:max-w-[36rem]">
-      <figure class="w-full">
-        <NuxtImg
-          provider="ipx"
-          src="/images/hero-1.webp"
-          alt="Aratrik Nandy, CEO & Lead Product Photographer"
-          :width="576"
-          :height="Math.round(576 / (3 / 4))"
-          class="aspect-[3/4] w-full object-cover object-top grayscale hover:grayscale-0" />
-        <figcaption>Aratrik Nandy, CEO & Lead Product Photographer</figcaption>
-      </figure>
-      <figure class="w-full">
-        <NuxtImg
-          provider="ipx"
-          src="/images/hero-2.webp"
-          alt="Kinjal Adhikary, Assistant Director"
-          :width="576"
-          :height="576"
-          class="aspect-square w-full object-cover object-top grayscale hover:grayscale-0" />
-        <figcaption>Kinjal Adhikary, Assistant Director</figcaption>
-      </figure>
+          —delivering versatile, professional imagery that drives results.
+        </p>
+      </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-img {
-  -webkit-transition: 1s -webkit-filter ease-out;
-  -moz-transition: 1s -moz-filter ease-out;
-  -moz-transition: 1s filter ease-out;
-  -ms-transition: 1s -ms-filter ease-out;
-  -o-transition: 1s -o-filter ease-out;
-  transition:
-    1s filter ease-out,
-    1s -webkit-filter ease-out,
-    2s opacity ease-in-out;
-}
-
 h3 {
   @apply text-base text-primary-500 lg:text-xl;
 }

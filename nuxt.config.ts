@@ -9,7 +9,13 @@ export default defineNuxtConfig({
   experimental: {
     viewTransition: true,
   },
-  devtools: { enabled: true },
+  devtools: {
+    enabled: true,
+
+    timeline: {
+      enabled: true,
+    },
+  },
   modules: [
     '@nuxt/eslint',
     '@nuxt/fonts',
@@ -45,6 +51,9 @@ export default defineNuxtConfig({
   },
   // FIXME: tempo fix remove when not needed
   vite: {
+    server: {
+      allowedHosts: true,
+    },
     $server: {
       build: {
         rollupOptions: {
@@ -94,6 +103,7 @@ export default defineNuxtConfig({
       oauthClientId: '',
       oauthClientSecret: '',
       oauthRefreshToken: '',
+      facebookAccessToken: '',
     },
   },
   icon: {
