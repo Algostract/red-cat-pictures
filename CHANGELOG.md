@@ -1,5 +1,18 @@
 # red-cat-pictures
 
+## v2.15.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.14.0...v2.15.0)
+
+### 🚀 Enhancements
+
+- Add cancellation, privacy, and terms pages with structured content ([42fa1fc](https://github.com/Algostract/red-cat-pictures/commit/42fa1fc))
+- Add new hero images and video effects in about page ([e56bb62](https://github.com/Algostract/red-cat-pictures/commit/e56bb62))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.14.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.13.5...v2.14.0)
