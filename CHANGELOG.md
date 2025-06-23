@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.15.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.15.0...v2.15.1)
+
+### 💅 Refactors
+
+- Sections renamed, video section moved, about section animation fix, photo/video api update ([7bc04a2](https://github.com/Algostract/red-cat-pictures/commit/7bc04a2))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.15.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.14.0...v2.15.0)
