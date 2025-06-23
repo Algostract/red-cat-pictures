@@ -4,7 +4,7 @@ const props = defineProps<{
   activeCategory: Category
 }>()
 
-const featuredVideos = useTemplateRef<HTMLDivElement>('featured-videos')
+const featuredVideos = useTemplateRef<HTMLDivElement>('video-gallery')
 const isAutoplay = shallowRef(false)
 const isPlay = shallowRef(false)
 
@@ -70,8 +70,8 @@ function isLandscapeOriented(deviceOrientation: string, videoOrientation: string
 </script>
 
 <template>
-  <section id="featured-videos" ref="featured-videos" class="relative -mx-2 h-fit w-[calc(100%+16px)]">
-    <SectionLabel icon="movie" title="Featured Videos" />
+  <section id="video-gallery" ref="video-gallery" class="relative -mx-2 h-fit w-[calc(100%+16px)]">
+    <SectionLabel icon="movie" title="Video Gallery" />
     <div v-if="videos.length" class="relative left-1/2 flex h-screen -translate-x-1/2 items-center justify-center overflow-hidden bg-black">
       <NuxtVideo
         ref="videoContainerRef"

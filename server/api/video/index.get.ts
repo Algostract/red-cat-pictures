@@ -115,30 +115,45 @@ export default defineEventHandler<Promise<Video[]>>(async () => {
     const assetStorage = useStorage<Resource<'asset'>>(`data:resource:asset`)
     const assets = (await assetStorage.getItems(await assetStorage.getKeys())).flatMap(({ value }) => value.record)
 
-    const videos = assets
-      .filter(({ properties }) => properties.Type?.select?.name === 'Video' && properties.Status.status?.name === 'Release')
-      .toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
+    const videos = assets.filter(({ properties }) => properties.Type?.select?.name === 'Video' && properties.Status.status?.name === 'Release')
 
     if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
+    const order = {
+      ecommerce: 0,
+      product: 1,
+      food: 2,
+    }
 
     const settled = await Promise.allSettled(
       videos.map<Promise<Video>>(async ({ cover, properties }) => {
-        const id = notionTextStringify(properties.Slug.rich_text)
+        // const id = notionTextStringify(properties.Slug.rich_text)
+        // console.log({ 'Sematic Slug': properties['Sematic Slug'].formula.string })
+        const slug: string = properties['Sematic Slug'].formula.string //notionTextStringify(properties.Slug.rich_text)
         const [aW, aH] = properties['Aspect ratio'].select.name.split(':').map((item) => parseInt(item))
         const aspectRatio = aW / aH
 
         return {
-          id: id,
+          id: slug,
           title: notionTextStringify(properties.Name.title),
           description: notionTextStringify(properties.Description.rich_text),
-          type: id === 'hero' ? 'hero' : 'feature',
           poster: cover?.type === 'external' ? cover.external.url : '',
-          sources: convertSources(id, id === 'hero' ? heroPreset : aspectRatio < 1 ? portraitPreset : landscapePreset),
-          url: `/video/${id}`,
+          sources: convertSources(slug, slug === 'hero' ? heroPreset : aspectRatio < 1 ? portraitPreset : landscapePreset),
+          type: slug.includes('featured-video') ? 'hero' : 'feature',
+          category: properties.Segment.select.name,
+          gallery: properties.Gallery.checkbox ? (properties['Project Index'].rollup.array[0]?.number ?? 0) * 1000 + (properties.Index?.number ?? 0) : null,
+          featured: properties.Featured.number,
+          url: `/video/${slug}`,
         }
       })
     )
-    return settled.filter((result) => result.status === 'fulfilled').map((result) => result.value)
+    return settled
+      .filter((result) => result.status === 'fulfilled')
+      .map((result) => result.value)
+      .toSorted((a, b) => {
+        const diff = order[a.category] - order[b.category]
+        if (diff) return diff
+        return (a.gallery ?? Infinity) - (b.gallery ?? Infinity)
+      })
   } catch (error: unknown) {
     console.error('API video GET', error)
 

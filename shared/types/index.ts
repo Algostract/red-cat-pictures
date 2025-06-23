@@ -51,6 +51,9 @@ export interface FileVideo {
   type: 'hero' | 'feature'
   poster: string
   sources: FileSources
+  category: Category
+  gallery: null | number
+  featured: null | number
 }
 
 export interface Source {
@@ -322,6 +325,14 @@ export interface NotionAsset {
   cover: NotionImage
   icon: NotionImage
   properties: {
+    Index: { number: number }
+    'Project Index': {
+      rollup: {
+        array: {
+          number: number
+        }[]
+      }
+    }
     Name: {
       title: {
         plain_text: string
@@ -358,7 +369,7 @@ export interface NotionAsset {
       }
     }
     Project: { relation: string[]; has_more: false }
-    Gallery: { number: number }
+    Gallery: { checkbox: boolean }
     Featured: { number: number }
     Resolution: {
       select: {

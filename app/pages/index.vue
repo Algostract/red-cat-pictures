@@ -36,11 +36,11 @@ useSchemaOrg([
   }),
 ])
 
-const { data: photos } = await useFetch('/api/photo', { default: () => [] })
-const { data: videos } = await useFetch('/api/video', { default: () => [] })
+const { data: allPhotos } = await useFetch('/api/photo', { default: () => [] })
+const { data: allVideos } = await useFetch('/api/video', { default: () => [] })
 
-const heroVideo = computed(() => videos.value.find(({ type }) => type === 'hero')!)
-const featuredVideos = computed(() => videos.value.filter(({ type }) => type === 'feature'))
+const featuredVideo = computed(() => allVideos.value.find(({ type }) => type === 'hero')!)
+const videos = computed(() => allVideos.value.filter(({ type }) => type === 'feature'))
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
@@ -62,10 +62,10 @@ function onContact(action: boolean) {
 <template>
   <div class="flex flex-col gap-4">
     <LazyButtonFloatingAction hydrate-on-idle :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
-    <SectionHero :video="heroVideo" @contact="onContact(true)" />
-    <SectionGallery :photos="photos" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
-    <LazySectionFeaturedPhoto hydrate-on-visible :photos="photos" :active-category="activeCategory" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
-    <LazySectionFeaturedVideo hydrate-on-visible :videos="featuredVideos" :active-category="activeCategory" />
+    <SectionHero :video="featuredVideo" @contact="onContact(true)" />
+    <SectionPhotoGallery :photos="allPhotos" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
+    <LazySectionVideoGallery hydrate-on-visible :videos="videos" :active-category="activeCategory" />
+    <LazySectionFeaturedPhoto hydrate-on-visible :photos="allPhotos" :active-category="activeCategory" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
     <SectionPricing :active-category="activeCategory" />
   </div>
 </template>

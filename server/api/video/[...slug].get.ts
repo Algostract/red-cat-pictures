@@ -8,27 +8,27 @@ export default defineCachedEventHandler<Promise<VideoDetails>>(
 
       const slug = getRouterParam(event, 'slug')!.toString().replace(/,$/, '')
 
-      const videos = assets.filter(({ properties }) => properties.Type?.select.name === 'Video').toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
+      const videos = assets.filter(({ properties }) => properties.Type?.select?.name === 'Video' && properties.Status.status?.name === 'Release')
 
       if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
 
-      const video = videos.find(({ properties }) => notionTextStringify(properties.Slug.rich_text) === slug)
+      const video = videos.find(({ properties }) => notionTextStringify(properties['Sematic Slug'].formula.string) === slug)
       if (!video) {
         throw createError({ statusCode: 404, statusMessage: `video ${slug} not found` })
       }
 
-      const id = notionTextStringify(video.properties.Slug.rich_text)
+      // const slug: string = video.properties['Sematic Slug'].formula.string //notionTextStringify(video.properties.Slug.rich_text)
       const [aW, aH] = video.properties['Aspect ratio'].select.name.split(':').map((item) => parseInt(item))
       const aspectRatio = aW / aH
 
       return {
-        id: id,
+        id: slug,
         title: notionTextStringify(video.properties.Name.title),
         description: notionTextStringify(video.properties.Description.rich_text),
-        type: id === 'hero' ? 'hero' : 'feature',
+        type: slug === 'hero' ? 'hero' : 'feature',
         poster: video.cover?.type === 'external' ? video.cover.external.url.split('/')[3] : '',
-        sources: convertSources(id, id === 'hero' ? heroPreset : aspectRatio < 1 ? portraitPreset : landscapePreset),
-        url: `/video/${id}`,
+        sources: convertSources(slug, slug === 'hero' ? heroPreset : aspectRatio < 1 ? portraitPreset : landscapePreset),
+        url: `/video/${slug}`,
       } as VideoDetails
     } catch (error: unknown) {
       console.error('API video/slug GET', error)

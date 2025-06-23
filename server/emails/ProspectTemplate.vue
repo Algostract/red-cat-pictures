@@ -121,7 +121,7 @@ const tailwindConfig = {
               >. We specialize in product videography and photography—delivering crisp, high‑resolution
               <Link :href="`${fromCompanyLink}/#featured-photos`" class="inline-block text-primary-400 underline" target="_blank">photos</Link>
               and short‑form
-              <Link :href="`${fromCompanyLink}/#featured-videos`" class="inline-block text-primary-400 underline" target="_blank">videos</Link>
+              <Link :href="`${fromCompanyLink}/#video-gallery`" class="inline-block text-primary-400 underline" target="_blank">videos</Link>
               <br />
               for e‑commerce, social media, and advertising. Whether on‑location or in‑studio, our full production and post‑production services ensure top‑quality assets, on time and within budget.
               Here are some of our work

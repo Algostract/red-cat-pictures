@@ -27,8 +27,8 @@ export default defineCachedEventHandler<Promise<Photo[]>>(
             image: cover?.type === 'external' ? cover.external.url.split('/')[3] : '',
             aspectRatio: aW / aH,
             category: properties.Segment.select.name,
+            gallery: properties.Gallery.checkbox ? (properties['Project Index'].rollup.array[0]?.number ?? 0) * 1000 + (properties.Index?.number ?? 0) : null,
             featured: properties.Featured.number,
-            gallery: properties.Gallery.number,
             url: `/photo/${id}`,
           }
         })

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import reglConstructor from 'regl'
 import heroVideoEffect from '~~/app/assets/videos/effect-1.webm'
 type SocialPlatforms = 'facebook' | 'instagram' | 'youtube' | 'x' | 'linkedin' | 'website'
 
@@ -12,6 +13,8 @@ export interface Member {
 }
 
 const props = defineProps<Member>()
+
+const isAnimated = ref(false)
 
 const platforms: Record<
   SocialPlatforms,
@@ -39,94 +42,97 @@ const links = computed(() =>
 )
 
 /* Animation */
-const wrapper = useTemplateRef<HTMLDivElement>('wrapper')
 const heroMaskCanvas = useTemplateRef<HTMLCanvasElement>('hero-mask-canvas')
-const offscreenCanvas = useTemplateRef<HTMLCanvasElement>('offscreen-canvas')
 const heroImage = useTemplateRef<HTMLImageElement>('hero-image')
 const heroMaskVideo = useTemplateRef<HTMLVideoElement>('hero-mask-video')
-const isHovered = useElementHover(wrapper)
 
-function renderFrame() {
-  if (!(heroMaskVideo.value && heroMaskCanvas.value && offscreenCanvas.value && heroImage.value)) return
+let regl: reglConstructor.Regl | undefined
+let drawBlend: reglConstructor.DrawCommand<reglConstructor.DefaultContext> | undefined
 
-  const vid = heroMaskVideo.value
-  const cvs = heroMaskCanvas.value
-  const ctx = cvs.getContext('2d')!
-  const offscreenCvs = offscreenCanvas.value
-  const offscreenCtx = offscreenCvs.getContext('2d')!
-  if (vid.paused || vid.ended) return
+function initRenderFunction() {
+  if (drawBlend || !regl) return
+  const maskTex = regl.texture({ data: heroMaskVideo.value, flipY: true })
+  const imageTex = regl.texture({ data: heroImage.value, flipY: true })
 
-  const w = cvs.width,
-    h = cvs.height
-
-  ctx.globalCompositeOperation = 'source-over'
-  ctx.drawImage(heroImage.value, 0, 0, w, h)
-
-  offscreenCtx.drawImage(heroMaskVideo.value, 0, 0, w, h)
-
-  const imgData = ctx.getImageData(0, 0, w, h)
-  const maskData = offscreenCtx.getImageData(0, 0, w, h)
-
-  for (let i = 0; i < maskData.data.length; i += 4) {
-    const sR = imgData.data[i]!
-    const sG = imgData.data[i + 1]!
-    const sB = imgData.data[i + 2]!
-    // const _sA = imgData.data[i + 3]!;
-    const tR = maskData.data[i]!
-    const tG = maskData.data[i + 1]!
-    const tB = maskData.data[i + 2]!
-    // const _tA = maskData.data[i + 3]!;
-    const alpha = (tR + tG + tB) / (3 * 255)
-    imgData.data[i] = (tR * (1 - alpha) + sR * alpha * 2) / 2
-    imgData.data[i + 1] = (tG * (1 - alpha) + sG * alpha * 2) / 2
-    imgData.data[i + 2] = (tB * (1 - alpha) + sB * alpha * 2) / 2
-    imgData.data[i + 3] = Math.round(alpha * 255)
-  }
-
-  ctx.putImageData(imgData, 0, 0)
-
-  requestAnimationFrame(renderFrame)
+  drawBlend = regl({
+    framebuffer: null,
+    attributes: {
+      position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1],
+    },
+    uniforms: {
+      src: imageTex,
+      mask: () => {
+        maskTex({ data: heroMaskVideo.value })
+        return maskTex
+      },
+    },
+    vert: `
+       precision mediump float;
+       attribute vec2 position;
+       varying   vec2 uv;
+       void main() {
+         uv = position * 0.5 + 0.5;
+         gl_Position = vec4(position, 0, 1);
+       }`,
+    frag: `
+       precision mediump float;
+       uniform sampler2D src, mask;
+       varying vec2 uv;
+       void main() {
+         vec4 s = texture2D(src,  uv);
+          vec4 m = texture2D(mask, uv);
+          float alpha = (m.r + m.g + m.b) / 3.0;
+          vec3 col = mix(m.rgb, s.rgb, alpha);
+          gl_FragColor = vec4(col, alpha);
+       }`,
+    count: 6,
+  })
 }
 
 onMounted(() => {
-  if (!(heroMaskVideo.value && heroMaskCanvas.value && offscreenCanvas.value)) return
+  if (!(heroMaskVideo.value && heroMaskCanvas.value)) return
 
   const vid = heroMaskVideo.value
   const cvs = heroMaskCanvas.value
-  const offscreenCvs = offscreenCanvas.value
 
   const { width: cssW, height: cssH } = cvs.getBoundingClientRect()
 
   const dpr = window.devicePixelRatio || 1
-  offscreenCvs.width = cvs.width = Math.round(cssW * dpr)
-  offscreenCvs.height = cvs.height = Math.round(cssH * dpr)
+  cvs.width = Math.round(cssW * dpr)
+  cvs.height = Math.round(cssH * dpr)
+
+  regl = reglConstructor({
+    canvas: heroMaskCanvas.value!,
+    pixelRatio: window.devicePixelRatio,
+  })
 
   vid.addEventListener('play', () => {
-    requestAnimationFrame(renderFrame)
-  })
-
-  vid.addEventListener('ended', () => {
-    vid.currentTime = 0
+    isAnimated.value = true
+    initRenderFunction()
+    regl?.frame(() => drawBlend!())
   })
 })
 
-watch(isHovered, (value) => {
-  if (!heroMaskVideo.value) {
+function triggerAnimation() {
+  if (!heroMaskVideo.value || isAnimated.value) {
     return
   }
 
-  if (!value) {
-    heroMaskVideo.value.pause()
-    heroMaskVideo.value.currentTime = 0
-    return
-  }
+  heroMaskVideo.value.pause()
+  heroMaskVideo.value.currentTime = 0
   heroMaskVideo.value.play()
-})
+}
 </script>
 
 <template>
-  <div class="h-fit max-w-full overflow-hidden" :class="{ 'md:max-w-[405px]': !isHero }">
-    <div ref="wrapper" class="relative aspect-square w-full overflow-hidden rounded-md">
+  <div
+    class="h-fit max-w-full overflow-hidden"
+    :class="{ 'md:max-w-[405px]': !isHero }"
+    @focusin="triggerAnimation"
+    @touchstart="triggerAnimation"
+    @click="triggerAnimation"
+    @mouseenter="triggerAnimation">
+    <div class="relative aspect-square w-full overflow-hidden rounded-md">
       <canvas ref="hero-mask-canvas" class="pointer-events-none absolute inset-0 z-20 aspect-[2/3] w-full" />
       <img
         ref="hero-image"
@@ -134,9 +140,8 @@ watch(isHovered, (value) => {
         :alt="`${name}, ${designation}`"
         :width="512"
         :height="Math.round(512 / (2 / 3))"
-        class="absolute inset-0 z-10 h-full w-full object-cover object-top grayscale filter" />
-      <canvas ref="offscreen-canvas" class="hidden aspect-[2/3] w-full" />
-      <video ref="hero-mask-video" :src="heroVideoEffect" muted preload="auto" playsinline class="hidden" />
+        class="absolute inset-0 z-10 aspect-[2/3] w-full object-cover object-top grayscale filter" />
+      <video ref="hero-mask-video" :src="heroVideoEffect" muted playsinline class="hidden" />
     </div>
     <div>
       <h2 class="pt-6 text-xl font-semi-bold md:pt-8 md:text-2xl">{{ name }}</h2>

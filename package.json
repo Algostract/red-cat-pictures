@@ -69,6 +69,7 @@
     "nuxt-nodemailer": "^1.1.2",
     "nuxt-splide": "^1.1.1",
     "puppeteer": "^24.10.2",
+    "regl": "^2.1.1",
     "rehype-parse": "^9.0.1",
     "rehype-remark": "^10.0.1",
     "remark-stringify": "^11.0.0",

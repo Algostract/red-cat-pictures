@@ -66,7 +66,7 @@ const members: Member[] = [
   },
   {
     name: 'Shirsendu Bairagi',
-    designation: 'CTO',
+    designation: 'System Architect',
     content: `I Design, Develop, Deploy & Repeat`,
     image: `/images/hero-4.webp`,
     socials: {
@@ -95,8 +95,8 @@ const members: Member[] = [
         :is-hero="isHero"
         class="col-span-full"
         :class="isHero ? 'md:col-span-3 md:col-start-4' : `md:col-span-2 md:row-start-2 md:col-start-${index * 2 - 1}`" />
-      <div class="col-span-full md:col-span-3 md:col-start-1 md:row-start-1 lg:mr-32">
-        <h2 class="pb-8 text-2xl text-primary-500 lg:text-4xl">Our Story</h2>
+      <div class="col-span-full md:col-span-3 md:col-start-1 md:row-start-1 lg:mr-24">
+        <h2 class="mb-2 text-xl text-primary-500 lg:mb-6 lg:text-3xl">Our Story</h2>
         <p>
           RED CAT PICTURES was founded by Aratrik Nandy to revolutionize brand imagery. Through our product and food photography and videography, we help brands forge deeper connections with their
           audience.
@@ -144,7 +144,7 @@ const members: Member[] = [
 
 <style scoped>
 h3 {
-  @apply text-base text-primary-500 lg:text-xl;
+  @apply my-2 text-xl text-primary-500 lg:text-xl;
 }
 
 figcaption {

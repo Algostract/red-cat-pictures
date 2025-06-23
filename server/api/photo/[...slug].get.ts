@@ -6,7 +6,7 @@ export default defineCachedEventHandler<Promise<PhotoDetails>>(
 
       const slug = getRouterParam(event, 'slug')!.toString().replace(/,$/, '')
 
-      const photos = assets.filter(({ properties }) => properties.Type?.select.name === 'Photo').toSorted((a, b) => a.properties.Gallery.number - b.properties.Gallery.number)
+      const photos = assets.filter(({ properties }) => properties.Type?.select?.name === 'Photo' && properties.Status.status?.name === 'Release')
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })
 

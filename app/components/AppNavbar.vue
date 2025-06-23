@@ -15,9 +15,9 @@ function onNavigate(section: string) {
 }
 
 const urls = ref([
-  { url: '/#gallery', id: 'gallery', title: 'Gallery' },
+  { url: '/#photo-gallery', id: 'gallery', title: 'Gallery' },
   { url: '/photo', id: 'photos', title: 'Photos' },
-  { url: '/#featured-videos', id: 'featured-videos', title: 'Videos' },
+  { url: '/#video-gallery', id: 'video-gallery', title: 'Videos' },
   { url: '/#pricing', id: 'pricing', title: 'Pricing' },
   { url: '/episode', id: 'episodes', title: 'Episodes' },
   { url: '/blog', id: 'blogs', title: 'Blogs' },
