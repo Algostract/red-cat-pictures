@@ -79,6 +79,9 @@ export default defineNuxtConfig({
     '/blogs/**': { redirect: { to: '/blog/**', statusCode: 301 } },
     '/blog/**': { ssr: true },
     '/about': { ssr: true },
+    '/terms': { prerender: true },
+    '/privacy': { prerender: true },
+    '/cancellation': { prerender: true },
   },
   runtimeConfig: {
     app: {

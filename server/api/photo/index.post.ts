@@ -8,7 +8,6 @@ export default defineEventHandler(async (event) => {
     const title = formData.get('title') as string
     const description = (formData.get('description') ?? '') as string
     const category = formData.get('category') as Category
-    const gallery = parseInt(formData.get('gallery') as string)
     const featured = parseInt(formData.get('featured') as string)
     const fileName = title ? `${title}.${file.name.split('.').at(-1)?.toLowerCase()}` : file.name
 
@@ -108,10 +107,6 @@ export default defineEventHandler(async (event) => {
           select: {
             name: aspectRatioLabel,
           },
-        },
-        Gallery: {
-          type: 'number',
-          number: gallery,
         },
         Featured: {
           type: 'number',

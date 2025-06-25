@@ -55,9 +55,9 @@ export const portraitPreset: FileSources = {
 export const heroPreset: FileSources = (() => {
   const merged: FileSources = {}
 
-  for (const codec of codecs) {
+  for (const codec of codecs.toReversed()) {
     merged[codec] = { type: portraitPreset[codec]!.type }
-    for (const res of resolutions) {
+    for (const res of resolutions.toReversed()) {
       merged[codec]![res] = [...portraitPreset[codec]![res]!, ...landscapePreset[codec]![res]!]
     }
   }

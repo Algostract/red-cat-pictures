@@ -45,6 +45,7 @@ const members: Member[] = [
       linkedin: 'https://www.linkedin.com/in/aratrik-nandy-b72288323/',
     },
     isHero: true,
+    animation: 'fly-in',
   },
   {
     name: 'Kinjal Adhikary',
@@ -53,6 +54,7 @@ const members: Member[] = [
     image: `/images/hero-2.webp`,
     socials: {},
     isHero: false,
+    animation: 'burn',
   },
   {
     name: 'Swarup Ghosh',
@@ -63,6 +65,7 @@ const members: Member[] = [
       linkedin: 'https://www.linkedin.com/in/swarup-ghosh-48910425b',
     },
     isHero: false,
+    animation: 'burn',
   },
   {
     name: 'Shirsendu Bairagi',
@@ -77,6 +80,7 @@ const members: Member[] = [
       website: 'https://shirsendu-bairagi.dev/',
     },
     isHero: false,
+    animation: 'burn',
   },
 ]
 </script>
@@ -85,7 +89,7 @@ const members: Member[] = [
   <section class="relative flex flex-col justify-between lg:flex-row">
     <div class="mb-4 mt-28 grid grid-flow-col grid-cols-6 justify-center gap-6 px-4 md:grid-flow-row md:grid-rows-[repeat(auto,2)] lg:mb-12 lg:mt-36 lg:pl-8">
       <CardMember
-        v-for="({ name, designation, content, image, socials, isHero }, index) in members"
+        v-for="({ name, designation, content, image, socials, isHero, animation }, index) in members"
         :key="name"
         :name="name"
         :designation="designation"
@@ -93,6 +97,7 @@ const members: Member[] = [
         :image="image"
         :socials="socials"
         :is-hero="isHero"
+        :animation="animation"
         class="col-span-full"
         :class="isHero ? 'md:col-span-3 md:col-start-4' : `md:col-span-2 md:row-start-2 md:col-start-${index * 2 - 1}`" />
       <div class="col-span-full md:col-span-3 md:col-start-1 md:row-start-1 lg:mr-24">

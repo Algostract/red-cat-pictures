@@ -29,7 +29,8 @@
 https://g.page/r/CaroFd9d81EjEBM/review
 
 - [x] Modify About Us page
-- [ ] Update photos and videos url slug
+- [x] Update photos and videos url slug
+
 - [ ] Modify content page to show gallery view
 - [ ] Whatsapp Automation
 
