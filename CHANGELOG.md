@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.15.2
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.15.1...v2.15.2)
+
+### 💅 Refactors
+
+- Update photo, video filtering logic, remove unused composable, adjust gallery type boolean ([3544b62](https://github.com/Algostract/red-cat-pictures/commit/3544b62))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.15.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.15.0...v2.15.1)
