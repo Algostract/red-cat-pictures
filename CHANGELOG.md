@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.15.3
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.15.2...v2.15.3)
+
+### 🏡 Chore
+
+- Add redirect middleware for photo and video routes to force google indexing old urls ([afac0de](https://github.com/Algostract/red-cat-pictures/commit/afac0de))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.15.2
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.15.1...v2.15.2)
