@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.15.5
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.15.4...v2.15.5)
+
+### 💅 Refactors
+
+- **heroPreset:** Simplify merging logic and remove commented-out code ([6daffd4](https://github.com/Algostract/red-cat-pictures/commit/6daffd4))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.15.4
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.15.3...v2.15.4)
