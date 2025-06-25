@@ -16,9 +16,9 @@ function objectToClass({ sm, md }: { sm: Position; md: Position }, size: string)
 }
 
 const categoryPhotos = {
-  ecommerce: usePhoto(props.photos, { section: 'featured', category: 'ecommerce' }),
-  product: usePhoto(props.photos, { section: 'featured', category: 'product' }),
-  food: usePhoto(props.photos, { section: 'featured', category: 'food' }),
+  ecommerce: props.photos.filter(({ featured, category }) => featured !== null && category === 'ecommerce').toSorted((a, b) => a.featured! - b.featured!),
+  product: props.photos.filter(({ featured, category }) => featured !== null && category === 'product').toSorted((a, b) => a.featured! - b.featured!),
+  food: props.photos.filter(({ featured, category }) => featured !== null && category === 'food').toSorted((a, b) => a.featured! - b.featured!),
 }
 
 const photos = computed<GalleryPhoto[]>(() =>
@@ -81,16 +81,16 @@ const photos = computed<GalleryPhoto[]>(() =>
     },
   ]
     .map((photo, index): GalleryPhoto | null => {
-      if (!categoryPhotos[props.activeCategory]?.value[index]) return null
+      if (!categoryPhotos[props.activeCategory][index]) return null
 
       return {
-        id: categoryPhotos[props.activeCategory].value[index]!.id,
-        image: categoryPhotos[props.activeCategory].value[index]!.image,
-        title: categoryPhotos[props.activeCategory].value[index]!.title,
-        description: categoryPhotos[props.activeCategory].value[index]!.description,
+        id: categoryPhotos[props.activeCategory][index]!.id,
+        image: categoryPhotos[props.activeCategory][index]!.image,
+        title: categoryPhotos[props.activeCategory][index]!.title,
+        description: categoryPhotos[props.activeCategory][index]!.description,
         dynamicClass: objectToClass(photo.position, photo.size),
         aspectRatio: photo.aspectRatio,
-        url: categoryPhotos[props.activeCategory].value[index]!.url,
+        url: categoryPhotos[props.activeCategory][index]!.url,
       }
     })
     .filter((item) => item !== null)

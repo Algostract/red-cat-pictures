@@ -8,13 +8,15 @@ const emit = defineEmits<{
   active: [value: string]
 }>()
 
-const allUniquePhotos = usePhoto(props.photos, { section: 'gallery' })
 const allPhotos = computed(() => {
-  const needed = (12 - (allUniquePhotos.value.length % 12)) % 12
-  const indexToSlice = allUniquePhotos.value.findIndex(({ category }) => category === 'food')
-  const extra = allUniquePhotos.value.slice(indexToSlice, indexToSlice + needed)
+  const filterPhotos = props.photos.filter(({ gallery }) => gallery)
+  const needed = (12 - (filterPhotos.length % 12)) % 12
+  const indexToSlice = filterPhotos.findIndex(({ category }) => category === 'food')
+  const extra = filterPhotos.slice(indexToSlice, indexToSlice + needed)
 
-  return allUniquePhotos.value.concat(extra)
+  const orderedPhotos = ['ecommerce', 'product', 'food', 'Uncategorized'].flatMap((cat) => filterPhotos.concat(extra).filter((p) => (p.category ?? 'Uncategorized') === cat))
+
+  return orderedPhotos
 })
 
 const slider = useTemplateRef<HTMLDivElement>('slider')

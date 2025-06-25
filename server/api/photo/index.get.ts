@@ -7,40 +7,36 @@ export default defineCachedEventHandler<Promise<Photo[]>>(
       const photos = assets.filter(({ properties }) => properties.Type?.select?.name === 'Photo' && properties.Status.status?.name === 'Release')
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })
-      const order = {
-        ecommerce: 0,
-        product: 1,
-        food: 2,
-      }
 
       const results = await Promise.all(
-        photos.map(async ({ cover, properties }): Promise<Photo | null> => {
-          if (properties.Status.status.name !== 'Release') return null
-          const id = notionTextStringify(properties.Slug.rich_text)
-          const title = notionTextStringify(properties.Name.title)
-          const [aW, aH] = properties['Aspect ratio'].select.name.split(':').map((item) => parseInt(item))
+        photos
+          .toSorted((a, b) => {
+            const pa = b.properties['Project Index'].rollup?.array[0]?.number ?? 0
+            const pb = a.properties['Project Index'].rollup?.array[0]?.number ?? 0
+            return pa - pb || (b.properties.Index?.number ?? 0) - (a.properties.Index?.number ?? 0)
+          })
+          .map(async ({ cover, properties }): Promise<Photo | null> => {
+            if (properties.Status.status.name !== 'Release') return null
+            // const slug = notionTextStringify(properties.Slug.rich_text)
+            const slug: string = properties['Sematic Slug'].formula.string
+            const title = notionTextStringify(properties.Name.title)
+            const [aW, aH] = properties['Aspect ratio'].select.name.split(':').map((item) => parseInt(item))
 
-          return {
-            id,
-            title,
-            description: notionTextStringify(properties.Description.rich_text),
-            image: cover?.type === 'external' ? cover.external.url.split('/')[3] : '',
-            aspectRatio: aW / aH,
-            category: properties.Segment.select.name,
-            gallery: properties.Gallery.checkbox ? (properties['Project Index'].rollup.array[0]?.number ?? 0) * 1000 + (properties.Index?.number ?? 0) : null,
-            featured: properties.Featured.number,
-            url: `/photo/${id}`,
-          }
-        })
+            return {
+              id: slug,
+              title,
+              description: notionTextStringify(properties.Description.rich_text),
+              image: cover?.type === 'external' ? cover.external.url.split('/')[3] : '',
+              aspectRatio: aW / aH,
+              category: properties.Segment.select.name,
+              gallery: properties.Gallery.checkbox,
+              featured: properties.Featured.number,
+              url: `/photo/${slug}`,
+            }
+          })
       )
 
-      return results
-        .filter((item) => item !== null)
-        .toSorted((a, b) => {
-          const diff = order[a.category] - order[b.category]
-          if (diff) return diff
-          return (a.gallery ?? Infinity) - (b.gallery ?? Infinity)
-        })
+      return results.filter((item) => item !== null)
     } catch (error: unknown) {
       console.error('API photo GET', error)
 

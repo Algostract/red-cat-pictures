@@ -10,7 +10,7 @@ export interface FilePhoto {
   width: number
   height: number
   category: Category
-  gallery: null | number
+  gallery: boolean
   featured: null | number
 }
 
@@ -52,7 +52,7 @@ export interface FileVideo {
   poster: string
   sources: FileSources
   category: Category
-  gallery: null | number
+  gallery: boolean
   featured: null | number
 }
 

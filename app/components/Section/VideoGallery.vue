@@ -20,12 +20,14 @@ const isMuted = ref(true)
 function toggleMute() {
   isMuted.value = !isMuted.value
 }
+const filterVideos = computed(() => props.videos.filter(({ featured }) => featured).toSorted((a, b) => a.featured! - b.featured!))
+
 const activeVideoIndex = ref(0)
-const activeVideo = computed(() => ({ ...props.videos[activeVideoIndex.value]! }))
+const activeVideo = computed(() => ({ ...filterVideos.value[activeVideoIndex.value]! }))
 const activeVideoProgress = ref(0)
 
 async function updateVideoIndex(step = 1) {
-  const total = props.videos.length
+  const total = filterVideos.value.length
   activeVideoProgress.value = 0
   activeVideoIndex.value = (activeVideoIndex.value + step + total) % total
 }
@@ -72,7 +74,7 @@ function isLandscapeOriented(deviceOrientation: string, videoOrientation: string
 <template>
   <section id="video-gallery" ref="video-gallery" class="relative -mx-2 h-fit w-[calc(100%+16px)]">
     <SectionLabel icon="movie" title="Video Gallery" />
-    <div v-if="videos.length" class="relative left-1/2 flex h-screen -translate-x-1/2 items-center justify-center overflow-hidden bg-black">
+    <div v-if="filterVideos.length" class="relative left-1/2 flex h-screen -translate-x-1/2 items-center justify-center overflow-hidden bg-black">
       <NuxtVideo
         ref="videoContainerRef"
         :key="activeVideoIndex"
@@ -91,7 +93,7 @@ function isLandscapeOriented(deviceOrientation: string, videoOrientation: string
         @ended="updateVideoIndex()"
         @click="toggleMute" />
       <!-- @click="toggleFullScreen()" -->
-      <StatusBar :total="videos.length" :active-index="activeVideoIndex" :active-percent="activeVideoProgress" class="absolute left-1/2 top-8 z-0 w-full -translate-x-1/2 px-4 md:px-16" />
+      <StatusBar :total="filterVideos.length" :active-index="activeVideoIndex" :active-percent="activeVideoProgress" class="absolute left-1/2 top-8 z-0 w-full -translate-x-1/2 px-4 md:px-16" />
       <ButtonSlide class="absolute bottom-20 left-1/2 z-10 -translate-x-1/2 md:bottom-12 md:left-16 md:translate-x-0" @click="(value) => updateVideoIndex(value === 'left' ? -1 : 1)" />
       <NuxtIcon
         v-for="iconName in ['muted', 'unmuted']"
