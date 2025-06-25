@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.15.4
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.15.3...v2.15.4)
+
+### 💅 Refactors
+
+- **Member.vue:** Simplify rendering logic and remove unused animation cases ([9c7a30f](https://github.com/Algostract/red-cat-pictures/commit/9c7a30f))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.15.3
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.15.2...v2.15.3)
