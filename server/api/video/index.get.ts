@@ -55,23 +55,14 @@ export const portraitPreset: FileSources = {
 export const heroPreset: FileSources = (() => {
   const merged: FileSources = {}
 
-  // union of all formats
-  for (const format of new Set([...Object.keys(landscapePreset), ...Object.keys(portraitPreset)])) {
-    const fmt = format as Codec
-    const srcA = landscapePreset[fmt]!
-    const srcB = portraitPreset[fmt]!
-    merged[fmt] = { type: srcA.type || srcB.type }
-
-    // union of all resolution keys for this format
-    for (const resolution of new Set([...Object.keys(srcA), ...Object.keys(srcB)])) {
-      const res = resolution as Resolution
-      const orientationsA = srcA[res]!
-      const orientationsB = srcB[res]!
-      merged[fmt][res] = Array.from(new Set([...orientationsA, ...orientationsB]))
+  for (const codec of codecs) {
+    merged[codec] = { type: portraitPreset[codec]!.type }
+    for (const res of resolutions) {
+      merged[codec]![res] = [...portraitPreset[codec]![res]!, ...landscapePreset[codec]![res]!]
     }
   }
 
-  return merged as typeof landscapePreset
+  return merged
 })()
 
 export function convertSources(name: string, sources: FileSources): Source[] {
