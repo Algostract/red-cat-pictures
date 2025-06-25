@@ -10,24 +10,23 @@ export default defineCachedEventHandler<Promise<PhotoDetails>>(
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })
 
-      const photo = photos.find(({ properties }) => notionTextStringify(properties.Slug.rich_text) === slug)
+      const photo = photos.find(({ properties }) => properties['Sematic Slug'].formula.string === slug)
       if (!photo) {
         throw createError({ statusCode: 404, statusMessage: `photo ${slug} not found` })
       }
 
-      const id = notionTextStringify(photo.properties.Slug.rich_text)
       const [aW, aH] = photo.properties['Aspect ratio'].select.name.split(':').map((item) => parseInt(item))
 
       return {
-        id,
+        id: slug,
         title: notionTextStringify(photo.properties.Name.title),
         description: notionTextStringify(photo.properties.Description.rich_text),
         image: photo.cover?.type === 'external' ? photo.cover.external.url.split('/')[3] : '',
         aspectRatio: aW / aH,
         category: photo.properties.Segment.select.name,
         featured: photo.properties.Featured.number,
-        gallery: photo.properties.Gallery.number,
-        url: `/photo/${id}`,
+        gallery: photo.properties.Gallery.checkbox,
+        url: `/photo/${slug}`,
       } as PhotoDetails
     } catch (error: unknown) {
       console.error('API photo/slug GET', error)

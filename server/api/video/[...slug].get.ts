@@ -12,12 +12,11 @@ export default defineCachedEventHandler<Promise<VideoDetails>>(
 
       if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
 
-      const video = videos.find(({ properties }) => notionTextStringify(properties['Sematic Slug'].formula.string) === slug)
+      const video = videos.find(({ properties }) => properties['Sematic Slug'].formula.string === slug)
       if (!video) {
         throw createError({ statusCode: 404, statusMessage: `video ${slug} not found` })
       }
 
-      // const slug: string = video.properties['Sematic Slug'].formula.string //notionTextStringify(video.properties.Slug.rich_text)
       const [aW, aH] = video.properties['Aspect ratio'].select.name.split(':').map((item) => parseInt(item))
       const aspectRatio = aW / aH
 

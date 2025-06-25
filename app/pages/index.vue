@@ -60,7 +60,7 @@ function onContact(action: boolean) {
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
+  <div class="isolate flex flex-col gap-4">
     <LazyButtonFloatingAction hydrate-on-idle :active-category="activeCategory" @update="(value) => (activeCategory = value)" />
     <SectionHero :video="featuredVideo" @contact="onContact(true)" />
     <SectionPhotoGallery :photos="allPhotos" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />

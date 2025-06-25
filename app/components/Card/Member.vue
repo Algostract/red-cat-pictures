@@ -10,6 +10,7 @@ export interface Member {
   image: string
   socials: Partial<Record<SocialPlatforms, string>>
   isHero: boolean
+  animation: 'burn' | 'fly-in'
 }
 
 const props = defineProps<Member>()
@@ -47,46 +48,112 @@ const heroImage = useTemplateRef<HTMLImageElement>('hero-image')
 const heroMaskVideo = useTemplateRef<HTMLVideoElement>('hero-mask-video')
 
 let regl: reglConstructor.Regl | undefined
-let drawBlend: reglConstructor.DrawCommand<reglConstructor.DefaultContext> | undefined
+let renderer: reglConstructor.DrawCommand<reglConstructor.DefaultContext> | undefined
+// let rendererParams: object | undefined
 
 function initRenderFunction() {
-  if (drawBlend || !regl) return
-  const maskTex = regl.texture({ data: heroMaskVideo.value, flipY: true })
-  const imageTex = regl.texture({ data: heroImage.value, flipY: true })
+  if (renderer || !regl) return
+  const maskTex = regl.texture({ data: heroMaskVideo.value, flipY: false })
+  const imageTex = regl.texture({ data: heroImage.value, flipY: false })
 
-  drawBlend = regl({
-    framebuffer: null,
-    attributes: {
-      position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1],
-    },
-    uniforms: {
-      src: imageTex,
-      mask: () => {
-        maskTex({ data: heroMaskVideo.value })
-        return maskTex
-      },
-    },
-    vert: `
-       precision mediump float;
-       attribute vec2 position;
-       varying   vec2 uv;
-       void main() {
-         uv = position * 0.5 + 0.5;
-         gl_Position = vec4(position, 0, 1);
-       }`,
-    frag: `
-       precision mediump float;
-       uniform sampler2D src, mask;
-       varying vec2 uv;
-       void main() {
-         vec4 s = texture2D(src,  uv);
+  switch (props.animation) {
+    case 'burn':
+      renderer = regl({
+        framebuffer: null,
+        attributes: {
+          position: [-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1],
+        },
+        uniforms: {
+          src: () => {
+            imageTex({ data: heroImage.value })
+            return imageTex
+          },
+          mask: () => {
+            maskTex({ data: heroMaskVideo.value })
+            return maskTex
+          },
+        },
+        vert: `
+        precision mediump float;
+        attribute vec2 position;
+        varying vec2 uv;
+        void main() {
+          uv = position * 0.5 + 0.5;
+          uv.y = 1.0 - uv.y;  // flip vertically only for burn
+          gl_Position = vec4(position, 0, 1);
+        }`,
+        frag: `
+        precision mediump float;
+        uniform sampler2D src, mask;
+        varying vec2 uv;
+        void main() {
+          vec4 s = texture2D(src, uv);
           vec4 m = texture2D(mask, uv);
           float alpha = (m.r + m.g + m.b) / 3.0;
           vec3 col = mix(m.rgb, s.rgb, alpha);
           gl_FragColor = vec4(col, alpha);
-       }`,
-    count: 6,
-  })
+        }`,
+        count: 6,
+      })
+      rendererParams = {}
+      break
+
+    case 'fly-in':
+      renderer = regl({
+        attributes: {
+          position: regl.prop('positions'),
+          uv: regl.prop('uvs'),
+          pieceIndex: regl.prop('pieceIndex'),
+        },
+        uniforms: {
+          tex: () => {
+            imageTex({ data: heroImage.value })
+            return imageTex
+          },
+          time: ({ tick }) => tick * 0.016, // seconds
+          cols: regl.prop('cols'),
+          rows: regl.prop('rows'),
+        },
+        vert: `
+        precision mediump float;
+        attribute vec2 position, uv;
+        attribute float pieceIndex;
+        uniform float time, cols, rows;
+        varying vec2 vUV;
+        void main() {
+          float col = mod(pieceIndex, cols);
+          float row = floor(pieceIndex / cols);
+          vec2 targetPos = position;
+          // start far scattered in Z
+          vec3 startPos = vec3((col - cols/2.0) * 1.5,
+                               (row - rows/2.0) * 1.5,
+                               -4.0);
+          float delay = (col + row) * 0.1;
+          float t = smoothstep(delay, delay + 1.0, time);
+          vec3 worldPos = mix(startPos, vec3(targetPos, 0.0), t);
+          gl_Position = vec4(worldPos.xy, worldPos.z, 1);
+          vUV = uv;
+        }`,
+        frag: `
+        precision mediump float;
+        uniform sampler2D tex;
+        varying vec2 vUV;
+        void main() {
+          gl_FragColor = texture2D(tex, vUV);
+        }
+      `,
+        count: 6,
+        depth: { enable: true },
+        blend: {
+          enable: true,
+          func: { src: 'src alpha', dst: 'one minus src alpha' },
+        },
+      })
+      break
+
+    default:
+      break
+  }
 }
 
 onMounted(() => {
@@ -109,7 +176,50 @@ onMounted(() => {
   vid.addEventListener('play', () => {
     isAnimated.value = true
     initRenderFunction()
-    regl?.frame(() => drawBlend!())
+    // regl?.frame(() => renderer!(rendererParams!))
+
+    // Animation parameters
+    const rows = 2,
+      cols = 4 // 8 slices
+    const sliceData: { index: number; positions: number[]; uvs: number[] }[] = []
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const ix = row * cols + col
+        // UV space
+        const u0 = col / cols
+        const v0 = row / rows
+        const u1 = (col + 1) / cols
+        const v1 = (row + 1) / rows
+        // two triangles per slice
+        const positions = [
+          // tri 1
+          -1 + 2 * (col / cols),
+          -1 + 2 * (row / rows),
+          2 / cols,
+          0,
+          -1 + 2 * ((col + 1) / cols),
+          -1 + 2 * (row / rows),
+          2 / cols,
+          0,
+        ]
+        // more positions to cover the quad…
+        const uvs = [u0, v0, u1, v0, u1, v1, u0, v1]
+        sliceData.push({ index: ix, positions, uvs })
+      }
+    }
+
+    regl?.frame(() => {
+      sliceData.forEach((slice) => {
+        renderer!({
+          cols,
+          rows,
+          pieceIndex: slice.index,
+          positions: slice.positions,
+          uvs: slice.uvs,
+          z: 0,
+        })
+      })
+    })
   })
 })
 
@@ -132,7 +242,7 @@ function triggerAnimation() {
     @touchstart="triggerAnimation"
     @click="triggerAnimation"
     @mouseenter="triggerAnimation">
-    <div class="relative aspect-square w-full overflow-hidden rounded-md">
+    <div class="relative isolate aspect-square w-full overflow-hidden rounded-md">
       <canvas ref="hero-mask-canvas" class="pointer-events-none absolute inset-0 z-20 aspect-[2/3] w-full" />
       <img
         ref="hero-image"

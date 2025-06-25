@@ -28,6 +28,7 @@
 
 https://g.page/r/CaroFd9d81EjEBM/review
 
+- [x] Modify About Us page
 - [ ] Update photos and videos url slug
 - [ ] Modify content page to show gallery view
 - [ ] Whatsapp Automation
@@ -40,7 +41,6 @@ https://g.page/r/CaroFd9d81EjEBM/review
 - [ ] Share Url
 - [ ] Modify Photo page to Project page
 - [ ] Videos and Video page
-- [ ] Modify About Us page
 - [ ] Like/Dislike Count Content
 - [ ] Add live streaming page
 - [ ] Audio Dictation of Content
