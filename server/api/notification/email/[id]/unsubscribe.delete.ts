@@ -1,22 +1,17 @@
 export default defineEventHandler(async (event) => {
   try {
+    const { id } = getRouterParams(event)
     const emailStorage = useStorage<EmailSubscription>('data:subscription:email')
 
-    const body = await readBody<EmailSubscription>(event)
+    const result = await emailStorage.removeItem(id)
 
-    if (await emailStorage.getItem(body.email)) {
-      return { success: true }
-    }
-
-    await emailStorage.setItem(body.email, body)
-
-    return { success: true }
+    return { success: result }
   } catch (error: unknown) {
-    console.error('API subscription/email POST', error)
-
     if (error instanceof Error && 'statusCode' in error) {
       throw error
     }
+
+    console.error('API notification/email/[id]/unsubscribe DELETE', error)
 
     throw createError({
       statusCode: 500,

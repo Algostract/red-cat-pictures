@@ -100,12 +100,12 @@ export default defineEventHandler<Promise<{ success: boolean }>>(async (event) =
 
     return { success: true }
   } catch (error: unknown) {
-    console.error('API subscription/[id]/email POST', error)
-
     const { code: errorCode } = error as { code?: string }
     if (errorCode === 'ESOCKET' || errorCode === 'ECONNECTION') {
       throw createError({ statusCode: 500, statusMessage: 'Failed to establish secure SMTP connection. Please check SSL/TLS settings.' })
     }
+
+    console.error('API notification/email/[id]/send POST', error)
 
     throw createError({
       statusCode: 500,

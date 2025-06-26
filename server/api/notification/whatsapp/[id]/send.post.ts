@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
       throw error
     }
 
-    console.error('API subscription/[id]/whatsapp POST', error)
+    console.error('API notification/whatsapp/[id]/send POST', error)
 
     throw createError({
       statusCode: 500,

@@ -1,7 +1,6 @@
-import { sendEmail } from '~~/server/api/subscription/[id]/email.post'
-import { sendWhatsappMessage } from '~~/server/api/subscription/[id]/whatsapp.post'
+import { sendEmail } from '~~/server/api/notification/email/[id]/send.post'
+import { sendWhatsappMessage } from '~~/server/api/notification/whatsapp/[id]/send.post'
 import { messageTemplates } from '~~/server/plugins/whatsapp'
-import type { WhatsappSubscription } from '~~/shared/types'
 
 export default defineTask({
   meta: {

@@ -1,5 +1,5 @@
 import webpush from 'web-push'
-import type { NotificationSubscription } from '../notification.post'
+import type { NotificationSubscription } from '../subscribe.post'
 
 interface PushNotification {
   title: string
@@ -38,7 +38,7 @@ export default defineEventHandler(async (event) => {
       throw error
     }
 
-    console.error('API subscription/[id]/notification POST', error)
+    console.error('API notification/push/[id]/send POST', error)
 
     throw createError({
       statusCode: 500,
