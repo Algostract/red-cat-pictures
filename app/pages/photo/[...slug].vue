@@ -3,30 +3,18 @@ definePageMeta({
   layout: false,
 })
 
-const slugMap: Record<string, string> = {
-  'product-009-001': 'ecommerce-001-001',
-}
-
 const route = useRoute()
 const slug = route.params.slug!.toString()
 const { data: photos } = await useFetch('/api/photo', { default: () => [] })
 
-const activePhotoName = computed<string>(() => {
-  const unmappedSlug = slugify(slug)
-  if (slugMap[unmappedSlug]) return slugMap[unmappedSlug]
+const activePhotoSlug = computed<string>(() => slugify(slug))
+const activePhoto = computed(() => photos.value.find(({ id }) => id === activePhotoSlug.value))
 
-  return unmappedSlug
-})
-if (activePhotoName.value !== slug) {
-  await navigateTo('/photo/' + activePhotoName.value, { redirectCode: 301 })
-}
-
-const activePhoto = computed(() => photos.value.find(({ id }) => id === activePhotoName.value))
 if (!activePhoto.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const title = `${activePhotoName.value.charAt(0).toUpperCase() + activePhotoName.value.slice(1)}`
+const title = `${activePhoto.value.title}`
 const description = `${activePhoto.value.description}`
 const {
   public: { siteUrl },
@@ -42,12 +30,12 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${siteUrl}/photo/${activePhotoName.value}`,
+  ogUrl: `${siteUrl}/photo/${activePhotoSlug.value}`,
 })
 
 useSchemaOrg([
   defineImage({
-    url: `${siteUrl}/photo/${activePhotoName.value}`,
+    url: `${siteUrl}/photo/${activePhotoSlug.value}`,
     contentUrl: imageUrl,
     caption: description,
     width: 720,

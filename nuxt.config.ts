@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-nodemailer',
     'nuxt-splide',
+    '@tresjs/nuxt',
   ],
   nitro: {
     compressPublicAssets: true,

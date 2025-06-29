@@ -1,7 +1,7 @@
 import type { SitemapUrlInput } from '#sitemap/types'
 
 export default defineSitemapEventHandler(async () => {
-  const settled = await Promise.allSettled(['/api/photo', '/api/episode', '/api/blog'].map((url) => $fetch<{ url: string }[]>(url)))
+  const settled = await Promise.allSettled(['/api/photo', '/api/video', '/api/episode', '/api/blog'].map((url) => $fetch<{ url: string }[]>(url)))
 
   return settled.flatMap((res) => {
     if (res.status === 'fulfilled') {

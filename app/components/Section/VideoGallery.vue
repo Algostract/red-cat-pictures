@@ -75,23 +75,25 @@ function isLandscapeOriented(deviceOrientation: string, videoOrientation: string
   <section id="video-gallery" ref="video-gallery" class="relative -mx-2 h-fit w-[calc(100%+16px)]">
     <SectionLabel icon="movie" title="Video Gallery" />
     <div v-if="filterVideos.length" class="relative left-1/2 flex h-screen -translate-x-1/2 items-center justify-center overflow-hidden bg-black">
-      <NuxtVideo
-        ref="videoContainerRef"
-        :key="activeVideoIndex"
-        class="aspect-video"
-        :class="isLandscapeOriented(deviceOrientation?.split('-')[0]!, activeVideo.sources[0]!.orientation) ? 'w-[100vh] max-w-[100vh] rotate-90' : ''"
-        :poster="activeVideo.poster"
-        :source="activeVideo.sources"
-        :disable-picture-in-picture="true"
-        controls-list="nodownload"
-        :autoplay="isAutoplay"
-        :state="isPlay ? 'play' : 'pause'"
-        :muted="isMuted"
-        :playsinline="true"
-        preload="metadata"
-        @progress="(value) => (activeVideoProgress = value)"
-        @ended="updateVideoIndex()"
-        @click="toggleMute" />
+      <ClientOnly>
+        <NuxtVideo
+          ref="videoContainerRef"
+          :key="activeVideoIndex"
+          class="aspect-video"
+          :class="isLandscapeOriented(deviceOrientation?.split('-')[0]!, activeVideo.sources[0]!.orientation) ? 'w-[100vh] max-w-[100vh] rotate-90' : ''"
+          :poster="activeVideo.poster"
+          :source="activeVideo.sources"
+          :disable-picture-in-picture="true"
+          controls-list="nodownload"
+          :autoplay="isAutoplay"
+          :state="isPlay ? 'play' : 'pause'"
+          :muted="isMuted"
+          :playsinline="true"
+          preload="metadata"
+          @progress="(value) => (activeVideoProgress = value)"
+          @ended="updateVideoIndex()"
+          @click="toggleMute" />
+      </ClientOnly>
       <!-- @click="toggleFullScreen()" -->
       <StatusBar :total="filterVideos.length" :active-index="activeVideoIndex" :active-percent="activeVideoProgress" class="absolute left-1/2 top-8 z-0 w-full -translate-x-1/2 px-4 md:px-16" />
       <ButtonSlide class="absolute bottom-20 left-1/2 z-10 -translate-x-1/2 md:bottom-12 md:left-16 md:translate-x-0" @click="(value) => updateVideoIndex(value === 'left' ? -1 : 1)" />

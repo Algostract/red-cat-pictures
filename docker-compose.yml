@@ -12,8 +12,8 @@ services:
     #           count: all
     #           capabilities: [gpu]
     volumes:
-      - red-cat-pictures_static:/app/static
-      - red-cat-pictures_data:/app/.data
+      - static:/app/static
+      - data:/app/.data
     env_file:
       - .env.prod
     ports:
@@ -25,7 +25,7 @@ services:
     restart: on-failure:3
     user: root
     volumes:
-      - red-cat-pictures_data:/usr/src/app/user-data-dir
+      - data:/usr/src/app/user-data-dir
     environment:
       - CORS=true
     healthcheck:
@@ -51,7 +51,16 @@ services:
   #     WEBSOCKETS_ENABLED: 'true'
 
 volumes:
-  red-cat-pictures_static:
-    external: true
-  red-cat-pictures_data:
-    external: true
+  static:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./static
+
+  data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./.data
