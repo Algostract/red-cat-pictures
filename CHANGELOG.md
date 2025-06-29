@@ -1,5 +1,21 @@
 # red-cat-pictures
 
+## v2.16.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.15.6...v2.16.0)
+
+### 🚀 Enhancements
+
+- Added 3d photo-frame gallery in experience page ([7133f0f](https://github.com/Algostract/red-cat-pictures/commit/7133f0f))
+
+### 💅 Refactors
+
+- Rerouted email and push notification APIs ([bb7767e](https://github.com/Algostract/red-cat-pictures/commit/bb7767e))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.15.6
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.15.5...v2.15.6)
