@@ -172,9 +172,8 @@ export default defineTask({
           Object.assign(data, {
             ogTitle: resource.record.properties.Name.title.map((title) => (typeof title !== 'string' ? title.plain_text : '')).join('') || null,
             ogDescription: null,
-            ogImage:
-              (resource.record.cover?.type === 'external' ? resource.record.cover.external.url : null) ?? (resource.record.cover?.type === 'file' ? resource.record.cover.file.url : null) ?? null,
-            logo: (resource.record.icon?.type === 'external' ? resource.record.icon.external.url : null) ?? (resource.record.icon?.type === 'file' ? resource.record.icon.file.url : null) ?? null,
+            ogImage: resource.record.cover?.type === 'external' ? resource.record.cover.external.url : undefined,
+            logo: resource.record.icon?.type === 'external' ? resource.record.icon.external.url : undefined,
           })
 
           if (source === 'auto') {

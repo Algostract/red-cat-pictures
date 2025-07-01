@@ -1,5 +1,3 @@
-import WAWebJS from 'whatsapp-web.js'
-
 interface WhatsappMessage {
   to: string
   data: { asset: string; text: string }

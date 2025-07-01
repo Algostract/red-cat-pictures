@@ -1,4 +1,3 @@
-import WAWebJS from 'whatsapp-web.js'
 import { renderANSI } from 'uqr'
 import { consola } from 'consola'
 

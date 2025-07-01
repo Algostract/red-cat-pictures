@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const title = `Product Photography & Videography in Kolkata`
 const description = `Nurture the essence of your food & product with our professional photography & videography services in kolkata`
+
 const {
   public: { siteUrl },
 } = useRuntimeConfig()
@@ -44,7 +45,7 @@ const videos = computed(() => allVideos.value.filter(({ type }) => type === 'fea
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
-const activeCategory = ref<Category>('ecommerce')
+const activeCategory = ref<Category>('food')
 const activePhotoName = useState<string>()
 const isModelContactOpen = useState<boolean>('isModelContactOpen', () => false)
 

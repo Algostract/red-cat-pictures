@@ -13,16 +13,16 @@ const categories = ref<
   }[]
 >([
   {
-    icon: 'cart',
-    title: 'ecommerce',
+    icon: 'pizza',
+    title: 'food',
   },
   {
     icon: 'photo',
     title: 'product',
   },
   {
-    icon: 'pizza',
-    title: 'food',
+    icon: 'cart',
+    title: 'ecommerce',
   },
 ])
 

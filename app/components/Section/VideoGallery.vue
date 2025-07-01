@@ -32,7 +32,7 @@ async function updateVideoIndex(step = 1) {
   activeVideoIndex.value = (activeVideoIndex.value + step + total) % total
 }
 
-const videoContainerRef = useTemplateRef<HTMLVideoElement>('videoContainerRef')
+const videoContainerWrapper = useTemplateRef<HTMLDivElement>('video-container-wrapper')
 
 const { orientation: deviceOrientation } = useScreenOrientation()
 
@@ -59,6 +59,7 @@ width >= height     | landscape          | portrait          | portrait
 width >= height     | landscape          | landscape         | landscape
 */
 const { width, height } = useWindowSize()
+const { x } = useMouseInElement(videoContainerWrapper)
 
 function isLandscapeOriented(deviceOrientation: string, videoOrientation: string) {
   const deviceType = width.value > height.value
@@ -69,15 +70,24 @@ function isLandscapeOriented(deviceOrientation: string, videoOrientation: string
     else return false
   }
 }
+
+function slideClick() {
+  if (!videoContainerWrapper.value) return
+  const width = videoContainerWrapper.value.clientWidth
+  if (x.value < width * (1 / 4)) {
+    updateVideoIndex(-1)
+  } else if (x.value > width * (3 / 4)) {
+    updateVideoIndex(1)
+  }
+}
 </script>
 
 <template>
   <section id="video-gallery" ref="video-gallery" class="relative -mx-2 h-fit w-[calc(100%+16px)]">
     <SectionLabel icon="movie" title="Video Gallery" />
-    <div v-if="filterVideos.length" class="relative left-1/2 flex h-screen -translate-x-1/2 items-center justify-center overflow-hidden bg-black">
+    <div v-if="filterVideos.length" ref="video-container-wrapper" class="relative left-1/2 flex h-screen -translate-x-1/2 items-center justify-center overflow-hidden bg-black">
       <ClientOnly>
         <NuxtVideo
-          ref="videoContainerRef"
           :key="activeVideoIndex"
           class="aspect-video"
           :class="isLandscapeOriented(deviceOrientation?.split('-')[0]!, activeVideo.sources[0]!.orientation) ? 'w-[100vh] max-w-[100vh] rotate-90' : ''"
@@ -92,7 +102,7 @@ function isLandscapeOriented(deviceOrientation: string, videoOrientation: string
           preload="metadata"
           @progress="(value) => (activeVideoProgress = value)"
           @ended="updateVideoIndex()"
-          @click="toggleMute" />
+          @click="slideClick" />
       </ClientOnly>
       <!-- @click="toggleFullScreen()" -->
       <StatusBar :total="filterVideos.length" :active-index="activeVideoIndex" :active-percent="activeVideoProgress" class="absolute left-1/2 top-8 z-0 w-full -translate-x-1/2 px-4 md:px-16" />

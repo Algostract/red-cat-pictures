@@ -25,7 +25,7 @@ export default defineCachedEventHandler<Promise<VideoDetails>>(
         title: notionTextStringify(video.properties.Name.title),
         description: notionTextStringify(video.properties.Description.rich_text),
         type: slug === 'hero' ? 'hero' : 'feature',
-        poster: video.cover?.type === 'external' ? video.cover.external.url.split('/')[3] : '',
+        poster: video.cover?.type === 'external' ? video.cover.external.url.split('/')[3] : undefined,
         sources: convertSources(slug, slug === 'hero' ? heroPreset : aspectRatio < 1 ? portraitPreset : landscapePreset),
         url: `/video/${slug}`,
       } as VideoDetails

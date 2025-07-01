@@ -57,14 +57,6 @@ const activePhotoName = useState<string | null>()
 </template>
 
 <style scoped>
-/* section {
-  @apply [&:has(img:hover)_img:not(:hover)]:grayscale [&_img]:filter [&_img]:transition [&_img]:duration-300;
-}
-
-img {
-  @apply hover:grayscale-0;
-} */
-
 img.active {
   view-transition-name: selected-photo;
 }

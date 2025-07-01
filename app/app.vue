@@ -1,6 +1,7 @@
 <script setup lang="ts">
-const title = `RED CAT PICTURES | Elevate Your Brand Image`
-const description = `Nurture the essence of your product with our photography & videography services in kolkata`
+const title = `Product Photography & Videography in Kolkata`
+const description = `Nurture the essence of your food & product with our professional photography & videography services in kolkata`
+
 const {
   app: { buildTime },
   public: { siteUrl },
@@ -37,7 +38,7 @@ useSeoMeta({
 
 useSchemaOrg([
   defineWebPage({
-    datePublished: new Date(2024, 1, 1).toISOString(),
+    datePublished: new Date(2023, 10, 24).toISOString(),
     dateModified: buildTime,
     author: 'Shirsendu Bairagi',
   }),
@@ -47,7 +48,7 @@ useSchemaOrg([
     description: description,
   }),
   defineLocalBusiness({
-    '@type': 'EntertainmentBusiness',
+    '@type': 'ProfessionalService',
     name: 'RED CAT PICTURES',
     description: description,
     image: `${siteUrl}/previews/landing.webp`,

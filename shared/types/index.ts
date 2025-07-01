@@ -2,19 +2,14 @@ export type Category = 'ecommerce' | 'product' | 'food'
 export type Service = 'photo' | 'video'
 export type Orientation = 'portrait' | 'landscape'
 
-export interface FilePhoto {
+export interface Photo {
   id: string
   title: string
-  image: string
+  image?: string
   description: string
-  width: number
-  height: number
   category: Category
   gallery: boolean
   featured: null | number
-}
-
-export interface Photo extends Omit<FilePhoto, 'width' | 'height'> {
   aspectRatio: number
   url: string
 }
@@ -44,18 +39,6 @@ export type FileSources = {
   }
 }
 
-export interface FileVideo {
-  id: string
-  title: string
-  description: string
-  type: 'hero' | 'feature'
-  poster: string
-  sources: FileSources
-  category: Category
-  gallery: boolean
-  featured: null | number
-}
-
 export interface Source {
   src: string
   type: string
@@ -65,7 +48,15 @@ export interface Source {
   orientation: Orientation
 }
 
-export interface Video extends Omit<FileVideo, 'sources'> {
+export interface Video {
+  id: string
+  title: string
+  description: string
+  type: 'hero' | 'feature'
+  poster?: string
+  category: Category
+  gallery: boolean
+  featured: null | number
   sources: Source[]
   url: string
 }
@@ -103,6 +94,16 @@ export interface MetaData {
   ogDescription: string | null
   ogImage: string | null
   logo: string | null
+}
+
+export interface EmailSubscription {
+  name: string
+  email: string
+}
+
+export interface WhatsappSubscription {
+  name: string
+  phone: string
 }
 
 /* Server Only */
@@ -357,7 +358,11 @@ export interface NotionAsset {
         name: 'Photo' | 'Video'
       }
     }
-    // Segment:{},
+    Segment: {
+      select: {
+        name: Category
+      }
+    }
     Category: {
       select: {
         name: Category
@@ -416,14 +421,4 @@ export interface NotionStudio {
   }
   url: string
   public_url: null
-}
-
-export interface EmailSubscription {
-  name: string
-  email: string
-}
-
-export interface WhatsappSubscription {
-  name: string
-  phone: string
 }
