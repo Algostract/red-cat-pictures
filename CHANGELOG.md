@@ -1,5 +1,21 @@
 # red-cat-pictures
 
+## v2.16.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.16.0...v2.16.1)
+
+### 💅 Refactors
+
+- Update task sync:meta-data for optimistic cached update ([dc3a61b](https://github.com/Algostract/red-cat-pictures/commit/dc3a61b))
+
+### 🏡 Chore
+
+- Category arrangement change, whatsapp.js remove ([6f5d037](https://github.com/Algostract/red-cat-pictures/commit/6f5d037))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.16.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.15.6...v2.16.0)
