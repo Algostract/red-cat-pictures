@@ -4,7 +4,7 @@ const description = `Nurture the essence of your food & product with our profess
 
 const {
   app: { buildTime },
-  public: { siteUrl },
+  public: { siteUrl, vapidKey },
 } = useRuntimeConfig()
 
 useHead({
@@ -74,15 +74,13 @@ useSchemaOrg([
 const { isSupported, permissionGranted } = useWebNotification()
 
 async function getExistingSubscription() {
-  const config = useRuntimeConfig()
-
   const registration = await navigator.serviceWorker.ready
   let subscription = await registration.pushManager.getSubscription()
 
   if (!subscription) {
     subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey: config.public.vapidKey,
+      applicationServerKey: vapidKey,
     })
   }
 
@@ -105,7 +103,6 @@ watch(permissionGranted, async (value) => {
 
 <template>
   <NuxtRouteAnnouncer />
-  <NuxtPwaManifest />
   <NuxtPwaAssets />
   <NuxtLoadingIndicator color="#CD2D2D" />
   <NuxtLayout>

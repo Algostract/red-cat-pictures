@@ -1,6 +1,7 @@
 import { Buffer } from 'buffer'
 import { render } from '@vue-email/render'
-import emailTemplate, { type EmailTemplateData } from '~~/server/emails'
+import emailTemplate from '~~/server/emails'
+import type { EmailTemplateData } from '~~/server/emails'
 
 interface TransactionalEmail<T extends keyof EmailTemplateData> {
   template: T

@@ -94,6 +94,7 @@ export interface MetaData {
   ogDescription: string | null
   ogImage: string | null
   logo: string | null
+  lastUpdated: string
 }
 
 export interface EmailSubscription {

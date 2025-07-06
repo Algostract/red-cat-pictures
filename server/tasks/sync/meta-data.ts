@@ -128,6 +128,7 @@ export default defineTask({
     description: 'Process an array of URLs; retrieve and return each page’s OG title, description, and image',
   },
   async run(event) {
+    // console.log("Task sync:meta-data")
     const metaDataStorage = useStorage<MetaData>('data:meta-data')
     const resourceStorage = useStorage<Resource>(`data:resource`)
 
@@ -174,6 +175,7 @@ export default defineTask({
             ogDescription: null,
             ogImage: resource.record.cover?.type === 'external' ? resource.record.cover.external.url : undefined,
             logo: resource.record.icon?.type === 'external' ? resource.record.icon.external.url : undefined,
+            lastUpdated: new Date().toISOString(),
           })
 
           if (source === 'auto') {

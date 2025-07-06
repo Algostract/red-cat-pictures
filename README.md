@@ -30,12 +30,12 @@ https://g.page/r/CaroFd9d81EjEBM/review
 
 - [x] Modify About Us page
 - [x] Update photos and videos url slug
+- [x] Update task sync:meta-data for optimistic cached update
 
 - [ ] Modify content page to show gallery view
 - [ ] Whatsapp Automation
 
 - [ ] Facebook Automation
-- [ ] Update task sync:meta-data for optimistic cached update
 - [ ] Image Search
 - [ ] Update Photo page with title and description
 - [ ] Instagram Automation
