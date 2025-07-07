@@ -128,7 +128,7 @@ export default defineTask({
     description: 'Process an array of URLs; retrieve and return each page’s OG title, description, and image',
   },
   async run(event) {
-    // console.log("Task sync:meta-data")
+    // console.log("Task sync:meta-data running")
     const metaDataStorage = useStorage<MetaData>('data:meta-data')
     const resourceStorage = useStorage<Resource>(`data:resource`)
 
@@ -138,17 +138,15 @@ export default defineTask({
     // if payload is empty get all the links of clients, models, studios, contents
     const result = await Promise.allSettled(
       urls.map(async (url) => {
-        const data: {
-          ogTitle: string | null
-          ogDescription: string | null
-          ogImage: string | null
-          logo: string | null
-        } = {
+        const data = (await metaDataStorage.getItem(normalizeUrl(url))) ?? {
           ogTitle: null,
           ogDescription: null,
           ogImage: null,
           logo: null,
+          lastUpdated: new Date().toISOString(),
         }
+        data.lastUpdated = new Date().toISOString()
+        await metaDataStorage.setItem(normalizeUrl(url), data)
 
         let resource: Resource | null = null
         if (source !== 'external') {
@@ -175,7 +173,6 @@ export default defineTask({
             ogDescription: null,
             ogImage: resource.record.cover?.type === 'external' ? resource.record.cover.external.url : undefined,
             logo: resource.record.icon?.type === 'external' ? resource.record.icon.external.url : undefined,
-            lastUpdated: new Date().toISOString(),
           })
 
           if (source === 'auto') {
@@ -191,6 +188,8 @@ export default defineTask({
           const ext = extractOgData(tree, url)
           Object.assign(data, ext)
         }
+
+        data.lastUpdated = new Date().toISOString()
 
         await metaDataStorage.setItem(normalizeUrl(url), data)
         return data

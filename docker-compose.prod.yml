@@ -21,9 +21,6 @@ services:
 
   browserless:
     image: ghcr.io/browserless/chromium:latest
-    user: root
-    volumes:
-      - red-cat-pictures_data:/usr/src/app/user-data-dir
     environment:
       - CORS=true
     networks:
