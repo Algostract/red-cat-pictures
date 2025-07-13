@@ -1,5 +1,25 @@
 # red-cat-pictures
 
+## v2.17.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.16.1...v2.17.0)
+
+### 🚀 Enhancements
+
+- Add tauri for native app ([0d2d2c5](https://github.com/Algostract/red-cat-pictures/commit/0d2d2c5))
+
+### 🩹 Fixes
+
+- Ensure build script handles static copy failure gracefully ([7b609db](https://github.com/Algostract/red-cat-pictures/commit/7b609db))
+
+### 💅 Refactors
+
+- Simplify meta-data handling and remove unused files ([29a430d](https://github.com/Algostract/red-cat-pictures/commit/29a430d))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.16.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.16.0...v2.16.1)
