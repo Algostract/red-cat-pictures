@@ -24,7 +24,7 @@
     "lint": "eslint . --fix",
     "format": "prettier . --write",
     "test:load": "k6 run tests/load.test.ts",
-    "build": "nuxt build && cp -r static .output/static",
+    "build": "nuxt build && (cp -r static .output/static || true)",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "start": "node --env-file=.env.prod .output/server/index.mjs",
