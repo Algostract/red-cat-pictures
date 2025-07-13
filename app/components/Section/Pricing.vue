@@ -5,7 +5,7 @@ defineProps<{
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
-const { data: prices } = await useFetch('/api/price')
+const { data: prices } = await useAPI('/api/price')
 
 const splideOption = computed(() => ({
   mediaQuery: 'min',

@@ -37,8 +37,8 @@ useSchemaOrg([
   }),
 ])
 
-const { data: allPhotos } = await useFetch('/api/photo', { default: () => [] })
-const { data: allVideos } = await useFetch('/api/video', { default: () => [] })
+const { data: allPhotos } = await useAPI('/api/photo', { default: () => [] })
+const { data: allVideos } = await useAPI('/api/video', { default: () => [] })
 
 const featuredVideo = computed(() => allVideos.value.find(({ type }) => type === 'hero')!)
 const videos = computed(() => allVideos.value.filter(({ type }) => type === 'feature'))

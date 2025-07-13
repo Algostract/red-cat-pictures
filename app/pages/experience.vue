@@ -19,7 +19,7 @@ useSeoMeta({
   ogUrl: `${siteUrl}/experience`,
 })
 
-const { data: photos } = await useFetch('/api/photo')
+const { data: photos } = await useAPI('/api/photo')
 
 const categoryOrder = ['product', 'food', 'ecommerce'] as Category[]
 

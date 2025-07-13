@@ -19,7 +19,19 @@ export default defineEventHandler(async (event) => {
     const notionDbId = config.private.notionDbId as unknown as NotionDB
 
     const buffer = await toUint8Array(file)
-    await storage.setItemRaw(`photos/source/${fileName}`, buffer)
+    const signedBuffer = await stegoEncode(
+      buffer,
+      JSON.stringify({
+        copyright: '© RED CAT PICTURES',
+        terms: 'All Rights Reserved',
+        year: '2025',
+        // "id": "9b8f3c2a-4d1e-4a6f-bf2e-7d5a946ab123",
+        // "url": `${config.public.siteUrl}/photo`,
+        ts: new Date().toISOString(),
+      }),
+      config.private.steganographyKey
+    )
+    await storage.setItemRaw(`photos/source/${fileName}`, signedBuffer)
     console.log(`File Saved ${fileName}`)
 
     const { width = 0, height = 0 } = await getDimension(fileName, 'photo')

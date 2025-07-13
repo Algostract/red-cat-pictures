@@ -18,12 +18,12 @@ logs
 .fleet
 .idea
 misc
-.wwebjs_*
 
 # Env files
 .env
 .env.*
 !.env.example
+!.env.native
 
 # Static files
 static

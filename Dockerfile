@@ -22,8 +22,7 @@ ARG BUILD_TIME
 WORKDIR /app
 
 RUN apk add --no-cache ffmpeg
-# RUN apk add --no-cache chromium
-# ENV BROWSER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+RUN apk add --no-cache steghide
 
 COPY --from=builder /app/.output ./.output
 

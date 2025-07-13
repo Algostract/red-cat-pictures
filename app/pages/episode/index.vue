@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: episodes } = await useFetch('/api/episode')
+const { data: episodes } = await useAPI('/api/episode')
 
 const title = `Episodes of all behind the Scenes & Stories`
 const description = `Read our episodes for behind-the-scenes insights, project stories, and expert tips on photography and videography.`

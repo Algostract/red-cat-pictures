@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const slug = route.params.slug!.toString()
-const { data: blog } = await useFetch<ContentDetails>(`/api/blog/${slug}`)
+const { data: blog } = await useAPI<ContentDetails>(`/api/blog/${slug}`)
 
 if (!blog.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })

@@ -5,7 +5,7 @@ definePageMeta({
 
 const route = useRoute()
 const slug = route.params.slug!.toString()
-const { data: videos } = await useFetch('/api/video', { default: () => [] })
+const { data: videos } = await useAPI('/api/video', { default: () => [] })
 
 const activeVideoSlug = computed<string>(() => slugify(slug))
 const activeVideo = computed(() => videos.value.find(({ id }) => id === activeVideoSlug.value))

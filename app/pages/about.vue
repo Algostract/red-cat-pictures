@@ -33,7 +33,7 @@ const experience = computed(() => {
   return formatDuration({ years: differenceInYears(now.value, DOE) }, { format: ['years'] })
 }) */
 
-const { data: clients } = await useFetch('/api/client')
+const { data: clients } = await useAPI('/api/client')
 
 const members: Member[] = [
   {

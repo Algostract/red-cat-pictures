@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: photos } = await useFetch('/api/photo', { default: () => [] })
+const { data: photos } = await useAPI('/api/photo', { default: () => [] })
 
 const title = `Photos`
 const description = `Photo Gallery`

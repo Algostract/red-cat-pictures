@@ -1,5 +1,50 @@
 import vue from '@vitejs/plugin-vue'
 
+const host = process.env.TAURI_DEV_HOST || 'localhost'
+const port = process.env.PORT ? parseInt(process.env.PORT) : 3000
+
+const nativeConfig =
+  process.env.PLATFORM_ENV === 'native'
+    ? {
+        ssr: false,
+        devServer: { host },
+        ignore: ['**/src-tauri/**', '**/node_modules/**', '**/dist/**', '**/.git/**', '**/.nuxt/**', '**/.output/**'],
+        vite: {
+          clearScreen: false,
+          envPrefix: ['VITE_', 'TAURI_'],
+          server: {
+            strictPort: true,
+            port,
+            host: host || false,
+            hmr: host
+              ? {
+                  protocol: 'ws',
+                  host,
+                  port,
+                }
+              : undefined,
+          },
+        },
+        nitro: {
+          storage: {
+            fs: {
+              driver: 'fs',
+              base: './static',
+            },
+          },
+          rollupConfig: {
+            plugins: [vue()],
+          },
+          experimental: {
+            tasks: true,
+          },
+          prerender: {
+            routes: [],
+          },
+        },
+      }
+    : {}
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
@@ -107,11 +152,12 @@ export default defineNuxtConfig({
       oauthClientSecret: '',
       oauthRefreshToken: '',
       facebookAccessToken: '',
+      steganographyKey: '',
     },
   },
   icon: {
     componentName: 'NuxtIcon',
-    provider: 'server',
+    provider: 'none',
     mode: 'svg',
     customCollections: [
       {
@@ -119,6 +165,9 @@ export default defineNuxtConfig({
         dir: './app/assets/icons',
       },
     ],
+    clientBundle: {
+      scan: true,
+    },
   },
   image: {
     provider: 'uploadcare',
@@ -361,4 +410,5 @@ export default defineNuxtConfig({
   splide: {
     theme: 'core',
   },
+  ...nativeConfig,
 })

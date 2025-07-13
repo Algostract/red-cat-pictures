@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: blogs } = await useFetch('/api/blog')
+const { data: blogs } = await useAPI('/api/blog')
 
 const title = `Blogs`
 const description = `Read our Blogs for expert tips on photography and videography.`

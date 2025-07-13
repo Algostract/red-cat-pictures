@@ -14,7 +14,7 @@ const isDark = useDark()
 watch(url, async (value) => {
   if (!value) return
 
-  data.value = await $fetch<MetaData>('/api/external/meta', { query: { url: value } })
+  data.value = await $api<MetaData>('/api/external/meta', { query: { url: value } })
 })
 
 const title = computed(() => data.value?.ogTitle ?? props.activeLink?.title)

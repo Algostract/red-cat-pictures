@@ -5,7 +5,7 @@ definePageMeta({
 
 const route = useRoute()
 const slug = route.params.slug!.toString()
-const { data: photos } = await useFetch('/api/photo', { default: () => [] })
+const { data: photos } = await useAPI('/api/photo', { default: () => [] })
 
 const activePhotoSlug = computed<string>(() => slugify(slug))
 const activePhoto = computed(() => photos.value.find(({ id }) => id === activePhotoSlug.value))
