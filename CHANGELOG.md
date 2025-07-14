@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.17.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.17.0...v2.17.1)
+
+### 🩹 Fixes
+
+- Replace $fetch to $api ([53a72f8](https://github.com/Algostract/red-cat-pictures/commit/53a72f8))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.17.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.16.1...v2.17.0)
