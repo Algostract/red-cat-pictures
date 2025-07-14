@@ -71,6 +71,7 @@ useSchemaOrg([
   }),
 ])
 
+const { $api } = useNuxtApp()
 const { isSupported, permissionGranted } = useWebNotification()
 
 async function getExistingSubscription() {

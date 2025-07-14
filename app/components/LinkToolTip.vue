@@ -7,6 +7,7 @@ const props = defineProps<{
   }
 }>()
 
+const { $api } = useNuxtApp()
 const url = computed(() => props.activeLink?.url)
 const data = ref<MetaData>()
 const isDark = useDark()
