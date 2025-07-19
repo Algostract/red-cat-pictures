@@ -41,5 +41,5 @@ export default defineCachedEventHandler<Promise<PhotoDetails>>(
       })
     }
   },
-  { maxAge: 60 * 60 }
+  { maxAge: 60 * 60, swr: true }
 )

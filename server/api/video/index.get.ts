@@ -152,5 +152,5 @@ export default defineCachedEventHandler<Promise<Video[]>>(
       })
     }
   },
-  { maxAge: 60 * 1 }
+  { maxAge: 60 * 1, swr: true }
 )

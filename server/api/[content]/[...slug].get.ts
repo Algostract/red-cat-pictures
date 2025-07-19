@@ -1,4 +1,5 @@
 import { NotionToMarkdown } from 'notion-to-md'
+import { createRegExp, global, exactly } from 'magic-regexp'
 import { z } from 'zod'
 
 let n2m: NotionToMarkdown
@@ -10,12 +11,8 @@ export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId:
     let mdString = n2m.toMarkdownString(mdBlocks).parent
 
     if (mdString) {
-      // literal "\n" → actual newlines
-      mdString = mdString.replace(/\\n/g, '\n')
-      // collapse 3+ newlines → 2
-      mdString = mdString.replace(/\n{3,}/g, '\n\n').replaceAll('\\n\\n', '\n\n')
+      mdString = mdString.replace(createRegExp(exactly('\n').times(3).or(exactly('\\n').times(2)), [global]), '\n\n')
 
-      // async-replace all Notion links, unpacking (fullMatch, linkText, pageId)
       if (replaceNotionLinks) {
         mdString = await replaceAsync(mdString, /\[([^\]]+)\]\(https?:\/\/(?:www\.)?notion\.so\/(?:[^\s/()]+-)?([0-9A-Fa-f]{32})(?:\S*)?\)/g, async ([full, text, pageId]): Promise<string> => {
           let resource: Resource | null = null
@@ -55,6 +52,16 @@ export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId:
 
           return full
         })
+
+        mdString = mdString.replace(
+          createRegExp(exactly('\n\nchild_database\n\n'), [global]),
+          await (async () => {
+            const currentContent = await resourceStorage.getItem<Resource<'content'>>(`content:${normalizeNotionId(pageId)}`)
+            const currentAssets = await resourceStorage.getItems<Resource<'asset'>>(currentContent?.record.properties.Asset.relation.flatMap(({ id }) => `asset:${normalizeNotionId(id)}`) ?? [])
+
+            return `\n::gallery{photos="${currentAssets.flatMap(({ value }) => value.record.properties['Sematic Slug'].formula.string).join(',')}"}\n::\n`
+          })()
+        )
       }
 
       mdString = mdString.trim()
@@ -88,7 +95,7 @@ export default defineCachedEventHandler<Promise<ContentDetails>>(
       }
 
       const content = (await notion.pages.retrieve({ page_id: pageId })) as unknown as NotionContent
-      if (!content || content.properties.Status.status.name !== 'Publish') {
+      if (!content || !(content.properties.Status.status.name === 'Publish')) {
         throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
       }
 
@@ -120,5 +127,5 @@ export default defineCachedEventHandler<Promise<ContentDetails>>(
       })
     }
   },
-  { maxAge: 60 * 60 }
+  { maxAge: 60 * 60, swr: true }
 )

@@ -1,17 +1,8 @@
-export interface NotificationSubscription {
-  endpoint: string
-  expirationTime: null
-  keys: {
-    p256dh: string
-    auth: string
-  }
-}
-
 export default defineEventHandler(async (event) => {
   try {
-    const notificationStorage = useStorage<NotificationSubscription>('data:subscription:notification')
+    const notificationStorage = useStorage<PushNotificationSubscription>('data:subscription:notification')
 
-    const body = await readBody<NotificationSubscription>(event)
+    const body = await readBody<PushNotificationSubscription>(event)
 
     if (await notificationStorage.getItem(body.keys.auth)) {
       return { success: true }

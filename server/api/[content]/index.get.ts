@@ -22,7 +22,7 @@ export default defineCachedEventHandler<Promise<Content[]>>(
       const results = await Promise.allSettled(
         contents.map(async ({ id, cover, properties, created_time, last_edited_time }): Promise<Content | null> => {
           if (properties.Type?.select.name.toLowerCase() !== contentType) return null
-          if (properties.Status.status.name !== 'Publish') return null
+          if (!(properties.Status.status.name === 'Publish')) return null
 
           const markdown = await convertNotionPageToMarkdown(n2m, id)
           const title = notionTextStringify(properties.Name.title)
@@ -53,5 +53,5 @@ export default defineCachedEventHandler<Promise<Content[]>>(
       })
     }
   },
-  { maxAge: 60 * 5 }
+  { maxAge: 60 * 5, swr: true }
 )

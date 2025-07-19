@@ -16,7 +16,7 @@ export default defineTask({
     const subscriptionStorage = useStorage('data:subscription')
 
     n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })
-    let notificationSubscriptions: NotificationSubscription[] = []
+    let pushNotificationSubscriptions: PushNotificationSubscription[] = []
     let emailSubscriptions: EmailSubscription[] = []
     let whatsappSubscriptions: WhatsappSubscription[] = []
 
@@ -25,8 +25,8 @@ export default defineTask({
         if (!content || content.notificationStatus == true) return
         if (content.record.properties.Status.status.name !== 'Publish') return
 
-        if (!(notificationSubscriptions.length > 0))
-          notificationSubscriptions = (await subscriptionStorage.getItems<NotificationSubscription>(await subscriptionStorage.getKeys('notification'))).flatMap(({ value }) => value)
+        if (!(pushNotificationSubscriptions.length > 0))
+          pushNotificationSubscriptions = (await subscriptionStorage.getItems<NotificationSubscription>(await subscriptionStorage.getKeys('notification'))).flatMap(({ value }) => value)
         if (!(emailSubscriptions.length > 0)) emailSubscriptions = (await subscriptionStorage.getItems<EmailSubscription>(await subscriptionStorage.getKeys('email'))).flatMap(({ value }) => value)
         if (!(whatsappSubscriptions.length > 0))
           whatsappSubscriptions = (await subscriptionStorage.getItems<WhatsappSubscription>(await subscriptionStorage.getKeys('whatsapp'))).flatMap(({ value }) => value)
@@ -45,7 +45,7 @@ export default defineTask({
         console.log(`Publishing new ${contentType} content →`, title)
 
         if (contentType === 'Episode' || contentType === 'Blog' || contentType === 'Photo' || contentType === 'Video')
-          await sendPushNotification({ title: `New ${contentType} release | ${title}`, body: `${description.split('. ')[0]}...`, url: url + '?ref=push' }, notificationSubscriptions)
+          await sendPushNotification({ title: `New ${contentType} release | ${title}`, body: `${description.split('. ')[0]}...`, url: url + '?ref=push' }, pushNotificationSubscriptions)
 
         if (contentType === 'Episode' || contentType === 'Blog')
           await sendEmail(

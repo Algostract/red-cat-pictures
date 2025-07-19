@@ -1,114 +1,10 @@
 <script setup lang="ts">
-import { marked } from 'marked'
-
-const {
-  public: { siteUrl },
-} = useRuntimeConfig()
-
 const props = defineProps<{ content: string }>()
-
-const renderer = new marked.Renderer()
-
-renderer.link = ({ href, title, tokens }) => {
-  const text = tokens.length > 0 ? tokens[0]?.raw || '' : ''
-
-  if (title == 'embed' || text == 'embed') {
-    return `<img src="${href}" alt="${text}" class="w-full aspect-video object-cover" />`
-  } else if (title == 'video' || text == 'video') {
-    const videoId = href.split('/').pop()
-    return `<iframe src="https://www.youtube.com/embed/${videoId}?si=lG674PPCuncqyX85&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
-  }
-
-  const parsedText = marked.parseInline(text, { async: false })
-
-  return `<a href="${href}?utm_source=redcatpictures.com" target="_blank" rel="noopener">${parsedText}</a>`
-}
-
-renderer.blockquote = ({ text }) => {
-  const content = text
-    .replace(/^<p>/, '')
-    .replace(/<\/p>$/, '')
-    .trim()
-
-  if (text.toLowerCase() === 'show more photos') {
-    return `<a href="${siteUrl}/photo" class="cta secondary-btn" target="_blank" rel="noopener">${content}</button>`
-  }
-
-  return `<button class="cta secondary-btn">${content}</button>`
-}
-
-marked.use({ renderer })
-
-const containerRef = useTemplateRef<HTMLDivElement>('containerRef')
-const hoveredLink = ref<{
-  url: string
-  title: string
-  position: { x: number; y: number }
-}>()
-
-function showTooltip(event: TouchEvent | MouseEvent | FocusEvent) {
-  const target = (event.target as HTMLElement).closest('a') as HTMLAnchorElement | null
-
-  if (target?.classList.contains('cta')) return
-
-  if (target && containerRef.value) {
-    const linkRect = target.getBoundingClientRect()
-    const containerRect = containerRef.value.getBoundingClientRect()
-
-    stop()
-    hoveredLink.value =
-      hoveredLink.value && hoveredLink.value.url === target.href
-        ? hoveredLink.value
-        : {
-            url: target.href,
-            title: target.title || target.textContent || '',
-            position: {
-              x: Math.round(linkRect.left - containerRect.left + linkRect.width / 2),
-              y: Math.round(linkRect.top - containerRect.top + linkRect.height),
-            },
-          }
-  }
-}
-
-const { start, stop } = useTimeoutFn(
-  () => {
-    hoveredLink.value = undefined
-  },
-  100,
-  { immediate: false }
-)
-
-function hideTooltip(event: TouchEvent | MouseEvent | FocusEvent) {
-  const target = (event.target as HTMLElement).closest('a') as HTMLAnchorElement | null
-  if (!target) {
-    start()
-  }
-}
 </script>
 
 <template>
   <div class="relative">
-    <div
-      ref="containerRef"
-      class="content relative"
-      @touchstart.capture="showTooltip"
-      @touchend.capture="hideTooltip"
-      @touchcancel.capture="hideTooltip"
-      @focusin.capture="showTooltip"
-      @focusout.capture="hideTooltip"
-      @mouseover.capture="showTooltip"
-      @mouseleave.capture="hideTooltip"
-      v-html="marked(props.content, { async: false })" />
-    <LazyLinkToolTip
-      :active-link="hoveredLink"
-      hydrate-on-idle
-      @touchstart.self="showTooltip"
-      @touchend.self="hideTooltip"
-      @touchcancel.self="hideTooltip"
-      @focusin.self="showTooltip"
-      @focusout.self="hideTooltip"
-      @mouseenter.self="showTooltip"
-      @mouseleave.self="hideTooltip" />
+    <MDC :value="props.content" class="content relative" />
   </div>
 </template>
 
@@ -165,8 +61,10 @@ function hideTooltip(event: TouchEvent | MouseEvent | FocusEvent) {
   @apply whitespace-nowrap underline underline-offset-1;
 }
 
-.content h3 > a {
-  @apply no-underline;
+.content h1 > a,
+h2 > a,
+h3 > a {
+  @apply !no-underline;
 }
 
 .content blockquote {

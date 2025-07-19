@@ -97,6 +97,15 @@ export interface MetaData {
   lastUpdated: string
 }
 
+export interface PushNotificationSubscription {
+  endpoint: string
+  expirationTime: null
+  keys: {
+    p256dh: string
+    auth: string
+  }
+}
+
 export interface EmailSubscription {
   name: string
   email: string
@@ -297,14 +306,14 @@ export interface NotionContent {
         plain_text: string
       }[]
     }
-    Type: {
-      select: {
-        name: 'Episode' | 'Blog'
-      }
-    }
     Status: {
       status: {
         name: 'Plan' | 'Draft' | 'Ready' | 'Publish' | 'Unpublish'
+      }
+    }
+    Type: {
+      select: {
+        name: 'Episode' | 'Blog'
       }
     }
     'Publish date': {
@@ -312,10 +321,13 @@ export interface NotionContent {
         start: string
       }
     }
-    'Client name': {
-      select: {
-        name: string
-      }
+    Project: {
+      relation: { id: string }[]
+      has_more: false
+    }
+    Asset: {
+      relation: { id: string }[]
+      has_more: true
     }
   }
 }

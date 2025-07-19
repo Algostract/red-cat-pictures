@@ -39,5 +39,5 @@ export default defineCachedEventHandler<Promise<ProjectClient[]>>(
       })
     }
   },
-  { maxAge: 60 * 1 }
+  { maxAge: 60 * 1, swr: true }
 )

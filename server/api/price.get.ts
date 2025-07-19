@@ -19,5 +19,5 @@ export default defineCachedEventHandler<Promise<Price>>(
       })
     }
   },
-  { maxAge: 60 * 60 }
+  { maxAge: 60 * 60, swr: true }
 )

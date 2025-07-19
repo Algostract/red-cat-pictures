@@ -21,6 +21,7 @@ const urls = ref([
   { url: '/#pricing', id: 'pricing', title: 'Pricing' },
   { url: '/episode', id: 'episodes', title: 'Episodes' },
   { url: '/blog', id: 'blogs', title: 'Blogs' },
+  { url: '/experience', id: 'experience', title: 'Experience' },
   { url: '/about', id: 'about', title: 'About Us' },
 ])
 

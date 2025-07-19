@@ -3,7 +3,6 @@ const props = defineProps<{
   activeLink?: {
     url: string
     title: string
-    position: { x: number; y: number }
   }
 }>()
 
@@ -40,15 +39,9 @@ const imgProvider = computed((): 'uploadcare' | 'ipx' => {
     leave-active-class="transition duration-150 ease-in"
     leave-from-class="opacity-100 translate-y-0 scale-100"
     leave-to-class="opacity-0 translate-y-2 scale-95">
-    <NuxtLink
+    <span
       v-if="activeLink"
-      :key="`${activeLink.position.x}_${activeLink.position.y}`"
-      :to="url"
-      :style="{ left: activeLink.position.x + 'px', top: activeLink.position.y + 'px' }"
-      external
-      target="_blank"
-      rel="noopener"
-      class="absolute z-50 flex w-[256px] -translate-x-1/2 flex-col overflow-hidden !whitespace-normal border border-black bg-light-500 !no-underline dark:bg-dark-500 md:w-[320px]"
+      class="absolute left-1/2 z-50 flex w-[256px] -translate-x-1/2 flex-col overflow-hidden !whitespace-normal border border-black bg-light-500 !no-underline dark:bg-dark-500 md:w-[320px]"
       tabindex="-1">
       <NuxtImg
         :provider="imgProvider"
@@ -73,6 +66,6 @@ const imgProvider = computed((): 'uploadcare' | 'ipx' => {
           <NuxtTime :datetime="lastUpdated" relative />
         </span>
       </div>
-    </NuxtLink>
+    </span>
   </Transition>
 </template>

@@ -1,5 +1,4 @@
 import webpush from 'web-push'
-import type { NotificationSubscription } from '../subscribe.post'
 
 interface PushNotification {
   title: string
@@ -8,7 +7,7 @@ interface PushNotification {
   icon?: string
 }
 
-export async function sendPushNotification(payload: PushNotification, subscriptions: NotificationSubscription[]) {
+export async function sendPushNotification(payload: PushNotification, subscriptions: PushNotificationSubscription[]) {
   try {
     const config = useRuntimeConfig()
 
