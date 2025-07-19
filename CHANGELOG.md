@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.18.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.17.1...v2.18.0)
+
+### 🚀 Enhancements
+
+- Added '@nuxtjs/mdc' and 'magic-regexp/nuxt', added gallery view ([333adf6](https://github.com/Algostract/red-cat-pictures/commit/333adf6))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.17.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.17.0...v2.17.1)
