@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.18.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.18.0...v2.18.1)
+
+### 🎨 Styles
+
+- Updated 'fly-in' animation, add tap to slide indicator in 'VideoGallery' ([c95074e](https://github.com/Algostract/red-cat-pictures/commit/c95074e))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.18.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.17.1...v2.18.0)
