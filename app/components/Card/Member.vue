@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import reglConstructor from 'regl'
+import { burnVert, burnFrag } from '~~/app/shaders/burn'
+import { flyInVert, flyInFrag } from '~~/app/shaders/fly-in'
 import heroVideoEffect from '~~/app/assets/videos/effect-1.webm'
+
 type SocialPlatforms = 'facebook' | 'instagram' | 'youtube' | 'x' | 'linkedin' | 'website'
 
 export interface Member {
@@ -29,7 +32,7 @@ const platforms: Record<
   youtube: { icon: 'local:youtube', color: '#FF0000' },
   x: { icon: 'local:x', color: '#000000' },
   linkedin: { icon: 'local:linkedin', color: '#0A66C2' },
-  website: { icon: 'mdi:web', color: '#1DA1F2' },
+  website: { icon: 'local:web', color: '#1DA1F2' },
 }
 
 const links = computed(() =>
@@ -65,31 +68,14 @@ function initRenderFunction() {
           src: () => (imageTex({ data: heroImage.value }), imageTex),
           mask: () => (maskTex({ data: heroMaskVideo.value }), maskTex),
         },
-        vert: `
-        precision mediump float;
-        attribute vec2 position;
-        varying vec2 uv;
-        void main() {
-          uv = position * 0.5 + 0.5;
-          uv.y = 1.0 - uv.y;
-          gl_Position = vec4(position, 0, 1);
-        }`,
-        frag: `
-        precision mediump float;
-        uniform sampler2D src, mask;
-        varying vec2 uv;
-        void main() {
-          vec4 s = texture2D(src, uv);
-          vec4 m = texture2D(mask, uv);
-          float a = (m.r + m.g + m.b) / 3.0;
-          gl_FragColor = vec4(mix(m.rgb, s.rgb, a), a);
-        }`,
+        vert: burnVert,
+        frag: burnFrag,
         count: 6,
       })
       break
     case 'fly-in': {
-      const GRID_ROWS = 4
-      const GRID_COLS = 6
+      const GRID_ROWS = 16
+      const GRID_COLS = 12
 
       const positions: number[] = []
       const uvs: number[] = []
@@ -129,67 +115,14 @@ function initRenderFunction() {
           rows: GRID_ROWS,
           cols: GRID_COLS,
         },
-        vert: `
-        precision mediump float;
-        attribute vec2 position, uv;
-        attribute float pieceIndex;
-        uniform float time, cols, rows;
-        varying vec2 vUV;
-        // simple hash if you still need randomness elsewhere
-        float hash(float x) {
-          return fract(sin(x * 12.9898) * 43758.5453);
-        }
-        void main() {
-          float c = mod(pieceIndex, cols);
-          float r = floor(pieceIndex / cols);
-
-          // compute each tile's center in clip‐space
-          vec2 center = vec2(
-            -1.0 + (2.0 * (c + 0.5)) / cols,
-            -1.0 + (2.0 * (r + 0.5)) / rows
-          );
-
-
-          // radial distance [0..1] from screen center to tile center
-          float maxR = length(vec2(1.0, 1.0));
-          float radial = length(center) / maxR;
-          // delay so center pieces start first, outer ones up to 1.2s later
-          // new: start up to 0.8s later
-          float delay    = radial * 1.2;
-          // same duration mapping
-          float duration = mix(1.2, 0.6, radial);
-          // linear progress in [0,1]
-          float raw      = clamp((time - delay) / duration, 0.0, 1.0);
-          // ease-out cubic
-          float t        = 1.0 - pow(1.0 - raw, 3.0);
-
-
-          // direction from off‐canvas toward the center point
-          vec2 dirToCenter = normalize(center);
-          float offDist    = mix(3.0, 0.0, t);
-          float scale      = mix(2.5, 1.0, t);
-
-          vec2 zoomed    = center + (position - center) * scale;
-          vec2 displaced = zoomed + dirToCenter * offDist;
-
-          vUV = uv;
-          vUV.y = 1.0 - vUV.y;
-          gl_Position = vec4(displaced, 0.0, 1.0);
-        }`,
-        frag: `
-        precision mediump float;
-        uniform sampler2D tex;
-        varying vec2 vUV;
-        void main() {
-          gl_FragColor = texture2D(tex, vUV);
-        }`,
+        vert: flyInVert,
+        frag: flyInFrag,
         count: positions.length / 2,
         blend: {
           enable: true,
           func: { src: 'src alpha', dst: 'one minus src alpha' },
         },
       })
-
       break
     }
     default:

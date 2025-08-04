@@ -96,11 +96,11 @@ export default defineNuxtConfig({
       '*/5 * * * *': ['sync:resource', 'notify:content', 'prospect:marketing'],
     },
   },
-  // FIXME: tempo fix remove when not needed
   vite: {
     server: {
       allowedHosts: true,
     },
+    // FIXME: temporary fix for email remove when not needed
     $server: {
       build: {
         rollupOptions: {
@@ -214,7 +214,8 @@ export default defineNuxtConfig({
       description: 'Nurture the essence of your product with our photography & videography services in kolkata',
       theme_color: '#CD2D2D',
       background_color: '#FFFFFF',
-      orientation: 'portrait',
+      orientation: 'any',
+      display: 'fullscreen',
       shortcuts: [
         {
           name: 'Book a Session by Call',
@@ -384,6 +385,7 @@ export default defineNuxtConfig({
       navigateFallback: '/',
       cleanupOutdatedCaches: true,
       importScripts: ['/sw-push.js'],
+      maximumFileSizeToCacheInBytes: 3000000,
     },
     client: {
       installPrompt: true,
@@ -393,7 +395,6 @@ export default defineNuxtConfig({
       type: 'module',
       enabled: false,
       suppressWarnings: false,
-      navigateFallback: undefined,
     },
   },
   nodemailer: {

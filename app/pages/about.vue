@@ -69,7 +69,7 @@ const members: Member[] = [
   },
   {
     name: 'Shirsendu Bairagi',
-    designation: 'System Architect',
+    designation: 'CTO & System Architect',
     content: `I Design, Develop, Deploy & Repeat`,
     image: `/images/hero-4.webp`,
     socials: {

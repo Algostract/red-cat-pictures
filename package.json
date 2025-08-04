@@ -3,10 +3,10 @@
   "version": "2.18.0",
   "description": "Nurture the essence of your product with our photography & videography services in kolkata",
   "author": "Shirsendu Bairagi <shirsendu2001@gmail.com>",
-  "license": "LGPL-3.0-or-later",
+  "license": "GPL-3.0-only",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Algostract/red-cat-pictures.git"
+    "url": "git+https://github.com/Algostract/red-cat-pictures.git"
   },
   "type": "module",
   "private": true,
@@ -15,7 +15,7 @@
     "pnpm": "^9.15.0 || ^10.2.0",
     "bun": "^1.2.9"
   },
-  "packageManager": "bun@1.2.18",
+  "packageManager": "bun@1.2.19",
   "scripts": {
     "prepare": "husky || true",
     "postinstall": "nuxt prepare",
@@ -38,12 +38,12 @@
     "tauri:build:mobile": "tauri android build"
   },
   "dependencies": {
-    "@dotenvx/dotenvx": "^1.48.0",
+    "@dotenvx/dotenvx": "^1.48.4",
     "@notionhq/client": "^4.0.1",
-    "@nuxt/eslint": "^1.6.0",
+    "@nuxt/eslint": "^1.7.1",
     "@nuxt/fonts": "^0.11.4",
     "@nuxt/icon": "^1.15.0",
-    "@nuxt/image": "^1.10.0",
+    "@nuxt/image": "^1.11.0",
     "@nuxt/scripts": "0.11.5",
     "@nuxt/test-utils": "^3.19.2",
     "@nuxtjs/color-mode": "^3.5.2",
@@ -56,26 +56,26 @@
     "@tresjs/nuxt": "^4.0.0",
     "@types/k6": "^1.1.1",
     "@types/web-push": "^3.6.4",
-    "@unhead/vue": "^2.0.12",
+    "@unhead/vue": "^2.0.13",
     "@vite-pwa/nuxt": "^1.0.4",
     "@vue-email/components": "^0.0.21",
     "@vue-email/render": "^0.0.9",
-    "@vueuse/core": "^13.5.0",
-    "@vueuse/nuxt": "^13.5.0",
+    "@vueuse/core": "^13.6.0",
+    "@vueuse/nuxt": "^13.6.0",
     "confbox": "^0.2.2",
     "date-fns": "^4.1.0",
-    "eslint": "^9.31.0",
+    "eslint": "^9.32.0",
     "execa": "^9.6.0",
     "hast-util-from-html": "^2.0.3",
     "hast-util-select": "^6.0.4",
     "image-meta": "^0.2.1",
-    "ipx": "^3.0.3",
+    "ipx": "^3.1.1",
     "magic-regexp": "^0.10.0",
     "notion-to-md": "^3.1.9",
-    "nuxt": "^3.17.7",
+    "nuxt": "^3.18.0",
     "nuxt-nodemailer": "^1.1.2",
-    "nuxt-splide": "^1.1.1",
-    "puppeteer": "^24.14.0",
+    "nuxt-splide": "^1.1.2",
+    "puppeteer": "^24.15.0",
     "regl": "^2.1.1",
     "rehype-parse": "^9.0.1",
     "rehype-remark": "^10.0.1",
@@ -86,19 +86,19 @@
     "vue": "latest",
     "vue-router": "latest",
     "web-push": "^3.6.7",
-    "zod": "^4.0.5"
+    "zod": "^4.0.14"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@tauri-apps/cli": "^2.6.2",
+    "@tauri-apps/cli": "^2.7.1",
     "@vue/test-utils": "^2.4.6",
     "happy-dom": "^18.0.1",
     "husky": "^9.1.7",
-    "playwright-core": "^1.54.1",
+    "playwright-core": "^1.54.2",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
-    "typescript": "^5.8.3",
+    "typescript": "~5.8.3",
     "vitest": "^3.2.4"
   },
   "trustedDependencies": [
@@ -106,6 +106,7 @@
     "esbuild",
     "puppeteer",
     "sharp",
-    "unrs-resolver"
+    "unrs-resolver",
+    "vue-demi"
   ]
 }

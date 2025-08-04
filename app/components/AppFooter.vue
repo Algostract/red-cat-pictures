@@ -24,12 +24,12 @@ const emit = defineEmits<{
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink aria-label="facebook" to="https://www.facebook.com/redcatxpictures" target="_blank" external>
+          <NuxtLink aria-label="facebook" to="https://www.facebook.com/redcatpictures" target="_blank" external>
             <NuxtIcon name="local:facebook" class="text-[28px] md:text-[40px]" />
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink aria-label="instagram" to="https://www.instagram.com/redcatxpictures" target="_blank" external>
+          <NuxtLink aria-label="instagram" to="https://www.instagram.com/redcatpictures" target="_blank" external>
             <NuxtIcon name="local:instagram" class="text-[28px] md:text-[40px]" />
           </NuxtLink>
         </li>

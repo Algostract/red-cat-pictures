@@ -24,7 +24,7 @@ export interface ProspectEmail {
   fromCompanyLogo: string
   fromCompanyLink: string
   fromCompanyPhone: string
-  fromFeaturedPhotos: { id: string; title: string; description: string }[]
+  fromFeaturedPhotos: { id: string; title: string; description: string; url: string }[]
   emailSubject: string
   toCompanyName: string
   toPersonName: string
@@ -87,7 +87,7 @@ const emailTemplate = {
             baseURL: meta.fromCompanyLink,
           })
           if (Array.isArray(data)) throw new Error('Unexpected array response')
-          return { id: data.id, title: data.title, description: data.description }
+          return { id: data.id, title: data.title, description: data.description, url: data.url }
         } catch {
           return null
         }

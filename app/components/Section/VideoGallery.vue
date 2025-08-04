@@ -71,13 +71,17 @@ function isLandscapeOriented(deviceOrientation: string, videoOrientation: string
   }
 }
 
+const sliderIndicatorDirection = refAutoReset(0, 500) as Ref<-1 | 0 | 1>
+
 function slideClick() {
   if (!videoContainerWrapper.value) return
   const width = videoContainerWrapper.value.clientWidth
   if (x.value < width * (1 / 4)) {
     updateVideoIndex(-1)
+    sliderIndicatorDirection.value = -1
   } else if (x.value > width * (3 / 4)) {
     updateVideoIndex(1)
+    sliderIndicatorDirection.value = 1
   }
 }
 </script>
@@ -114,6 +118,38 @@ function slideClick() {
         class="absolute right-4 top-16 z-10 rounded-full bg-white fill-black p-1 text-[20px] md:right-16 md:text-[28px]"
         :class="{ hidden: isMuted ? iconName == 'unmuted' : iconName == 'muted' }"
         @click="toggleMute" />
+      <Transition name="fade" mode="out-in" appear>
+        <div
+          v-if="!!sliderIndicatorDirection"
+          class="absolute top-0 flex h-full w-1/4 items-center justify-center rounded-r-full bg-white/50"
+          :class="[sliderIndicatorDirection === 1 ? 'right-0 scale-x-[-1]' : 'left-0']">
+          <NuxtIcon name="local:chevron-bold" class="pr-1 text-[24px] md:text-[48px]" />
+        </div>
+      </Transition>
     </div>
   </section>
 </template>
+
+<style>
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-box {
+  /* Optional: initial styles */
+  background: lightblue;
+  padding: 16px;
+  margin: 8px 0;
+}
+</style>
