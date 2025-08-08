@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.18.2
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.18.1...v2.18.2)
+
+### 🩹 Fixes
+
+- Anchor link line break, magic-regex added ([0b3d14d](https://github.com/Algostract/red-cat-pictures/commit/0b3d14d))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.18.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.18.0...v2.18.1)
