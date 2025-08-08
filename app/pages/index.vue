@@ -5,7 +5,6 @@ const description = `Nurture the essence of your food & product with our profess
 const {
   public: { siteUrl },
 } = useRuntimeConfig()
-const imageUrl = `${siteUrl}/previews/landing.webp`
 
 useHead({
   bodyAttrs: {
@@ -20,8 +19,6 @@ useSeoMeta({
   description: description,
   ogDescription: description,
   twitterDescription: description,
-  ogImage: imageUrl,
-  twitterImage: imageUrl,
   ogUrl: siteUrl,
 })
 

@@ -5,7 +5,6 @@ const {
   app: { buildTime },
   public: { siteUrl },
 } = useRuntimeConfig()
-const imageUrl = `${siteUrl}/previews/landing.webp`
 
 useHead({
   bodyAttrs: { class: 'scrollbar-hidden' },
@@ -18,8 +17,6 @@ useSeoMeta({
   description,
   ogDescription: description,
   twitterDescription: description,
-  ogImage: imageUrl,
-  twitterImage: imageUrl,
   ogUrl: `${siteUrl}/refund`,
 })
 

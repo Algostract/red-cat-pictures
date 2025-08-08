@@ -1,5 +1,5 @@
 import { NotionToMarkdown } from 'notion-to-md'
-import { createRegExp, global, exactly } from 'magic-regexp'
+import { createRegExp, exactly, charNotIn, charIn, maybe, global } from 'magic-regexp'
 import { z } from 'zod'
 
 let n2m: NotionToMarkdown
@@ -14,44 +14,67 @@ export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId:
       mdString = mdString.replace(createRegExp(exactly('\n').times(3).or(exactly('\\n').times(2)), [global]), '\n\n')
 
       if (replaceNotionLinks) {
-        mdString = await replaceAsync(mdString, /\[([^\]]+)\]\(https?:\/\/(?:www\.)?notion\.so\/(?:[^\s/()]+-)?([0-9A-Fa-f]{32})(?:\S*)?\)/g, async ([full, text, pageId]): Promise<string> => {
-          let resource: Resource | null = null
+        mdString = await replaceAsync(
+          mdString,
+          createRegExp(
+            exactly('[')
+              .and(charNotIn(']').times.any().as('text'))
+              .and(']')
+              .and('(')
+              .and(
+                exactly('http')
+                  .and(maybe('s'))
+                  .and('://')
+                  .and(maybe('www.'))
+                  .and('notion.so/')
+                  .and(maybe(charNotIn(' /()').times.any().and('-')))
+                  .and(charIn('0-9a-fA-F').times(32).as('pageId'))
+                  .and(maybe(charNotIn(')').times.any()))
+                  .as('url')
+              )
+              .and(')'),
+            [global]
+          ),
+          async ([full, text, pageId]): Promise<string> => {
+            let resource: Resource | null = null
 
-          for (const type of resourceTypes) {
-            const item = await resourceStorage.getItem<Resource>(`${type}:${pageId}`)
+            for (const type of resourceTypes) {
+              const item = await resourceStorage.getItem<Resource>(`${type}:${pageId}`)
 
-            if (item) {
-              resource = item
-              break
+              if (item) {
+                resource = item
+                break
+              }
             }
+
+            if (!resource) return text
+            const { type, record } = resource
+
+            switch (type) {
+              // case 'project':
+              case 'content': {
+                if (!('Type' in record.properties)) return full
+
+                const title = notionTextStringify(record.properties['Name'].title)
+                const contentType = record.properties.Type?.select.name.toLowerCase()
+
+                console.log({ text, title: slugify(title), full: `[${text}](/${contentType}/${slugify(title)}_${record.id})` })
+                return `[${text}](/${contentType}/${slugify(title)}_${record.id})`
+              }
+              case 'client': {
+                const url = ('Website' in record.properties ? record.properties.Website.url : null) ?? ('Instagram' in record.properties ? record.properties.Instagram.url : null)
+                if (!url) return full
+
+                console.log({ text, url, full: `[${text}](${url})` })
+                return `[${text}](${url})`
+              }
+              default:
+                break
+            }
+
+            return full
           }
-
-          if (!resource) return text
-          const { type, record } = resource
-
-          switch (type) {
-            case 'project':
-            case 'content': {
-              if (!('Type' in record.properties)) return full
-
-              const title = notionTextStringify(record.properties['Name'].title)
-              const contentType = record.properties.Type?.select.name.toLowerCase()
-              return `[${text}](/${contentType}/${slugify(title)}_${record.id})`
-            }
-            case 'client':
-            case 'model':
-            case 'studio': {
-              const url = ('Website' in record.properties ? record.properties.Website.url : null) ?? ('Instagram' in record.properties ? record.properties.Instagram.url : null)
-              if (!url) return full
-
-              return `[${text}](${url})`
-            }
-            default:
-              break
-          }
-
-          return full
-        })
+        )
 
         mdString = mdString.replace(
           createRegExp(exactly('\n\nchild_database\n\n'), [global]),

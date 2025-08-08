@@ -44,7 +44,7 @@ function hideTooltip() {
       target="_blank"
       rel="noopener"
       v-bind="attrs"
-      class="relative inline-block"
+      class="relative"
       @touchstart.capture="showTooltip"
       @touchend.capture="hideTooltip"
       @touchcancel.capture="hideTooltip"
@@ -55,8 +55,14 @@ function hideTooltip() {
       <MDCSlot unwrap="p" />
       <LazyLinkToolTip :active-link="hoveredLink" hydrate-on-idle />
     </NuxtLink>
-    <a v-else :href="href" :title="title" v-bind="attrs">
+    <NuxtLink v-else internal :to="href" :title="title" v-bind="attrs">
       <slot />
-    </a>
+    </NuxtLink>
   </Suspense>
 </template>
+
+<style lang="css" scoped>
+a {
+  @apply whitespace-normal;
+}
+</style>

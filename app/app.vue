@@ -6,6 +6,7 @@ const {
   app: { buildTime },
   public: { siteUrl, vapidKey },
 } = useRuntimeConfig()
+const imageUrl = `${siteUrl}/previews/landing.webp`
 
 useHead({
   htmlAttrs: {
@@ -34,6 +35,8 @@ useSeoMeta({
     userScalable: 'no',
     viewportFit: 'cover',
   },
+  ogImage: imageUrl,
+  twitterImage: imageUrl,
 })
 
 useSchemaOrg([
@@ -51,7 +54,7 @@ useSchemaOrg([
     '@type': 'ProfessionalService',
     name: 'RED CAT PICTURES',
     description: description,
-    image: `${siteUrl}/previews/landing.webp`,
+    image: imageUrl,
     logo: siteUrl + '/logo-dark.png',
     url: siteUrl,
     address: {

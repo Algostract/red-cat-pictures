@@ -117,7 +117,7 @@ export interface WhatsappSubscription {
 }
 
 /* Server Only */
-export const resourceTypes = ['prospect', 'client', 'project', 'content', 'asset', 'model', 'studio'] as const
+export const resourceTypes = ['prospect', 'client', 'project', 'content', 'asset'] as const
 
 export type ResourceType = (typeof resourceTypes)[number]
 
@@ -129,8 +129,6 @@ export interface ResourceRecordMap {
   project: NotionProject
   content: NotionContent
   asset: NotionAsset
-  model: NotionModel
-  studio: NotionStudio
 }
 
 export interface Resource<T extends ResourceType = ResourceType> {
@@ -400,38 +398,4 @@ export interface NotionAsset {
       }
     }
   }
-}
-
-export interface NotionModel {
-  id: string
-  created_time: string
-  last_edited_time: string
-  cover: NotionImage
-  icon: NotionImage
-  properties: {
-    Name: { type: 'title'; title: string[] }
-    Email: { type: 'email'; email: string }
-    Phone: { type: 'phone_number'; phone_number: string }
-    Instagram: { type: 'url'; url: string }
-    Project: { type: 'relation'; relation: string[]; has_more: false }
-  }
-  url: string
-  public_url: null
-}
-
-export interface NotionStudio {
-  id: string
-  created_time: string
-  last_edited_time: string
-  cover: NotionImage
-  icon: NotionImage
-  properties: {
-    Name: { type: 'title'; title: string[] }
-    Email: { type: 'email'; email: string }
-    Phone: { type: 'phone_number'; phone_number: string }
-    Instagram: { type: 'url'; url: string }
-    Project: { type: 'relation'; relation: string[]; has_more: false }
-  }
-  url: string
-  public_url: null
 }
