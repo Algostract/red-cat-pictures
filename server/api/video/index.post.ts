@@ -3,18 +3,20 @@ import type { Codec, Device } from '~~/server/utils/transcode-video'
 
 export default defineEventHandler(async (event) => {
   try {
-    const config = useRuntimeConfig()
-    const storage = useStorage('fs')
-    const notionDbId = config.private.notionDbId as unknown as NotionDB
     const formData = await readFormData(event)
     const file = formData.get('file') as File
     const targetCodecs = JSON.parse(formData.get('codecs') as string) as Codec[]
     const targetResolutions = JSON.parse(formData.get('resolutions') as string) as Resolution[]
     const targetDevice = formData.get('device') as Device
+    const projectSlug = formData.get('projectSlug') as string
 
     if (!file || !file.size) {
       throw createError({ statusCode: 400, message: 'No file provided' })
     }
+
+    const config = useRuntimeConfig()
+    const storage = useStorage('fs')
+    const notionDbId = config.private.notionDbId as unknown as NotionDB
 
     const eventStream = createEventStream(event)
     const streamResponse = (data: object) => eventStream.push(JSON.stringify(data))
@@ -58,7 +60,35 @@ export default defineEventHandler(async (event) => {
           const imageFile = await transcodeImage(`./static/photos/source/${file.name.split('.')[0]}.jpg`, `./static/photos`, expectedWidth, expectedHeight)
           // Upload to uploadcare cdn
           const { file: fileId } = await uploadcareUploadImage(imageFile)
-          // Save to notion
+
+          const response = await notionQueryDb<NotionAsset>(notion, notionDbId.asset, {
+            filter: {
+              and: [
+                {
+                  property: 'Project',
+                  relation: projectSlug
+                    ? {
+                        contains: projectSlug,
+                      }
+                    : {
+                        is_empty: true,
+                      },
+                },
+                {
+                  property: 'Type',
+                  select: {
+                    equals: 'Video',
+                  },
+                },
+              ],
+            },
+          })
+          const lastIndex = response.reduce((max, page) => {
+            const indexValue = page.properties?.Index?.number ?? 0
+
+            return indexValue > max ? indexValue : max
+          }, 0)
+
           await notion.pages.create({
             parent: {
               database_id: notionDbId.asset,
@@ -70,6 +100,10 @@ export default defineEventHandler(async (event) => {
               },
             },
             properties: {
+              Index: {
+                type: 'number',
+                number: lastIndex + 1,
+              },
               Name: {
                 type: 'title',
                 title: [

@@ -34,7 +34,7 @@ function base64UrlEncode(input: string | number | boolean): string {
 async function saveAsDraft(rawMessage: string) {
   const body = { message: { raw: base64UrlEncode(rawMessage) } }
 
-  const res = await apiFetch<{ id: string }>('/drafts', {
+  const res = await apiGoogle<{ id: string }>('/drafts', {
     baseURL: 'https://gmail.googleapis.com/gmail/v1/users/me',
     method: 'POST',
     body,

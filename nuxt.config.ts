@@ -61,6 +61,7 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    // '@hannoeru/nuxt-otel',
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/icon',
@@ -71,12 +72,12 @@ export default defineNuxtConfig({
     '@nuxtjs/mdc',
     '@nuxtjs/seo',
     '@nuxtjs/tailwindcss',
+    '@tresjs/nuxt',
     '@vite-pwa/nuxt',
     '@vueuse/nuxt',
     'magic-regexp/nuxt',
     'nuxt-nodemailer',
     'nuxt-splide',
-    '@tresjs/nuxt',
   ],
   nitro: {
     compressPublicAssets: true,

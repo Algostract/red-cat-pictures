@@ -10,6 +10,7 @@ export default defineEventHandler(async (event) => {
     const category = formData.get('category') as Category
     const featured = parseInt(formData.get('featured') as string)
     const fileName = title ? `${title}.${file.name.split('.').at(-1)?.toLowerCase()}` : file.name
+    const projectSlug = formData.get('projectSlug') as string
 
     if (!file || !file.size) {
       throw createError({ statusCode: 400, message: 'No file provided' })
@@ -48,6 +49,35 @@ export default defineEventHandler(async (event) => {
     // Upload to uploadcare cdn
     const { file: id } = await uploadcareUploadImage(imageFile)
 
+    const response = await notionQueryDb<NotionAsset>(notion, notionDbId.asset, {
+      filter: {
+        and: [
+          {
+            property: 'Project',
+            relation: projectSlug
+              ? {
+                  contains: projectSlug,
+                }
+              : {
+                  is_empty: true,
+                },
+          },
+          {
+            property: 'Type',
+            select: {
+              equals: 'Photo',
+            },
+          },
+        ],
+      },
+    })
+
+    const lastIndex = response.reduce((max, page) => {
+      const indexValue = page.properties?.Index?.number ?? 0
+
+      return indexValue > max ? indexValue : max
+    }, 0)
+
     await notion.pages.create({
       parent: {
         database_id: notionDbId.asset,
@@ -59,6 +89,10 @@ export default defineEventHandler(async (event) => {
         },
       },
       properties: {
+        Index: {
+          type: 'number',
+          number: lastIndex + 1,
+        },
         Name: {
           type: 'title',
           title: [

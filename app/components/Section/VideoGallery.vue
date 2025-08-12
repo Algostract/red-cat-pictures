@@ -145,11 +145,4 @@ function slideClick() {
 .fade-leave-active {
   transition: opacity 0.5s ease;
 }
-
-.fade-box {
-  /* Optional: initial styles */
-  background: lightblue;
-  padding: 16px;
-  margin: 8px 0;
-}
 </style>

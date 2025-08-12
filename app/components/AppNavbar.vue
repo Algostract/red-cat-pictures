@@ -15,14 +15,14 @@ function onNavigate(section: string) {
 }
 
 const urls = ref([
-  { url: '/#photo-gallery', id: 'gallery', title: 'Gallery' },
-  { url: '/photo', id: 'photos', title: 'Photos' },
-  { url: '/#video-gallery', id: 'video-gallery', title: 'Videos' },
-  { url: '/#pricing', id: 'pricing', title: 'Pricing' },
-  { url: '/episode', id: 'episodes', title: 'Episodes' },
-  { url: '/blog', id: 'blogs', title: 'Blogs' },
-  { url: '/experience', id: 'experience', title: 'Experience' },
-  { url: '/about', id: 'about', title: 'About Us' },
+  { url: '/#photo-gallery', id: 'gallery', label: 'Gallery' },
+  { url: '/photo', id: 'photos', label: 'Photos' },
+  { url: '/#video-gallery', id: 'video-gallery', label: 'Videos' },
+  { url: '/#pricing', id: 'pricing', label: 'Pricing' },
+  { url: '/episode', id: 'episodes', label: 'Episodes' },
+  { url: '/blog', id: 'blogs', label: 'Blogs' },
+  { url: '/experience', id: 'experience', label: 'Experience' },
+  { url: '/about', id: 'about', label: 'About Us' },
 ])
 
 const route = useRoute()
@@ -42,9 +42,9 @@ const isAnimate = ref(false)
             <NuxtIcon name="local:logo-dark" filled class="text-[112px]" />
           </NuxtLink>
           <ul class="font-semibold flex flex-col gap-4 p-6 text-right text-xl">
-            <li v-for="{ id, url, title } of urls" :key="id" class="py-2">
+            <li v-for="{ id, url, label } of urls" :key="id" class="py-2">
               <NuxtLink :to="url" class="inline-block hover:underline" :active-class="route.name !== 'index' ? 'underline' : ''" @click="onNavigate(id)">
-                {{ title }}
+                {{ label }}
               </NuxtLink>
             </li>
           </ul>
@@ -54,8 +54,8 @@ const isAnimate = ref(false)
     </Transition>
   </div>
   <ul class="hidden justify-center gap-8 whitespace-nowrap md:flex">
-    <li v-for="{ id, url, title } of urls" :key="id">
-      <NuxtLink :to="url" class="p-2 hover:underline" :active-class="route.name !== 'index' ? 'underline' : ''" @click="onNavigate(id)">{{ title }} </NuxtLink>
+    <li v-for="{ id, url, label } of urls" :key="id">
+      <NuxtLink :to="url" class="p-2 hover:underline" :active-class="route.name !== 'index' ? 'underline' : ''" @click="onNavigate(id)">{{ label }} </NuxtLink>
     </li>
   </ul>
 </template>

@@ -1,6 +1,6 @@
 let oauthAccessToken: string | null = null
 
-export default async function apiFetch<T>(
+export default async function apiGoogle<T>(
   path: string,
   options: {
     baseURL: string
@@ -14,7 +14,6 @@ export default async function apiFetch<T>(
   const { baseURL, headers = {}, _retry = false, ...rest } = options
 
   try {
-    // @ts-expect-error: Suppress excessive stack depth error
     return (await $fetch(path, {
       baseURL,
       headers: oauthAccessToken ? { ...headers, Authorization: `Bearer ${oauthAccessToken}` } : headers,
@@ -52,7 +51,7 @@ export default async function apiFetch<T>(
       } else {
         throw new Error('Failed to refresh access token')
       }
-      return apiFetch<T>(path, { ...options, _retry: true })
+      return apiGoogle<T>(path, { ...options, _retry: true })
     }
 
     throw err

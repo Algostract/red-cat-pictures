@@ -10,7 +10,7 @@ const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
 const methods = ref([
   { method: 'call', icon: 'phone', link: 'tel:+91891-048-9578' },
-  // { method: 'email', icon: 'email', link: 'mailto:aratriknandy2200@gmail.com' },
+  // { method: 'email', icon: 'email', link: 'mailto:admin@redcatpictures.com' },
   { method: 'whatsapp', icon: 'whatsapp', link: 'https://wa.me/918910489578' },
 ])
 
@@ -54,7 +54,7 @@ function flippedClass(method: string) {
 
 <style scoped>
 a {
-  @apply bg-primary-500 drop-shadow-[inset_-2px_2px_8px_0_rgba(0,0,0,0.25)] transition-all duration-500 ease-out hover:bg-primary-400 hover:drop-shadow-[inset_-4px_4px_8px_0_rgba(0,0,0,0.25)];
+  @apply drop-shadow-[inset_-2px_2px_8px_0_rgba(0, 0, 0, 0.25)] hover:drop-shadow-[inset_-4px_4px_8px_0_rgba(0, 0, 0, 0.25)] bg-primary-500 transition-all duration-500 ease-out hover:bg-primary-400;
   clip-path: url(#bgClip);
 }
 

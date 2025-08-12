@@ -4,6 +4,7 @@ export const codecs = ['avc', 'vp9', 'hevc', 'av1'] as const
 export type Codec = (typeof codecs)[number]
 
 export const resolutions = ['1440p', '1080p', '720p'] as const
+// export type Resolution = (typeof resolutions)[number]
 
 export const devices = ['cpu', 'gpu'] as const
 export type Device = (typeof devices)[number]

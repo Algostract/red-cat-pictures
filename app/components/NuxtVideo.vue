@@ -1,4 +1,15 @@
 <script setup lang="ts">
+type Orientation = 'portrait' | 'landscape'
+
+interface Source {
+  src: string
+  type: string
+  media: string
+  codec: Codec
+  resolution: Resolution
+  orientation: Orientation
+}
+
 const props = withDefaults(
   defineProps<{
     source: Source | Source[]
