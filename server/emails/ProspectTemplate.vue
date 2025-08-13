@@ -8,7 +8,7 @@ defineProps<{
   fromCompanyLogo: string
   fromCompanyPhone: string
   fromCompanyLink: string
-  fromFeaturedPhotos: { id: string; title: string; description: string; url: string }[]
+  fromFeaturedPhotos: { id: string; title: string; description: string; image: string; url: string }[]
   emailSubject: string
   toCompanyName: string
   toPersonName: string
@@ -128,8 +128,8 @@ const tailwindConfig = {
             </Text>
             <!-- Product images row -->
             <Section class="relative mb-4 flex flex-row">
-              <Link v-for="{ id, description, url } in fromFeaturedPhotos" :key="id" :href="`${fromCompanyLink}${url}${referTag}`" class="inline-block w-1/4" target="_blank">
-                <Img :src="`https://ucarecdn.com/${id}/-/smart_resize/960x1440/`" :alt="description" class="w-full object-cover" />
+              <Link v-for="{ id, title, image, url } in fromFeaturedPhotos" :key="id" :href="`${fromCompanyLink}${url}${referTag}`" class="inline-block w-1/4" target="_blank">
+                <Img :src="`https://ucarecdn.com/${image}/-/smart_resize/960x1440/`" :alt="title" class="w-full object-cover" />
               </Link>
             </Section>
             <Section class="mb-4 text-center">

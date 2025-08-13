@@ -1,12 +1,12 @@
 import type { EmailTemplateData } from '~~/server/emails'
+import type { TransactionalEmail } from './[id]/send.post'
 import { sendEmail } from './[id]/send.post'
 
 export default defineEventHandler<Promise<{ success: boolean }>>(async (event) => {
   try {
     const body = await readBody<TransactionalEmail<keyof EmailTemplateData>>(event)
-    await sendEmail(body.template, [body.data], false)
 
-    return { success: true }
+    return { success: await sendEmail(body.template, [body.data]) }
   } catch (error: unknown) {
     const { code: errorCode } = error as { code?: string }
     if (errorCode === 'ESOCKET' || errorCode === 'ECONNECTION') {

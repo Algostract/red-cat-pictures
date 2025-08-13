@@ -8,7 +8,16 @@ export const messageTemplates = {
   \nI’m Aratrik Nandy from RED CAT PICTURES. We specialize in product videography and photography—delivering crisp, high‑resolution photos and short‑form videos
   for e‑commerce, social media, and advertising. Whether on‑location or in‑studio, our full production and post‑production services ensure top‑quality assets, on time and within budget. Here are some of our work
   \nWebsite: https://redcatpictures.com?ref=whatsapp`,
-  prospectMiddle: ['Ecommerce-014-001', 'Product-001-001', 'Ecommerce-012-001', 'Product-028-001', 'Food-003-001', 'Food-019-001', 'Food-004-001', 'Product-016-003'],
+  prospectMiddle: [
+    'ecommerce-photo-020-001',
+    'product-photo-000-025',
+    'ecommerce-photo-000-007',
+    'product-photo-022-004',
+    'food-photo-000-016',
+    'food-photo-010-004',
+    'food-photo-000-020',
+    'food-photo-011-003',
+  ],
   prospectEnd: `I would appreciate a brief call to discuss strategies for enhancing your clients' visual marketing campaigns. Please advise on your availability.
   \nThank you for your consideration.`,
 }

@@ -399,16 +399,16 @@ export default defineNuxtConfig({
     },
   },
   nodemailer: {
+    from: '',
     host: '',
-    port: 0,
-    secure: false,
+    port: '',
+    secure: true,
     auth: {
       user: '',
       pass: '',
     },
     tls: {
       rejectUnauthorized: false,
-      minVersion: 'TLSv1.2',
     },
   },
   splide: {
