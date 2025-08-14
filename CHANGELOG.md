@@ -1,5 +1,26 @@
 # red-cat-pictures
 
+## v2.19.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.18.1...v2.19.0)
+
+### 🚀 Enhancements
+
+- Payment upi intent url generation added ([1446c91](https://github.com/Algostract/red-cat-pictures/commit/1446c91))
+
+### 🩹 Fixes
+
+- Anchor link line break, magic-regex added ([0b3d14d](https://github.com/Algostract/red-cat-pictures/commit/0b3d14d))
+- Automated email sending ([8963dd5](https://github.com/Algostract/red-cat-pictures/commit/8963dd5))
+
+### 🏡 Chore
+
+- Housekeeping, renaming ([61a9bf9](https://github.com/Algostract/red-cat-pictures/commit/61a9bf9))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.18.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.18.0...v2.18.1)
