@@ -156,6 +156,7 @@ export default defineNuxtConfig({
       oauthRefreshToken: '',
       facebookAccessToken: '',
       steganographyKey: '',
+      paymentUpiInfo: '',
     },
   },
   icon: {
