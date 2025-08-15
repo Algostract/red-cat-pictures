@@ -1,5 +1,19 @@
 # red-cat-pictures
 
+## v2.19.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.19.0...v2.19.1)
+
+### 🩹 Fixes
+
+- **footer:** Extra margin remove ([e110640](https://github.com/Algostract/red-cat-pictures/commit/e110640))
+- **footer:** Extra margin remove ([d3293ad](https://github.com/Algostract/red-cat-pictures/commit/d3293ad))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+- SATADRU1 <satadrumondal1331@gmail.com>
+
 ## v2.19.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.18.1...v2.19.0)
