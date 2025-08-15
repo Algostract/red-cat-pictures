@@ -2,6 +2,9 @@
 const emit = defineEmits<{
   contact: []
 }>()
+
+const route = useRoute()
+const isHome = computed(() => route.name === 'index')
 </script>
 
 <template>
@@ -40,7 +43,7 @@ const emit = defineEmits<{
         </li>
       </ul>
     </div>
-    <ul class="mx-auto mb-1 mt-5 flex w-min items-center justify-between gap-3 text-xs md:mb-12 md:gap-4 md:text-sm">
+    <ul class="mx-auto mb-1 mt-5 flex w-min items-center justify-between gap-3 text-xs md:gap-4 md:text-sm" :class="{ 'md:mb-12': isHome }">
       <li>
         <NuxtLink to="terms">Terms</NuxtLink>
       </li>
