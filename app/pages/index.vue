@@ -42,7 +42,7 @@ const videos = computed(() => allVideos.value.filter(({ type }) => type === 'fea
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
-const activeCategory = ref<Category>('food')
+const activeCategory = ref<Category>('ecommerce')
 const activePhotoName = useState<string>()
 const isModelContactOpen = useState<boolean>('isModelContactOpen', () => false)
 

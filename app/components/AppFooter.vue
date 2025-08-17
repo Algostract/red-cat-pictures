@@ -12,7 +12,7 @@ const isHome = computed(() => route.name === 'index')
     <div
       class="relative grid h-52 grid-cols-2 grid-rows-2 items-end overflow-hidden rounded-lg bg-light-500 p-6 text-dark-600/50 dark:bg-dark-500 dark:text-light-600 md:grid-cols-3 md:grid-rows-3 md:p-8">
       <div class="relative col-start-1 row-start-2 flex flex-col gap-2 justify-self-start text-sm md:row-start-3">
-        <NuxtIcon name="local:logo" class="absolute -left-[60px] top-0 -z-10 -translate-y-[56%] text-[309px] text-white opacity-10 md:-left-[104px] md:-translate-y-[37%] md:text-[560px]" />
+        <NuxtIcon name="local:logo" filled class="absolute -left-[60px] top-0 -translate-y-[56%] text-[309px] opacity-10 md:-left-[104px] md:-translate-y-[37%] md:text-[560px]" />
         <span>&copy; 2024-2025</span>
         <NuxtLink to="https://shirsendu-bairagi.dev" target="__blank" class="flex items-center gap-1">
           <span>Made by</span>

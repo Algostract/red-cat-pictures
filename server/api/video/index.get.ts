@@ -66,6 +66,9 @@ export const heroPreset: FileSources = (() => {
 })()
 
 export function convertSources(name: string, sources: FileSources): Source[] {
+  const {
+    public: { siteUrl },
+  } = useRuntimeConfig()
   const result: Source[] = []
   for (const codec of Object.keys(sources) as Codec[]) {
     const codecSources = sources[codec]
@@ -79,7 +82,7 @@ export function convertSources(name: string, sources: FileSources): Source[] {
       const hasBoth = orientations.includes('landscape') && orientations.includes('portrait')
       for (const orientation of orientations) {
         const media = hasBoth ? (orientation === 'landscape' ? '(orientation: landscape)' : '(orientation: portrait)') : ''
-        const src = `/media/video/${name}-${codec}-${resolution}-${orientation}.${extension}`
+        const src = `${siteUrl}/media/video/${name}-${codec}-${resolution}-${orientation}.${extension}`
         result.push({
           src,
           type: mimeType,

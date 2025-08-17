@@ -113,6 +113,7 @@ watch(permissionGranted, async (value) => {
     <NuxtPage />
   </NuxtLayout>
   <LazyAppInstallPrompt hydrate-on-idle />
+  <LazyAppVisitPrompt hydrate-on-idle />
 </template>
 
 <style>
