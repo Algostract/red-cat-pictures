@@ -2,13 +2,10 @@
 const emit = defineEmits<{
   contact: []
 }>()
-
-const route = useRoute()
-const isHome = computed(() => route.name === 'index')
 </script>
 
 <template>
-  <footer>
+  <footer class="mx-auto w-full max-w-[90rem] px-2 md:px-4">
     <div
       class="relative grid h-52 grid-cols-2 grid-rows-2 items-end overflow-hidden rounded-lg bg-light-500 p-6 text-dark-600/50 dark:bg-dark-500 dark:text-light-600 md:grid-cols-3 md:grid-rows-3 md:p-8">
       <div class="relative col-start-1 row-start-2 flex flex-col gap-2 justify-self-start text-sm md:row-start-3">
@@ -43,7 +40,7 @@ const isHome = computed(() => route.name === 'index')
         </li>
       </ul>
     </div>
-    <ul class="mx-auto mb-1 mt-5 flex w-min items-center justify-between gap-3 text-xs md:gap-4 md:text-sm" :class="{ 'md:mb-12': isHome }">
+    <ul class="mx-auto mb-1 mt-5 flex w-min items-center justify-between gap-3 text-xs md:gap-4 md:text-sm">
       <li>
         <NuxtLink to="terms">Terms</NuxtLink>
       </li>

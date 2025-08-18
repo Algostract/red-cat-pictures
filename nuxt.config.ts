@@ -94,7 +94,8 @@ export default defineNuxtConfig({
       tasks: true,
     },
     scheduledTasks: {
-      '*/5 * * * *': ['sync:resource', 'notify:content', 'prospect:marketing'],
+      '*/5 * * * *': ['sync:resource', 'notify:content'],
+      '*/10 * * * *': ['prospect:marketing'],
     },
   },
   vite: {

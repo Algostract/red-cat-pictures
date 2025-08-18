@@ -16,8 +16,6 @@ export default defineTask({
       project: await notionQueryDb<NotionProject>(notion, notionDbId.project),
       content: await notionQueryDb<NotionContent>(notion, notionDbId.content),
       asset: await notionQueryDb<NotionAsset>(notion, notionDbId.asset),
-      model: await notionQueryDb<NotionModel>(notion, notionDbId.model),
-      studio: await notionQueryDb<NotionStudio>(notion, notionDbId.studio),
     }
     const results = await Promise.allSettled(Object.values(resources))
 

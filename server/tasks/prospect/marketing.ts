@@ -17,7 +17,7 @@ export default defineTask({
         const id = prospect.record.id
         const companyName = notionTextStringify(prospect.record.properties.Name.title)
         const email = prospect.record.properties.Email.email
-        const whatsapp = prospect.record.properties.Whatsapp.url.replace(/^https?:\/\/wa\.me\//, '')
+        const whatsapp = prospect.record.properties.Whatsapp.url?.replace(/^https?:\/\/wa\.me\//, '')
         const status = prospect.record.properties.Status.status.name
 
         if (!(status === 'Verified')) return
