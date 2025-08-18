@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.19.2
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.19.1...v2.19.2)
+
+### 🩹 Fixes
+
+- Marketing task edge case fixed, prompts position fixed ([36d3236](https://github.com/Algostract/red-cat-pictures/commit/36d3236))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.19.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.19.0...v2.19.1)
