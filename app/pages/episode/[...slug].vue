@@ -10,12 +10,13 @@ if (!episode.value) {
 if (episode.value.url !== '/episode/' + slug) {
   await navigateTo(episode.value.url, { redirectCode: 301 })
 }
-
-const title = `${episode.value.title}`
-const description = `${episode.value.description}`
 const {
   public: { siteUrl },
 } = useRuntimeConfig()
+const title = `${episode.value.title}`
+const description = `${episode.value.description}`
+const url = `${siteUrl}/episode/${slug}`
+
 const imageUrl = `https://ucarecdn.com/${episode.value.cover}/-/format/auto/-/preview/1200x630/center`
 
 useSeoMeta({
@@ -27,7 +28,7 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${siteUrl}/episode/${slug}`,
+  ogUrl: url,
 })
 
 useSchemaOrg([
@@ -45,7 +46,7 @@ useSchemaOrg([
 <template>
   <article v-if="episode" class="w-full">
     <NuxtImg
-      :src="episode.cover"
+      :src="episode.cover!"
       :alt="episode.title"
       :width="1280"
       :height="Math.round(1280 / (16 / 9))"
@@ -57,6 +58,7 @@ useSchemaOrg([
       <h1 class="my-4 text-xl font-semi-bold md:text-3xl">{{ episode.title }}</h1>
       <div class="mb-2 mt-4 flex justify-between gap-8 text-black/60 dark:text-white/60 md:mt-8">
         <NuxtTime :datetime="episode.publishedAt" day="numeric" month="short" year="numeric" />
+        <AppShare :title="title" :description="description" :url="url" class="ml-auto" />
         <span class="text-right text-base">
           Updated on
           <NuxtTime :datetime="episode.modifiedAt" day="numeric" month="short" year="numeric" />
