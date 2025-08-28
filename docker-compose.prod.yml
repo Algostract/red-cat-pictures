@@ -58,7 +58,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /root/red-cat-pictures/data
+      device: /root/red-cat-pictures/.data
 
 networks:
   front-tier:
