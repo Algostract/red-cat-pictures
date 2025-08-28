@@ -52,13 +52,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /red-cat-pictures/static
+      device: /root/red-cat-pictures/static
   red-cat-pictures_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /red-cat-pictures/data
+      device: /root/red-cat-pictures/data
 
 networks:
   front-tier:
