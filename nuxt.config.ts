@@ -99,9 +99,6 @@ export default defineNuxtConfig({
     },
   },
   vite: {
-    server: {
-      allowedHosts: true,
-    },
     // FIXME: temporary fix for email remove when not needed
     $server: {
       build: {
@@ -147,7 +144,6 @@ export default defineNuxtConfig({
       vapidKey: '',
     },
     private: {
-      rootDir: '',
       serverValidationKey: '',
       notionDbId: '',
       vapidKey: '',
@@ -207,8 +203,6 @@ export default defineNuxtConfig({
     disallow: ['/_nuxt/'],
   },
   pwa: {
-    scope: '/',
-    base: '/',
     injectRegister: 'auto',
     registerType: 'autoUpdate',
     manifest: {
