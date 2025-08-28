@@ -68,14 +68,14 @@ docker volume create \
   --name red-cat-pictures_static \
   --driver local \
   --opt type=none \
-  --opt device=~/Algostract/red-cat-pictures/static \
+  --opt device=~/red-cat-pictures/static \
   --opt o=bind
 
 docker volume create \
   --name red-cat-pictures_data \
   --driver local \
   --opt type=none \
-  --opt device=~/Algostract/red-cat-pictures/.data \
+  --opt device=~/red-cat-pictures/.data \
   --opt o=bind
 ```
 

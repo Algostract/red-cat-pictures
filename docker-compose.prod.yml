@@ -48,9 +48,17 @@ services:
 
 volumes:
   red-cat-pictures_static:
-    external: true
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /red-cat-pictures/static
   red-cat-pictures_data:
-    external: true
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /red-cat-pictures/data
 
 networks:
   front-tier:
