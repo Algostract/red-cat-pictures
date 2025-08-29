@@ -64,19 +64,7 @@ docker node ls
 4. Create a docker volume
 
 ```bash
-docker volume create \
-  --name red-cat-pictures_static \
-  --driver local \
-  --opt type=none \
-  --opt device=~/red-cat-pictures/static \
-  --opt o=bind
-
-docker volume create \
-  --name red-cat-pictures_data \
-  --driver local \
-  --opt type=none \
-  --opt device=~/red-cat-pictures/.data \
-  --opt o=bind
+upload static, .data, .env.prod into /root/red-cat-pictures
 ```
 
 5. Use Docker Stack to deploy multi-container application
