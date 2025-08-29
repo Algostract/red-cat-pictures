@@ -10,12 +10,13 @@ if (!blog.value) {
 if (blog.value.url !== '/blog/' + slug) {
   await navigateTo(blog.value.url, { redirectCode: 301 })
 }
-
-const title = `${blog.value.title}`
-const description = `${blog.value.description}`
 const {
   public: { siteUrl },
 } = useRuntimeConfig()
+const title = `${blog.value.title}`
+const description = `${blog.value.description}`
+const url = `${siteUrl}/blog/${slug}`
+
 const imageUrl = `https://ucarecdn.com/${blog.value.cover}/-/format/auto/-/preview/1200x630/center`
 
 useSeoMeta({
@@ -27,7 +28,7 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${siteUrl}/blog/${slug}`,
+  ogUrl: url,
 })
 
 useSchemaOrg([
@@ -45,7 +46,7 @@ useSchemaOrg([
 <template>
   <article v-if="blog" class="w-full">
     <NuxtImg
-      :src="blog.cover"
+      :src="blog.cover!"
       :alt="blog.title"
       :width="1280"
       :height="Math.round(1280 / (16 / 9))"
@@ -57,6 +58,7 @@ useSchemaOrg([
       <h1 class="my-4 text-xl font-semi-bold md:text-3xl">{{ blog.title }}</h1>
       <div class="mb-2 mt-4 flex justify-between gap-8 text-black/60 dark:text-white/60 md:mt-8">
         <NuxtTime :datetime="blog.publishedAt" day="numeric" month="short" year="numeric" />
+        <AppShare :title="title" :description="description" :url="url" class="ml-auto" />
         <span class="text-right text-base">
           Updated on
           <NuxtTime :datetime="blog.modifiedAt" day="numeric" month="short" year="numeric" />
