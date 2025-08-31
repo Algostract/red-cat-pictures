@@ -1,5 +1,18 @@
 # red-cat-pictures
 
+## v2.19.4
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.19.3...v2.19.4)
+
+### 🩹 Fixes
+
+- (skip ci) update env_file path in docker-compose for consistency ([89d7571](https://github.com/Algostract/red-cat-pictures/commit/89d7571))
+- Update team member details in About Us page ([1e8f20f](https://github.com/Algostract/red-cat-pictures/commit/1e8f20f))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.19.3
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.19.2...v2.19.3)
