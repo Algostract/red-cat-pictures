@@ -64,7 +64,7 @@ const props = defineProps<{ content: string }>()
 .content h1 > a,
 h2 > a,
 h3 > a {
-  @apply !no-underline;
+  @apply !whitespace-break-spaces !no-underline;
 }
 
 .content blockquote {
