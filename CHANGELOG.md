@@ -1,5 +1,25 @@
 # red-cat-pictures
 
+## v2.19.3
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.19.2...v2.19.3)
+
+### 🩹 Fixes
+
+- Update volume configurations in README and docker-compose for correct paths ([26f1d7a](https://github.com/Algostract/red-cat-pictures/commit/26f1d7a))
+- Update volume device paths in docker-compose for correct binding ([e60ac37](https://github.com/Algostract/red-cat-pictures/commit/e60ac37))
+- Correct volume device path for red-cat-pictures_data in docker-compose ([9692675](https://github.com/Algostract/red-cat-pictures/commit/9692675))
+- Update README and docker-compose to reflect new volume upload instructions ([a44d1f8](https://github.com/Algostract/red-cat-pictures/commit/a44d1f8))
+- Comment out deploy-web job in Actions workflow and update README for volume upload instructions ([b3d22f2](https://github.com/Algostract/red-cat-pictures/commit/b3d22f2))
+
+### 💅 Refactors
+
+- Clean up configuration files and remove unused environment variables ([2f30919](https://github.com/Algostract/red-cat-pictures/commit/2f30919))
+
+### ❤️ Contributors
+
+- Shba007 ([@shba007](https://github.com/shba007))
+
 ## v2.19.2
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.19.1...v2.19.2)
