@@ -3,7 +3,7 @@ services:
   app:
     image: ghcr.io/algostract/red-cat-pictures:latest
     env_file:
-      - /root/red-cat-pictures/.env.prod
+      - .env
     volumes:
       - red-cat-pictures_static:/app/static
       - red-cat-pictures_data:/app/.data
