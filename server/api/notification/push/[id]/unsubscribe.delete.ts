@@ -1,9 +1,7 @@
-import type { NotificationSubscription } from '../subscribe.post'
-
 export default defineEventHandler(async (event) => {
   try {
     const { id } = getRouterParams(event)
-    const pushStorage = useStorage<NotificationSubscription>('data:subscription:notification')
+    const pushStorage = useStorage<PushNotificationSubscription>('data:subscription:notification')
 
     const result = await pushStorage.removeItem(id)
 

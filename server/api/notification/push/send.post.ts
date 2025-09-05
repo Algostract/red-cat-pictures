@@ -1,4 +1,4 @@
-import type { NotificationSubscription } from './subscribe.post'
+import type { PushNotificationSubscription } from './subscribe.post'
 import { sendPushNotification } from './[id]/send.post'
 
 interface PushNotification {
@@ -11,7 +11,7 @@ interface PushNotification {
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody<PushNotification>(event)
-    const notificationStorage = useStorage<NotificationSubscription>('data:subscription:notification')
+    const notificationStorage = useStorage<PushNotificationSubscription>('data:subscription:notification')
 
     const subscriptions = (await notificationStorage.getItems(await notificationStorage.getKeys())).flatMap(({ value }) => value)
     await sendPushNotification(body, subscriptions)

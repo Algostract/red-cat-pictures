@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
   try {
     const { id } = getRouterParams(event)
     const body = await readBody<PushNotification>(event)
-    const notificationStorage = useStorage<NotificationSubscription>('data:subscription:notification')
+    const notificationStorage = useStorage<PushNotificationSubscription>('data:subscription:notification')
 
     const subscription = (await notificationStorage.getItems(await notificationStorage.getKeys())).flatMap(({ value }) => value).filter(({ keys }) => keys.auth === id)
     await sendPushNotification(body, subscription)

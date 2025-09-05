@@ -3,31 +3,7 @@ import { convertNotionPageToMarkdown } from '~~/server/api/[content]/[...slug].g
 import { sendPushNotification } from '~~/server/api/notification/push/[id]/send.post'
 import { sendEmail } from '~~/server/api/notification/email/[id]/send.post'
 import { sendWhatsappMessage } from '~~/server/api/notification/whatsapp/[id]/send.post'
-
-async function facebookPost(image: string, title: string, description: string, url: string) {
-  try {
-    const { facebookAccessToken, pageId } = useRuntimeConfig().private
-
-    if (!facebookAccessToken || !pageId) {
-      throw new Error('Facebook access token or page ID is missing in environment variables')
-    }
-
-    const caption = `${title}\n\n${description}\n\nRead more: https://redcatpictures.com${url}`
-    const body = new FormData()
-    body.append('url', image)
-    body.append('caption', caption)
-    body.append('access_token', facebookAccessToken)
-
-    const response = await $fetch(`https://graph.facebook.com/v18.0/${pageId}/photos`, {
-      method: 'POST',
-      body,
-    })
-    return response
-  } catch (error) {
-    console.warn('Error posting to Facebook:', error)
-    throw error
-  }
-}
+import { postFacebook } from '~~/server/api/notification/facebook/send.post'
 
 let n2m: NotionToMarkdown
 
@@ -51,7 +27,7 @@ export default defineTask({
         if (content.record.properties.Status.status.name !== 'Publish') return
 
         if (!(pushNotificationSubscriptions.length > 0))
-          pushNotificationSubscriptions = (await subscriptionStorage.getItems<NotificationSubscription>(await subscriptionStorage.getKeys('notification'))).flatMap(({ value }) => value)
+          pushNotificationSubscriptions = (await subscriptionStorage.getItems<PushNotificationSubscription>(await subscriptionStorage.getKeys('notification'))).flatMap(({ value }) => value)
         if (!(emailSubscriptions.length > 0)) emailSubscriptions = (await subscriptionStorage.getItems<EmailSubscription>(await subscriptionStorage.getKeys('email'))).flatMap(({ value }) => value)
         if (!(whatsappSubscriptions.length > 0))
           whatsappSubscriptions = (await subscriptionStorage.getItems<WhatsappSubscription>(await subscriptionStorage.getKeys('whatsapp'))).flatMap(({ value }) => value)
@@ -88,8 +64,11 @@ export default defineTask({
           console.warn(e)
         }
         if (contentType === 'Episode') {
-          await facebookPost(image, title, description, url)
-          console.log('Facebook post sent')
+          await postFacebook([
+            {
+              data: { asset: image, text: `New ${contentType} release | ${title}\n\n${description.split('. ')[0]}...\n\nRead More here https://redcatpictures.com${url}?ref=whatsapp` },
+            },
+          ])
 
           await sendWhatsappMessage(
             whatsappSubscriptions.map(({ phone }) => ({
