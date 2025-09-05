@@ -3,7 +3,7 @@ interface ImportMetaEnv {
   readonly PLATFORM_ENV: 'native' | 'web'
   readonly HOSTNAME: string
   readonly NOTION_API_KEY?: string
-  readonly UPLOADCARE_API_KEY?: string
+  readonly UPLOADCARE_PUBLIC_KEY?: string
   readonly BROWSER_ENDPOINT?: string
 }
 

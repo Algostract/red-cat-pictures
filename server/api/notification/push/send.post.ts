@@ -18,11 +18,11 @@ export default defineEventHandler(async (event) => {
 
     return { success: true }
   } catch (error: unknown) {
+    console.error('API notification/push/send POST', error)
+
     if (error instanceof Error && 'statusCode' in error) {
       throw error
     }
-
-    console.error('API notification/push/send POST', error)
 
     throw createError({
       statusCode: 500,

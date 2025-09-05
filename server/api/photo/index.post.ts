@@ -165,6 +165,10 @@ export default defineEventHandler(async (event) => {
   } catch (error: unknown) {
     console.error('API photo POST', error)
 
+    if (error instanceof Error && 'statusCode' in error) {
+      throw error
+    }
+
     throw createError({
       statusCode: 500,
       statusMessage: 'Some Unknown Error Found',

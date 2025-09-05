@@ -7,11 +7,11 @@ export default defineEventHandler(async (event) => {
 
     return { success: result }
   } catch (error: unknown) {
+    console.error('API notification/whatsapp/[id]/unsubscribe POST', error)
+
     if (error instanceof Error && 'statusCode' in error) {
       throw error
     }
-
-    console.error('API notification/whatsapp/[id]/unsubscribe POST', error)
 
     throw createError({
       statusCode: 500,

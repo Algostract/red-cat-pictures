@@ -82,7 +82,7 @@ export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId:
             const currentContent = await resourceStorage.getItem<Resource<'content'>>(`content:${normalizeNotionId(pageId)}`)
             const currentAssets = await resourceStorage.getItems<Resource<'asset'>>(currentContent?.record.properties.Asset.relation.flatMap(({ id }) => `asset:${normalizeNotionId(id)}`) ?? [])
 
-            return `\n::gallery{photos="${currentAssets.flatMap(({ value }) => value.record.properties['Sematic Slug'].formula.string).join(',')}"}\n::\n`
+            return `\n::gallery{photos="${currentAssets.flatMap(({ value }) => value.record.properties.Slug.formula.string).join(',')}"}\n::\n`
           })()
         )
       }

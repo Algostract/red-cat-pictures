@@ -12,7 +12,7 @@ export default defineCachedEventHandler<Promise<VideoDetails>>(
 
       if (!videos) throw createError({ statusCode: 500, statusMessage: 'videos is undefined' })
 
-      const video = videos.find(({ properties }) => properties['Sematic Slug'].formula.string === slug)
+      const video = videos.find(({ properties }) => properties.Slug.formula.string === slug)
       if (!video) {
         throw createError({ statusCode: 404, statusMessage: `video ${slug} not found` })
       }

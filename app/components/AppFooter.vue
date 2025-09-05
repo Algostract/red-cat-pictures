@@ -42,13 +42,13 @@ const emit = defineEmits<{
     </div>
     <ul class="mx-auto mb-1 mt-5 flex w-min items-center justify-between gap-3 text-xs md:gap-4 md:text-sm">
       <li>
-        <NuxtLink to="terms">Terms</NuxtLink>
+        <NuxtLink to="/terms">Terms</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="privacy">Privacy</NuxtLink>
+        <NuxtLink to="/privacy">Privacy</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="cancellation">Cancellation</NuxtLink>
+        <NuxtLink to="/cancellation">Cancellation</NuxtLink>
       </li>
     </ul>
   </footer>

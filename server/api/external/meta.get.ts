@@ -24,11 +24,11 @@ export default defineEventHandler(async (event) => {
 
     return data
   } catch (error: unknown) {
+    console.error('API external/meta POST', error)
+
     if (error instanceof Error && 'statusCode' in error) {
       throw error
     }
-
-    console.error('API external/meta GET', error)
 
     throw createError({
       statusCode: 500,

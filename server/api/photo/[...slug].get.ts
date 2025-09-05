@@ -10,7 +10,7 @@ export default defineCachedEventHandler<Promise<PhotoDetails>>(
 
       if (!photos) throw createError({ statusCode: 500, statusMessage: 'photos is undefined' })
 
-      const photo = photos.find(({ properties }) => properties['Sematic Slug'].formula.string === slug)
+      const photo = photos.find(({ properties }) => properties.Slug.formula.string === slug)
       if (!photo) {
         throw createError({ statusCode: 404, statusMessage: `photo ${slug} not found` })
       }

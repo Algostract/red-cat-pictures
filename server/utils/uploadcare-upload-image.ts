@@ -1,6 +1,6 @@
 export default async function (file: File) {
   const formData = new FormData()
-  formData.append('UPLOADCARE_PUB_KEY', import.meta.env.UPLOADCARE_API_KEY!)
+  formData.append('UPLOADCARE_PUB_KEY', import.meta.env.UPLOADCARE_PUBLIC_KEY!)
   formData.append('UPLOADCARE_STORE', 'auto')
   formData.append('file', file)
 

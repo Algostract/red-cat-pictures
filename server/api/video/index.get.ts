@@ -116,7 +116,7 @@ export default defineCachedEventHandler<Promise<Video[]>>(
             return pa - pb || (b.properties.Index?.number ?? 0) - (a.properties.Index?.number ?? 0)
           })
           .map<Promise<Video>>(async ({ cover, properties }) => {
-            const slug: string = properties['Sematic Slug'].formula.string
+            const slug: string = properties.Slug.formula.string
 
             // if (slugify(notionTextStringify(properties.Slug.rich_text)) !== slug)
             //   slugMap[slugify(notionTextStringify(properties.Slug.rich_text))] = slug

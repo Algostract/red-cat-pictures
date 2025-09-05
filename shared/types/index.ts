@@ -161,14 +161,9 @@ export interface NotionProspect {
   icon: NotionImage
   properties: {
     Name: {
+      type: 'title'
       title: {
-        type: string
-        text: {
-          content: string
-          link: null
-        }
         plain_text: string
-        href: null
       }[]
     }
     Status: {
@@ -195,8 +190,10 @@ export interface NotionProspect {
       type: 'url'
       url: string
     }
-    Email: { type: 'email'; email: string }
-
+    Email: {
+      type: 'email'
+      email: string
+    }
     Whatsapp: {
       type: 'url'
       url: string
@@ -218,46 +215,41 @@ export interface NotionProjectClient {
   icon: NotionImage
   properties: {
     Name: {
+      type: 'title'
       title: {
-        type: string
-        text: {
-          content: string
-          link: null
-        }
         plain_text: string
-        href: null
       }[]
     }
     'Point of Contact': {
-      id: string
-      type: string
+      type: 'select'
       select: {
-        id: string
         name: string
         color: string
       }
     }
     Website: {
+      type: 'url'
       url: string
     }
     Instagram: {
+      type: 'url'
       url: string
     }
     Email: {
+      type: 'email'
       email: string
     }
     Phone: {
+      type: 'phone_number'
       phone_number: string
     }
     Project: {
-      id: string
-      type: string
+      type: 'relation'
       relation: { id: string }[]
       has_more: boolean
     }
     Profit: {
-      id: string
-      type: string
+      type: 'rollup'
       rollup: {
         type: string
         number: null
@@ -277,14 +269,9 @@ export interface NotionProject {
   icon: NotionImage
   properties: {
     Name: {
+      type: 'title'
       title: {
-        type: string
-        text: {
-          content: string
-          link: null
-        }
         plain_text: string
-        href: null
       }[]
     }
   }
@@ -300,30 +287,36 @@ export interface NotionContent {
   icon: NotionImage
   properties: {
     Name: {
+      type: 'title'
       title: {
         plain_text: string
       }[]
     }
     Status: {
+      type: 'status'
       status: {
         name: 'Plan' | 'Draft' | 'Ready' | 'Publish' | 'Unpublish'
       }
     }
     Type: {
+      type: 'select'
       select: {
         name: 'Episode' | 'Blog'
       }
     }
     'Publish date': {
+      type: 'date'
       date: {
         start: string
       }
     }
     Project: {
+      type: 'relation'
       relation: { id: string }[]
       has_more: false
     }
     Asset: {
+      type: 'relation'
       relation: { id: string }[]
       has_more: true
     }
@@ -337,8 +330,12 @@ export interface NotionAsset {
   cover: NotionImage
   icon: NotionImage
   properties: {
-    Index: { number: number }
+    Index: {
+      type: 'number'
+      number: number
+    }
     'Project Index': {
+      type: 'rollup'
       rollup: {
         array: {
           number: number
@@ -346,18 +343,17 @@ export interface NotionAsset {
       }
     }
     Name: {
+      type: 'title'
       title: {
         plain_text: string
       }[]
     }
     Slug: {
-      rich_text: {
-        text: {
-          content: string
-        }
-      }[]
+      type: 'formula'
+      formula: { string: string }
     }
     Description: {
+      type: 'rich_text'
       rich_text: {
         text: {
           content: string
@@ -365,34 +361,50 @@ export interface NotionAsset {
       }[]
     }
     Type: {
+      type: 'select'
       select: {
         name: 'Photo' | 'Video'
       }
     }
     Segment: {
+      type: 'select'
       select: {
         name: Category
       }
     }
     Category: {
+      type: 'select'
       select: {
         name: Category
       }
     }
     Status: {
+      type: 'select'
       status: {
         name: 'Plan' | 'Draft' | 'Release' | 'Archive'
       }
     }
-    Project: { relation: string[]; has_more: false }
-    Gallery: { checkbox: boolean }
-    Featured: { number: number }
+    Project: {
+      type: 'relation'
+      relation: string[]
+      has_more: false
+    }
+    Gallery: {
+      type: 'checkbox'
+      checkbox: boolean
+    }
+    Featured: {
+      type: 'number'
+      number: number
+    }
     Resolution: {
+      type: 'select'
       select: {
         name: Resolution
       }
     }
     'Aspect ratio': {
+      type: 'select'
       select: {
         name: AspectRatio
       }
