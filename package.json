@@ -19,7 +19,7 @@
   "scripts": {
     "prepare": "husky || true",
     "postinstall": "nuxt prepare",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --tunnel",
     "detect": "gitleaks git --verbose",
     "lint": "eslint . --fix",
     "format": "prettier . --write",

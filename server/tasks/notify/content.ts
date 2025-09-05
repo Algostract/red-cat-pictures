@@ -4,6 +4,31 @@ import { sendPushNotification } from '~~/server/api/notification/push/[id]/send.
 import { sendEmail } from '~~/server/api/notification/email/[id]/send.post'
 import { sendWhatsappMessage } from '~~/server/api/notification/whatsapp/[id]/send.post'
 
+async function facebookPost(image: string, title: string, description: string, url: string) {
+  try {
+    const { facebookAccessToken, pageId } = useRuntimeConfig().private
+
+    if (!facebookAccessToken || !pageId) {
+      throw new Error('Facebook access token or page ID is missing in environment variables')
+    }
+
+    const caption = `${title}\n\n${description}\n\nRead more: https://redcatpictures.com${url}`
+    const body = new FormData()
+    body.append('url', image)
+    body.append('caption', caption)
+    body.append('access_token', facebookAccessToken)
+
+    const response = await $fetch(`https://graph.facebook.com/v18.0/${pageId}/photos`, {
+      method: 'POST',
+      body,
+    })
+    return response
+  } catch (error) {
+    console.warn('Error posting to Facebook:', error)
+    throw error
+  }
+}
+
 let n2m: NotionToMarkdown
 
 export default defineTask({
@@ -46,21 +71,26 @@ export default defineTask({
 
         if (contentType === 'Episode' || contentType === 'Blog' || contentType === 'Photo' || contentType === 'Video')
           await sendPushNotification({ title: `New ${contentType} release | ${title}`, body: `${description.split('. ')[0]}...`, url: url + '?ref=push' }, pushNotificationSubscriptions)
+        try {
+          if (contentType === 'Episode' || contentType === 'Blog')
+            await sendEmail(
+              'content',
+              emailSubscriptions.map(({ name, email }) => ({
+                toPersonName: name,
+                toEmail: email,
+                emailSubject: `New ${contentType} release | ${title}`,
+                contentTitle: `${description.split('. ')[0]}...`,
+                contentImage: image,
+                contentUrl: 'https://redcatpictures.com' + url,
+              }))
+            )
+        } catch (e) {
+          console.warn(e)
+        }
+        if (contentType === 'Episode') {
+          await facebookPost(image, title, description, url)
+          console.log('Facebook post sent')
 
-        if (contentType === 'Episode' || contentType === 'Blog')
-          await sendEmail(
-            'content',
-            emailSubscriptions.map(({ name, email }) => ({
-              toPersonName: name,
-              toEmail: email,
-              emailSubject: `New ${contentType} release | ${title}`,
-              contentTitle: `${description.split('. ')[0]}...`,
-              contentImage: image,
-              contentUrl: 'https://redcatpictures.com' + url,
-            }))
-          )
-
-        if (contentType === 'Episode')
           await sendWhatsappMessage(
             whatsappSubscriptions.map(({ phone }) => ({
               to: phone,
@@ -70,7 +100,7 @@ export default defineTask({
               },
             }))
           )
-
+        }
         content.notificationStatus = true
         await resourceStorage.setItem(`${content.type}/${normalizeNotionId(id)}`, content)
       })
