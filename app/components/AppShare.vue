@@ -1,13 +1,13 @@
 <script setup lang="ts">
-const { share, isSupported: isWebShareSupported } = useShare()
-const route = useRoute()
-
 const props = defineProps<{
   title: string
   description: string
   url: string
 }>()
 
+const route = useRoute()
+
+const { share, isSupported: isWebShareSupported } = useShare()
 // Share functionality
 const { copy, isSupported: isClipboardSupported } = useClipboard()
 
@@ -23,8 +23,6 @@ async function shareWebsite() {
       await share(shareData)
     } else if (isClipboardSupported.value) {
       await copy(route.fullPath)
-
-      console.log('URL copied to clipboard!')
     }
   } catch (error) {
     console.error('Error sharing:', error)
@@ -33,7 +31,7 @@ async function shareWebsite() {
 </script>
 
 <template>
-  <button aria-label="share" class="text-white transition-colors duration-500 ease-out hover:text-dark-600" @click="shareWebsite">
-    <NuxtIcon name="local:share" class="text-[28px] md:text-[28px]" />
+  <button aria-label="share" class="block text-white transition-colors duration-500 ease-out hover:text-dark-600" @click="shareWebsite">
+    <NuxtIcon name="local:share" class="text-[28px] md:text-[32px]" />
   </button>
 </template>

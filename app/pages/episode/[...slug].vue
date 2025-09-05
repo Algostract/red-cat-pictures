@@ -58,12 +58,12 @@ useSchemaOrg([
       <h1 class="my-4 text-xl font-semi-bold md:text-3xl">{{ episode.title }}</h1>
       <div class="mb-2 mt-4 flex justify-between gap-8 text-black/60 dark:text-white/60 md:mt-8">
         <NuxtTime :datetime="episode.publishedAt" day="numeric" month="short" year="numeric" />
-        <AppShare :title="title" :description="description" :url="url" class="ml-auto" />
         <span class="text-right text-base">
           Updated on
           <NuxtTime :datetime="episode.modifiedAt" day="numeric" month="short" year="numeric" />
         </span>
       </div>
+      <AppShare :title="title" :description="description" :url="url" class="ml-auto" />
       <MarkdownContent :content="episode.markdown" />
     </div>
   </article>
