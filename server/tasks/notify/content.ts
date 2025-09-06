@@ -6,9 +6,9 @@ import { sendWhatsappMessage } from '~~/server/api/notification/whatsapp/[id]/se
 
 async function facebookPost(image: string, title: string, description: string, url: string) {
   try {
-    const { facebookAccessToken, pageId } = useRuntimeConfig().private
+    const { facebookAccessToken, facebookPageId } = useRuntimeConfig().private
 
-    if (!facebookAccessToken || !pageId) {
+    if (!facebookAccessToken || !facebookPageId) {
       throw new Error('Facebook access token or page ID is missing in environment variables')
     }
 
