@@ -98,18 +98,18 @@ export default defineNuxtConfig({
       '*/10 * * * *': ['prospect:marketing'],
     },
   },
-  vite: {
-    // FIXME: temporary fix for email remove when not needed
-    $server: {
-      build: {
-        rollupOptions: {
-          output: {
-            preserveModules: true,
+  /*   vite: {
+      // FIXME: temporary fix for email remove when not needed
+      $server: {
+        build: {
+          rollupOptions: {
+            output: {
+              preserveModules: true,
+            },
           },
         },
       },
-    },
-  },
+    }, */
   routeRules: {
     '/': { swr: true },
     '/_ipx/**': { headers: { 'cache-control': 'max-age=31536000' } },
@@ -121,10 +121,10 @@ export default defineNuxtConfig({
     '/videos/**': { redirect: { to: '/video/**', statusCode: 301 } },
     '/video/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/episodes/**': { redirect: { to: '/episode/**', statusCode: 301 } },
-    '/episode/**': { ssr: true },
+    '/episode/**': { isr: true },
     '/blogs/**': { redirect: { to: '/blog/**', statusCode: 301 } },
-    '/blog/**': { ssr: true },
-    '/about': { ssr: true },
+    '/blog/**': { isr: true },
+    '/about': { isr: true },
     '/terms': { prerender: true },
     '/privacy': { prerender: true },
     '/cancellation': { prerender: true },
@@ -148,9 +148,7 @@ export default defineNuxtConfig({
       notionDbId: '',
       vapidKey: '',
       vapidSubject: '',
-      oauthClientId: '',
-      oauthClientSecret: '',
-      oauthRefreshToken: '',
+      emailMetaData: '',
       facebookPageId: '',
       facebookAccessToken: '',
       steganographyKey: '',

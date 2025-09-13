@@ -26,20 +26,17 @@
 - ⚡️ API Route Caching
 - 📐 Analytics
 
-https://g.page/r/CaroFd9d81EjEBM/review
-
-- [ ] Facebook Automation
 - [ ] Whatsapp Automation
 
 - [ ] Image Search
 - [ ] Update Photo page with title and description
 - [ ] Instagram Automation
-- [ ] Share Url
 - [ ] Modify Photo page to Project page
 - [ ] Videos and Video page
 - [ ] Like/Dislike Count Content
 - [ ] Add live streaming page
 - [ ] Audio Dictation of Content
+- [ ] Q&A Bot
 
 ## How to Deploy
 
