@@ -58,6 +58,7 @@ export default defineTask({
                 contentTitle: `${description.split('. ')[0]}...`,
                 contentImage: image,
                 contentUrl: 'https://redcatpictures.com' + url,
+                unsubscribeUrl: '',
               }))
             )
         } catch (e) {

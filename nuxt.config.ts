@@ -151,7 +151,6 @@ export default defineNuxtConfig({
       emailMetaData: '',
       facebookPageId: '',
       facebookAccessToken: '',
-      steganographyKey: '',
       paymentUpiInfo: '',
     },
   },

@@ -1,14 +1,15 @@
-import type { Component } from 'vue'
-import { parseYAML } from 'confbox'
-import contentTemplate from './ContentTemplate.vue'
 import prospectTemplate from './ProspectTemplate.vue'
+import contentTemplate from './ContentTemplate.vue'
 
-export interface ContentEmail {
+export interface EmailMetaData {
   fromCompanyName: string
-  fromEmail: string
   fromCompanyLogo: string
   fromCompanyLink: string
-  emailSubject: string
+  fromCompanyPhone: string
+  fromEmail: string
+}
+
+export interface ContentEmail {
   contentTitle: string
   contentImage: string
   contentUrl: string
@@ -18,86 +19,27 @@ export interface ContentEmail {
 }
 
 export interface ProspectEmail {
-  fromCompanyName: string
-  fromPersonName: string
-  fromEmail: string
-  fromCompanyLogo: string
-  fromCompanyLink: string
-  fromCompanyPhone: string
-  fromFeaturedPhotos: { id: string; title: string; description: string; image: string; url: string }[]
-  emailSubject: string
   toCompanyName: string
   toPersonName: string
   toEmail: string
 }
 
-/**
- * Generic function to read and parse YAML by key
- */
-async function loadYamlSection<T>(filename: string, section: string): Promise<T> {
-  const storage = useStorage('fs')
-  const fileContents = await storage.getItem(`data/${filename}`)
-  if (!fileContents) {
-    throw new Error(`Missing YAML file: ${filename}`)
-  }
-  const parsed = parseYAML<{ [key: string]: unknown }>(fileContents.toString())
-  if (!(section in parsed)) {
-    throw new Error(`Section ${section} not found in ${filename}`)
-  }
-  return parsed[section] as T
-}
-
-/**
- * Factory to create email modules with DRY logic
- */
-function createEmailModule<TData extends Record<string, unknown>, TMeta extends Record<string, unknown>, TEMeta = TMeta>(
-  section: string,
-  template: Component,
-  enrich?: (meta: TMeta) => Promise<Partial<TEMeta>>
-) {
-  return {
-    template,
-    data: async (data: TData, metaData?: Omit<TMeta, keyof TData>): Promise<TEMeta & TData> => {
-      const baseMeta = (metaData as TMeta) ?? (await loadYamlSection<{ [K in keyof TMeta]: TMeta[K] }>('emails.yml', section))
-      const extra = enrich ? await enrich(baseMeta) : {}
-      return { ...(baseMeta as object), ...extra, ...data } as TEMeta & TData
-    },
-  }
-}
-
 export type EmailTemplateData = {
-  content: Pick<ContentEmail, 'toPersonName' | 'toEmail'>
-  prospect: Pick<ProspectEmail, 'toCompanyName' | 'toPersonName' | 'toEmail'>
+  prospect: ProspectEmail
+  content: ContentEmail
 }
 
 const emailTemplate = {
-  content: createEmailModule<
-    Pick<ContentEmail, 'toPersonName' | 'toEmail' | 'emailSubject' | 'contentTitle' | 'contentImage' | 'contentUrl'>,
-    Omit<ContentEmail, 'toPersonName' | 'toEmail' | 'emailSubject' | 'contentTitle' | 'contentImage' | 'contentUrl'>
-  >('content', contentTemplate),
-  prospect: createEmailModule<
-    Pick<ProspectEmail, 'toCompanyName' | 'toPersonName' | 'toEmail'>,
-    Omit<ProspectEmail, 'toCompanyName' | 'toPersonName' | 'toEmail' | 'fromFeaturedPhotos'> & { fromFeaturedPhotos: string[] },
-    Omit<ProspectEmail, 'toCompanyName' | 'toPersonName' | 'toEmail'>
-  >('prospect', prospectTemplate, async (meta) => {
-    const fromFeaturedPhotos = await Promise.all(
-      meta.fromFeaturedPhotos.map(async (key) => {
-        try {
-          const data = await $fetch(`/api/photo/${(key as unknown as string).toLowerCase()}`, {
-            baseURL: meta.fromCompanyLink,
-          })
-          if (Array.isArray(data)) throw new Error('Unexpected array response')
-          return { id: data.id, title: data.title, description: data.description, image: data.image, url: data.url }
-        } catch {
-          return null
-        }
-      })
-    ).then((photos) => photos.filter((photo) => photo !== null))
-
-    return {
-      fromFeaturedPhotos,
-    }
-  }),
+  prospect: {
+    template: prospectTemplate,
+    data: {},
+  },
+  content: {
+    template: contentTemplate,
+    data: {
+      emailSubject: 'Your Meeting has been Scheduled with Shirsendu Bairagi',
+    },
+  },
 }
 
 export default emailTemplate

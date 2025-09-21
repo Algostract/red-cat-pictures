@@ -8,7 +8,6 @@ defineProps<{
   fromCompanyLogo: string
   fromCompanyPhone: string
   fromCompanyLink: string
-  fromFeaturedPhotos: { id: string; title: string; description: string; image: string; url: string }[]
   emailSubject: string
   toCompanyName: string
   toPersonName: string
@@ -16,6 +15,34 @@ defineProps<{
 }>()
 
 const referTag = '?ref=mail-prospect'
+const category = 'food'
+
+const featuredPhotos = {
+  product: [
+    'ecommerce-photo-020-001',
+    'product-photo-000-025',
+    'ecommerce-photo-000-007',
+    'product-photo-022-004',
+    'food-photo-000-016',
+    'food-photo-010-004',
+    'food-photo-000-020',
+    'food-photo-011-003',
+  ],
+  food: ['food-photo-042-002', 'food-photo-042-004', 'food-photo-042-003', 'food-photo-000-016', 'food-photo-010-002', 'food-photo-010-004', 'food-photo-003-005', 'food-photo-010-010'],
+}
+const fromFeaturedPhotos = (
+  await Promise.all(
+    featuredPhotos[category].map(async (key) => {
+      try {
+        const data = await $fetch(`/api/photo/${(key as unknown as string).toLowerCase()}`)
+        if (Array.isArray(data)) throw new Error('Unexpected array response')
+        return { id: data.id, title: data.title, description: data.description, image: data.image!, url: data.url }
+      } catch {
+        return null
+      }
+    })
+  )
+).filter((item) => !!item)
 
 const tailwindConfig = {
   darkMode: 'class',
@@ -118,7 +145,7 @@ const tailwindConfig = {
             <Text class="text-base leading-relaxed">
               I’m {{ fromPersonName }} from
               <Link :href="`${fromCompanyLink}${referTag}`" :title="fromCompanyName" class="inline-block text-primary-400 underline" target="_blank">{{ fromCompanyName }}</Link
-              >. We specialize in product videography and photography—delivering crisp, high‑resolution
+              >. We specialize in {{ category }} videography and photography—delivering crisp, high‑resolution
               <Link :href="`${fromCompanyLink}/#featured-photos`" class="inline-block text-primary-400 underline" target="_blank">photos</Link>
               and short‑form
               <Link :href="`${fromCompanyLink}/#video-gallery`" class="inline-block text-primary-400 underline" target="_blank">videos</Link>

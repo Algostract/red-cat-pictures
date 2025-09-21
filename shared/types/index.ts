@@ -33,6 +33,9 @@ export interface Position {
   col: { start: number; span: number }
 }
 
+export const codecs = ['avc', 'vp9', 'hevc', 'av1'] as const
+export type Codec = (typeof codecs)[number]
+
 export type FileSources = {
   [codec in Codec]?: { type: string } & {
     [resolution in Resolution]?: Orientation[]

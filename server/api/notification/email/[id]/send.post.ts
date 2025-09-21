@@ -17,6 +17,7 @@ export async function sendEmail<T extends keyof EmailTemplateData>(template: T, 
     payload.map(async (payloadData) => {
       try {
         const allData = { ...metaData, ...emailTemplate[template].data, ...payloadData }
+
         const html = await render(emailTemplate[template].template as Component, allData)
         const text = await render(emailTemplate[template].template as Component, allData, { plainText: true })
 
