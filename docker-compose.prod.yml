@@ -7,8 +7,6 @@ services:
     volumes:
       - red-cat-pictures_static:/app/static
       - red-cat-pictures_data:/app/.data
-    ports:
-      - 4300:3000
     networks:
       - front-tier
     depends_on:
