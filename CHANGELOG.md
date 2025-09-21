@@ -1,5 +1,31 @@
 # red-cat-pictures
 
+## v2.20.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.19.4...v2.20.0)
+
+### 🚀 Enhancements
+
+- Facebook automation added ([1504d63](https://github.com/Algostract/red-cat-pictures/commit/1504d63))
+- **share:** Appshare feature added ([32aba8c](https://github.com/Algostract/red-cat-pictures/commit/32aba8c))
+
+### 💅 Refactors
+
+- Remove steganography features and related code ([de8e3a0](https://github.com/Algostract/red-cat-pictures/commit/de8e3a0))
+
+### 🏡 Chore
+
+- Update environment variable names, and enhance error logging in API endpoints ([f64ea7f](https://github.com/Algostract/red-cat-pictures/commit/f64ea7f))
+- Facebook automation redundant code removed ([92ad57e](https://github.com/Algostract/red-cat-pictures/commit/92ad57e))
+- Update share icon and improve AppShare component layout ([b2cbb1a](https://github.com/Algostract/red-cat-pictures/commit/b2cbb1a))
+- Update tauri dependencies to latest versions: tauri-build to 2.4.1 and tauri to 2.8.5 ([cf71d8e](https://github.com/Algostract/red-cat-pictures/commit/cf71d8e))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+- Shba007 ([@shba007](https://github.com/shba007))
+- SATADRU1 <satadrumondal1331@gmail.com>
+
 ## v2.19.4
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.19.3...v2.19.4)
