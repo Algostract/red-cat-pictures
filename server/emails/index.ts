@@ -32,13 +32,13 @@ export type EmailTemplateData = {
 const emailTemplate = {
   prospect: {
     template: prospectTemplate,
-    data: {},
+    data: {
+      emailSubject: 'Elevate Your Brand’s Visuals: Product Photography/Videography from RED CAT PICTURES',
+    },
   },
   content: {
     template: contentTemplate,
-    data: {
-      emailSubject: 'Your Meeting has been Scheduled with Shirsendu Bairagi',
-    },
+    data: {},
   },
 }
 

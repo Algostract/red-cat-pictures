@@ -2,6 +2,8 @@ version: '3.9'
 services:
   app:
     image: ghcr.io/algostract/red-cat-pictures:latest
+    expose:
+      - 3000
     env_file:
       - .env
     volumes:
