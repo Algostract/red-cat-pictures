@@ -1,5 +1,18 @@
 # red-cat-pictures
 
+## v2.20.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.20.0...v2.20.1)
+
+### 🏡 Chore
+
+- [skip ci] removed port map ([897a5b3](https://github.com/Algostract/red-cat-pictures/commit/897a5b3))
+- Update docker-compose files to include environment variables and ports for app service ([d96f0fb](https://github.com/Algostract/red-cat-pictures/commit/d96f0fb))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v2.20.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.19.4...v2.20.0)
