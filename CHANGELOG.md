@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v2.20.2
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.20.1...v2.20.2)
+
+### 🏡 Chore
+
+- Update docker-compose configurations and add cloudreve service ([64e98a9](https://github.com/Algostract/red-cat-pictures/commit/64e98a9))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v2.20.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.20.0...v2.20.1)
