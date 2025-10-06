@@ -113,7 +113,7 @@ export default defineCachedEventHandler<Promise<ContentDetails>>(
       const [name, _ext] = slug.split('.')
       const pageId = name?.split('_').at(-1)
 
-      if (!pageId) {
+      if (!(pageId && z.uuid().safeParse(pageId).success)) {
         throw createError({ statusCode: 404, statusMessage: `pageId ${slug} not found` })
       }
 

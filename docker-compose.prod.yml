@@ -2,13 +2,13 @@ version: '3.9'
 services:
   app:
     image: ghcr.io/algostract/red-cat-pictures:latest
-    expose:
-      - 3000
     env_file:
       - .env
     volumes:
       - red-cat-pictures_static:/app/static
       - red-cat-pictures_data:/app/.data
+    expose:
+      - 3000
     networks:
       - front-tier
     depends_on:
