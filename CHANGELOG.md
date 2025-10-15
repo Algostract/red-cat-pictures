@@ -1,5 +1,21 @@
 # red-cat-pictures
 
+## v3.0.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.20.2...v3.0.0)
+
+### 🚀 Enhancements
+
+- **nuxt,api,media,storage,emails,tauri:** ⚠️ Prepare v3 with ISR, R2 integration, updated streaming ([4078f31](https://github.com/Algostract/red-cat-pictures/commit/4078f31))
+
+#### ⚠️ Breaking Changes
+
+- **nuxt,api,media,storage,emails,tauri:** ⚠️ Prepare v3 with ISR, R2 integration, updated streaming ([4078f31](https://github.com/Algostract/red-cat-pictures/commit/4078f31))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v2.20.2
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.20.1...v2.20.2)
