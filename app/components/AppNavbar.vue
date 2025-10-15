@@ -15,13 +15,12 @@ function onNavigate(section: string) {
 }
 
 const urls = ref([
-  { url: '/#photo-gallery', id: 'gallery', label: 'Gallery' },
   { url: '/photo', id: 'photos', label: 'Photos' },
   { url: '/#video-gallery', id: 'video-gallery', label: 'Videos' },
   { url: '/#pricing', id: 'pricing', label: 'Pricing' },
   { url: '/episode', id: 'episodes', label: 'Episodes' },
   { url: '/blog', id: 'blogs', label: 'Blogs' },
-  { url: '/experience', id: 'experience', label: 'Experience' },
+  // { url: '/experience', id: 'experience', label: 'Experience' },
   { url: '/about', id: 'about', label: 'About Us' },
 ])
 
@@ -41,7 +40,7 @@ const isAnimate = ref(false)
             @click="onNavigate(id)">
             <NuxtIcon name="local:logo-dark" filled class="text-[112px]" />
           </NuxtLink>
-          <ul class="font-semibold flex flex-col gap-4 p-6 text-right text-xl">
+          <ul class="font-semibold text-shadow-lg flex flex-col gap-4 p-6 text-right text-xl">
             <li v-for="{ id, url, label } of urls" :key="id" class="py-2">
               <NuxtLink :to="url" class="inline-block hover:underline" :active-class="route.name !== 'index' ? 'underline' : ''" @click="onNavigate(id)">
                 {{ label }}
@@ -53,7 +52,7 @@ const isAnimate = ref(false)
       </div>
     </Transition>
   </div>
-  <ul class="hidden justify-center gap-8 whitespace-nowrap md:flex">
+  <ul class="text-shadow-lg hidden justify-center gap-8 whitespace-nowrap md:flex">
     <li v-for="{ id, url, label } of urls" :key="id">
       <NuxtLink :to="url" class="p-2 hover:underline" :active-class="route.name !== 'index' ? 'underline' : ''" @click="onNavigate(id)">{{ label }} </NuxtLink>
     </li>
@@ -63,6 +62,13 @@ const isAnimate = ref(false)
 <style scoped>
 :root {
   @apply visible;
+}
+
+.text-shadow-lg {
+  text-shadow:
+    0px 1px 1px rgb(0 0 0 / 0.2),
+    0px 1px 2px rgb(0 0 0 / 0.2),
+    0px 2px 4px rgb(0 0 0 / 0.2);
 }
 
 .v-enter-active,

@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import iconLogo from '~/assets/icons/gfb.svg'
+import iconLogo from '~/assets/icons/gft.svg'
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
 function onVisit() {
-  gaProxy.gtag('event', 'visit-bowl')
+  gaProxy.gtag('event', 'visit-talents')
 }
 </script>
 
 <template>
-  <div class="fixed bottom-44 left-0 z-50" role="alert">
+  <div class="fixed bottom-72 right-0 z-50 -translate-y-1/2" role="alert">
     <NuxtLink
-      to="https://bowl.redcatpictures.com"
+      to="https://goldfishtalents.com"
       external
       target="_blank"
       rel="noopener"
-      class="relative flex flex-col items-center justify-center gap-2 rounded-r-2xl bg-[#FFD400] p-2 pb-3"
-      aria-label="Visit Gold Fish Bowl"
+      class="flex flex-col items-center gap-3 rounded-l-2xl bg-warning-400 px-2 pb-4 pt-3"
+      aria-label="Find Talent at Gold Fish Talents"
       @click="onVisit">
-      <img :src="iconLogo" alt="gold-fish-bowl-logo" :width="32" :height="32" />
-      <div class="relative h-32 w-3">
-        <span class="absolute left-1/2 top-1/2 inline-block -translate-x-1/2 -translate-y-1/2 rotate-90 whitespace-nowrap text-sm font-semi-bold tracking-wide text-black"> Visit Gold Fish Bowl </span>
+      <img :src="iconLogo" alt="Gold Fish Talents Logo" :width="32" :height="32" />
+      <div class="[writing-mode:vertical-rl]">
+        <span class="font-semibold rotate-180 whitespace-nowrap text-sm tracking-wide text-black"> Find Talents </span>
       </div>
     </NuxtLink>
   </div>

@@ -3,7 +3,7 @@
 import type { Member } from '~/components/Card/Member.vue'
 
 const title = `About Us`
-const description = `Our About Us describes our team, vision, what we do and clients`
+const description = `Our team, vision, and clients`
 const {
   public: { siteUrl },
 } = useRuntimeConfig()
@@ -47,30 +47,40 @@ const members: Member[] = [
     isHero: true,
     animation: 'fly-in',
   },
-  {
-    name: 'Kinjal Adhikary',
-    designation: 'Assistant Director',
-    content: `Kinjal brings his immersive knowledge about film-making. His unique sense brings adds an extra layer to our projects.`,
-    image: `/images/hero-2.webp`,
-    socials: {},
-    isHero: false,
-    animation: 'burn',
-  },
-  {
-    name: 'Swarup Ghosh',
-    designation: 'Art Director',
-    content: `Swarup has experience in VFX industry for around 5 years and worked for several well known brands.`,
-    image: `/images/hero-3.webp`,
-    socials: {
-      linkedin: 'https://www.linkedin.com/in/swarup-ghosh-48910425b',
+  /*   {
+      name: 'Kinjal Adhikary',
+      designation: 'Assistant Director',
+      content: `Kinjal brings his immersive knowledge about film-making. His unique sense brings adds an extra layer to our projects.`,
+      image: `/images/hero-2.webp`,
+      socials: {},
+      isHero: false,
+      animation: 'burn',
     },
+    {
+      name: 'Swarup Ghosh',
+      designation: 'Art Director',
+      content: `Swarup has experience in VFX industry for around 5 years and worked for several well known brands.`,
+      image: `/images/hero-3.webp`,
+      socials: {
+        linkedin: 'https://www.linkedin.com/in/swarup-ghosh-48910425b',
+      },
+      isHero: false,
+      animation: 'burn',
+    }, */
+
+  {
+    name: 'Avishek Das',
+    designation: 'Script Writer',
+    content: `Avishek crafts scripts with engaging stories and rich narratives, giving each project a distinctive and compelling voice.`,
+    image: `/images/hero-5.webp`,
+    socials: {},
     isHero: false,
     animation: 'burn',
   },
   {
     name: 'Shirsendu Bairagi',
     designation: 'CTO & System Architect',
-    content: `Shirsendu creates website, app and automation workflow.`,
+    content: `Shirsendu builds sleek websites, apps, and automation systems that boost efficiency and simplify operations.`,
     image: `/images/hero-4.webp`,
     socials: {
       instagram: 'https://www.instagram.com/shirsendu_bairagi/',
@@ -82,99 +92,105 @@ const members: Member[] = [
     isHero: false,
     animation: 'burn',
   },
-  /*  {
-     name: 'Avishek Das',
-     designation: 'Coordinator',
-     content: ``,
-     image: ``,
-     socials: {
-     },
-     isHero: false,
-     animation: 'burn',
-   },
-   {
-     name: 'Aishik Kar',
-     designation: 'Coordinator',
-     content: ``,
-     image: ``,
-     socials: {
-     },
-     isHero: false,
-     animation: 'burn',
-   },
-   {
-     name: 'Avijit Sardar',
-     designation: 'Coordinator',
-     content: ``,
-     image: ``,
-     socials: {
-     },
-     isHero: false,
-     animation: 'burn',
-   }, */
+  {
+    name: 'Aishik Kar',
+    designation: 'Coordinator',
+    content: `Aishik keeps every production on track, expertly managing teams and details to guarantee smooth project execution.`,
+    image: `/images/hero-6.webp`,
+    socials: {},
+    isHero: false,
+    animation: 'burn',
+  },
+  {
+    name: 'Avijit Sardar',
+    designation: 'Photographer',
+    content: `Avijit captures memorable moments with creativity and precision, turning every frame into a striking visual story.`,
+    image: `/images/hero-7.webp`,
+    socials: {},
+    isHero: false,
+    animation: 'burn',
+  },
 ]
 </script>
 
 <template>
-  <section class="relative flex flex-col justify-between lg:flex-row">
-    <div class="mb-4 mt-28 grid grid-flow-col grid-cols-6 justify-center gap-6 px-4 md:grid-flow-row md:grid-rows-[repeat(auto,2)] lg:mb-12 lg:mt-36 lg:pl-8">
-      <CardMember
-        v-for="({ name, designation, content, image, socials, isHero, animation }, index) in members"
-        :key="name"
-        :name="name"
-        :designation="designation"
-        :content="content"
-        :image="image"
-        :socials="socials"
-        :is-hero="isHero"
-        :animation="animation"
-        class="col-span-full"
-        :class="isHero ? 'md:col-span-3 md:col-start-4' : `md:col-span-2 md:row-start-2 md:col-start-${index * 2 - 1}`" />
-      <div class="col-span-full md:col-span-3 md:col-start-1 md:row-start-1 lg:mr-24">
-        <h2 class="mb-2 text-xl text-primary-500 lg:mb-6 lg:text-3xl">Our Story</h2>
-        <p>
-          RED CAT PICTURES was founded by Aratrik Nandy to revolutionize brand imagery. Through our product and food photography and videography, we help brands forge deeper connections with their
-          audience.
-        </p>
-
-        <h3>Mission & Vision</h3>
-        <p>Our mission is to elevate your brand with striking visuals that drive engagement and sales. We aim to lead the industry in creative storytelling backed by technical mastery.</p>
-
-        <h3>What We Do</h3>
-        <p>
-          At Red Cat Pictures, we specialize in:<br />
-          <strong>Product & Food Photography:</strong> From e-commerce flat-lays to gourmet spreads, we capture every nuance.<br />
-          <strong>Videography:</strong> Short ads, commercials, and social reels that captivate.<br />
-          <strong>CGI-Style Imagery:</strong> High-end shots with dynamic lighting and expert retouching.<br />
-          <strong>Creative Direction:</strong> Art direction, styling, and custom concepts aligned with your identity.
-        </p>
-
-        <h3>Our Studio</h3>
-        <p>Located in Kolkata, our studio boasts advanced cameras, versatile backdrops, and controlled lighting—perfect for everything from clean white-background shots to lifestyle scenes.</p>
-
-        <h3>Our Approach</h3>
-        <p>We start each project with a collaborative briefing, follow with precise lighting and styling, and finish with meticulous post-production. Expect fast turnarounds and clear pricing.</p>
-
-        <h3>Our Clients</h3>
-        <p>
-          We’ve had the privilege of working with brands such as
-          <template v-if="clients">
-            <template v-for="({ id, name, website, logo }, index) in clients" :key="id">
+  <div class="mx-4">
+    <section class="mt-28 md:mt-36">
+      <!-- Hero: single parent grid -->
+      <div class="grid grid-cols-2 gap-10">
+        <!-- Left: Our Story / About Text -->
+        <div class="col-span-2 md:col-span-1">
+          <h2 class="mb-4 text-3xl font-bold text-primary-500">Our Story</h2>
+          <p class="mb-5">
+            RED CAT PICTURES was founded by Aratrik Nandy to revolutionize brand imagery. Through our product and food photography and videography, we help brands forge deeper connections with their
+            audience.
+          </p>
+          <h3 class="font-semibold mb-2 mt-8 text-xl">Mission & Vision</h3>
+          <p class="mb-5">
+            Our mission is to elevate your brand with striking visuals that drive engagement and sales. We aim to lead the industry in creative storytelling backed by technical mastery.
+          </p>
+          <h3 class="font-semibold mb-2 mt-8 text-xl">What We Do</h3>
+          <ul class="mb-5 list-inside list-disc space-y-1 text-base">
+            <li><strong>Product & Food</strong> Photography: E-commerce flat-lays to gourmet spreads.</li>
+            <li><strong>Videography:</strong> Short ads, commercials, and social reels that captivate.</li>
+            <li><strong>CGI-Style</strong> Imagery: High-end shots with dynamic lighting and expert retouching.</li>
+            <li><strong>Creative</strong> Direction: Art direction, styling, and custom concepts aligned with your identity.</li>
+          </ul>
+          <h3 class="font-semibold mb-2 mt-8 text-xl">Our Studio</h3>
+          <p class="mb-5">
+            Located in Kolkata, our studio boasts advanced cameras, versatile backdrops, and controlled lighting—perfect for everything from clean white-background shots to lifestyle scenes.
+          </p>
+          <h3 class="font-semibold mb-2 mt-8 text-xl">Our Approach</h3>
+          <p class="mb-5">
+            We start each project with a collaborative briefing, follow with precise lighting and styling, and finish with meticulous post-production. Expect fast turnarounds and clear pricing.
+          </p>
+          <h3 class="font-semibold mb-2 mt-8 text-xl">Our Clients</h3>
+          <p>
+            We’ve had the privilege of working with brands such as
+            <template v-for="({ id, name, website, logo }, idx) in clients" :key="id">
               <NuxtLink
                 v-if="extractUploadcareId(logo)"
                 :href="website ? `${website}?utm_source=redcatpictures.com` : ''"
                 target="__blank"
                 external
-                class="relative size-16 overflow-hidden whitespace-nowrap rounded-full bg-white px-3 py-1 transition-colors duration-200 ease-in-out hover:!bg-primary-400 hover:!text-white dark:bg-black">
+                class="font-semibold mx-1 underline transition-colors duration-200 hover:text-primary-400">
                 {{ name }} </NuxtLink
-              >{{ index !== clients.length - 1 ? ', ' : '' }}
+              >{{ idx !== clients.length - 1 ? ',' : '' }}
             </template>
-          </template>
-          —delivering versatile, professional imagery that drives results.
-        </p>
+            —delivering versatile, professional imagery that drives results.
+          </p>
+        </div>
+        <!-- Right: Hero Member only -->
+        <div class="col-span-2 md:col-span-1">
+          <CardMember
+            v-for="{ name, designation, content, image, socials, animation } in members.filter((m) => m.isHero)"
+            :key="name"
+            :name="name"
+            :designation="designation"
+            :content="content"
+            :image="image"
+            :socials="socials"
+            :animation="animation"
+            :is-hero="true" />
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+    <!-- Team section (excluding hero), 3 columns on md+ -->
+    <section class="mt-16">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <CardMember
+          v-for="{ name, designation, content, image, socials, animation } in members.filter((m) => !m.isHero)"
+          :key="name"
+          :name="name"
+          :designation="designation"
+          :content="content"
+          :image="image"
+          :socials="socials"
+          :animation="animation"
+          :is-hero="false" />
+      </div>
+    </section>
+  </div>
 </template>
 
 <style scoped>

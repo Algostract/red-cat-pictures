@@ -12,7 +12,7 @@
 
 ![Landing](public/previews/landing.webp)
 
-> Nurture the essence of your product with our photography & videography services in kolkata
+> Product, Food Photography & Videography in Kolkata, India
 
 - 📦 SSR
 - 🖼️ OG Tags

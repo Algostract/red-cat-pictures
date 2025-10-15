@@ -9,10 +9,12 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <section id="hero" class="grid h-screen grid-cols-3 grid-rows-[repeat(3,min-content)] items-center gap-y-[4.5rem] overflow-hidden pt-24 text-white md:px-16 md:pt-32 lg:grid-rows-1 lg:pt-0">
+  <section
+    id="hero"
+    class="text-shadow-lg grid h-screen grid-cols-3 grid-rows-[repeat(3,min-content)] items-center gap-y-[4.5rem] overflow-hidden pt-24 text-white md:px-16 md:pt-32 lg:grid-rows-1 lg:pt-0">
     <NuxtVideo
       v-if="video"
-      class="absolute left-1/2 top-0 col-span-full col-start-1 row-span-full row-start-1 h-screen w-screen -translate-x-1/2 object-cover"
+      class="gradient-mask absolute left-1/2 top-0 col-span-full col-start-1 row-span-full row-start-1 h-screen w-screen -translate-x-1/2 object-cover"
       :source="video.sources"
       :poster="video.poster"
       :disable-picture-in-picture="true"
@@ -23,8 +25,8 @@ const emit = defineEmits<{
       :loop="true"
       preload="metadata" />
     <div class="relative col-span-3 !col-start-1 row-start-1 flex flex-col gap-6 text-center md:row-start-2 lg:col-span-2 lg:text-left">
-      <h1 class="-mb-1 text-3xl font-semi-bold md:text-5xl">Elevate Your <br /><span class="rounded bg-primary-500 px-2 py-2">Brand</span> Image</h1>
-      <p class="mx-auto max-w-screen-sm text-lg leading-9 tracking-wide md:text-xl lg:mx-0">Nurture the essence of your product with our photography & videography services</p>
+      <h1 class="text-3xl font-semi-bold md:text-5xl">BOLD MESSY <br /><span class="rounded bg-primary-500 px-2 py-2">MASCULINE</span></h1>
+      <p class="mx-auto max-w-screen-sm text-lg leading-9 tracking-wide md:text-xl lg:mx-0">Create your brand identity that speaks to your clients, with our product photography/videograpy service</p>
       <ButtonCTA class="hidden self-start lg:flex" @click="emit('contact')" />
     </div>
     <div class="relative bottom-[5rem] col-span-full col-start-1 row-start-4 flex flex-col items-center gap-4 self-end md:bottom-16">
@@ -35,7 +37,22 @@ const emit = defineEmits<{
 </template>
 
 <style scoped>
+.text-shadow-lg {
+  text-shadow:
+    0px 1px 1px rgb(0 0 0 / 0.35),
+    0px 1px 2px rgb(0 0 0 / 0.35),
+    0px 2px 4px rgb(0 0 0 / 0.35);
+}
+
 .gradient-mask {
-  @apply md:[mask-image:linear-gradient(0deg,rgba(0,0,0,0)_0%,rgba(0,0,0,1)_20%,rgba(0,0,0,1)_50%,rgba(0,0,0,1)_80%,rgba(0,0,0,0)_100%)];
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    /* Fully transparent at top */ rgba(0, 0, 0, 0.8) 8%,
+    /* Light fade in, lower opacity */ rgba(0, 0, 0, 1) 15%,
+    /* Moderate fade, not fully opaque */ rgba(0, 0, 0, 1) 85%,
+    /* Reduced solid center zone */ rgba(0, 0, 0, 0.8) 92%,
+    /* Light fade out, matching top */ rgba(0, 0, 0, 0.4) 100% /* Fully transparent at bottom */
+  );
 }
 </style>

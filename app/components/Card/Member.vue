@@ -188,7 +188,7 @@ function triggerAnimation() {
     <div>
       <h2 class="pt-6 text-xl font-semi-bold md:pt-8 md:text-2xl">{{ name }}</h2>
       <p class="pt-1.5 text-lg font-semi-bold text-primary-500 md:pt-3 md:text-xl">{{ designation }}</p>
-      <p class="pt-1.5 text-base font-semi-bold !leading-relaxed md:pt-3 md:text-lg">{{ content }}</p>
+      <p class="pt-1.5 text-base font-semi-bold !leading-relaxed md:pt-3" :class="{ 'md:text-lg': isHero }">{{ content }}</p>
       <div class="flex gap-4 pt-6 md:pt-12">
         <template v-for="{ visible, platform, url, icon, color } in links" :key="platform">
           <NuxtLink v-if="visible" :to="url" external target="_blank" rel="noopener" :aria-label="platform" class="transition-colors ease-out" :class="`hover:text-[${color}]`">

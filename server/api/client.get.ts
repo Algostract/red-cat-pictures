@@ -10,7 +10,16 @@ export default defineCachedEventHandler<Promise<ProjectClient[]>>(
   async () => {
     try {
       const clientStorage = useStorage<Resource<'client'>>(`data:resource:client`)
-      const clients = (await clientStorage.getItems(await clientStorage.getKeys())).flatMap(({ value }) => value.record)
+      const clients = (await clientStorage.getItems(await clientStorage.getKeys()))
+        .flatMap(({ value }) => value.record)
+        .toSorted((a, b) => {
+          const av = a.properties['Acquisition Date']?.rollup?.date?.start ?? null
+          const bv = b.properties['Acquisition Date']?.rollup?.date?.start ?? null
+          if (!av && !bv) return 0
+          if (!av) return 1 // put empty/nulls last
+          if (!bv) return -1
+          return new Date(bv).getTime() - new Date(av).getTime()
+        })
 
       return (
         await Promise.all(

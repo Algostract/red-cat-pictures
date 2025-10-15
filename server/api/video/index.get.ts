@@ -85,6 +85,7 @@ function buildType(codec: Codec, containerMime: string): string {
 }
 
 export function convertSources(name: string, sources: FileSources): Source[] {
+  const order: Resolution[] = ['1080p', '1440p', '720p']
   const {
     public: { siteUrl },
   } = useRuntimeConfig()
@@ -95,7 +96,7 @@ export function convertSources(name: string, sources: FileSources): Source[] {
     const mimeType = codecSources.type
     const typeWithCodecs = buildType(codec, mimeType)
     const extension = mimeType === 'video/webm' ? 'webm' : mimeType === 'video/mp4' ? 'mp4' : ''
-    const resolutionKeys = Object.keys(codecSources).filter((key) => key !== 'type') as Resolution[]
+    const resolutionKeys = (Object.keys(codecSources).filter((key) => key !== 'type') as Resolution[]).sort((a, b) => order.indexOf(a) - order.indexOf(b))
     for (const resolution of resolutionKeys) {
       const orientations = codecSources[resolution]
       if (!orientations || !Array.isArray(orientations)) continue

@@ -86,6 +86,14 @@ export default defineNuxtConfig({
         driver: 'fs',
         base: './static',
       },
+      /*  r2: {
+         driver: 's3',
+         accessKeyId: '',
+         secretAccessKey: '',
+         endpoint: '',
+         bucket: '',
+         region: '',
+       }, */
     },
     rollupConfig: {
       plugins: [vue()],
@@ -111,7 +119,7 @@ export default defineNuxtConfig({
       },
     }, */
   routeRules: {
-    '/': { swr: true },
+    '/': { isr: 3600 },
     '/_ipx/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/fonts/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/api/**': { cors: true },
@@ -121,10 +129,10 @@ export default defineNuxtConfig({
     '/videos/**': { redirect: { to: '/video/**', statusCode: 301 } },
     '/video/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/episodes/**': { redirect: { to: '/episode/**', statusCode: 301 } },
-    '/episode/**': { ssr: true },
+    '/episode/**': { isr: 3600 },
     '/blogs/**': { redirect: { to: '/blog/**', statusCode: 301 } },
-    '/blog/**': { ssr: true },
-    '/about': { ssr: true },
+    '/blog/**': { isr: 3600 },
+    '/about': { isr: 3600 },
     '/terms': { prerender: true },
     '/privacy': { prerender: true },
     '/cancellation': { prerender: true },
@@ -152,6 +160,11 @@ export default defineNuxtConfig({
       facebookPageId: '',
       facebookAccessToken: '',
       paymentUpiInfo: '',
+      r2AccessKeyId: '',
+      r2SecretAccessKey: '',
+      r2Endpoint: '',
+      r2Bucket: '',
+      r2Region: '',
     },
   },
   icon: {
@@ -204,12 +217,12 @@ export default defineNuxtConfig({
     injectRegister: 'auto',
     registerType: 'autoUpdate',
     manifest: {
-      name: 'RED CAT PICTURES',
+      name: 'RED CAT PICTURES | Product, Food Photography & Videography in Kolkata, India',
       short_name: 'RED CAT PICTURES',
-      description: 'Nurture the essence of your product with our photography & videography services in kolkata',
+      description: 'Create your brand identity that speaks to your clients, with our product photography/videograpy service',
       theme_color: '#CD2D2D',
       background_color: '#FFFFFF',
-      orientation: 'any',
+      // orientation: 'natural',
       display: 'fullscreen',
       shortcuts: [
         {

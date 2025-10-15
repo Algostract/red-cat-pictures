@@ -33,7 +33,7 @@ const emailTemplate = {
   prospect: {
     template: prospectTemplate,
     data: {
-      emailSubject: 'Elevate Your Brand’s Visuals: Product Photography/Videography from RED CAT PICTURES',
+      emailSubject: 'Create your brand identity that speaks to your clients, with our product photography/videograpy service',
     },
   },
   content: {

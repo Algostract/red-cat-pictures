@@ -20,7 +20,7 @@ useSeoMeta({
   ogUrl: `${siteUrl}/photo`,
 })
 
-const categoryOrder = ['food', 'ecommerce', 'product'] as Category[]
+const categoryOrder = ['product', 'food', 'ecommerce'] as Category[]
 const groupedPhotos = computed(() => Object.groupBy(photos.value, (photo) => photo.category))
 
 const activePhotoName = useState<string | null>()
