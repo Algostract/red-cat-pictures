@@ -223,12 +223,13 @@ export interface NotionProjectClient {
         plain_text: string
       }[]
     }
-    'Point of Contact': {
-      type: 'select'
-      select: {
-        name: string
-        color: string
-      }
+    Description: {
+      type: 'rich_text'
+      rich_text: {
+        text: {
+          content: string
+        }
+      }[]
     }
     Website: {
       type: 'url'
@@ -237,6 +238,13 @@ export interface NotionProjectClient {
     Instagram: {
       type: 'url'
       url: string
+    }
+    'Point of Contact': {
+      type: 'select'
+      select: {
+        name: string
+        color: string
+      }
     }
     Email: {
       type: 'email'
@@ -271,11 +279,34 @@ export interface NotionProject {
   cover: NotionImage
   icon: NotionImage
   properties: {
+    Index: {
+      type: 'number'
+      number: number
+    }
     Name: {
       type: 'title'
       title: {
         plain_text: string
       }[]
+    }
+    Slug: {
+      type: 'formula'
+      formula: { string: string }
+    }
+    Budget: {
+      type: 'number'
+      number: number
+    }
+    Date: {
+      type: 'date'
+      date: {
+        start: string
+      }
+    }
+    Client: {
+      type: 'relation'
+      relation: { id: string }[]
+      has_more: false
     }
   }
   url: string

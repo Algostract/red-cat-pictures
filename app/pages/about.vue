@@ -67,7 +67,6 @@ const members: Member[] = [
       isHero: false,
       animation: 'burn',
     }, */
-
   {
     name: 'Avishek Das',
     designation: 'Script Writer',

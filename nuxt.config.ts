@@ -210,9 +210,7 @@ export default defineNuxtConfig({
     autoLastmod: true,
     sources: ['/api/__sitemap__/urls'],
   },
-  robots: {
-    disallow: ['/_nuxt/'],
-  },
+  robots: {},
   pwa: {
     injectRegister: 'auto',
     registerType: 'autoUpdate',
