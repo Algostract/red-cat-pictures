@@ -1,5 +1,18 @@
 # red-cat-pictures
 
+## v3.1.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.0.0...v3.1.0)
+
+### 🚀 Enhancements
+
+- Update NotionProjectClient and NotionProject interfaces ([e9e73da](https://github.com/Algostract/red-cat-pictures/commit/e9e73da))
+- Added automated quotation generation/signing flow ([54a05e9](https://github.com/Algostract/red-cat-pictures/commit/54a05e9))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.0.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v2.20.2...v3.0.0)
