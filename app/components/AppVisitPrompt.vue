@@ -11,7 +11,7 @@ function onVisit() {
 <template>
   <div class="fixed bottom-72 right-0 z-50 -translate-y-1/2" role="alert">
     <NuxtLink
-      to="https://goldfishtalents.com"
+      to="https://goldfishtalents.com?ref=redcatpictures.com"
       external
       target="_blank"
       rel="noopener"

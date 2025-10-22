@@ -120,7 +120,7 @@ export interface WhatsappSubscription {
 }
 
 /* Server Only */
-export const resourceTypes = ['prospect', 'client', 'project', 'content', 'asset'] as const
+export const resourceTypes = ['prospect', 'client', 'project', 'content', 'asset', 'terms'] as const
 
 export type ResourceType = (typeof resourceTypes)[number]
 
@@ -132,6 +132,7 @@ export interface ResourceRecordMap {
   project: NotionProject
   content: NotionContent
   asset: NotionAsset
+  terms: string
 }
 
 export interface Resource<T extends ResourceType = ResourceType> {
@@ -223,7 +224,7 @@ export interface NotionProjectClient {
         plain_text: string
       }[]
     }
-    Description: {
+    Address: {
       type: 'rich_text'
       rich_text: {
         text: {
@@ -239,6 +240,10 @@ export interface NotionProjectClient {
       type: 'url'
       url: string
     }
+    LinkedIn: {
+      type: 'url'
+      url: string
+    }
     'Point of Contact': {
       type: 'select'
       select: {
@@ -249,6 +254,10 @@ export interface NotionProjectClient {
     Email: {
       type: 'email'
       email: string
+    }
+    Whatsapp: {
+      type: 'phone_number'
+      phone_number: string
     }
     Phone: {
       type: 'phone_number'
@@ -293,9 +302,23 @@ export interface NotionProject {
       type: 'formula'
       formula: { string: string }
     }
-    Budget: {
+    Status: {
+      type: 'status'
+      status: {
+        name: 'Plan' | 'Quotation' | 'Shoot' | 'Edit' | 'Delivered'
+      }
+    }
+    Quotation: {
       type: 'number'
       number: number
+    }
+    Address: {
+      type: 'rich_text'
+      rich_text: {
+        text: {
+          content: string
+        }
+      }[]
     }
     Date: {
       type: 'date'
@@ -306,7 +329,16 @@ export interface NotionProject {
     Client: {
       type: 'relation'
       relation: { id: string }[]
-      has_more: false
+      has_more: boolean
+    }
+    Budget: {
+      type: 'number'
+      number: number
+    }
+    Asset: {
+      type: 'relation'
+      relation: { id: string }[]
+      has_more: boolean
     }
   }
   url: string
@@ -420,7 +452,7 @@ export interface NotionAsset {
     }
     Project: {
       type: 'relation'
-      relation: string[]
+      relation: { id: string }[]
       has_more: false
     }
     Gallery: {

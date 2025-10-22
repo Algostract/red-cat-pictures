@@ -102,6 +102,7 @@ export default defineNuxtConfig({
       tasks: true,
     },
     scheduledTasks: {
+      '*/1 * * * *': ['workflow:quoation'],
       '*/5 * * * *': ['sync:resource', 'notify:content'],
       '*/10 * * * *': ['prospect:marketing'],
     },
@@ -165,6 +166,8 @@ export default defineNuxtConfig({
       r2Endpoint: '',
       r2Bucket: '',
       r2Region: '',
+      documensoApi: '',
+      documensoApiKey: '',
     },
   },
   icon: {
@@ -183,7 +186,9 @@ export default defineNuxtConfig({
   },
   image: {
     provider: 'uploadcare',
-    ipx: {},
+    ipx: {
+      baseURL: 'https://cdn.redcatpictures.com',
+    },
     uploadcare: {
       cdnURL: 'https://ucarecdn.com',
       quality: 'smart',

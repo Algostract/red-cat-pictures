@@ -14,7 +14,7 @@ export default defineTask({
 
     await Promise.allSettled(
       (await prospectStorage.getItems(await prospectStorage.getKeys())).map(async ({ value: prospect }) => {
-        const id = prospect.record.id
+        const prospectId = prospect.record.id
         const companyName = notionTextStringify(prospect.record.properties.Name.title)
         const email = prospect.record.properties.Email.email
         const whatsapp = prospect.record.properties.Whatsapp.url?.replace(/^https?:\/\/wa\.me\//, '')
@@ -91,7 +91,7 @@ export default defineTask({
         }
 
         await notion.pages.update({
-          page_id: id,
+          page_id: prospectId,
           properties: {
             Status: {
               status: {
@@ -101,7 +101,8 @@ export default defineTask({
           },
         })
 
-        await prospectStorage.setItem(normalizeNotionId(id), prospect)
+        prospect.record.properties.Status.status.name = 'Initiate'
+        await prospectStorage.setItem(normalizeNotionId(prospectId), prospect)
       })
     )
 
