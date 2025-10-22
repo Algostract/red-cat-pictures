@@ -410,10 +410,19 @@ export async function sendDocument({
 
 export default defineTask({
   meta: {
-    name: 'workflow:quoation',
+    name: 'workflow:quotation',
     description: 'Create quotation from CMS',
   },
   async run() {
+    const config = useRuntimeConfig()
+    const notionDbId = config.private.notionDbId as unknown as NotionDB
+
+    const today = new Date()
+    const expiry = new Date(today)
+    expiry.setDate(expiry.getDate() + 29)
+
+    n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })
+
     const projectStorage = useStorage<Resource<'project'>>(`data:resource:project`)
 
     await Promise.allSettled(
@@ -421,19 +430,11 @@ export default defineTask({
         const projectId = project.record.id
         const status = project.record.properties.Status.status.name
 
+        console.log('Loop Success', { project: notionTextStringify(project.record.properties.Name.title), status })
+
         if (!(status === 'Quotation')) return
 
-        const config = useRuntimeConfig()
-        const notionDbId = config.private.notionDbId as unknown as NotionDB
-
-        const today = new Date()
-        const expiry = new Date(today)
-        expiry.setDate(expiry.getDate() + 29)
-
-        if (!project) return { result: null }
         const client = (await notion.pages.retrieve({ page_id: project.record.properties.Client.relation[0].id })) as unknown as NotionProjectClient
-
-        n2m = n2m ?? new NotionToMarkdown({ notionClient: notion })
 
         const redcatpicturesDetails = {
           name: 'Aratrik Nandy',
@@ -457,12 +458,16 @@ export default defineTask({
         const termsMarkdown = `**Last Updated**: ${formatDate(termsUpdateDate)}\n` + (await convertNotionPageToMarkdown(n2m, notionDbId.terms, false))
         const budgetMarkdown = (await convertNotionPageToMarkdown(n2m, projectId, false)).split('\n---\n')[0]
 
+        console.log('Fetch Success')
+
         const pdf = await createDocument({
           termsMarkdown,
           budgetMarkdown,
           clientDetails,
           projectDetails,
         })
+
+        console.log('Create Success')
 
         // const documentStorage = useStorage('fs')
         // await documentStorage.setItemRaw(`documents/${pdf.fileName}`, pdf.fileBuffer)
@@ -550,6 +555,8 @@ export default defineTask({
             },
           },
         })
+
+        console.log('Send Success')
 
         project.record.properties.Status.status.name = 'Shoot'
         await projectStorage.setItem(normalizeNotionId(projectId), project)

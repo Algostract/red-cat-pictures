@@ -26,6 +26,8 @@ export default defineTask({
       if (res.status === 'fulfilled')
         await Promise.allSettled(
           res.value.map(async (record) => {
+            if (typeof record === 'string') return
+
             const resource = (await resourceStorage.getItem(normalizeNotionId(record.id))) ?? {
               type,
               notificationStatus: false,
