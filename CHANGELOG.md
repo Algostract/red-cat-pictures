@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.1.2
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.1.1...v3.1.2)
+
+### 🩹 Fixes
+
+- Improve PDF generation error handling and browser management ([988ae82](https://github.com/Algostract/red-cat-pictures/commit/988ae82))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.1.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.1.0...v3.1.1)
