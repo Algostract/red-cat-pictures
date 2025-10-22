@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.1.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.1.0...v3.1.1)
+
+### 🩹 Fixes
+
+- Quotation workflow and sync resource task timing ([48cb2ac](https://github.com/Algostract/red-cat-pictures/commit/48cb2ac))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.1.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.0.0...v3.1.0)
