@@ -215,19 +215,20 @@ _N.B: This Letter consists of 5 pages including this one. Please sign on all pag
   const html = md.render(mdContent)
   const pageHtml = await wrapHtml(html.replace(/\n<hr>\n/g, '<div class="page-break"></div>'), `${projectDetails.quoteNumber}.pdf`)
 
-  // HTML → PDF with Puppeteer
-  const browser = await puppeteer.launch(
-    import.meta.env.NODE_ENV === 'production'
-      ? {
-          browserWSEndpoint: import.meta.env.BROWSER_ENDPOINT,
-          args: ['--no-sandbox', '--disable-dev-shm-usage'],
-        }
-      : {
-          headless: true,
-        }
-  )
   let pdfBuffer: Uint8Array<ArrayBufferLike>
+  let browser
+
   try {
+    if (import.meta.env.NODE_ENV === 'production') {
+      browser = await puppeteer.connect({
+        browserWSEndpoint: import.meta.env.BROWSER_ENDPOINT,
+      })
+    } else {
+      browser = await puppeteer.launch({
+        headless: true,
+      })
+    }
+
     const page = await browser.newPage()
     await page.setContent(pageHtml, { waitUntil: 'networkidle0' })
 
@@ -235,12 +236,20 @@ _N.B: This Letter consists of 5 pages including this one. Please sign on all pag
       format: 'A4',
       printBackground: true,
       displayHeaderFooter: true,
-      headerTemplate: `<div></div>`,
+      headerTemplate: '<div></div>',
       footerTemplate: await footerTemplate(),
       margin: { top: '28mm', right: '15mm', bottom: '28mm', left: '15mm' },
     })
+  } catch (error) {
+    console.error('Failed to generate PDF:', error)
   } finally {
-    await browser.close()
+    if (browser) {
+      if (import.meta.env.NODE_ENV === 'production') {
+        await browser.disconnect()
+      } else {
+        await browser.close()
+      }
+    }
   }
 
   return { fileName: `${projectDetails.quoteNumber}.pdf`, fileBuffer: pdfBuffer }
@@ -364,6 +373,12 @@ export async function sendDocument({
     },
   })
 
+  /*   console.log({
+      uploadUrl,
+      documentId,
+      recipients: recipientsDetails,
+    }) */
+
   await $fetch(uploadUrl, {
     method: 'PUT',
     headers: {
@@ -430,7 +445,7 @@ export default defineTask({
         const projectId = project.record.id
         const status = project.record.properties.Status.status.name
 
-        console.log('Loop Success', { project: notionTextStringify(project.record.properties.Name.title), status })
+        // console.log('Loop Success', { project: notionTextStringify(project.record.properties.Name.title), status })
 
         if (!(status === 'Quotation')) return
 
@@ -458,7 +473,7 @@ export default defineTask({
         const termsMarkdown = `**Last Updated**: ${formatDate(termsUpdateDate)}\n` + (await convertNotionPageToMarkdown(n2m, notionDbId.terms, false))
         const budgetMarkdown = (await convertNotionPageToMarkdown(n2m, projectId, false)).split('\n---\n')[0]
 
-        console.log('Fetch Success')
+        // console.log('Fetch Success')
 
         const pdf = await createDocument({
           termsMarkdown,
@@ -467,7 +482,7 @@ export default defineTask({
           projectDetails,
         })
 
-        console.log('Create Success')
+        // console.log('Create Success', { pdf: pdf.fileName })
 
         // const documentStorage = useStorage('fs')
         // await documentStorage.setItemRaw(`documents/${pdf.fileName}`, pdf.fileBuffer)
@@ -556,7 +571,7 @@ export default defineTask({
           },
         })
 
-        console.log('Send Success')
+        // console.log('Send Success')
 
         project.record.properties.Status.status.name = 'Shoot'
         await projectStorage.setItem(normalizeNotionId(projectId), project)
