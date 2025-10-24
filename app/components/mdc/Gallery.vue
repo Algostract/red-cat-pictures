@@ -14,14 +14,13 @@ const allPhotos = computed(() => data.value.filter(({ id }) => activePhotoIds.va
     <div class="relative z-10 grid grid-cols-3 gap-2">
       <NuxtLink v-for="{ id, title, image, description, url } in allPhotos" :key="id" :to="url">
         <NuxtImg
-          provider="uploadcare"
           :src="image"
           :alt="description"
           :width="480"
           :height="Math.round(480 / (1 / 1))"
           fit="cover"
           loading="lazy"
-          :placeholder="[120, Math.round(120 / (1 / 1)), 'lightest', 25]"
+          :placeholder="[120, Math.round(120 / (1 / 1)), 20, 25]"
           class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500"
           :class="{ active: activePhotoName === title }" />
       </NuxtLink>

@@ -39,7 +39,7 @@ const { height: sliderHeight } = useElementSize(slider)
               :height="Math.round(480 / (3 / 4))"
               fit="cover"
               loading="lazy"
-              :placeholder="[120, Math.round(120 / (3 / 4)), 'lightest', 25]"
+              :placeholder="[120, Math.round(120 / (3 / 4)), 20, 25]"
               class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500"
               :class="{ active: activePhoto === `${dupIndex}-${title}` }" />
           </NuxtLink>

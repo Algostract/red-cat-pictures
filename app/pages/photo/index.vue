@@ -6,7 +6,7 @@ const description = `Photo Gallery`
 const {
   public: { siteUrl },
 } = useRuntimeConfig()
-const imageUrl = photos.value?.length ? `https://ucarecdn.com/${photos.value[0]?.image}/-/format/auto/-/scale_crop/1200x630/` : `${siteUrl}/preview/landscape.webp`
+const imageUrl = photos.value?.length ? `https://cdn.redcatpictures.com/media/f_webp&fit_cover&w_1200&h_630/${photos.value[0]?.image}` : `${siteUrl}/preview/landscape.webp`
 
 useSeoMeta({
   title: title,
@@ -38,11 +38,12 @@ const activePhotoName = useState<string | null>()
               <NuxtImg
                 :src="photo.image"
                 :alt="photo.description"
-                :width="480"
-                :height="Math.round(480 / photo.aspectRatio)"
+                :width="250"
+                :height="Math.round(250 / photo.aspectRatio)"
+                densities="x1 x2"
                 fit="cover"
                 loading="lazy"
-                :placeholder="[120, Math.round(120 / photo.aspectRatio), 'lightest', 25]"
+                :placeholder="[125, Math.round(125 / photo.aspectRatio), 60, 5]"
                 class="w-full object-cover"
                 :class="{ active: activePhotoName === photo.title }" />
             </NuxtLink>

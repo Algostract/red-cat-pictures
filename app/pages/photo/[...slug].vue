@@ -19,7 +19,7 @@ const description = `${activePhoto.value.description}`
 const {
   public: { siteUrl },
 } = useRuntimeConfig()
-const imageUrl = `https://ucarecdn.com/${activePhoto.value.image}/-/format/auto/-/scale_crop/${Math.round(720 * activePhoto.value.aspectRatio)}x720/center`
+const imageUrl = `https://cdn.redcatpictures.com/media/f_webp&fit_cover&w_${Math.round(720 * activePhoto.value.aspectRatio)}&h_720/${photos.value[0]?.image}`
 
 useSeoMeta({
   title: title,
@@ -66,7 +66,7 @@ useSchemaOrg([
       :height="720"
       fit="fill"
       loading="eager"
-      :placeholder="[Math.round(180 * activePhoto.aspectRatio), 180, 'lightest', 25]"
+      :placeholder="[Math.round(180 * activePhoto.aspectRatio), 180, 20, 25]"
       class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500 md:h-full md:w-auto" />
     <!-- <h1 class="text-center my-8">{{ activeImage.title }}</h1> -->
   </main>

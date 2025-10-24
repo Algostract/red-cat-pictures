@@ -58,14 +58,14 @@ export async function convertNotionPageToMarkdown(n2m: NotionToMarkdown, pageId:
                 const title = notionTextStringify(record.properties['Name'].title)
                 const contentType = record.properties.Type?.select.name.toLowerCase()
 
-                console.log({ text, title: slugify(title), full: `[${text}](/${contentType}/${slugify(title)}_${record.id})` })
+                // console.log({ text, title: slugify(title), full: `[${text}](/${contentType}/${slugify(title)}_${record.id})` })
                 return `[${text}](/${contentType}/${slugify(title)}_${record.id})`
               }
               case 'client': {
                 const url = ('Website' in record.properties ? record.properties.Website.url : null) ?? ('Instagram' in record.properties ? record.properties.Instagram.url : null)
                 if (!url) return full
 
-                console.log({ text, url, full: `[${text}](${url})` })
+                // console.log({ text, url, full: `[${text}](${url})` })
                 return `[${text}](${url})`
               }
               default:
@@ -129,7 +129,7 @@ export default defineCachedEventHandler<Promise<ContentDetails>>(
       return {
         id,
         title,
-        cover: content.cover?.type === 'external' ? content.cover.external.url.split('/')[3] : undefined,
+        cover: content.cover?.type === 'external' ? content.cover.external.url.split('/')[5] : undefined,
         createdAt: content.created_time as string,
         modifiedAt: content.last_edited_time as string,
         publishedAt: content.properties['Publish date'].date.start as string,

@@ -373,12 +373,6 @@ export async function sendDocument({
     },
   })
 
-  /*   console.log({
-      uploadUrl,
-      documentId,
-      recipients: recipientsDetails,
-    }) */
-
   await $fetch(uploadUrl, {
     method: 'PUT',
     headers: {
@@ -445,9 +439,9 @@ export default defineTask({
         const projectId = project.record.id
         const status = project.record.properties.Status.status.name
 
-        // console.log('Loop Success', { project: notionTextStringify(project.record.properties.Name.title), status })
-
         if (!(status === 'Quotation')) return
+
+        console.log('✅ Quotation Started:', notionTextStringify(project.record.properties.Name.title))
 
         const client = (await notion.pages.retrieve({ page_id: project.record.properties.Client.relation[0].id })) as unknown as NotionProjectClient
 
@@ -458,7 +452,7 @@ export default defineTask({
         const clientDetails = {
           name: notionTextStringify(client.properties.Name.title),
           address: notionTextStringify(client.properties.Address.rich_text),
-          phone: client.properties.Phone.phone_number,
+          phone: client.properties.Phone?.phone_number,
           email: import.meta.env.NODE_ENV === 'production' ? client.properties.Email.email : 'redcatpictures24@gmail.com',
         }
         const projectDetails = {
@@ -473,7 +467,7 @@ export default defineTask({
         const termsMarkdown = `**Last Updated**: ${formatDate(termsUpdateDate)}\n` + (await convertNotionPageToMarkdown(n2m, notionDbId.terms, false))
         const budgetMarkdown = (await convertNotionPageToMarkdown(n2m, projectId, false)).split('\n---\n')[0]
 
-        // console.log('Fetch Success')
+        console.log('📥 Quotation Details Fetched', { clientDetails, projectDetails })
 
         const pdf = await createDocument({
           termsMarkdown,
@@ -482,15 +476,13 @@ export default defineTask({
           projectDetails,
         })
 
-        // console.log('Create Success', { pdf: pdf.fileName })
+        console.log('📄 Quotation Created:', pdf.fileName)
 
         // const documentStorage = useStorage('fs')
         // await documentStorage.setItemRaw(`documents/${pdf.fileName}`, pdf.fileBuffer)
 
         // const doc = (await getAllDocuments())[0];
-        // console.log('Latest doc:', doc);
         // const meta = await getDocument(doc.id);
-        // console.log('fields:', meta.fields);
 
         await sendDocument({
           title: pdf.fileName,
@@ -571,7 +563,7 @@ export default defineTask({
           },
         })
 
-        // console.log('Send Success')
+        console.log('📤 Quotation Sent')
 
         project.record.properties.Status.status.name = 'Shoot'
         await projectStorage.setItem(normalizeNotionId(projectId), project)

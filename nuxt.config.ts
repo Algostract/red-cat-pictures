@@ -102,22 +102,10 @@ export default defineNuxtConfig({
       tasks: true,
     },
     scheduledTasks: {
-      '*/3 * * * *': ['sync:resource', 'workflow:quotation', 'notify:content'],
-      '*/10 * * * *': ['prospect:marketing'],
+      '*/5 * * * *': ['sync:resource', 'workflow:quotation'],
+      '*/10 * * * *': ['prospect:marketing', 'notify:content'],
     },
   },
-  /*   vite: {
-      // FIXME: temporary fix for email remove when not needed
-      $server: {
-        build: {
-          rollupOptions: {
-            output: {
-              preserveModules: true,
-            },
-          },
-        },
-      },
-    }, */
   routeRules: {
     '/': { isr: 3600 },
     '/_ipx/**': { headers: { 'cache-control': 'max-age=31536000' } },
@@ -184,16 +172,16 @@ export default defineNuxtConfig({
     },
   },
   image: {
-    provider: 'uploadcare',
+    provider: 'ipx',
     ipx: {
-      baseURL: 'https://cdn.redcatpictures.com',
-    },
-    uploadcare: {
-      cdnURL: 'https://ucarecdn.com',
-      quality: 'smart',
-      format: 'auto',
-      progressive: 'yes',
-      strip_meta: 'all',
+      // baseURL: 'http://localhost:3500/media',
+      baseURL: 'https://cdn.redcatpictures.com/media',
+      modifiers: {
+        quality: 80,
+        format: 'avif',
+        progressive: 'yes',
+        strip_meta: 'all',
+      },
     },
   },
   scripts: {

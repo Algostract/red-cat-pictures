@@ -40,7 +40,7 @@ export default defineTask({
         const url = `/${contentType}/${slugify(title)}_${id}`
         const image =
           content.record.cover?.type === 'external'
-            ? `https://ucarecdn.com/${content.record.cover.external.url.split('/')[3]}/-/format/jpg/-/scale_crop/1200x630/center/`
+            ? `https://ucarecdn.com/${content.record.cover.external.url.split('/')[5]}/-/format/jpg/-/scale_crop/1200x630/center/`
             : 'https://ucarecdn.com/771d0695-2196-4c98-b9eb-4f29acd6506f/-/format/jpg/-/scale_crop/1200x630/center/'
 
         console.log(`Publishing new ${contentType} content →`, title)
