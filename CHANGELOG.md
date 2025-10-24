@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.2.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.1.2...v3.2.0)
+
+### 🚀 Enhancements
+
+- Cdn migration from uploadcare to unfiles ([3169b0e](https://github.com/Algostract/red-cat-pictures/commit/3169b0e))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.1.2
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.1.1...v3.1.2)
