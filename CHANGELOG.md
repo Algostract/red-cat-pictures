@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.2.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.2.0...v3.2.1)
+
+### 💅 Refactors
+
+- Image handling and CDN integration across components and pages ([9380fd7](https://github.com/Algostract/red-cat-pictures/commit/9380fd7))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.2.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.1.2...v3.2.0)
