@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.3.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.2.1...v3.3.0)
+
+### 🚀 Enhancements
+
+- Enhance image handling with CDN integration and optimize video/image URLs across pages ([7f5c0e3](https://github.com/Algostract/red-cat-pictures/commit/7f5c0e3))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.2.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.2.0...v3.2.1)
