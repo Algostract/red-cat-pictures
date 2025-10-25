@@ -132,6 +132,8 @@ export default defineNuxtConfig({
     },
     public: {
       siteUrl: '',
+      // cdnUrl: 'http://localhost:3500/media',
+      cdnUrl: 'https://cdn.redcatpictures.com/media',
       scripts: {
         googleAnalytics: {
           id: '',
@@ -178,7 +180,7 @@ export default defineNuxtConfig({
       baseURL: 'https://cdn.redcatpictures.com/media',
       modifiers: {
         quality: 80,
-        format: 'avif',
+        // format: 'avif'
         progressive: 'yes',
         strip_meta: 'all',
       },

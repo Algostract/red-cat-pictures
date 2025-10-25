@@ -1,9 +1,13 @@
 <script setup lang="ts">
-const { data: videos } = await useAPI('/api/video', { default: () => [] })
-
 definePageMeta({
   layout: false,
 })
+
+const {
+  public: { cdnUrl },
+} = useRuntimeConfig()
+
+const { data: videos } = await useAPI('/api/video', { default: () => [] })
 
 if (!videos.value[0]) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
@@ -12,7 +16,7 @@ if (!videos.value[0]) {
 const title = `Videos`
 const description = `Video Gallery`
 const url = 'https://redcatpictures.com'
-const imageUrl = `https://ucarecdn.com/${videos.value[0].id}/-/format/auto/-/scale_crop/${Math.round(720 * videos.value[0].aspectRatio)}x720/center`
+const imageUrl = `${cdnUrl}/${videos.value[0].id}/-/format/auto/-/scale_crop/${Math.round(720 * videos.value[0].aspectRatio)}x720/center`
 
 useSeoMeta({
   title: title,

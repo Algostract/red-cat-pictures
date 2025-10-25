@@ -2,7 +2,7 @@
 const title = `Experience`
 const description = `Experience Our Image Gallery In 3D`
 const {
-  public: { siteUrl },
+  public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
 const imageUrl = `${siteUrl}/previews/landing.webp`
 
@@ -88,7 +88,7 @@ const frames = computed(() =>
       <PhotoFrame
         v-for="{ image, aspectRatio, position } in frames"
         :key="image"
-        :photo="`https://ucarecdn.com/${image}/-/format/auto/-/scale_crop/${Math.round(720 * aspectRatio)}x720/center`"
+        :photo="`${cdnUrl}/${image}/-/format/auto/-/scale_crop/${Math.round(720 * aspectRatio)}x720/center`"
         :aspect-ratio="aspectRatio"
         :position="position" />
     </Suspense>

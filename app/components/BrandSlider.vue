@@ -24,13 +24,13 @@ useIntersectionObserver(slider, onIntersectionObserver)
           <template v-for="dupIndex in [1, 2]" :key="dupIndex">
             <template v-for="{ id, name, website, logo } in clients" :key="id">
               <NuxtLink
-                v-if="extractUploadcareId(logo)"
+                v-if="extractCdnId(logo)"
                 :href="website ? `${website}?utm_source=redcatpictures.com` : ''"
                 target="_blank"
                 rel="noopener"
                 class="relative size-16 overflow-hidden rounded-full bg-white"
                 :aria-label="`Visit ${name} website`">
-                <NuxtImg :src="extractUploadcareId(logo)" :alt="name" :width="64" :height="64" fit="contain" loading="lazy" />
+                <NuxtImg :src="extractCdnId(logo)" :alt="name" :width="64" :height="64" fit="contain" loading="lazy" />
               </NuxtLink>
             </template>
           </template>

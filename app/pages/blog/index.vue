@@ -4,9 +4,9 @@ const { data: blogs } = await useAPI('/api/blog')
 const title = `Blogs`
 const description = `Read our Blogs for expert tips on photography and videography.`
 const {
-  public: { siteUrl },
+  public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
-const imageUrl = blogs.value?.length ? `https://ucarecdn.com/${blogs.value[0]?.cover}/-/format/auto/-/scale_crop/1200x630/` : `${siteUrl}/preview/landscape.webp`
+const imageUrl = blogs.value?.length ? `${cdnUrl}/${blogs.value[0]?.cover}/-/format/auto/-/scale_crop/1200x630/` : `${siteUrl}/preview/landscape.webp`
 
 useSeoMeta({
   title: title,

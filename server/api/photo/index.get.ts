@@ -28,7 +28,7 @@ export default defineCachedEventHandler<Promise<Photo[]>>(
               id: slug,
               title: notionTextStringify(properties.Name.title),
               description: notionTextStringify(properties.Description.rich_text),
-              image: cover?.type === 'external' ? cover.external.url.split('/')[5] : undefined,
+              image: cover?.type === 'external' ? cover.external.url : undefined,
               aspectRatio: aW / aH,
               category: properties.Segment.select.name,
               gallery: properties.Gallery.checkbox,

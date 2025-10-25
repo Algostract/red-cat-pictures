@@ -14,6 +14,10 @@ defineProps<{
   toEmail: string
 }>()
 
+const {
+  public: { cdnUrl },
+} = useRuntimeConfig()
+
 const referTag = '?ref=mail-prospect'
 const category = 'food'
 
@@ -36,7 +40,7 @@ const fromFeaturedPhotos = (
       try {
         const data = await $fetch(`/api/photo/${(key as unknown as string).toLowerCase()}`)
         if (Array.isArray(data)) throw new Error('Unexpected array response')
-        return { id: data.id, title: data.title, description: data.description, image: data.image!, url: data.url }
+        return { id: data.id, title: data.title, description: data.description, image: extractCdnId(data.image!), url: data.url }
       } catch {
         return null
       }
@@ -156,7 +160,7 @@ const tailwindConfig = {
             <!-- Product images row -->
             <Section class="relative mb-4 flex flex-row">
               <Link v-for="{ id, title, image, url } in fromFeaturedPhotos" :key="id" :href="`${fromCompanyLink}${url}${referTag}`" class="inline-block w-1/4" target="_blank">
-                <Img :src="`https://ucarecdn.com/${image}/-/smart_resize/960x1440/`" :alt="title" class="w-full object-cover" />
+                <Img :src="`${cdnUrl}/${image}/-/smart_resize/960x1440/`" :alt="title" class="w-full object-cover" />
               </Link>
             </Section>
             <Section class="mb-4 text-center">

@@ -8,6 +8,9 @@ export default defineTask({
     description: 'Outreach agencies via email, instagram, whatsApp',
   },
   async run() {
+    const {
+      public: { cdnUrl },
+    } = useRuntimeConfig()
     const prospectStorage = useStorage<Resource<'prospect'>>(`data:resource:prospect`)
     const emailStorage = useStorage<EmailSubscription>('data:subscription:email')
     const whatsappStorage = useStorage<WhatsappSubscription>('data:subscription:whatsapp')
@@ -57,7 +60,7 @@ export default defineTask({
                 const data = await $fetch(`/api/photo/${(key as unknown as string).toLowerCase()}`)
                 if (Array.isArray(data)) throw new Error('Unexpected array response')
 
-                const link = `https://ucarecdn.com/${data.id}/-/format/jpg/-/preview/${Math.min(1080, Math.round(1080 * data.aspectRatio))}x${Math.min(1080, Math.round(1080 / data.aspectRatio))}/`
+                const link = `${cdnUrl}/${extractCdnId(data.image)}/-/format/jpg/-/preview/${Math.min(1080, Math.round(1080 * data.aspectRatio))}x${Math.min(1080, Math.round(1080 / data.aspectRatio))}/`
 
                 await sendWhatsappMessage([
                   {

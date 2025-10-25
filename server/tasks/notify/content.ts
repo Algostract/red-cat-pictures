@@ -13,6 +13,9 @@ export default defineTask({
     description: 'Monitor new episodes and blog posts; send alerts via push, email, whatsApp',
   },
   async run() {
+    const {
+      public: { cdnUrl },
+    } = useRuntimeConfig()
     const resourceStorage = useStorage<Resource>(`data:resource`)
     const subscriptionStorage = useStorage('data:subscription')
 
@@ -40,8 +43,8 @@ export default defineTask({
         const url = `/${contentType}/${slugify(title)}_${id}`
         const image =
           content.record.cover?.type === 'external'
-            ? `https://ucarecdn.com/${content.record.cover.external.url.split('/')[5]}/-/format/jpg/-/scale_crop/1200x630/center/`
-            : 'https://ucarecdn.com/771d0695-2196-4c98-b9eb-4f29acd6506f/-/format/jpg/-/scale_crop/1200x630/center/'
+            ? `${cdnUrl}/${extractCdnId(content.record.cover.external.url)}/-/format/jpg/-/scale_crop/1200x630/center/`
+            : `${cdnUrl}/771d0695-2196-4c98-b9eb-4f29acd6506f/-/format/jpg/-/scale_crop/1200x630/center/`
 
         console.log(`Publishing new ${contentType} content →`, title)
 

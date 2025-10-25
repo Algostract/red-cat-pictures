@@ -23,6 +23,9 @@ export const messageTemplates = {
 }
 
 export default defineNitroPlugin(async () => {
+  const {
+    public: { cdnUrl },
+  } = useRuntimeConfig()
   // eslint-disable-next-line no-constant-condition
   if (!(import.meta.env.NODE_ENV === 'production' && import.meta.env.PLATFORM_ENV !== 'native' && false)) return
 
@@ -73,7 +76,7 @@ export default defineNitroPlugin(async () => {
           const links: string[] = (await $fetch('/api/photo'))
             .filter((item) => item.category === (message.body.toLowerCase().trim().split(' ').at(1) as unknown as Category))
             .map((item) => {
-              return `https://ucarecdn.com/${item.image}/-/format/jpg/-/preview/${Math.min(1080, Math.round(1080 * item.aspectRatio))}x${Math.min(1080, Math.round(1080 / item.aspectRatio))}/`
+              return `${cdnUrl}/${item.image}/-/format/jpg/-/preview/${Math.min(1080, Math.round(1080 * item.aspectRatio))}x${Math.min(1080, Math.round(1080 / item.aspectRatio))}/`
             })
 
           await Promise.allSettled(

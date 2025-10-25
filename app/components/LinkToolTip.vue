@@ -6,6 +6,9 @@ const props = defineProps<{
   }
 }>()
 
+const {
+  public: { cdnUrl },
+} = useRuntimeConfig()
 const { $api } = useNuxtApp()
 const url = computed(() => props.activeLink?.url)
 const data = ref<MetaData>()
@@ -20,7 +23,7 @@ watch(url, async (value) => {
 const title = computed(() => data.value?.ogTitle ?? props.activeLink?.title)
 const description = computed(() => data.value?.ogDescription)
 const lastUpdated = computed(() => data.value?.lastUpdated)
-const image = computed<string>(() => data.value?.ogImage?.toString() ?? 'https://ucarecdn.com/771d0695-2196-4c98-b9eb-4f29acd6506f/-/format/auto/-/scale_crop/2560x1440/center/')
+const image = computed<string>(() => data.value?.ogImage?.toString() ?? `${cdnUrl}/771d0695-2196-4c98-b9eb-4f29acd6506f/-/format/auto/-/scale_crop/2560x1440/center/`)
 const logo = computed<string>(() => data.value?.logo?.toString() ?? (isDark.value ? '/logo-light.png' : '/logo-dark.png'))
 const imgProvider = computed((): 'uploadcare' | 'ipx' => {
   if (image.value.includes('ucarecdn.com') || image.value.includes('uploadcare.com')) {

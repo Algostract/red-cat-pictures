@@ -30,14 +30,16 @@ export default defineTask({
       // current cover -> https://ucarecdn.com/17dc5f16-3961-47c2-9ea2-996b4fac0d19/-/preview/1620x1080/
       // update cover -> https://cdn.redcatpictures.com/media/w_1620&h_1080/product-photo-033-033
 
-      if (asset.properties.Type.select.name == 'Video') continue
+      if (!(asset.properties.Type.select.name === 'Video' && asset.properties.Status.status.name === 'Plan')) continue
 
       const slug = asset.properties.Slug?.formula?.string || asset.id
       const [aW, aH] = asset.properties['Aspect ratio'].select.name.split(':').flatMap((item) => parseInt(item))
       const aspectRatio = aW / aH
       const { width: coverWidth, height: coverHeight } = calculateDimension(1080, aspectRatio)
 
-      const updateCoverURL = `https://cdn.redcatpictures.com/media/w_${coverWidth}&h_${coverHeight}/${slug}`
+      const cdnUrl = 'https://cdn.redcatpictures.com/media'
+      // const cdnUrl = "https://localhost:3500/media"
+      const updateCoverURL = `${cdnUrl}/w_${coverWidth}&h_${coverHeight}/${slug}`
 
       let coverExists = false
       try {

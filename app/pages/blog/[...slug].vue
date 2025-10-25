@@ -11,13 +11,14 @@ if (blog.value.url !== '/blog/' + slug) {
   await navigateTo(blog.value.url, { redirectCode: 301 })
 }
 const {
-  public: { siteUrl },
+  public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
 const title = `${blog.value.title}`
 const description = `${blog.value.description}`
 const url = `${siteUrl}/blog/${slug}`
+const cover = blog.value.cover ? extractCdnId(blog.value.cover) : ''
 
-const imageUrl = `https://ucarecdn.com/${blog.value.cover}/-/format/auto/-/preview/1200x630/center`
+const imageUrl = `${cdnUrl}/${cover}/-/format/auto/-/preview/1200x630/center`
 
 useSeoMeta({
   title: title,
@@ -46,7 +47,7 @@ useSchemaOrg([
 <template>
   <article v-if="blog" class="w-full">
     <NuxtImg
-      :src="blog.cover!"
+      :src="cover"
       :alt="blog.title"
       :width="1280"
       :height="Math.round(1280 / (16 / 9))"

@@ -105,12 +105,13 @@ const photos = computed<GalleryPhoto[]>(() =>
         <NuxtImg
           :src="image"
           :alt="description"
-          :width="640"
-          :height="Math.round(640 / aspectRatio)"
-          fit="fill"
+          :width="700"
+          :height="Math.round(700 / aspectRatio)"
+          densities="x1 x2"
+          fit="cover"
           loading="lazy"
-          :placeholder="[160, Math.round(160 / aspectRatio), 20, 25]"
-          class="size-full overflow-hidden rounded-sm bg-light-600 dark:bg-dark-500"
+          :placeholder="[350, Math.round(350 / aspectRatio), 60, 5]"
+          class="size-full overflow-hidden rounded-sm bg-light-600 object-cover dark:bg-dark-500"
           :class="{ active: activePhoto === title }" />
       </NuxtLink>
     </div>

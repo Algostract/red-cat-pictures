@@ -11,13 +11,13 @@ if (episode.value.url !== '/episode/' + slug) {
   await navigateTo(episode.value.url, { redirectCode: 301 })
 }
 const {
-  public: { siteUrl },
+  public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
 const title = `${episode.value.title}`
 const description = `${episode.value.description}`
 const url = `${siteUrl}/episode/${slug}`
 
-const imageUrl = `https://ucarecdn.com/${episode.value.cover}/-/format/auto/-/preview/1200x630/center`
+const imageUrl = `${cdnUrl}/${episode.value.cover}/-/format/auto/-/preview/1200x630/center`
 
 useSeoMeta({
   title: title,
