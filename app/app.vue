@@ -36,6 +36,7 @@ useSeoMeta({
     viewportFit: 'cover',
   },
   ogImage: imageUrl,
+  ogLogo: `${siteUrl}/logo-dark.png`,
   twitterImage: imageUrl,
 })
 

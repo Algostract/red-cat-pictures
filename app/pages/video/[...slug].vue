@@ -17,9 +17,10 @@ if (!activeVideo.value) {
 const title = `${activeVideo.value.title}`
 const description = `${activeVideo.value.description}`
 const {
-  public: { siteUrl },
+  public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
-const imageUrl = activeVideo.value.poster
+const cover = activeVideo.value?.poster ? extractCdnId(activeVideo.value?.poster) : ''
+const imageUrl = `${cdnUrl}/fit_cover&w_1920&h_1080/${cover}`
 
 useSeoMeta({
   title: title,
@@ -30,7 +31,7 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${siteUrl}/photo/${activeVideoSlug.value}`,
+  ogUrl: `${siteUrl}/video/${activeVideoSlug.value}`,
 })
 
 useSchemaOrg([
@@ -65,7 +66,7 @@ async function toggleFullScreen() {
     <NuxtVideo
       ref="videoContainerRef"
       :key="activeVideoSlug"
-      :poster="activeVideo.poster"
+      :poster="cover"
       :source="activeVideo.sources"
       :disable-picture-in-picture="true"
       controls-list="nodownload"

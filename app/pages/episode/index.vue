@@ -6,7 +6,7 @@ const description = `Read our episodes for behind-the-scenes insights, project s
 const {
   public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
-const imageUrl = episodes.value?.length ? `${cdnUrl}/${extractCdnId(episodes.value[0]?.cover)}/-/format/auto/-/scale_crop/1200x630/` : `${siteUrl}/preview/landscape.webp`
+const imageUrl = episodes.value?.length ? `${cdnUrl}/fit_cover&w_1200&h_630/${extractCdnId(episodes.value[0]?.cover)}/` : `${siteUrl}/preview/placeholder-empty.webp`
 
 useSeoMeta({
   title: title,

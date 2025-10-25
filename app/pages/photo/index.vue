@@ -4,9 +4,9 @@ const { data: photos } = await useAPI('/api/photo', { default: () => [] })
 const title = `Photos`
 const description = `Photo Gallery`
 const {
-  public: { siteUrl },
+  public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
-const imageUrl = photos.value?.length ? `https://cdn.redcatpictures.com/media/f_webp&fit_cover&w_1200&h_630/${photos.value[0]?.image}` : `${siteUrl}/preview/landscape.webp`
+const imageUrl = photos.value?.length ? `${cdnUrl}/fit_cover&w_1200&h_630/${extractCdnId(photos.value[0]?.image)}` : `${siteUrl}/preview/placeholder-empty.webp`
 
 useSeoMeta({
   title: title,

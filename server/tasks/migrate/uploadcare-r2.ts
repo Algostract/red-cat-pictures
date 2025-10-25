@@ -38,7 +38,6 @@ export default defineTask({
       const { width: coverWidth, height: coverHeight } = calculateDimension(1080, aspectRatio)
 
       const cdnUrl = 'https://cdn.redcatpictures.com/media'
-      // const cdnUrl = "https://localhost:3500/media"
       const updateCoverURL = `${cdnUrl}/w_${coverWidth}&h_${coverHeight}/${slug}`
 
       let coverExists = false

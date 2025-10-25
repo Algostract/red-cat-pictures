@@ -16,8 +16,8 @@ const {
 const title = `${episode.value.title}`
 const description = `${episode.value.description}`
 const url = `${siteUrl}/episode/${slug}`
-
-const imageUrl = `${cdnUrl}/${episode.value.cover}/-/format/auto/-/preview/1200x630/center`
+const cover = episode.value.cover ? extractCdnId(episode.value.cover) : ''
+const imageUrl = `${cdnUrl}/fit_cover&w_1200&h_630/${cover}`
 
 useSeoMeta({
   title: title,
@@ -46,7 +46,7 @@ useSchemaOrg([
 <template>
   <article v-if="episode" class="w-full">
     <NuxtImg
-      :src="episode.cover!"
+      :src="cover"
       :alt="episode.title"
       :width="1280"
       :height="Math.round(1280 / (16 / 9))"

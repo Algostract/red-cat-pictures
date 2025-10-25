@@ -6,7 +6,7 @@ const description = `Read our Blogs for expert tips on photography and videograp
 const {
   public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
-const imageUrl = blogs.value?.length ? `${cdnUrl}/${blogs.value[0]?.cover}/-/format/auto/-/scale_crop/1200x630/` : `${siteUrl}/preview/landscape.webp`
+const imageUrl = blogs.value?.length ? `${cdnUrl}/fit_cover&w_1200&h_630/${extractCdnId(blogs.value[0]?.cover)}` : `${siteUrl}/preview/placeholder-empty.webp`
 
 useSeoMeta({
   title: title,

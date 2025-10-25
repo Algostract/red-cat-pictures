@@ -3,10 +3,6 @@ definePageMeta({
   layout: false,
 })
 
-const {
-  public: { cdnUrl },
-} = useRuntimeConfig()
-
 const { data: videos } = await useAPI('/api/video', { default: () => [] })
 
 if (!videos.value[0]) {
@@ -15,8 +11,10 @@ if (!videos.value[0]) {
 
 const title = `Videos`
 const description = `Video Gallery`
-const url = 'https://redcatpictures.com'
-const imageUrl = `${cdnUrl}/${videos.value[0].id}/-/format/auto/-/scale_crop/${Math.round(720 * videos.value[0].aspectRatio)}x720/center`
+const {
+  public: { siteUrl, cdnUrl },
+} = useRuntimeConfig()
+const imageUrl = videos.value?.length ? `${cdnUrl}/fit_cover&w_1200&h_630/${extractCdnId(videos.value[0].poster)}` : `${siteUrl}/preview/placeholder-empty.webp`
 
 useSeoMeta({
   title: title,
@@ -27,7 +25,7 @@ useSeoMeta({
   twitterDescription: description,
   ogImage: imageUrl,
   twitterImage: imageUrl,
-  ogUrl: `${url}/video`,
+  ogUrl: `${siteUrl}/video`,
 })
 </script>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// import { differenceInYears, formatDuration } from 'date-fns'
 import type { Member } from '~/components/Card/Member.vue'
+// import { differenceInYears, formatDuration } from 'date-fns'
 
 const title = `About Us`
 const description = `Our team, vision, and clients`

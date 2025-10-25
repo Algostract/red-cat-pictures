@@ -17,9 +17,10 @@ if (!activePhoto.value) {
 const title = `${activePhoto.value.title}`
 const description = `${activePhoto.value.description}`
 const {
-  public: { siteUrl },
+  public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
-const imageUrl = `https://cdn.redcatpictures.com/media/f_webp&fit_cover&w_${Math.round(720 * activePhoto.value.aspectRatio)}&h_720/${photos.value[0]?.image}`
+const cover = activePhoto.value?.image ? extractCdnId(activePhoto.value?.image) : ''
+const imageUrl = `${cdnUrl}/fit_cover&w_${Math.round(720 * activePhoto.value.aspectRatio)}&h_720/${cover}`
 
 useSeoMeta({
   title: title,
@@ -28,6 +29,13 @@ useSeoMeta({
   description: description,
   ogDescription: description,
   twitterDescription: description,
+  viewport: {
+    initialScale: 1.0,
+    maximumScale: 5.0,
+    minimumScale: 1.0,
+    userScalable: 'yes',
+    viewportFit: 'cover',
+  },
   ogImage: imageUrl,
   twitterImage: imageUrl,
   ogUrl: `${siteUrl}/photo/${activePhotoSlug.value}`,
@@ -60,7 +68,7 @@ useSchemaOrg([
     </header>
     <!-- App Header -->
     <NuxtImg
-      :src="activePhoto.image"
+      :src="cover"
       :alt="activePhoto.description"
       :width="Math.round(720 * activePhoto.aspectRatio)"
       :height="720"

@@ -1,4 +1,8 @@
 <script setup lang="ts">
+const {
+  public: { cdnUrl },
+} = useRuntimeConfig()
+
 type Orientation = 'portrait' | 'landscape'
 
 interface Source {
@@ -120,7 +124,7 @@ function handleEnded() {
   <video
     ref="videoRef"
     class="size-full bg-black"
-    :poster="poster"
+    :poster="`${cdnUrl}/fit_cover&w_1280/${poster}`"
     :controlsList="controlsList"
     :preload="preload"
     :controls="controls"

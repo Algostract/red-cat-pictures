@@ -4,7 +4,7 @@ const description = `Experience Our Image Gallery In 3D`
 const {
   public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
-const imageUrl = `${siteUrl}/previews/landing.webp`
+const imageUrl = `${siteUrl}/previews/exprience.webp`
 
 definePageMeta({ layout: false })
 useSeoMeta({
