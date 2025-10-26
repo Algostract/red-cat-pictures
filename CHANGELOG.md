@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.3.2
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.1...v3.3.2)
+
+### 🩹 Fixes
+
+- Replace extractUploadcare to extractCdn ([baca757](https://github.com/Algostract/red-cat-pictures/commit/baca757))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.3.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.0...v3.3.1)
