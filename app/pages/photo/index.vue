@@ -36,14 +36,13 @@ const activePhotoName = useState<string | null>()
           <div v-for="photo in groupedPhotos[category]" :key="photo.id" class="mb-2 overflow-hidden rounded-sm bg-light-600 duration-200 ease-in-out hover:scale-110 dark:bg-dark-500">
             <NuxtLink :to="photo.url" @click="activePhotoName = photo.title">
               <NuxtImg
-                :src="photo.image"
+                :src="extractCdnId(photo.image)"
                 :alt="photo.description"
-                :width="250"
-                :height="Math.round(250 / photo.aspectRatio)"
-                densities="x1 x2"
+                :width="240"
+                :height="Math.round(240 / photo.aspectRatio)"
                 fit="cover"
                 loading="lazy"
-                :placeholder="[125, Math.round(125 / photo.aspectRatio), 60, 5]"
+                :placeholder="[120, Math.round(120 / photo.aspectRatio), 40, 10]"
                 class="w-full object-cover"
                 :class="{ active: activePhotoName === photo.title }" />
             </NuxtLink>

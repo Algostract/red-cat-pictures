@@ -47,19 +47,11 @@ const nativeConfig =
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-05-15',
-  future: {
-    compatibilityVersion: 4,
-  },
+  compatibilityDate: '2025-07-15',
   experimental: {
     viewTransition: true,
   },
-  devtools: {
-    enabled: true,
-    timeline: {
-      enabled: true,
-    },
-  },
+  devtools: { enabled: true },
   modules: [
     // '@hannoeru/nuxt-otel',
     '@nuxt/eslint',
@@ -180,9 +172,7 @@ export default defineNuxtConfig({
       baseURL: 'https://cdn.redcatpictures.com/media',
       modifiers: {
         quality: 80,
-        // format: 'avif'
         progressive: 'yes',
-        strip_meta: 'all',
       },
     },
   },

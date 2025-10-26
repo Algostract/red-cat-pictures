@@ -85,7 +85,7 @@ const photos = computed<GalleryPhoto[]>(() =>
 
       return {
         id: categoryPhotos[props.activeCategory][index]!.id,
-        image: categoryPhotos[props.activeCategory][index]!.image,
+        image: categoryPhotos[props.activeCategory][index]!.image!,
         title: categoryPhotos[props.activeCategory][index]!.title,
         description: categoryPhotos[props.activeCategory][index]!.description,
         dynamicClass: objectToClass(photo.position, photo.size),
@@ -103,14 +103,13 @@ const photos = computed<GalleryPhoto[]>(() =>
     <div class="relative grid grid-cols-2 grid-rows-6 gap-2 md:grid-cols-4 md:grid-rows-3">
       <NuxtLink v-for="{ id, title, image, description, dynamicClass, aspectRatio, url } in photos" :key="id" :to="url" :class="dynamicClass" class="size-full" @click="emit('active', title)">
         <NuxtImg
-          :src="image"
+          :src="extractCdnId(image)"
           :alt="description"
           :width="700"
           :height="Math.round(700 / aspectRatio)"
-          densities="x1 x2"
           fit="cover"
           loading="lazy"
-          :placeholder="[350, Math.round(350 / aspectRatio), 60, 5]"
+          :placeholder="[350, Math.round(350 / aspectRatio), 40, 10]"
           class="size-full overflow-hidden rounded-sm bg-light-600 object-cover dark:bg-dark-500"
           :class="{ active: activePhoto === title }" />
       </NuxtLink>

@@ -10,7 +10,7 @@ services:
     expose:
       - 3000
     networks:
-      - front-tier
+      - internal
     depends_on:
       - browserless
     deploy:
@@ -24,7 +24,7 @@ services:
     environment:
       - CORS=true
     networks:
-      - front-tier
+      - internal
     deploy:
       replicas: 1
       restart_policy:
@@ -46,5 +46,5 @@ volumes:
       device: /root/red-cat-pictures/.data
 
 networks:
-  front-tier:
+  internal:
     driver: overlay

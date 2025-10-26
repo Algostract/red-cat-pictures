@@ -50,6 +50,9 @@ useSchemaOrg([
     height: Math.round(720 * activePhoto.value.aspectRatio),
   }),
 ])
+
+const img = useImage()
+const isImageLoaded = ref(false)
 </script>
 
 <template>
@@ -67,21 +70,52 @@ useSchemaOrg([
       </nav>
     </header>
     <!-- App Header -->
-    <NuxtImg
-      :src="cover"
-      :alt="activePhoto.description"
-      :width="Math.round(720 * activePhoto.aspectRatio)"
-      :height="720"
-      fit="fill"
-      loading="eager"
-      :placeholder="[Math.round(180 * activePhoto.aspectRatio), 180, 20, 25]"
-      class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500 md:h-full md:w-auto" />
+    <div class="shimmer-overlay w-full overflow-hidden rounded-sm bg-light-600 dark:bg-dark-500 md:h-full md:w-auto">
+      <NuxtImg
+        :src="cover"
+        :alt="activePhoto.description"
+        :width="Math.round(640 * activePhoto.aspectRatio)"
+        :height="640"
+        fit="cover"
+        loading="eager"
+        preload
+        :placeholder="img(cover, { w: 240, h: Math.round(240 / activePhoto.aspectRatio), q: 80 })"
+        class="size-full object-cover"
+        :class="{ shimmer: !isImageLoaded }"
+        @load="isImageLoaded = true" />
+    </div>
     <!-- <h1 class="text-center my-8">{{ activeImage.title }}</h1> -->
   </main>
 </template>
 
-<style scoped>
+<style>
 img {
   view-transition-name: selected-photo;
+}
+
+.shimmer-overlay:has(.shimmer) {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-overlay:has(.shimmer)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  translate: -150% -50%;
+  rotate: -30deg;
+  height: 200%;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 20%, rgba(255, 255, 255, 0.2) 50%, transparent 80%);
+  animation: shimmer 2s infinite;
+  z-index: 50;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  to {
+    translate: 150% -50%;
+  }
 }
 </style>
