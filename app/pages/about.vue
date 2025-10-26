@@ -148,7 +148,7 @@ const members: Member[] = [
             We’ve had the privilege of working with brands such as
             <template v-for="({ id, name, website, logo }, idx) in clients" :key="id">
               <NuxtLink
-                v-if="extractUploadcareId(logo)"
+                v-if="extractCdnId(logo)"
                 :href="website ? `${website}?utm_source=redcatpictures.com` : ''"
                 target="__blank"
                 external
