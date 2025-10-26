@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.3.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.0...v3.3.1)
+
+### 💅 Refactors
+
+- Improve code formatting and optimize image loading across components ([f738a14](https://github.com/Algostract/red-cat-pictures/commit/f738a14))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.3.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.2.1...v3.3.0)
