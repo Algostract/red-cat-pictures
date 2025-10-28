@@ -42,7 +42,7 @@ const activePhotoName = useState<string | null>()
                 :height="Math.round(240 / photo.aspectRatio)"
                 fit="cover"
                 loading="lazy"
-                :placeholder="[120, Math.round(120 / photo.aspectRatio), 40, 10]"
+                :placeholder="[120, Math.round(120 / photo.aspectRatio), 50, 5]"
                 class="w-full object-cover"
                 :class="{ active: activePhotoName === photo.title }" />
             </NuxtLink>

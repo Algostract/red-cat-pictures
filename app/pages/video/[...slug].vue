@@ -11,7 +11,7 @@ const activeVideoSlug = computed<string>(() => slugify(slug))
 const activeVideo = computed(() => videos.value.find(({ id }) => id === activeVideoSlug.value))
 
 if (!activeVideo.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
 
 const title = `${activeVideo.value.title}`

@@ -165,6 +165,32 @@ svg.iconify--local {
   animation: scroll-y linear infinite;
 }
 
+.shimmer-overlay:has(.shimmer) {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-overlay:has(.shimmer)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  translate: -150% -50%;
+  rotate: -30deg;
+  height: 200%;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 20%, rgba(255, 255, 255, 0.2) 50%, transparent 80%);
+  animation: shimmer 2s infinite;
+  z-index: 50;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  to {
+    translate: 150% -50%;
+  }
+}
+
 @keyframes scroll-x {
   from {
     transform: translateX(0);

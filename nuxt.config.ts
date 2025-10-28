@@ -167,10 +167,12 @@ export default defineNuxtConfig({
   },
   image: {
     provider: 'ipx',
+    densities: [1, 2.5],
     ipx: {
       // baseURL: 'http://localhost:3500/media',
       baseURL: 'https://cdn.redcatpictures.com/media',
       modifiers: {
+        format: 'auto',
         quality: 80,
         progressive: 'yes',
       },

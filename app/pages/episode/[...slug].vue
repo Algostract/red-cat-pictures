@@ -4,7 +4,7 @@ const slug = route.params.slug!.toString()
 const { data: episode } = await useAPI<ContentDetails>(`/api/episode/${slug}`)
 
 if (!episode.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
 
 if (episode.value.url !== '/episode/' + slug) {
@@ -52,7 +52,7 @@ useSchemaOrg([
       :height="Math.round(1280 / (16 / 9))"
       fit="cover"
       class="cover-img absolute left-0 aspect-[5/3] max-h-[20rem] w-screen object-cover"
-      :placeholder="[320, Math.round(320 / (16 / 9)), 40, 10]" />
+      :placeholder="[320, Math.round(320 / (16 / 9)), 50, 5]" />
     <div class="invisible -left-4 aspect-[5/3] max-h-[20rem] w-screen" />
     <div class="relative mx-auto max-w-4xl leading-relaxed 2xl:max-w-full">
       <h1 class="my-4 text-xl font-semi-bold md:text-3xl">{{ episode.title }}</h1>

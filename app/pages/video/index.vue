@@ -6,7 +6,7 @@ definePageMeta({
 const { data: videos } = await useAPI('/api/video', { default: () => [] })
 
 if (!videos.value[0]) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
 
 const title = `Videos`
