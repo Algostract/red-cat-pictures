@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.3.4
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.3...v3.3.4)
+
+### 🩹 Fixes
+
+- Format nuxt.config.ts for improved readability ([ebbd37a](https://github.com/Algostract/red-cat-pictures/commit/ebbd37a))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.3.3
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.2...v3.3.3)
