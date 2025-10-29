@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.3.5
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.4...v3.3.5)
+
+### 🩹 Fixes
+
+- Remove custom image density ([5dde539](https://github.com/Algostract/red-cat-pictures/commit/5dde539))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.3.4
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.3...v3.3.4)
