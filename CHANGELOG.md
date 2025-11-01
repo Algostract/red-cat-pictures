@@ -1,5 +1,18 @@
 # red-cat-pictures
 
+## v3.3.7
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.6...v3.3.7)
+
+### 🩹 Fixes
+
+- CdnUrl moved to docker build ([90fdb2c](https://github.com/Algostract/red-cat-pictures/commit/90fdb2c))
+- Build args in docker ([35f0328](https://github.com/Algostract/red-cat-pictures/commit/35f0328))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.3.6
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.5...v3.3.6)
