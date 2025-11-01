@@ -32,7 +32,7 @@ export default defineTask({
 
       if (!coverExists) continue
 
-      updateCoverURL = `https://cdn.redcatpictures.com/media/w_${coverWidth}&h_${coverHeight}/${slug}`
+      updateCoverURL = `https://cdn.redcatpictures.com/media/image/w_${coverWidth}&h_${coverHeight}/${slug}`
       console.log('Updating', slug, updateCoverURL)
 
       await notion.pages.update({
