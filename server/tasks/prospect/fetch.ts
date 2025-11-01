@@ -35,8 +35,8 @@ export default defineTask({
     name: 'prospect:fetch',
     description: 'Scrapes Prospect Info',
   },
-  async run(event) {
-    const urls = event.payload.urls as unknown as string[]
+  async run({ payload }) {
+    const urls = payload.urls as unknown as string[]
 
     if (!(urls && urls.length > 0)) throw Error('urls are not defined')
 

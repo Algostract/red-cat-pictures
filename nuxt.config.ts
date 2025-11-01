@@ -124,8 +124,7 @@ export default defineNuxtConfig({
     },
     public: {
       siteUrl: '',
-      // cdnUrl: 'http://localhost:3500/media',
-      cdnUrl: 'https://cdn.redcatpictures.com/media',
+      cdnUrl: '',
       scripts: {
         googleAnalytics: {
           id: '',
@@ -168,8 +167,7 @@ export default defineNuxtConfig({
   image: {
     provider: 'ipx',
     ipx: {
-      // baseURL: 'http://localhost:3500/media',
-      baseURL: 'https://cdn.redcatpictures.com/media',
+      baseURL: process.env.NUXT_PUBLIC_CDN_URL,
       modifiers: {
         format: 'auto',
         quality: 80,

@@ -127,13 +127,13 @@ export default defineTask({
     name: 'sync:meta-data',
     description: 'Process an array of URLs; retrieve and return each page’s OG title, description, and image',
   },
-  async run(event) {
+  async run({ payload }) {
     // console.log("Task sync:meta-data running")
     const metaDataStorage = useStorage<MetaData>('data:meta-data')
     const resourceStorage = useStorage<Resource>(`data:resource`)
 
-    const urls = (event.payload.urls ?? []) as unknown as string[]
-    const source = (event.payload.source ?? 'auto') as unknown as 'internal' | 'external' | 'auto'
+    const urls = (payload.urls ?? []) as unknown as string[]
+    const source = (payload.source ?? 'auto') as unknown as 'internal' | 'external' | 'auto'
 
     // if payload is empty get all the links of clients, models, studios, contents
     const result = await Promise.allSettled(
