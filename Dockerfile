@@ -7,6 +7,7 @@ COPY nuxt.config.ts ./
 
 ENV NITRO_PRESET=bun
 ENV NUXT_PUBLIC_SITE_URL=$SITE_URL
+ENV NUXT_PUBLIC_CDN_URL=$CDN_URL
 
 RUN bun install --frozen-lockfile
 

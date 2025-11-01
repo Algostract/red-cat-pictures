@@ -167,7 +167,7 @@ export default defineNuxtConfig({
   image: {
     provider: 'ipx',
     ipx: {
-      baseURL: process.env.NUXT_PUBLIC_CDN_URL,
+      baseURL: `${process.env.NUXT_PUBLIC_CDN_URL}/image`,
       modifiers: {
         format: 'auto',
         quality: 80,
