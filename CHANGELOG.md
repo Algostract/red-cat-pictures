@@ -1,5 +1,21 @@
 # red-cat-pictures
 
+## v3.3.6
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.5...v3.3.6)
+
+### 🩹 Fixes
+
+- Extract-cdn-id utils fixed ([0d1e25d](https://github.com/Algostract/red-cat-pictures/commit/0d1e25d))
+
+### 💅 Refactors
+
+- Clean up environment variables and update CDN URL handling ([ded7352](https://github.com/Algostract/red-cat-pictures/commit/ded7352))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.3.5
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.4...v3.3.5)
