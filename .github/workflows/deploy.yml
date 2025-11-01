@@ -89,6 +89,7 @@ jobs:
             VERSION=${{ steps.metadata.outputs.version }}
             BUILD_TIME=${{ steps.metadata.outputs.buildtime }}
             SITE_URL=${{ vars.SITE_URL }}
+            CDN_URL=${{ vars.CDN_URL }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -119,6 +120,7 @@ jobs:
     env:
       PLATFORM_ENV: native
       NUXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL }}
+      NUXT_PUBLIC_CDN_URL: ${{ vars.CDN_URL }}
 
     strategy:
       fail-fast: false
@@ -184,6 +186,7 @@ jobs:
       ANDROID_HOME:
       PLATFORM_ENV: native
       NUXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL }}
+      NUXT_PUBLIC_CDN_URL: ${{ vars.CDN_URL }}
 
     strategy:
       fail-fast: false
