@@ -1,5 +1,5 @@
 const resolutions = ['4320p', '2160p', '1440p', '1080p', '720p', '480p'] as const
-export type Resolution = (typeof resolutions)[number]
+type Resolution = (typeof resolutions)[number]
 
 /**
  * Determine the nearest resolution bucket based on the IMAGE HEIGHT (vertical "p").

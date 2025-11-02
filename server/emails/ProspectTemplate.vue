@@ -160,7 +160,7 @@ const tailwindConfig = {
             <!-- Product images row -->
             <Section class="relative mb-4 flex flex-row">
               <Link v-for="{ id, title, image, url } in fromFeaturedPhotos" :key="id" :href="`${fromCompanyLink}${url}${referTag}`" class="inline-block w-1/4" target="_blank">
-                <Img :src="`${cdnUrl}/${image}/-/smart_resize/960x1440/`" :alt="title" class="w-full object-cover" />
+                <Img :src="`${cdnUrl}/image/fit_cover&s_960x1440/${image}`" :alt="title" class="w-full object-cover" />
               </Link>
             </Section>
             <Section class="mb-4 text-center">

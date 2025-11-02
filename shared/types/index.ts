@@ -36,10 +36,11 @@ export interface Position {
 export const codecs = ['avc', 'vp9', 'hevc', 'av1'] as const
 export type Codec = (typeof codecs)[number]
 
+export const resolutions = ['1440p', '1080p', '720p'] as const
+export type Resolution = (typeof resolutions)[number]
+
 export type FileSources = {
-  [codec in Codec]?: { type: string } & {
-    [resolution in Resolution]?: Orientation[]
-  }
+  [codec in Codec]?: { type: string; orientation: Orientation[] }
 }
 
 export interface Source {
@@ -47,8 +48,8 @@ export interface Source {
   type: string
   media: string
   codec: Codec
-  resolution: Resolution
   orientation: Orientation
+  // resolution: Resolution
 }
 
 export interface Video {

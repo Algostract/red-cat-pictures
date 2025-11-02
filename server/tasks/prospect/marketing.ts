@@ -60,7 +60,7 @@ export default defineTask({
                 const data = await $fetch(`/api/photo/${(key as unknown as string).toLowerCase()}`)
                 if (Array.isArray(data)) throw new Error('Unexpected array response')
 
-                const link = `${cdnUrl}/${extractCdnId(data.image)}/-/format/jpg/-/preview/${Math.min(1080, Math.round(1080 * data.aspectRatio))}x${Math.min(1080, Math.round(1080 / data.aspectRatio))}/`
+                const link = `${cdnUrl}/image/f_jpeg&s_${Math.min(1080, Math.round(1080 * data.aspectRatio))}x${Math.min(1080, Math.round(1080 / data.aspectRatio))}/${extractCdnId(data.image)}`
 
                 await sendWhatsappMessage([
                   {

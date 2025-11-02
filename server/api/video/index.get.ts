@@ -1,59 +1,40 @@
 import type { Codec } from '~~/shared/types'
 
-export const resolutions = ['1440p', '1080p', '720p'] as const
-// export type Resolution = (typeof resolutions)[number]
-
 export const landscapePreset: FileSources = {
   av1: {
     type: 'video/webm',
-    '720p': ['landscape'],
-    '1080p': ['landscape'],
-    '1440p': ['landscape'],
+    orientation: ['landscape'],
   },
   vp9: {
     type: 'video/webm',
-    '720p': ['landscape'],
-    '1080p': ['landscape'],
-    '1440p': ['landscape'],
+    orientation: ['landscape'],
   },
   avc: {
     type: 'video/mp4',
-    '720p': ['landscape'],
-    '1080p': ['landscape'],
-    '1440p': ['landscape'],
+    orientation: ['landscape'],
   },
   hevc: {
     type: 'video/mp4',
-    '720p': ['landscape'],
-    '1080p': ['landscape'],
-    '1440p': ['landscape'],
+    orientation: ['landscape'],
   },
 }
 
 export const portraitPreset: FileSources = {
   av1: {
     type: 'video/webm',
-    '720p': ['portrait'],
-    '1080p': ['portrait'],
-    '1440p': ['portrait'],
+    orientation: ['portrait'],
   },
   vp9: {
     type: 'video/webm',
-    '720p': ['portrait'],
-    '1080p': ['portrait'],
-    '1440p': ['portrait'],
+    orientation: ['portrait'],
   },
   avc: {
     type: 'video/mp4',
-    '720p': ['portrait'],
-    '1080p': ['portrait'],
-    '1440p': ['portrait'],
+    orientation: ['portrait'],
   },
   hevc: {
     type: 'video/mp4',
-    '720p': ['portrait'],
-    '1080p': ['portrait'],
-    '1440p': ['portrait'],
+    orientation: ['portrait'],
   },
 }
 
@@ -61,10 +42,10 @@ export const heroPreset: FileSources = (() => {
   const merged: FileSources = {}
 
   for (const codec of codecs.toReversed()) {
-    merged[codec] = { type: portraitPreset[codec]!.type }
-    for (const res of resolutions.toReversed()) {
-      merged[codec]![res] = [...portraitPreset[codec]![res]!, ...landscapePreset[codec]![res]!]
-    }
+    merged[codec] = { type: portraitPreset[codec]!.type, orientation: [...portraitPreset[codec]!.orientation!, ...landscapePreset[codec]!.orientation!] }
+    // for (const res of resolutions.toReversed()) {
+    //   merged[codec]![res] = [...portraitPreset[codec]![res]!, ...landscapePreset[codec]![res]!]
+    // }
   }
 
   return merged
@@ -85,35 +66,32 @@ function buildType(codec: Codec, containerMime: string): string {
 }
 
 export function convertSources(name: string, sources: FileSources): Source[] {
-  const order: Resolution[] = ['1080p', '1440p', '720p']
-  const {
-    public: { siteUrl },
-  } = useRuntimeConfig()
+  // const order: Resolution[] = ['1080p', '1440p', '720p']
   const result: Source[] = []
   for (const codec of Object.keys(sources) as Codec[]) {
     const codecSources = sources[codec]
     if (!codecSources) continue
     const mimeType = codecSources.type
     const typeWithCodecs = buildType(codec, mimeType)
-    const extension = mimeType === 'video/webm' ? 'webm' : mimeType === 'video/mp4' ? 'mp4' : ''
-    const resolutionKeys = (Object.keys(codecSources).filter((key) => key !== 'type') as Resolution[]).sort((a, b) => order.indexOf(a) - order.indexOf(b))
-    for (const resolution of resolutionKeys) {
-      const orientations = codecSources[resolution]
-      if (!orientations || !Array.isArray(orientations)) continue
-      const hasBoth = orientations.includes('landscape') && orientations.includes('portrait')
-      for (const orientation of orientations) {
-        const media = hasBoth ? (orientation === 'landscape' ? '(orientation: landscape)' : '(orientation: portrait)') : ''
-        const src = `${siteUrl}/media/video/${name}-${codec}-${resolution}-${orientation}.${extension}`
-        result.push({
-          src,
-          type: typeWithCodecs,
-          orientation,
-          media,
-          codec,
-          resolution,
-        })
-      }
+    // const extension = mimeType === 'video/webm' ? 'webm' : mimeType === 'video/mp4' ? 'mp4' : ''
+    // const resolutionKeys = (Object.keys(codecSources).filter((key) => key !== 'type') as Resolution[]).sort((a, b) => order.indexOf(a) - order.indexOf(b))
+    // for (const resolution of resolutionKeys) {
+    // const resolution = '1440p'
+    const orientations = codecSources.orientation
+    if (!orientations || !Array.isArray(orientations)) continue
+    const hasBoth = orientations.includes('landscape') && orientations.includes('portrait')
+    for (const orientation of orientations) {
+      const media = hasBoth ? (orientation === 'landscape' ? '(orientation: landscape)' : '(orientation: portrait)') : ''
+      // const src = `${cdnUrl}/video/h_${resolution.slice(0, -1)}&c_${codec}&q_90/${name}` // -${orientation}
+      result.push({
+        src: name === 'featured-video-000-000' ? `${name}-${orientation}` : name,
+        type: typeWithCodecs,
+        orientation,
+        media,
+        codec,
+      })
     }
+    // }
   }
   return result
 }

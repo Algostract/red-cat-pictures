@@ -23,15 +23,8 @@ watch(url, async (value) => {
 const title = computed(() => data.value?.ogTitle ?? props.activeLink?.title)
 const description = computed(() => data.value?.ogDescription)
 const lastUpdated = computed(() => data.value?.lastUpdated)
-const image = computed<string>(() => data.value?.ogImage?.toString() ?? `${cdnUrl}/771d0695-2196-4c98-b9eb-4f29acd6506f/-/format/auto/-/scale_crop/2560x1440/center/`)
+const image = computed<string>(() => data.value?.ogImage?.toString() ?? `${cdnUrl}/image/f_jpeg&fit_cover&s_2560x1440/placeholder-blank`)
 const logo = computed<string>(() => data.value?.logo?.toString() ?? (isDark.value ? '/logo-light.png' : '/logo-dark.png'))
-const imgProvider = computed((): 'uploadcare' | 'ipx' => {
-  if (image.value.includes('ucarecdn.com') || image.value.includes('uploadcare.com')) {
-    return 'uploadcare'
-  }
-
-  return 'ipx'
-})
 </script>
 
 <template>
@@ -46,13 +39,7 @@ const imgProvider = computed((): 'uploadcare' | 'ipx' => {
       v-if="activeLink"
       class="absolute left-1/2 z-50 flex w-[256px] -translate-x-1/2 flex-col overflow-hidden !whitespace-normal border border-black bg-light-500 !no-underline dark:bg-dark-500 md:w-[320px]"
       tabindex="-1">
-      <NuxtImg
-        :provider="imgProvider"
-        :src="image"
-        :alt="activeLink.title"
-        width="640"
-        fit="contain"
-        class="aspect-[13/7] w-full overflow-hidden bg-light-600 object-cover object-top dark:bg-dark-500" />
+      <NuxtImg :src="image" :alt="activeLink.title" width="640" fit="contain" class="aspect-[13/7] w-full overflow-hidden bg-light-600 object-cover object-top dark:bg-dark-500" />
       <div class="relative flex flex-col gap-2 p-6 pb-4">
         <NuxtImg
           provider="ipx"

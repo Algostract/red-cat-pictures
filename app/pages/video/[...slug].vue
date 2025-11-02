@@ -20,7 +20,7 @@ const {
   public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
 const cover = activeVideo.value?.poster ? extractCdnId(activeVideo.value?.poster) : ''
-const imageUrl = `${cdnUrl}/fit_cover&w_1920&h_1080/${cover}`
+const imageUrl = `${cdnUrl}/image/fit_cover&w_1920&h_1080/${cover}`
 
 useSeoMeta({
   title: title,

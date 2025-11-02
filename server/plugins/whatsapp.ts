@@ -76,7 +76,7 @@ export default defineNitroPlugin(async () => {
           const links: string[] = (await $fetch('/api/photo'))
             .filter((item) => item.category === (message.body.toLowerCase().trim().split(' ').at(1) as unknown as Category))
             .map((item) => {
-              return `${cdnUrl}/${item.image}/-/format/jpg/-/preview/${Math.min(1080, Math.round(1080 * item.aspectRatio))}x${Math.min(1080, Math.round(1080 / item.aspectRatio))}/`
+              return `${cdnUrl}/image/f_jpeg&s_${Math.min(1080, Math.round(1080 * item.aspectRatio))}x${Math.min(1080, Math.round(1080 / item.aspectRatio))}/${item.image}`
             })
 
           await Promise.allSettled(

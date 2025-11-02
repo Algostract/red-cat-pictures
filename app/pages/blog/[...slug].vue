@@ -18,7 +18,7 @@ const description = `${blog.value.description}`
 const url = `${siteUrl}/blog/${slug}`
 const cover = blog.value.cover ? extractCdnId(blog.value.cover) : ''
 
-const imageUrl = `${cdnUrl}/fit_cover&w_1200&h_630/${cover}`
+const imageUrl = `${cdnUrl}/image/fit_cover&w_1200&h_630/${cover}`
 
 useSeoMeta({
   title: title,
