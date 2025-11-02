@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.3.8
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.7...v3.3.8)
+
+### 💅 Refactors
+
+- New cdn integration to videos ([c4c52d0](https://github.com/Algostract/red-cat-pictures/commit/c4c52d0))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.3.7
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.3.6...v3.3.7)
