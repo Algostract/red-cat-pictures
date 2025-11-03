@@ -1,33 +1,10 @@
 <script setup lang="ts">
-defineProps<{
-  activeCategory: Category
+const props = defineProps<{
+  photos: Photo[]
 }>()
 
 const { proxy: gaProxy } = useScriptGoogleAnalytics()
 
-const { data: prices } = await useAPI('/api/price')
-
-const splideOption = computed(() => ({
-  mediaQuery: 'min',
-  arrows: true,
-  pagination: false,
-  trimSpace: true,
-  focus: 'center',
-  perPage: 1,
-  padding: '1rem',
-  gap: '-2.5rem',
-  breakpoints: {
-    768: {
-      destroy: true,
-      arrows: false,
-      // perPage: 3,
-      // padding: 0,
-      // gap: '1.5rem',
-    },
-  },
-}))
-
-const activeSlideIndex = ref(1)
 const isModelContactOpen = useState<boolean>('isModelContactOpen', () => false)
 
 function onContact(action: boolean) {
@@ -40,48 +17,74 @@ function onContact(action: boolean) {
   }
 }
 
-const tabs = ref([
-  {
-    icon: 'photo',
-    title: 'photo',
-  } as const,
-  {
-    icon: 'youtube',
-    title: 'video',
-  } as const,
-])
-const activeTab = ref<Service>('photo')
+const isMobile = useMediaQuery('(max-width: 767px)')
+
+const COLS = computed<number>(() => (isMobile.value ? 3 : 7))
+
+const allPhotos = computed(() => {
+  return props.photos.filter(({ gallery }) => gallery)
+})
+
+const columns = computed<Photo[][]>(() => {
+  const cols: Photo[][] = Array.from({ length: COLS.value }, () => [])
+  allPhotos.value.forEach((photo, idx) => {
+    cols[idx % COLS.value].push(photo)
+  })
+  return cols
+})
 </script>
 
 <template>
-  <section id="pricing" class="max-w-screen relative -mx-2 w-[calc(100%+16px)]">
-    <div class="mx-auto mb-4 flex w-fit gap-4 md:mb-12">
-      <ButtonLabel v-for="{ icon, title } in tabs" :key="title" :icon="icon" :title="title" :active="title === activeTab" @click="activeTab = title" />
-    </div>
-    <Splide :options="splideOption" tag="div" :has-track="false" @move="(slideIndex: number) => (activeSlideIndex = slideIndex)">
-      <SplideTrack>
-        <SplideSlide v-for="({ title, price, unit, points }, index) in prices[activeCategory][activeTab]" :key="title" class="flex justify-center">
-          <CardPrice :is-active="index === activeSlideIndex" :title="title" :price="price" :unit="unit" :points="points" @contact="onContact(true)" />
-        </SplideSlide>
-      </SplideTrack>
-      <div class="splide__arrows absolute left-0 right-0 top-1/2 flex justify-between fill-white text-[24px]">
-        <button class="splide__arrow splide__arrow--prev arrow relative">
-          <NuxtIcon name="local:chevron-bold" class="relative z-10" />
-        </button>
-        <button class="splide__arrow splide__arrow--next arrow relative scale-x-[-1]">
-          <NuxtIcon name="local:chevron-bold" class="relative z-10" />
-        </button>
+  <section class="bg-neutral-900 relative mb-8 flex h-screen w-full items-center justify-center overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 flex -rotate-12 scale-[1.4] items-center justify-center" style="perspective(900px)">
+      <div class="size-screen grid gap-1 overflow-hidden" :class="`grid-cols-${COLS}`">
+        <div
+          v-for="(col, colIdx) in columns"
+          :key="colIdx"
+          :style="{ gridColumn: colIdx + 1, animationDuration: allPhotos.length * 1.5 + 's' }"
+          :class="colIdx % 2 === 0 ? 'animate-marquee-y' : 'animate-marquee-y-reverse'"
+          class="w-fit">
+          <div v-for="(card, i) in col" :key="i" class="aspect-[3/4] h-auto w-full overflow-hidden">
+            <NuxtImg :src="extractCdnId(card.image!)" alt="Card" :width="256" :height="341" loading="eager" preload class="object-cover" :draggable="false" />
+          </div>
+        </div>
       </div>
-    </Splide>
+    </div>
+    <!-- Hero text/CTA -->
+    <div class="absolute inset-0 z-20 bg-black/80">
+      <div class="relative z-30 flex h-full w-full flex-col items-center justify-center px-4 md:px-0">
+        <div class="flex flex-col items-center text-center">
+          <h1 class="md:text-6xl font-extrabold mb-5 text-3xl text-white drop-shadow-lg">Close every deal.</h1>
+          <p class="mx-auto mb-6 max-w-xl text-base md:text-2xl">A snapshot of your entire sales pipeline, beautifully showcased.</p>
+          <button class="text-neutral-900 mt-2 bg-gradient-to-r from-primary-500 to-transparent px-7 py-3 text-base font-bold shadow-2xl transition hover:scale-105 md:text-lg" @click="onContact">
+            See how it works
+          </button>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
-<style>
-#pricing ul.splide__list {
-  @apply md:flex md:w-full md:items-center md:justify-between;
+<style scoped>
+:root {
+  @apply grid-cols-3 grid-cols-7;
 }
 
-#pricing .arrow {
-  @apply bg-transparent before:absolute before:left-0 before:top-1/2 before:block before:size-16 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-md before:bg-primary-500 before:transition-colors before:duration-500 before:ease-out before:content-[''] active:before:bg-primary-400 disabled:before:bg-light-600 dark:disabled:before:bg-dark-600;
+.animate-marquee-y {
+  animation: marquee-y linear infinite;
+}
+
+.animate-marquee-y-reverse {
+  animation: marquee-y linear infinite reverse;
+}
+
+@keyframes marquee-y {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
 }
 </style>

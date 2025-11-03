@@ -64,6 +64,6 @@ function onContact(action: boolean) {
     <SectionPhotoGallery :photos="allPhotos" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
     <LazySectionVideoGallery hydrate-on-visible :videos="videos" :active-category="activeCategory" />
     <LazySectionFeaturedPhoto hydrate-on-visible :photos="allPhotos" :active-category="activeCategory" :active-photo="activePhotoName" @active="(name) => (activePhotoName = name)" />
-    <SectionPricing :active-category="activeCategory" />
+    <SectionPricing :photos="allPhotos" />
   </div>
 </template>

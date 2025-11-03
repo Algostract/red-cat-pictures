@@ -164,7 +164,11 @@ function coverByAspect(orientation: 'auto' | 'landscape' | 'portrait', r: number
 
 const adaptivePoster = computed(() => {
   const orientation = width.value >= height.value ? 'landscape' : 'portrait'
-  return props.poster ? `${cdnUrl}/image/fit_cover&w_1280/${extractCdnId(props.poster)!.replace(/\b(landscape|portrait)\b/i, orientation)}` : undefined
+  return import.meta.client
+    ? props.poster
+      ? `${cdnUrl}/image/fit_cover&${orientation === 'landscape' ? 'w' : 'h'}_1280/${extractCdnId(props.poster)!.replace(/\b(landscape|portrait)\b/i, orientation)}`
+      : undefined
+    : undefined
 })
 </script>
 
@@ -187,17 +191,19 @@ const adaptivePoster = computed(() => {
     @pause="handlePause"
     @timeupdate="handleProgress"
     @ended="handleEnded">
-    <template v-if="Array.isArray(source)">
-      <source
-        v-for="{ src, type, media, codec, orientation } of source"
-        :key="src"
-        :src="`${cdnUrl}/video/s_${coverByAspect(orientation)}&c_${codec}&q_${qualtiy}/${src}`"
-        :type="type"
-        :media="media" />
-    </template>
-    <template v-else>
-      <source :src="`${cdnUrl}/video/s_${coverByAspect(source.orientation)}&c_${source.codec}&q_${qualtiy}/${source.src}`" :type="source.type" />
-    </template>
-    Your browser does not support the video tag.
+    <ClientOnly>
+      <template v-if="Array.isArray(source)">
+        <source
+          v-for="{ src, type, media, codec, orientation } of source"
+          :key="src"
+          :src="`${cdnUrl}/video/s_${coverByAspect(orientation)}&c_${codec}&q_${qualtiy}/${src}`"
+          :type="type"
+          :media="media" />
+      </template>
+      <template v-else>
+        <source :src="`${cdnUrl}/video/s_${coverByAspect(source.orientation)}&c_${source.codec}&q_${qualtiy}/${source.src}`" :type="source.type" />
+      </template>
+      Your browser does not support the video tag.
+    </ClientOnly>
   </video>
 </template>
