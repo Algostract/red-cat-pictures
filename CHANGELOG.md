@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.4.2
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.1...v3.4.2)
+
+### 🎨 Styles
+
+- Global gradient, sharp corner, brand section, section color correction ([ca3609d](https://github.com/Algostract/red-cat-pictures/commit/ca3609d))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.4.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.0...v3.4.1)
