@@ -30,7 +30,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="relative mx-auto flex h-screen w-screen max-w-[90rem] flex-col items-center justify-center overflow-hidden p-4 md:p-8">
+  <main class="relative mx-auto flex h-screen w-screen flex-col items-center justify-center overflow-hidden p-4 md:p-8">
     <!--  <NuxtVideo ref="videoContainerRef" :key="activeVideoName" :poster="activeVideo.poster" :source="activeVideo.sources"
       :disable-picture-in-picture="true" controls-list="nodownload" :autoplay="true" :muted="true" :playsinline="true"
       preload="metadata" class="aspect-video cursor-pointer" @ended="updateVideoIndex" @click="toggleFullScreen()" /> -->

@@ -56,9 +56,9 @@ const isImageLoaded = ref(false)
 </script>
 
 <template>
-  <main v-if="activePhoto" class="relative mx-auto flex h-screen w-screen max-w-[90rem] flex-col items-center justify-center overflow-hidden p-4 md:p-8">
+  <main v-if="activePhoto" class="relative mx-auto flex h-screen w-screen flex-col items-center justify-center overflow-hidden p-4 md:p-8">
     <!-- App Header -->
-    <header class="absolute left-0 right-0 top-4 mx-auto max-w-[90rem] fill-black px-4 text-black dark:fill-white dark:text-white md:px-16">
+    <header class="absolute left-0 right-0 top-4 mx-auto fill-black px-4 text-black dark:fill-white dark:text-white md:px-16">
       <nav class="relative z-20 grid grid-cols-3 items-center">
         <NuxtLink to="/" class="size-fit" aria-label="home">
           <NuxtIcon name="local:logo" filled class="hidden text-[64px] dark:inline md:text-[96px]" />

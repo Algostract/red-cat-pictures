@@ -25,12 +25,12 @@ const emit = defineEmits<{
       :loop="true"
       preload="metadata" />
     <div class="relative col-span-3 !col-start-1 row-start-1 flex flex-col gap-6 text-center md:row-start-2 lg:col-span-2 lg:text-left">
-      <h1 class="text-3xl font-semi-bold md:text-5xl">BOLD MESSY <br /><span class="rounded bg-primary-500 px-2 py-2">MASCULINE</span></h1>
+      <h1 class="text-3xl font-semi-bold md:text-5xl">BOLD MESSY <br /><span class="rounded bg-gradient-to-r from-primary-500 to-transparent px-2 py-2">MASCULINE</span></h1>
       <p class="mx-auto max-w-screen-sm text-lg leading-9 tracking-wide md:text-xl lg:mx-0">Create your brand identity that speaks to your clients, with our product photography/videograpy service</p>
-      <ButtonCTA class="hidden self-start lg:flex" @click="emit('contact')" />
+      <ButtonCTA class="hidden self-start lg:flex" :transparent="true" @click="emit('contact')" />
     </div>
     <div class="relative bottom-[5rem] col-span-full col-start-1 row-start-4 flex flex-col items-center gap-4 self-end md:bottom-16">
-      <ButtonCTA class="items-center justify-self-center lg:hidden" @click="emit('contact')" />
+      <ButtonCTA class="items-center justify-self-center lg:hidden" :transparent="true" @click="emit('contact')" />
       <BrandSlider />
     </div>
   </section>

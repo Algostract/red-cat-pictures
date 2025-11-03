@@ -17,7 +17,7 @@ function toggleMobileMenu(value?: boolean) {
 
 <template>
   <header
-    class="absolute left-0 right-0 top-4 mx-auto max-w-[90rem] px-4 md:px-16"
+    class="absolute left-0 right-0 top-4 mx-auto px-4 md:px-16"
     :class="{ 'fill-white text-white': colorMode === 'light', 'fill-black text-black': colorMode === 'dark', 'fill-black text-black dark:fill-white dark:text-white': colorMode === 'auto' }">
     <nav class="relative z-20 grid grid-cols-3 items-center">
       <NuxtLink to="/" class="size-fit" aria-label="home">

@@ -3,19 +3,9 @@ const props = defineProps<{
   photos: Photo[]
 }>()
 
-const { proxy: gaProxy } = useScriptGoogleAnalytics()
-
-const isModelContactOpen = useState<boolean>('isModelContactOpen', () => false)
-
-function onContact(action: boolean) {
-  if (action) {
-    isModelContactOpen.value = true
-    gaProxy.gtag('event', 'contact_open')
-  } else {
-    isModelContactOpen.value = false
-    gaProxy.gtag('event', 'contact_close')
-  }
-}
+const emit = defineEmits<{
+  contact: []
+}>()
 
 const isMobile = useMediaQuery('(max-width: 767px)')
 
@@ -51,14 +41,21 @@ const columns = computed<Photo[][]>(() => {
       </div>
     </div>
     <!-- Hero text/CTA -->
-    <div class="absolute inset-0 z-20 bg-black/80">
+    <div class="absolute inset-0 z-20 bg-black/90 text-white">
       <div class="relative z-30 flex h-full w-full flex-col items-center justify-center px-4 md:px-0">
-        <div class="flex flex-col items-center text-center">
-          <h1 class="md:text-6xl font-extrabold mb-5 text-3xl text-white drop-shadow-lg">Close every deal.</h1>
-          <p class="mx-auto mb-6 max-w-xl text-base md:text-2xl">A snapshot of your entire sales pipeline, beautifully showcased.</p>
-          <button class="text-neutral-900 mt-2 bg-gradient-to-r from-primary-500 to-transparent px-7 py-3 text-base font-bold shadow-2xl transition hover:scale-105 md:text-lg" @click="onContact">
-            See how it works
-          </button>
+        <div class="flex flex-col items-center gap-4 text-left md:gap-10">
+          <h1 class="sweep-gradient font-extrabold bg-gradient-to-r from-primary-500 from-50% to-white text-center text-xl md:text-4xl">Signature Visuals for Brands That Dare to Lead</h1>
+          <p class="mx-auto max-w-[52rem] text-sm !leading-8 md:text-lg">
+            We specializes in <strong>food/product photography</strong>, and <strong>creative videography</strong> in Kolkata, India.<br />
+            Your product deserves an experience — not a price tag. We partner with forward-thinking brands to create stunning imagery that tells stories, drives desire, and elevates perceived value.
+            Our portfolio covers Kolkata’s top D2Cs, F&B ventures, and consumer brands looking for impactful food and product visuals in India’s creative capital.
+          </p>
+          <ul class="text-md max-w-[52rem] list-inside list-disc space-y-3 text-left">
+            <li>Strategy-first <strong>food & product photography</strong> concepts tailored for your launch objectives in Kolkata, India</li>
+            <li>Full-service production: casting, art direction, motion, and brand-centric <strong>videography</strong></li>
+            <li>Brand-safe rights and tailored assets for digital campaigns—delivered with a focus on quality brands</li>
+          </ul>
+          <ButtonCTA class="flex" :transparent="true" @click="emit('contact')" />
         </div>
       </div>
     </div>
@@ -85,6 +82,26 @@ const columns = computed<Photo[][]>(() => {
 
   100% {
     transform: translateY(-50%);
+  }
+}
+
+.sweep-gradient {
+  background: linear-gradient(90deg, var(--tw-gradient-stops));
+  background-size: 200%;
+  background-position: 0% 50%;
+  animation: bg-sweep 2.5s linear alternate infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes bg-sweep {
+  from {
+    background-position: 60% 50%;
+  }
+
+  to {
+    background-position: 100% 50%;
   }
 }
 </style>

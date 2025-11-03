@@ -15,7 +15,7 @@ useIntersectionObserver(slider, onIntersectionObserver)
   <section v-if="clients" ref="sliderRef" class="w-full px-2 text-white" aria-label="Trusted by our clients" role="region">
     <div class="max-auto flex items-center gap-0">
       <div class="h-20 w-2 bg-[url('assets/images/line.svg')]" />
-      <div class="trap w-full overflow-hidden md:max-w-[700px]">
+      <div class="trap w-full overflow-hidden bg-gradient-to-r from-primary-500 to-transparent to-75% md:max-w-[700px]">
         <div
           class="autoscroll-x flex w-fit gap-12 md:gap-16"
           :style="{

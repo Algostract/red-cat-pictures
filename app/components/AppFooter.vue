@@ -5,7 +5,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <footer class="mx-auto w-full max-w-[90rem] px-2 md:px-4">
+  <footer class="mx-auto w-full px-2 md:px-4">
     <div
       class="relative grid h-52 grid-cols-2 grid-rows-2 items-end overflow-hidden rounded-lg bg-light-500 p-6 text-dark-600/50 dark:bg-dark-500 dark:text-light-600 md:grid-cols-3 md:grid-rows-3 md:p-8">
       <div class="relative col-start-1 row-start-2 flex flex-col gap-2 justify-self-start text-sm md:row-start-3">
