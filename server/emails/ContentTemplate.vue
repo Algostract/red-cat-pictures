@@ -122,7 +122,7 @@ const tailwindConfig = {
             <Text class="text-left text-base leading-snug">
               {{ contentTitle }}
             </Text>
-            <Link :href="contentUrl + referTag" class="inline-block rounded bg-primary-500 px-4 py-1 text-white" target="_blank"> Read More</Link>
+            <Link :href="contentUrl + referTag" class="inline-block bg-primary-500 px-4 py-1 text-white" target="_blank"> Read More</Link>
           </Section>
           <!-- Footer -->
           <Section class="mt-4 text-right">

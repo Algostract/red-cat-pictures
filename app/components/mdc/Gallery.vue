@@ -21,7 +21,7 @@ const allPhotos = computed(() => data.value.filter(({ id }) => activePhotoIds.va
           fit="cover"
           loading="lazy"
           :placeholder="[120, Math.round(120 / (1 / 1)), 50, 5]"
-          class="w-full rounded-sm bg-light-600 object-cover dark:bg-dark-500"
+          class="w-full bg-light-600 object-cover dark:bg-dark-500"
           :class="{ active: activePhotoName === title }" />
       </NuxtLink>
     </div>

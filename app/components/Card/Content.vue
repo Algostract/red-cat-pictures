@@ -22,7 +22,7 @@ const emit = defineEmits<{
       fit="cover"
       loading="lazy"
       :placeholder="[160, Math.round(160 / (16 / 9)), 50, 5]"
-      class="cover-img aspect-[13/7] h-full w-full overflow-hidden rounded-sm bg-light-600 object-cover dark:bg-dark-500"
+      class="cover-img aspect-[13/7] h-full w-full overflow-hidden bg-light-600 object-cover dark:bg-dark-500"
       :class="{ active: isActive }" />
     <div class="p-2 md:px-4">
       <!-- <FormattedDate date={time} class="uppercase text-sm opacity-60" /> -->

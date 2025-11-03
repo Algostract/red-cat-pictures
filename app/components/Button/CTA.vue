@@ -7,7 +7,7 @@ withDefaults(defineProps<{ primary?: boolean; transparent?: boolean }>(), {
 
 <template>
   <button
-    class="z-10 flex h-fit w-fit items-center justify-between gap-3 rounded p-[6px] pl-5 text-base font-semi-bold transition-colors duration-500 ease-out md:gap-5 md:p-2 md:pl-6 md:text-lg"
+    class="z-10 flex h-fit w-fit items-center justify-between gap-3 p-[6px] pl-5 text-base font-semi-bold transition-colors duration-500 ease-out md:gap-5 md:p-2 md:pl-6 md:text-lg"
     :class="
       primary
         ? `bg-gradient-to-r from-primary-500 ${transparent ? '' : 'dark:hover::to-transparent to-dark-400 hover:to-dark-400 dark:to-transparent'} text-white hover:bg-primary-400 hover:text-white`

@@ -174,7 +174,7 @@ function triggerAnimation() {
     @touchstart="triggerAnimation"
     @click="triggerAnimation"
     @mouseenter="triggerAnimation">
-    <div class="relative isolate aspect-square w-full overflow-hidden rounded-md">
+    <div class="relative isolate aspect-square w-full overflow-hidden">
       <canvas ref="hero-mask-canvas" class="pointer-events-none absolute inset-0 z-20 aspect-[2/3] w-full" />
       <img
         ref="hero-image"

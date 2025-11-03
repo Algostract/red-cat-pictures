@@ -1,3 +1,3 @@
 export default function (url: string) {
-  return url.split('/').at(-1)
+  return url ? url.split('/').at(-1) : ''
 }

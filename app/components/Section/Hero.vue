@@ -9,23 +9,23 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <section
-    id="hero"
-    class="text-shadow-lg grid h-screen grid-cols-3 grid-rows-[repeat(3,min-content)] items-center gap-y-[4.5rem] overflow-hidden pt-24 text-white md:px-16 md:pt-32 lg:grid-rows-1 lg:pt-0">
-    <NuxtVideo
-      v-if="video"
-      class="gradient-mask absolute left-1/2 top-0 col-span-full col-start-1 row-span-full row-start-1 h-screen w-screen -translate-x-1/2 object-cover"
-      :source="video.sources"
-      :poster="video.poster"
-      :disable-picture-in-picture="true"
-      controls-list="nodownload"
-      :autoplay="true"
-      :muted="true"
-      :playsinline="true"
-      :loop="true"
-      preload="metadata" />
+  <section id="hero" class="text-shadow-lg grid h-screen grid-cols-3 grid-rows-[repeat(3,min-content)] items-center gap-y-[4.5rem] pt-24 text-white md:px-16 md:pt-32 lg:grid-rows-1 lg:pt-0">
+    <div class="absolute left-1/2 top-0 col-span-full col-start-1 row-span-full row-start-1 h-screen w-screen -translate-x-1/2 bg-black">
+      <NuxtVideo
+        v-if="video"
+        class="gradient-mask size-full object-cover"
+        :source="video.sources"
+        :poster="video.poster"
+        :disable-picture-in-picture="true"
+        controls-list="nodownload"
+        :autoplay="true"
+        :muted="true"
+        :playsinline="true"
+        :loop="true"
+        preload="metadata" />
+    </div>
     <div class="relative col-span-3 !col-start-1 row-start-1 flex flex-col gap-6 text-center md:row-start-2 lg:col-span-2 lg:text-left">
-      <h1 class="text-3xl font-semi-bold md:text-5xl">BOLD MESSY <br /><span class="rounded bg-gradient-to-r from-primary-500 to-transparent px-2 py-2">MASCULINE</span></h1>
+      <h1 class="text-3xl font-semi-bold md:text-5xl">BOLD MESSY <br /><span class="bg-gradient-to-r from-primary-500 to-transparent px-2 py-2">MASCULINE</span></h1>
       <p class="mx-auto max-w-screen-sm text-lg leading-9 tracking-wide md:text-xl lg:mx-0">Create your brand identity that speaks to your clients, with our product photography/videograpy service</p>
       <ButtonCTA class="hidden self-start lg:flex" :transparent="true" @click="emit('contact')" />
     </div>

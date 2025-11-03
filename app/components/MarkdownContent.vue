@@ -68,7 +68,7 @@ h3 > a {
 }
 
 .content blockquote {
-  @apply rounded border-l-4 border-primary-500 pl-4;
+  @apply border-l-4 border-primary-500 pl-4;
 }
 
 .content iframe {
@@ -76,6 +76,6 @@ h3 > a {
 }
 
 .content .cta.secondary-btn {
-  @apply mx-auto block w-fit rounded bg-primary-500 px-4 py-1 text-white no-underline decoration-transparent;
+  @apply mx-auto block w-fit bg-primary-500 px-4 py-1 text-white no-underline decoration-transparent;
 }
 </style>

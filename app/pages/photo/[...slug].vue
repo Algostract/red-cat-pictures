@@ -70,7 +70,7 @@ const isImageLoaded = ref(false)
       </nav>
     </header>
     <!-- App Header -->
-    <div class="shimmer-overlay w-full overflow-hidden rounded-sm bg-light-600 dark:bg-dark-500 md:h-full md:w-auto">
+    <div class="shimmer-overlay w-full overflow-hidden bg-light-600 dark:bg-dark-500 md:h-full md:w-auto">
       <NuxtImg
         :src="cover"
         :alt="activePhoto.description"
