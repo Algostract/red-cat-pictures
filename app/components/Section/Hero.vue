@@ -25,7 +25,12 @@ const emit = defineEmits<{
         preload="metadata" />
     </div>
     <div class="relative col-span-3 !col-start-1 row-start-1 flex flex-col gap-6 text-center md:row-start-2 lg:col-span-2 lg:text-left">
-      <h1 class="text-3xl font-semi-bold md:text-5xl">BOLD MESSY <br /><span class="bg-gradient-to-r from-primary-500 to-transparent px-2 py-2">MASCULINE</span></h1>
+      <h1 class="text-3xl font-semi-bold md:text-5xl">
+        BOLD MESSY <br /><span
+          class="relative isolate bg-gradient-to-r from-primary-500 to-dark-400/60 px-2 py-2 after:absolute after:-bottom-2 after:left-2 after:-z-10 after:size-full after:bg-dark-400/60 after:content-['']"
+          >MASCULINE</span
+        >
+      </h1>
       <p class="mx-auto max-w-screen-sm text-lg leading-9 tracking-wide md:text-xl lg:mx-0">Create your brand identity that speaks to your clients, with our product photography/videograpy service</p>
       <ButtonCTA class="hidden self-start lg:flex" :transparent="true" @click="emit('contact')" />
     </div>

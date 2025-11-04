@@ -26,7 +26,7 @@ const { height: sliderHeight } = useElementSize(slider)
 </script>
 
 <template>
-  <section id="photo-gallery" class="relative z-0 h-screen overflow-hidden bg-light-400 dark:bg-dark-400">
+  <section id="photo-gallery" class="relative z-0 h-screen overflow-hidden">
     <SectionLabel icon="grid" title="Photo Gallery" />
     <div class="overflow-hidden">
       <div ref="slider" class="autoscroll-y relative z-10 grid grid-cols-2 gap-2 lg:grid-cols-4" :style="{ animationDuration: 0.008 * sliderHeight + 's' }">

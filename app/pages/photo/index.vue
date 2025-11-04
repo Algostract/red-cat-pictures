@@ -29,7 +29,7 @@ const activePhotoName = useState<string | null>()
 <template>
   <main class="mx-auto min-h-screen w-full pt-20 md:pt-28">
     <!-- <LazySearchBar class="fixed bottom-4 left-1/2 z-50 -translate-x-1/2" hydrate-on-idle /> -->
-    <section class="bg-light-400 dark:bg-dark-400">
+    <section class="">
       <div v-for="category in categoryOrder" :key="category" class="mb-6 flex flex-col gap-3">
         <h2 class="font-semibold text-md text-center uppercase md:text-xl">{{ category }}</h2>
         <div class="columns-3 gap-2 md:columns-4 lg:columns-6">
