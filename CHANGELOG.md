@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.4.5
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.4...v3.4.5)
+
+### 🩹 Fixes
+
+- Video server side rendering ([74c012f](https://github.com/Algostract/red-cat-pictures/commit/74c012f))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.4.4
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.3...v3.4.4)
