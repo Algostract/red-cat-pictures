@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.4.3
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.2...v3.4.3)
+
+### 🩹 Fixes
+
+- Video resolution for portrait fixed ([06ef05c](https://github.com/Algostract/red-cat-pictures/commit/06ef05c))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.4.2
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.1...v3.4.2)
