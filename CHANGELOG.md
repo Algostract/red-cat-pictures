@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.4.4
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.3...v3.4.4)
+
+### 🎨 Styles
+
+- Gradient to changed ([0f01184](https://github.com/Algostract/red-cat-pictures/commit/0f01184))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.4.3
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.2...v3.4.3)
