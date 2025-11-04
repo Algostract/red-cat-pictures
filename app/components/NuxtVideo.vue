@@ -151,21 +151,19 @@ const adaptivePoster = computed(() => {
     @pause="handlePause"
     @timeupdate="handleProgress"
     @ended="handleEnded">
-    <ClientOnly>
-      <template v-if="Array.isArray(source)">
-        <source
-          v-for="{ src, type, media, codec, orientation } of source"
-          :key="src"
-          :src="`${cdnUrl}/video/s_${videoFitCoverAspect(orientation, orientation === 'landscape' ? 16 / 9 : 9 / 16, width, height)}&c_${codec}&q_${qualtiy}/${src}`"
-          :type="type"
-          :media="media" />
-      </template>
-      <template v-else>
-        <source
-          :src="`${cdnUrl}/video/s_${videoFitCoverAspect(source.orientation, source.orientation === 'landscape' ? 16 / 9 : 9 / 16, width, height)}&c_${source.codec}&q_${qualtiy}/${source.src}`"
-          :type="source.type" />
-      </template>
-      Your browser does not support the video tag.
-    </ClientOnly>
+    <template v-if="Array.isArray(source)">
+      <source
+        v-for="{ src, type, media, codec, orientation } of source"
+        :key="src"
+        :src="`${cdnUrl}/video/s_${videoFitCoverAspect(orientation, orientation === 'landscape' ? 16 / 9 : 9 / 16, width, height)}&c_${codec}&q_${qualtiy}/${src}`"
+        :type="type"
+        :media="media" />
+    </template>
+    <template v-else>
+      <source
+        :src="`${cdnUrl}/video/s_${videoFitCoverAspect(source.orientation, source.orientation === 'landscape' ? 16 / 9 : 9 / 16, width, height)}&c_${source.codec}&q_${qualtiy}/${source.src}`"
+        :type="source.type" />
+    </template>
+    Your browser does not support the video tag.
   </video>
 </template>

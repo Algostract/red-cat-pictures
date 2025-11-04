@@ -22,7 +22,7 @@ const emit = defineEmits<{
         :muted="true"
         :playsinline="true"
         :loop="true"
-        preload="metadata" />
+        preload="auto" />
     </div>
     <div class="relative col-span-3 !col-start-1 row-start-1 flex flex-col gap-6 text-center md:row-start-2 lg:col-span-2 lg:text-left">
       <h1 class="text-3xl font-semi-bold md:text-5xl">
