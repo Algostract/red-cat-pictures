@@ -1,7 +1,7 @@
 export default defineTask({
   meta: {
-    name: 'migrate:media',
-    description: 'Sync Notion Resources into cache',
+    name: 'sync:cdn',
+    description: 'Sync Drive Resources into CDN',
   },
   async run() {
     const config = useRuntimeConfig()
@@ -13,7 +13,7 @@ export default defineTask({
       // update cover -> https://cdn.redcatpictures.com/media/w_1620&h_1080/product-photo-033-033
 
       // asset.properties.Type.select.name === 'Photo' && asset.properties.Status.status.name === 'Plan'
-      if (!(asset.properties.Type.select.name === 'Photo')) continue
+      if (!(asset.properties.Type.select.name === 'Video')) continue
 
       const slug = asset.properties.Slug?.formula?.string === 'featured-video-000-000' ? asset.properties.Slug?.formula?.string + '-landscape' : asset.properties.Slug?.formula?.string
       const [aW, aH] = asset.properties['Aspect ratio'].select.name.split(':').flatMap((item) => parseInt(item))

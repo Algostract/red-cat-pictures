@@ -118,57 +118,17 @@ function handleEnded() {
   emit('ended')
 }
 
-function ceilToList(x: number, list: readonly number[]) {
-  for (const n of list) if (x <= n) return n
-  return list[list.length - 1] // clamp to max if beyond list
-}
-
 const qualtiy = 80
 const { width, height } = useElementSize(videoRef)
 
-// Source: common display/video resolutions (HD/Full HD/QHD/4K/8K)
-const WIDTHS_16_9 = [1280, 1920, 2560] as const
-const HEIGHTS_16_9 = [720, 1080, 1440] as const
-
-function coverByAspect(orientation: 'auto' | 'landscape' | 'portrait', r: number = 16 / 9): string {
-  const W = width.value
-  const H = height.value
-  const containerR = W / H
-
-  // cover math: scale by width if container is wider than source ratio, else by height
-  let rawW = containerR > r ? W : H * r
-  let rawH = containerR > r ? W / r : H
-
-  // Ensure orientation if explicitly requested
-  if (orientation === 'landscape' && rawW < rawH) [rawW, rawH] = [rawH, rawW]
-  if (orientation === 'portrait' && rawH < rawW) [rawW, rawH] = [rawH, rawW]
-
-  // Decide which axis to snap:
-  const snapByWidth = orientation === 'landscape' ? true : orientation === 'portrait' ? false : containerR > r
-
-  let finalW: number
-  let finalH: number
-
-  if (snapByWidth) {
-    const snappedW = ceilToList(Math.round(rawW), WIDTHS_16_9)!
-    finalW = snappedW
-    finalH = Math.round(snappedW / r)
-  } else {
-    const snappedH = ceilToList(Math.round(rawH), HEIGHTS_16_9)!
-    finalH = snappedH
-    finalW = Math.round(snappedH * r)
-  }
-
-  return `${finalW}x${finalH}`
-}
-
+// TODO: remove when hero video is same as landscape and portrait
 const adaptivePoster = computed(() => {
   const orientation = width.value >= height.value ? 'landscape' : 'portrait'
   return import.meta.client
     ? props.poster
       ? `${cdnUrl}/image/fit_cover&${orientation === 'landscape' ? 'w' : 'h'}_1280/${extractCdnId(props.poster)!.replace(/\b(landscape|portrait)\b/i, orientation)}`
       : undefined
-    : undefined
+    : '/previews/placeholder-blank.webp'
 })
 </script>
 
@@ -196,12 +156,14 @@ const adaptivePoster = computed(() => {
         <source
           v-for="{ src, type, media, codec, orientation } of source"
           :key="src"
-          :src="`${cdnUrl}/video/s_${coverByAspect(orientation)}&c_${codec}&q_${qualtiy}/${src}`"
+          :src="`${cdnUrl}/video/s_${videoFitCoverAspect(orientation, orientation === 'landscape' ? 16 / 9 : 9 / 16, width, height)}&c_${codec}&q_${qualtiy}/${src}`"
           :type="type"
           :media="media" />
       </template>
       <template v-else>
-        <source :src="`${cdnUrl}/video/s_${coverByAspect(source.orientation)}&c_${source.codec}&q_${qualtiy}/${source.src}`" :type="source.type" />
+        <source
+          :src="`${cdnUrl}/video/s_${videoFitCoverAspect(source.orientation, source.orientation === 'landscape' ? 16 / 9 : 9 / 16, width, height)}&c_${source.codec}&q_${qualtiy}/${source.src}`"
+          :type="source.type" />
       </template>
       Your browser does not support the video tag.
     </ClientOnly>
