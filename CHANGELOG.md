@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.4.6
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.5...v3.4.6)
+
+### 🩹 Fixes
+
+- Codec details and spelling of videography ([b2a95d1](https://github.com/Algostract/red-cat-pictures/commit/b2a95d1))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.4.5
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.4...v3.4.5)
