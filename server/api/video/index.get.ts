@@ -52,16 +52,16 @@ export const heroPreset: FileSources = (() => {
 })()
 
 // Use explicit RFC 6381 codec strings so browsers can quickly reject unsupported sources; for HEVC, tag as "hvc1" (not "hev1") to avoid black video on Apple decoders
-function buildType(codec: Codec, containerMime: string): string {
+function buildType(codec: Codec): string {
   switch (codec) {
     case 'avc':
-      return 'video/mp4; codecs="avc1, mp4a.40.2"'
+      return 'video/mp4;'
     case 'hevc':
       return 'video/mp4; codecs="hvc1, mp4a.40.2"'
     case 'vp9':
-      return 'video/webm; codecs="vp9, opus"'
+      return 'video/webm;'
     case 'av1':
-      return containerMime === 'video/mp4' ? 'video/mp4; codecs="av01, mp4a.40.2"' : 'video/webm; codecs="av01, opus"'
+      return 'video/mp4;'
   }
 }
 
@@ -71,8 +71,7 @@ export function convertSources(name: string, sources: FileSources): Source[] {
   for (const codec of Object.keys(sources) as Codec[]) {
     const codecSources = sources[codec]
     if (!codecSources) continue
-    const mimeType = codecSources.type
-    const typeWithCodecs = buildType(codec, mimeType)
+    const typeWithCodecs = buildType(codec)
     // const extension = mimeType === 'video/webm' ? 'webm' : mimeType === 'video/mp4' ? 'mp4' : ''
     // const resolutionKeys = (Object.keys(codecSources).filter((key) => key !== 'type') as Resolution[]).sort((a, b) => order.indexOf(a) - order.indexOf(b))
     // for (const resolution of resolutionKeys) {
