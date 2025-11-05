@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.4.7
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.6...v3.4.7)
+
+### 🩹 Fixes
+
+- Video quality adjusted ([ad248fb](https://github.com/Algostract/red-cat-pictures/commit/ad248fb))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.4.6
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.5...v3.4.6)
