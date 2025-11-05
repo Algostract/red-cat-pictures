@@ -118,16 +118,14 @@ function handleEnded() {
   emit('ended')
 }
 
-const qualtiy = 80
+const qualtiy = 75
 const { width, height } = useElementSize(videoRef)
 
 // TODO: remove when hero video is same as landscape and portrait
 const adaptivePoster = computed(() => {
-  const orientation = width.value >= height.value ? 'landscape' : 'portrait'
-  return import.meta.client
-    ? props.poster
-      ? `${cdnUrl}/image/fit_cover&${orientation === 'landscape' ? 'w' : 'h'}_1280/${extractCdnId(props.poster)!.replace(/\b(landscape|portrait)\b/i, orientation)}`
-      : undefined
+  const orientation = width.value > height.value ? 'landscape' : 'portrait'
+  return props.poster
+    ? `${cdnUrl}/image/fit_cover&${orientation === 'portrait' ? 'h' : 'w'}_720/${extractCdnId(props.poster)!.replace(/\b(landscape|portrait)\b/i, orientation)}`
     : '/previews/placeholder-blank.webp'
 })
 </script>
