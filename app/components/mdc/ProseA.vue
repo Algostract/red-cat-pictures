@@ -2,6 +2,10 @@
 defineProps<{ href: string; title?: string }>()
 const attrs = useAttrs()
 
+const {
+  public: { cdnUrl },
+} = useRuntimeConfig()
+
 const hoveredLink = ref<{
   url: string
   title: string
@@ -35,7 +39,20 @@ function hideTooltip() {
     </template>
     <template v-else-if="title === 'video' || $slots.default?.()[0]?.children === 'video'">
       <!-- extract YouTube video ID and embed -->
-      <iframe :src="`https://www.youtube.com/embed/${href.split('/').pop()}?controls=0`" title="YouTube video player" frameborder="0" allowfullscreen class="aspect-video w-full" v-bind="attrs" />
+      <!-- <iframe :src="`https://www.youtube.com/embed/${href.split('/').pop()}?controls=0`" title="YouTube video player" frameborder="0" allowfullscreen class="aspect-video w-full" v-bind="attrs" /> -->
+      <video
+        ref="videoRef"
+        class="aspect-video w-full bg-black"
+        controls-list="nodownload"
+        preload="auto"
+        :controls="false"
+        :autoplay="true"
+        :muted="true"
+        :playsinline="true"
+        :disablePictureInPicture="true">
+        <source :src="`${cdnUrl}/video/s_1280x720&c_av1&q_${75}/${href.split('/').pop()}`" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </template>
     <NuxtLink
       v-else-if="!href.startsWith('#')"

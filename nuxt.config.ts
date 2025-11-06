@@ -94,7 +94,7 @@ export default defineNuxtConfig({
       tasks: true,
     },
     scheduledTasks: {
-      '*/5 * * * *': ['sync:resource', 'workflow:quotation'],
+      '*/5 * * * *': ['sync:resource', 'sync:cdn', 'workflow:quotation'],
       '*/10 * * * *': ['prospect:marketing', 'notify:content'],
     },
   },

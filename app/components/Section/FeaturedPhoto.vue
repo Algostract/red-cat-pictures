@@ -111,7 +111,8 @@ const photos = computed<GalleryPhoto[]>(() =>
           loading="lazy"
           :placeholder="[350, Math.round(350 / aspectRatio), 50, 5]"
           class="size-full overflow-hidden bg-light-600 object-cover dark:bg-dark-500"
-          :class="{ active: activePhoto === title }" />
+          :class="{ active: activePhoto === title }"
+          :style="{ aspectRatio }" />
       </NuxtLink>
     </div>
   </section>

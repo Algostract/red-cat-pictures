@@ -28,40 +28,38 @@ const columns = computed<Photo[][]>(() => {
   <div>
     <SectionLabel icon="photo" title="Signature Branding" />
     <section class="bg-neutral-900 relative mb-8 flex h-screen w-full items-center justify-center overflow-hidden">
-      <div class="pointer-events-none absolute inset-0 flex -rotate-12 scale-[1.4] items-center justify-center" style="perspective(900px)">
-        <div class="size-screen grid gap-1 overflow-hidden" :class="`grid-cols-${COLS}`">
+      <div class="pointer-events-none absolute inset-0 flex -rotate-12 scale-[1.4] items-center justify-center before:absolute before:inset-0 before:z-10 before:bg-black/90 before:content-['']">
+        <div class="size-screen grid gap-1" :class="`grid-cols-${COLS}`">
           <div
             v-for="(col, colIdx) in columns"
             :key="colIdx"
             :style="{ gridColumn: colIdx + 1, animationDuration: allPhotos.length * 1.5 + 's' }"
             :class="colIdx % 2 === 0 ? 'animate-marquee-y' : 'animate-marquee-y-reverse'"
             class="w-fit">
-            <div v-for="(card, i) in col" :key="i" class="aspect-[3/4] h-auto w-full overflow-hidden">
-              <NuxtImg :src="extractCdnId(card.image!)" alt="Card" :width="256" :height="341" loading="lazy" class="object-cover" :draggable="false" />
+            <div v-for="(card, i) in col" :key="i" class="aspect-[3/4] h-auto w-full">
+              <NuxtImg :src="extractCdnId(card.image!)" alt="Card" :width="256" :height="341" loading="lazy" class="size-full object-cover" :draggable="false" />
             </div>
           </div>
         </div>
       </div>
       <!-- Hero text/CTA -->
-      <div class="absolute inset-0 z-20 bg-black/90 text-white">
-        <div class="relative z-30 flex h-full w-full flex-col items-center justify-center px-4 md:px-0">
-          <div class="flex flex-col items-center gap-4 text-left md:gap-10">
-            <h1 class="sweep-gradient font-extrabold bg-gradient-to-r from-primary-500 from-50% to-white text-center text-xl md:text-4xl">Signature Visuals for Brands That Dare to Lead</h1>
-            <p class="mx-auto max-w-[52rem] text-sm !leading-8 md:text-lg">
-              We specializes in <strong>food/product photography</strong>, and <strong>creative videography</strong> in Kolkata, India.<br />
-              Your product deserves an experience — not a price tag. We partner with forward-thinking brands to create stunning imagery that tells stories, drives desire, and elevates perceived value.
-              Our portfolio covers Kolkata’s top D2Cs, F&B ventures, and consumer brands looking for impactful food and product visuals in India’s creative capital.
-            </p>
-            <ul class="text-md max-w-[52rem] list-inside list-disc space-y-3 text-left">
-              <li>Strategy-first <strong>food & product photography</strong> concepts tailored for your launch objectives in Kolkata, India</li>
-              <li>
-                Full-service production: casting, art direction, motion, and brand-centric
-                <strong>videography</strong>
-              </li>
-              <li>Brand-safe rights and tailored assets for digital campaigns—delivered with a focus on quality brands</li>
-            </ul>
-            <ButtonCTA class="flex" :transparent="true" @click="emit('contact')" />
-          </div>
+      <div class="relative z-30 flex h-full w-full flex-col items-center justify-center px-4 text-white md:px-0">
+        <div class="flex flex-col items-center gap-4 text-left md:gap-10">
+          <h1 class="sweep-gradient font-extrabold bg-gradient-to-r from-primary-500 from-50% to-white text-center text-xl md:text-4xl">Signature Visuals for Brands That Dare to Lead</h1>
+          <p class="mx-auto max-w-[52rem] text-sm !leading-8 md:text-lg">
+            We specializes in <strong>food/product photography</strong>, and <strong>creative videography</strong> in Kolkata, India.<br />
+            Your product deserves an experience — not a price tag. We partner with forward-thinking brands to create stunning imagery that tells stories, drives desire, and elevates perceived value.
+            Our portfolio covers Kolkata’s top D2Cs, F&B ventures, and consumer brands looking for impactful food and product visuals in India’s creative capital.
+          </p>
+          <ul class="text-md max-w-[52rem] list-inside list-disc space-y-3 text-left">
+            <li>Strategy-first <strong>food & product photography</strong> concepts tailored for your launch objectives in Kolkata, India</li>
+            <li>
+              Full-service production: casting, art direction, motion, and brand-centric
+              <strong>videography</strong>
+            </li>
+            <li>Brand-safe rights and tailored assets for digital campaigns—delivered with a focus on quality brands</li>
+          </ul>
+          <ButtonCTA class="flex" :transparent="true" @click="emit('contact')" />
         </div>
       </div>
     </section>
