@@ -45,6 +45,7 @@ function hideTooltip() {
         class="aspect-video w-full bg-black"
         controls-list="nodownload"
         preload="auto"
+        :poster="`${cdnUrl}/image/s_1280x720/${href.split('/').pop()}`"
         :controls="false"
         :autoplay="true"
         :muted="true"
