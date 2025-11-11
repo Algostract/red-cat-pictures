@@ -1,5 +1,18 @@
 # red-cat-pictures
 
+## v3.4.8
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.7...v3.4.8)
+
+### 🩹 Fixes
+
+- Content link update ([2ec0a7d](https://github.com/Algostract/red-cat-pictures/commit/2ec0a7d))
+- Email template fixed ([65d9cb9](https://github.com/Algostract/red-cat-pictures/commit/65d9cb9))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.4.7
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.6...v3.4.7)
