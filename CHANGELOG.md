@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.5.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.8...v3.5.0)
+
+### 🚀 Enhancements
+
+- Novu integration and old deps removed ([f9d9b03](https://github.com/Algostract/red-cat-pictures/commit/f9d9b03))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.4.8
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.7...v3.4.8)
