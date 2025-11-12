@@ -225,6 +225,14 @@ export interface NotionProjectClient {
         plain_text: string
       }[]
     }
+    Company: {
+      type: 'rich_text'
+      rich_text: {
+        text: {
+          content: string
+        }
+      }[]
+    }
     Address: {
       type: 'rich_text'
       rich_text: {

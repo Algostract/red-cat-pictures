@@ -4,11 +4,13 @@ import { sendEmail } from './[id]/send.post'
 
 export default defineEventHandler<Promise<{ success: boolean }>>(async (event) => {
   try {
+    // const { id } = getRouterParams(event)
     const body = await readBody<TransactionalEmail<keyof EmailTemplateData>>(event)
+    await sendEmail(body.template, [body.data])
 
-    return { success: await sendEmail(body.template, [body.data]) }
+    return { success: true }
   } catch (error: unknown) {
-    console.error('API notification/email/send POST', error)
+    console.error('API notification/email/[id]/send POST', error)
 
     const { code: errorCode } = error as { code?: string }
     if (errorCode === 'ESOCKET' || errorCode === 'ECONNECTION') {

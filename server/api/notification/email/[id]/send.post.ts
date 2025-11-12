@@ -1,5 +1,3 @@
-import { render } from '@vue-email/render'
-import type { Component } from 'vue'
 import emailTemplate from '~~/server/emails'
 import type { EmailMetaData, EmailTemplateData } from '~~/server/emails'
 
@@ -17,21 +15,21 @@ export async function sendEmail<T extends keyof EmailTemplateData>(template: T, 
     payload.map(async (payloadData) => {
       try {
         const allData = { ...metaData, ...emailTemplate[template].data, ...payloadData }
-
-        const html = await render(emailTemplate[template].template as Component, allData)
-        const text = await render(emailTemplate[template].template as Component, allData, { plainText: true })
-
-        const { transport } = useNodeMailer()
-
-        await transport.verify()
-
-        await transport.sendMail({
-          from: `"${allData.fromCompanyName}" <${allData.fromEmail}>`,
-          to: allData.toEmail,
-          subject: allData.emailSubject,
-          html,
-          text,
-        })
+        console.log(allData)
+        /* 
+ 
+         const html = await render(emailTemplate[template].template as Component, allData)
+         const text = await render(emailTemplate[template].template as Component, allData, { plainText: true })
+ 
+         await transport.verify()
+ 
+         await transport.sendMail({
+           from: `"${allData.fromCompanyName}" <${allData.fromEmail}>`,
+           to: allData.toEmail,
+           subject: allData.emailSubject,
+           html,
+           text,
+         }) */
       } catch (error) {
         console.error('function sendEmail', error)
         isSuccessful = false

@@ -68,7 +68,6 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@vueuse/nuxt',
     'magic-regexp/nuxt',
-    'nuxt-nodemailer',
     'nuxt-splide',
   ],
   nitro: {
@@ -148,6 +147,8 @@ export default defineNuxtConfig({
       r2Region: '',
       documensoApi: '',
       documensoApiKey: '',
+      novuApi: '',
+      novuApiKey: '',
     },
   },
   icon: {

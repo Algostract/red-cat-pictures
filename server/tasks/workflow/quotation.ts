@@ -450,7 +450,7 @@ export default defineTask({
           email: 'ceo@redcatpictures.com',
         }
         const clientDetails = {
-          name: notionTextStringify(client.properties.Name.title),
+          name: notionTextStringify(client.properties.Company.rich_text),
           address: notionTextStringify(client.properties.Address.rich_text),
           phone: client.properties.Phone?.phone_number,
           email: import.meta.env.NODE_ENV === 'production' ? client.properties.Email.email : 'redcatpictures24@gmail.com',
