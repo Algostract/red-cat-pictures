@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.5.1
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.5.0...v3.5.1)
+
+### 🏡 Chore
+
+- Migrate from hardcoded to notion page ([07d428e](https://github.com/Algostract/red-cat-pictures/commit/07d428e))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.5.0
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.4.8...v3.5.0)
