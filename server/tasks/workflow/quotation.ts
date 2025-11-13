@@ -1,7 +1,6 @@
 import MarkdownIt from 'markdown-it'
 import puppeteer from 'puppeteer'
 import { NotionToMarkdown } from 'notion-to-md'
-import { convertNotionPageToMarkdown } from '~~/server/api/[content]/[...slug].get'
 
 let n2m: NotionToMarkdown
 const md = new MarkdownIt({

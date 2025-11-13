@@ -93,8 +93,9 @@ export default defineNuxtConfig({
       tasks: true,
     },
     scheduledTasks: {
-      '*/5 * * * *': ['sync:resource', 'sync:cdn', 'workflow:quotation'],
-      '*/10 * * * *': ['prospect:marketing', 'notify:content'],
+      '*/3 * * * *': ['sync:resource', 'sync:cdn'],
+      '*/5 * * * *': ['workflow:quotation', 'prospect:marketing'],
+      '*/7 * * * *': ['notify:content'],
     },
   },
   routeRules: {
@@ -112,9 +113,9 @@ export default defineNuxtConfig({
     '/blogs/**': { redirect: { to: '/blog/**', statusCode: 301 } },
     '/blog/**': { isr: 3600 },
     '/about': { isr: 3600 },
-    '/terms': { prerender: true },
-    '/privacy': { prerender: true },
-    '/cancellation': { prerender: true },
+    '/terms': { isr: 86400 },
+    '/privacy': { isr: 86400 },
+    '/cancellation': { isr: 86400 },
   },
   runtimeConfig: {
     app: {

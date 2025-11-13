@@ -1,6 +1,5 @@
 import { NotionToMarkdown } from 'notion-to-md'
 import { z } from 'zod'
-import { convertNotionPageToMarkdown } from './[...slug].get'
 
 let n2m: NotionToMarkdown
 
