@@ -1,5 +1,25 @@
 # red-cat-pictures
 
+## v3.6.0
+
+[compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.5.1...v3.6.0)
+
+### 🚀 Enhancements
+
+- Video page added ([a0e4148](https://github.com/Algostract/red-cat-pictures/commit/a0e4148))
+
+### 🩹 Fixes
+
+- Codec mimetype ([1275cbb](https://github.com/Algostract/red-cat-pictures/commit/1275cbb))
+
+### 🏡 Chore
+
+- Added all social links, some housekeeping of styles ([e1669f3](https://github.com/Algostract/red-cat-pictures/commit/e1669f3))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.5.1
 
 [compare changes](https://github.com/Algostract/red-cat-pictures/compare/v3.5.0...v3.5.1)
