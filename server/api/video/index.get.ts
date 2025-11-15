@@ -55,13 +55,13 @@ export const heroPreset: FileSources = (() => {
 function buildType(codec: Codec): string {
   switch (codec) {
     case 'avc':
-      return 'video/mp4;'
+      return 'video/mp4'
     case 'hevc':
-      return 'video/mp4; codecs="hvc1, mp4a.40.2"'
+      return 'video/mp4; codecs="hvc1"'
     case 'vp9':
-      return 'video/webm;'
+      return 'video/webm'
     case 'av1':
-      return 'video/mp4;'
+      return 'video/webm'
   }
 }
 
