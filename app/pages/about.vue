@@ -42,31 +42,12 @@ const members: Member[] = [
     content: `Aratrik brings a keen eye for detail and a passion for storytelling through photos and videos.`,
     image: `/images/hero-1.webp`,
     socials: {
-      linkedin: 'https://www.linkedin.com/in/aratrik-nandy-b72288323/',
+      instagram: 'https://www.instagram.com/photos_by_aratrik/',
+      linkedin: 'https://www.linkedin.com/in/aratrik-nandy-rcp/',
     },
     isHero: true,
     animation: 'fly-in',
   },
-  /*   {
-      name: 'Kinjal Adhikary',
-      designation: 'Assistant Director',
-      content: `Kinjal brings his immersive knowledge about film-making. His unique sense brings adds an extra layer to our projects.`,
-      image: `/images/hero-2.webp`,
-      socials: {},
-      isHero: false,
-      animation: 'burn',
-    },
-    {
-      name: 'Swarup Ghosh',
-      designation: 'Art Director',
-      content: `Swarup has experience in VFX industry for around 5 years and worked for several well known brands.`,
-      image: `/images/hero-3.webp`,
-      socials: {
-        linkedin: 'https://www.linkedin.com/in/swarup-ghosh-48910425b',
-      },
-      isHero: false,
-      animation: 'burn',
-    }, */
   {
     name: 'Avishek Das',
     designation: 'Script Writer',
@@ -91,24 +72,24 @@ const members: Member[] = [
     isHero: false,
     animation: 'burn',
   },
-  {
-    name: 'Aishik Kar',
-    designation: 'Coordinator',
-    content: `Aishik keeps every production on track, expertly managing teams and details to guarantee smooth project execution.`,
-    image: `/images/hero-6.webp`,
-    socials: {},
-    isHero: false,
-    animation: 'burn',
-  },
-  {
-    name: 'Avijit Sardar',
-    designation: 'Photographer',
-    content: `Avijit captures memorable moments with creativity and precision, turning every frame into a striking visual story.`,
-    image: `/images/hero-7.webp`,
-    socials: {},
-    isHero: false,
-    animation: 'burn',
-  },
+  /*  {
+     name: 'Aishik Kar',
+     designation: 'Coordinator',
+     content: `Aishik keeps every production on track, expertly managing teams and details to guarantee smooth project execution.`,
+     image: `/images/hero-6.webp`,
+     socials: {},
+     isHero: false,
+     animation: 'burn',
+   },
+   {
+     name: 'Avijit Sardar',
+     designation: 'Photographer',
+     content: `Avijit captures memorable moments with creativity and precision, turning every frame into a striking visual story.`,
+     image: `/images/hero-7.webp`,
+     socials: {},
+     isHero: false,
+     animation: 'burn',
+   }, */
 ]
 </script>
 

@@ -5,7 +5,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <footer class="mx-auto w-full px-2 md:px-4">
+  <footer class="mx-auto mt-8 w-full px-2 md:px-4">
     <div class="relative grid h-52 grid-cols-2 grid-rows-2 items-end overflow-hidden bg-white p-6 text-dark-600/50 dark:bg-black dark:text-light-600 md:grid-cols-3 md:grid-rows-3 md:p-8">
       <div class="relative col-start-1 row-start-2 flex flex-col gap-2 justify-self-start text-sm md:row-start-3">
         <NuxtIcon name="local:logo" filled class="absolute -left-[60px] top-0 -translate-y-[56%] text-[309px] opacity-10 md:-left-[104px] md:-translate-y-[37%] md:text-[560px]" />
@@ -23,13 +23,23 @@ const emit = defineEmits<{
           </NuxtLink>
         </li>
         <li>
+          <NuxtLink aria-label="instagram" to="https://www.instagram.com/redcatpictures" target="_blank" external>
+            <NuxtIcon name="local:instagram" class="text-[28px] md:text-[40px]" />
+          </NuxtLink>
+        </li>
+        <li>
           <NuxtLink aria-label="facebook" to="https://www.facebook.com/redcatpictures" target="_blank" external>
             <NuxtIcon name="local:facebook" class="text-[28px] md:text-[40px]" />
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink aria-label="instagram" to="https://www.instagram.com/redcatpictures" target="_blank" external>
-            <NuxtIcon name="local:instagram" class="text-[28px] md:text-[40px]" />
+          <NuxtLink aria-label="linkedin" to="https://www.linkedin.com/company/red-cat-pictures" target="_blank" external>
+            <NuxtIcon name="local:linkedin" class="text-[28px] md:text-[40px]" />
+          </NuxtLink>
+        </li>
+        <li>
+          <NuxtLink aria-label="youtube" to="https://www.youtube.com/@red_cat_pictures" target="_blank" external>
+            <NuxtIcon name="local:youtube" class="text-[28px] md:text-[40px]" />
           </NuxtLink>
         </li>
         <li>

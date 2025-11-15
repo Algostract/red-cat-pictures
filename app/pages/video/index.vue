@@ -32,7 +32,7 @@ const landscapeVideos = computed(() => videos.value.filter((v) => v.sources[0]?.
 
 <template>
   <main class="mx-auto min-h-screen w-fit pt-20 md:pt-28">
-    <section class="mb-6 flex w-full flex-col items-center gap-3">
+    <section class="flex w-full flex-col items-center gap-3">
       <!-- Reels Grid (5 per row) -->
       <h2 class="font-semibold text-md text-center uppercase md:text-xl">Portrait</h2>
       <div class="grid grid-cols-3 gap-2 md:grid-cols-5 lg:grid-cols-7">

@@ -25,9 +25,9 @@ const columns = computed<Photo[][]>(() => {
 </script>
 
 <template>
-  <div>
-    <SectionLabel icon="photo" title="Signature Branding" />
-    <section class="bg-neutral-900 relative mb-8 flex h-screen w-full items-center justify-center overflow-hidden">
+  <section id="pricing">
+    <SectionLabel icon="chess-knight" title="Signature Branding" />
+    <div class="bg-neutral-900 relative flex h-screen w-full items-center justify-center overflow-hidden">
       <div class="pointer-events-none absolute inset-0 flex -rotate-12 scale-[1.4] items-center justify-center before:absolute before:inset-0 before:z-10 before:bg-black/90 before:content-['']">
         <div class="size-screen grid gap-1" :class="`grid-cols-${COLS}`">
           <div
@@ -62,8 +62,8 @@ const columns = computed<Photo[][]>(() => {
           <ButtonCTA class="flex" :transparent="true" @click="emit('contact')" />
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>

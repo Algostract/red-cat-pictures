@@ -30,7 +30,7 @@ const activePhotoName = useState<string | null>()
   <main class="mx-auto min-h-screen w-full pt-20 md:pt-28">
     <!-- <LazySearchBar class="fixed bottom-4 left-1/2 z-50 -translate-x-1/2" hydrate-on-idle /> -->
     <section>
-      <div v-for="category in categoryOrder" :key="category" class="mb-6 flex flex-col gap-3">
+      <div v-for="category in categoryOrder" :key="category" class="flex flex-col gap-3">
         <h2 class="font-semibold text-md text-center uppercase md:text-xl">{{ category }}</h2>
         <div class="columns-3 gap-2 md:columns-4 lg:columns-6">
           <div v-for="photo in groupedPhotos[category]" :key="photo.id" class="mb-2 overflow-hidden bg-light-600 duration-200 ease-in-out hover:scale-110 dark:bg-dark-500">

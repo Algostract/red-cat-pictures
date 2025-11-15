@@ -67,8 +67,9 @@ useSchemaOrg([
     },
     sameAs: [
       'https://wa.me/c/918910489578',
-      'https://www.facebook.com/redcatpictures',
       'https://www.instagram.com/redcatpictures',
+      'https://www.facebook.com/redcatpictures',
+      'https://www.linkedin.com/company/red-cat-pictures',
       'https://www.youtube.com/@red_cat_pictures',
       'https://maps.app.goo.gl/uWqh8LjcF5ez4WZY8',
     ],
