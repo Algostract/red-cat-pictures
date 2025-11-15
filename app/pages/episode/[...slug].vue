@@ -17,7 +17,7 @@ const title = `${episode.value.title}`
 const description = `${episode.value.description}`
 const url = `${siteUrl}/episode/${slug}`
 const cover = episode.value.cover ? extractCdnId(episode.value.cover) : ''
-const imageUrl = `${cdnUrl}/image/fit_cover&w_1200&h_630/${cover}`
+const imageUrl = `${cdnUrl}/image/fit_cover&s_1200x630/${cover}`
 
 useSeoMeta({
   title: title,

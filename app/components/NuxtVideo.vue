@@ -85,6 +85,7 @@ watch(
 )
 
 const progress = ref(0)
+const isVideoLoaded = ref(false)
 
 function handleError(e?: Error) {
   console.error('Video Error occurred:', e)
@@ -100,6 +101,10 @@ function handlePlay() {
 
 function handlePause() {
   // console.log('Video paused')
+}
+
+function handleLoadedData() {
+  isVideoLoaded.value = true
 }
 
 function handleProgress() {
@@ -129,7 +134,6 @@ const adaptivePoster = computed(() => {
 </script>
 
 <template>
-  <!-- @loadedmetadata="" -->
   <video
     ref="videoRef"
     class="size-full bg-black"
@@ -141,12 +145,15 @@ const adaptivePoster = computed(() => {
     :muted="muted"
     :playsinline="playsinline"
     :disablePictureInPicture="disablePictureInPicture"
+    :class="{ shimmer: !isVideoLoaded }"
     @error="handleError()"
     @canplay="handleCanPlay"
     @play="handlePlay"
     @pause="handlePause"
     @timeupdate="handleProgress"
-    @ended="handleEnded">
+    @ended="handleEnded"
+    @loadeddata="handleLoadedData"
+    @loadedmetadata="handleLoadedData">
     <template v-if="Array.isArray(source)">
       <source
         v-for="{ src, type, media, codec, orientation } of source"

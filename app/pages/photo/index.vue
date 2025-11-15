@@ -6,7 +6,7 @@ const description = `Photo Gallery`
 const {
   public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
-const imageUrl = photos.value?.length ? `${cdnUrl}/image/fit_cover&w_1200&h_630/${extractCdnId(photos.value[0]?.image)}` : `${siteUrl}/preview/placeholder-empty.webp`
+const imageUrl = photos.value?.length ? `${cdnUrl}/image/fit_cover&s_1200x630/${extractCdnId(photos.value[0]?.image)}` : `${siteUrl}/preview/placeholder-empty.webp`
 
 useSeoMeta({
   title: title,
@@ -29,7 +29,7 @@ const activePhotoName = useState<string | null>()
 <template>
   <main class="mx-auto min-h-screen w-full pt-20 md:pt-28">
     <!-- <LazySearchBar class="fixed bottom-4 left-1/2 z-50 -translate-x-1/2" hydrate-on-idle /> -->
-    <section class="">
+    <section>
       <div v-for="category in categoryOrder" :key="category" class="mb-6 flex flex-col gap-3">
         <h2 class="font-semibold text-md text-center uppercase md:text-xl">{{ category }}</h2>
         <div class="columns-3 gap-2 md:columns-4 lg:columns-6">

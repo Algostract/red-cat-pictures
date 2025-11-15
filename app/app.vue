@@ -23,8 +23,10 @@ useHead({
 
 useSeoMeta({
   ogType: 'profile',
-  ogImageWidth: 1280,
-  ogImageHeight: 640,
+  ogLogo: `${siteUrl}/logo-dark.png`,
+  ogImage: imageUrl,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
   fbAppId: 966242223397117,
   twitterCard: 'summary_large_image',
   colorScheme: 'light dark',
@@ -35,8 +37,6 @@ useSeoMeta({
     userScalable: 'no',
     viewportFit: 'cover',
   },
-  ogImage: imageUrl,
-  ogLogo: `${siteUrl}/logo-dark.png`,
   twitterImage: imageUrl,
 })
 

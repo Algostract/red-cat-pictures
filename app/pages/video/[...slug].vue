@@ -20,7 +20,7 @@ const {
   public: { siteUrl, cdnUrl },
 } = useRuntimeConfig()
 const cover = activeVideo.value?.poster ? extractCdnId(activeVideo.value?.poster) : ''
-const imageUrl = `${cdnUrl}/image/fit_cover&w_1920&h_1080/${cover}`
+const imageUrl = `${cdnUrl}/image/fit_cover&s_1200x630/${cover}`
 
 useSeoMeta({
   title: title,
@@ -62,7 +62,7 @@ async function toggleFullScreen() {
 </script>
 
 <template>
-  <main v-if="activeVideo" class="relative mx-auto flex h-screen w-screen flex-col items-center justify-center overflow-hidden p-4 md:p-8">
+  <main v-if="activeVideo" class="shimmer-overlay relative mx-auto flex h-screen w-screen flex-col items-center justify-center overflow-hidden p-4 md:p-8">
     <NuxtVideo
       ref="videoContainerRef"
       :key="activeVideoSlug"

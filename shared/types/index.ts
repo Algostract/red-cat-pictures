@@ -121,7 +121,7 @@ export interface WhatsappSubscription {
 }
 
 /* Server Only */
-export const resourceTypes = ['prospect', 'client', 'project', 'content', 'asset', 'terms'] as const
+export const resourceTypes = ['prospect', 'client', 'project', 'content', 'asset', 'terms', 'privacy', 'cancellation'] as const
 
 export type ResourceType = (typeof resourceTypes)[number]
 

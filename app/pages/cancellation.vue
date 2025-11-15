@@ -18,23 +18,7 @@ useSeoMeta({
   twitterDescription: description,
   ogUrl: `${siteUrl}/refund`,
 })
-/* 
-const lastUpdated = buildTime
 
-const sections = [
-  {
-    title: '1. Cancellation of Services',
-    content: `
-      You may cancel your booking or service request at any time prior to the scheduled start date by contacting us using the details provided below. Please note that the booking fee is non-refundable in the event of cancellation.
-    `,
-  },
-  {
-    title: '2. Refund Eligibility',
-    content: `
-    All transactions are final. Once a transaction is completed, no refunds will be issued under any circumstances.
-  `,
-  },
-] */
 const { data } = await useAPI<{
   cancellation: {
     content: string
