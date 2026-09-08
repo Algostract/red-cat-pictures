@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.16.2
+
+[compare changes](https://github.com/RED-CAT-PICTURES/red-cat-pictures/compare/v3.16.1...v3.16.2)
+
+### 💅 Refactors
+
+- Updated nuxtvideo.vue component to use videojs ([e2759ef](https://github.com/RED-CAT-PICTURES/red-cat-pictures/commit/e2759ef))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.16.1
 
 [compare changes](https://github.com/RED-CAT-PICTURES/red-cat-pictures/compare/v3.16.0...v3.16.1)
