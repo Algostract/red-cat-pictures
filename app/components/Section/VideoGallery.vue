@@ -32,9 +32,6 @@ async function updateVideoIndex(step = 1) {
 }
 
 const videoContainerWrapper = useTemplateRef<HTMLDivElement>('video-container-wrapper')
-
-const { orientation: deviceOrientation } = useScreenOrientation()
-
 /*
 const videoRef = computed(() => videoContainerRef.value?.videoRef as HTMLVideoElement)
 const { isFullscreen, toggle } = useFullscreen(videoRef)
@@ -60,16 +57,6 @@ width >= height     | landscape          | landscape         | landscape
 const { width, height } = useWindowSize()
 const { x } = useMouseInElement(videoContainerWrapper)
 
-function isLandscapeOriented(deviceOrientation: string, videoOrientation: string) {
-  const deviceType = width.value > height.value
-  if (deviceType) {
-    return false
-  } else {
-    if (deviceOrientation === 'landscape' || videoOrientation === 'landscape') return true
-    else return false
-  }
-}
-
 const sliderIndicatorDirection = refAutoReset(0, 500) as Ref<-1 | 0 | 1>
 
 function slideClick() {
@@ -92,8 +79,9 @@ function slideClick() {
       <ClientOnly>
         <NuxtVideo
           :key="activeVideo.id"
-          class="aspect-video"
-          :class="isLandscapeOriented(deviceOrientation?.split('-')[0]!, activeVideo.aspectRatio >= 1 ? 'landscape' : 'portrait') ? 'w-[100vh] max-w-[100vh] rotate-90' : ''"
+          :aspect-ratio="activeVideo.aspectRatio"
+          :css-class="width > height ? '' : activeVideo.aspectRatio > 1 ? 'rotate-90 w-[100vh] min-w-[100vh] h-auto' : ' '"
+          :object-fit="width > height ? (activeVideo.aspectRatio < 1 ? 'contain' : 'cover') : 'cover'"
           :media="activeVideo.media"
           :poster="activeVideo.poster"
           :disable-picture-in-picture="true"
@@ -130,6 +118,10 @@ function slideClick() {
 </template>
 
 <style>
+:root .test {
+  @apply h-auto w-[200vh] rotate-90;
+}
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;

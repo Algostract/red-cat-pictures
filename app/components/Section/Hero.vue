@@ -11,7 +11,8 @@ defineProps<{
         v-if="video"
         :media="video.id"
         :multi-orentation="true"
-        class="gradient-mask size-full object-cover"
+        css-class="gradient-mask size-full"
+        object-fit="cover"
         :poster="video.poster"
         :disable-picture-in-picture="true"
         controls-list="nodownload"
@@ -19,6 +20,7 @@ defineProps<{
         :muted="true"
         :playsinline="true"
         :loop="true"
+        :multi-orientation="true"
         preload="auto" />
     </div>
     <div class="relative col-span-3 !col-start-1 row-start-3 flex flex-col gap-6 text-center md:row-start-2 lg:col-span-2 lg:text-left">

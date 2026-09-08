@@ -88,7 +88,7 @@ const mediaType = computed<MediaType>(() => {
           :playsinline="true"
           :loop="true"
           preload="metadata"
-          class="aspect-video" />
+          css-class="aspect-video" />
       </NuxtLink>
     </template>
     <NuxtLink

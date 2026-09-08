@@ -117,7 +117,7 @@ async function toggleFullScreen() {
         :muted="true"
         :playsinline="true"
         preload="metadata"
-        class="aspect-video cursor-pointer"
+        css-class="aspect-video cursor-pointer"
         @ended="updateVideoIndex"
         @click="toggleFullScreen()" />
     </div>

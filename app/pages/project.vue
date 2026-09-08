@@ -156,7 +156,7 @@ const activeMediaId = useState<string | null>('active-media-id', () => null)
                     :disable-picture-in-picture="true"
                     controls-list="nodownload"
                     preload="metadata"
-                    class="object-cover" />
+                    css-class="object-cover" />
                 </div>
               </NuxtLink>
             </template>
