@@ -170,7 +170,7 @@ services:
     restart: 'on-failure:3'
 
   mongodb:
-    image: mongo:8.0.3
+    image: mongo:8.3.8@sha256:5211c51171f57ae60842b11664bb244628971b3d35325762a97888337b9bb0db
     networks:
       - internal
     environment:
