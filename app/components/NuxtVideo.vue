@@ -1,6 +1,38 @@
 <script setup lang="ts">
 import type { MediaPlayerClass, Representation } from 'dashjs'
 
+let customElementsPromise: Promise<void> | null = null
+
+function ensureVideoCustomElementsRegistered(): Promise<void> {
+  if (!customElementsPromise) {
+    customElementsPromise = Promise.all([
+      import('@videojs/html/video/minimal-skin'),
+      import('@videojs/html/video/player'),
+      import('@videojs/html/media/dash-video'),
+      import('@videojs/html/media/hlsjs-video'),
+      // ?raw tells Vite to skip PostCSS and transformers entirely
+      import('@videojs/html/video/minimal-skin.css?raw').then((cssModule) => {
+        if (typeof document !== 'undefined' && !document.getElementById('vjs-skin-styles')) {
+          const style = document.createElement('style')
+          style.id = 'vjs-skin-styles'
+          style.textContent = cssModule.default
+          document.head.appendChild(style)
+        }
+      }),
+    ]).then(() => undefined)
+  }
+  return customElementsPromise
+}
+
+const DASH_EVENTS = {
+  STREAM_INITIALIZED: 'streamInitialized',
+} as const
+
+const HLS_EVENTS = {
+  MANIFEST_PARSED: 'hlsManifestParsed',
+  LEVEL_SWITCHED: 'hlsLevelSwitched',
+} as const
+
 const {
   public: { cdnUrl },
 } = useRuntimeConfig()
@@ -62,7 +94,7 @@ const props = withDefaults(
     disablePictureInPicture?: boolean
     live?: boolean
     objectFit?: 'auto' | 'cover' | 'contain' | 'fill'
-    cssClass: string
+    cssClass?: string
   }>(),
   {
     media: undefined,
@@ -79,7 +111,7 @@ const props = withDefaults(
     disablePictureInPicture: false,
     live: false,
     objectFit: 'auto',
-    class: '',
+    cssClass: '',
   }
 )
 
@@ -92,6 +124,7 @@ const emit = defineEmits<{
   atLive: [value: boolean]
   qualityChange: [quality: string]
   error: [error: MediaError | undefined]
+  autoplayMuted: []
 }>()
 
 const baseUrl = computed(() => (props.media?.startsWith('/') ? '' : cdnUrl))
@@ -102,6 +135,7 @@ const pendingSeekTime = ref<number | null>(null)
 const pendingPlayState = ref<boolean>(false)
 const isVideoLoaded = ref(false)
 const isPlaying = ref(false)
+const customElementsReady = ref(false)
 const progress = ref(0)
 const lastAtLive = ref<boolean | null>(null)
 
@@ -128,7 +162,6 @@ const videoUrl = computed(() => {
   if (!activeSource.value) return ''
   const base = baseUrl.value.replace(/\/+$/, '')
   const source = activeSource.value.replace(/^\/+/, '')
-
   return `${base}/media/video/s_720-1920/${source}.mpd`
 })
 
@@ -140,20 +173,21 @@ const mediaKind = computed<MediaKind>(() => {
   try {
     pathname = new URL(raw, typeof window !== 'undefined' ? window.location.href : undefined).pathname.toLowerCase()
   } catch {
-    // relative or otherwise unparsable — fall back to matching the raw string
+    // fallback to string check
   }
 
   if (pathname.endsWith('.mpd')) return 'dash'
   if (pathname.endsWith('.m3u8')) return 'hls'
-  return 'native' // .mp4, .webm, .ogg, or anything else a <video> tag can play natively
+  return 'native'
 })
 
+// Match the registered custom element tag from @videojs/html/media/hlsjs-video
 const mediaTag = computed(() => {
   switch (mediaKind.value) {
     case 'dash':
       return 'dash-video'
     case 'hls':
-      return 'hls-video'
+      return 'hlsjs-video'
     default:
       return 'video'
   }
@@ -252,6 +286,39 @@ function applyQuality(q: string) {
   emit('qualityChange', q)
 }
 
+function waitForEngine(el: MediaEngineElement, timeoutMs = 8000): Promise<MediaPlayerClass | HlsLikeEngine | undefined> {
+  if (el.engine) return Promise.resolve(el.engine)
+  return new Promise((resolve) => {
+    const start = performance.now()
+    function check() {
+      if (el.engine) {
+        resolve(el.engine)
+      } else if (performance.now() - start > timeoutMs) {
+        resolve(undefined)
+      } else {
+        requestAnimationFrame(check)
+      }
+    }
+    check()
+  })
+}
+
+async function attemptPlay(el: MediaEngineElement) {
+  try {
+    await el.play()
+  } catch {
+    if (!el.muted) {
+      el.muted = true
+      try {
+        await el.play()
+        emit('autoplayMuted')
+      } catch {
+        // Playback completely blocked
+      }
+    }
+  }
+}
+
 function seekToLive() {
   const el = videoRef.value
   if (!el) return
@@ -296,8 +363,10 @@ function handleCanPlay() {
     pendingSeekTime.value = null
   }
   if (pendingPlayState.value) {
-    el.play()
+    attemptPlay(el)
     pendingPlayState.value = false
+  } else if (props.autoplay && el.paused) {
+    attemptPlay(el)
   }
   if (props.live) seekToLive()
 }
@@ -305,28 +374,32 @@ function handleCanPlay() {
 watch(videoRef, async (el, _, onCleanup) => {
   if (!el || !import.meta.client) return
 
-  if (mediaKind.value === 'dash' && el.engine) {
-    const { MediaPlayer } = await import('dashjs')
-    const { events } = MediaPlayer
+  if (mediaKind.value === 'native') {
+    availableQualities.value = []
+    return
+  }
+
+  await ensureVideoCustomElementsRegistered()
+  const engine = await waitForEngine(el)
+  if (!engine) return
+
+  if (mediaKind.value === 'dash') {
+    const dashEngine = engine as MediaPlayerClass
     const onStreamInitialized = () => loadDashQualities(el)
-    el.engine.on(events.STREAM_INITIALIZED, onStreamInitialized)
+    dashEngine.on(DASH_EVENTS.STREAM_INITIALIZED, onStreamInitialized)
     onCleanup(() => {
-      ;(el.engine as MediaPlayerClass | undefined)?.off(events.STREAM_INITIALIZED, onStreamInitialized)
+      dashEngine.off(DASH_EVENTS.STREAM_INITIALIZED, onStreamInitialized)
     })
-  } else if (mediaKind.value === 'hls' && el.engine) {
-    const { default: Hls } = await import('hls.js')
-    const engine = el.engine as HlsLikeEngine
+  } else if (mediaKind.value === 'hls') {
+    const hlsEngine = engine as HlsLikeEngine
     const onManifestParsed = () => loadHlsQualities(el)
     const onLevelSwitched = () => syncHlsSelectedQuality(el)
-    engine.on(Hls.Events.MANIFEST_PARSED, onManifestParsed)
-    engine.on(Hls.Events.LEVEL_SWITCHED, onLevelSwitched)
+    hlsEngine.on(HLS_EVENTS.MANIFEST_PARSED, onManifestParsed)
+    hlsEngine.on(HLS_EVENTS.LEVEL_SWITCHED, onLevelSwitched)
     onCleanup(() => {
-      engine.off(Hls.Events.MANIFEST_PARSED, onManifestParsed)
-      engine.off(Hls.Events.LEVEL_SWITCHED, onLevelSwitched)
+      hlsEngine.off(HLS_EVENTS.MANIFEST_PARSED, onManifestParsed)
+      hlsEngine.off(HLS_EVENTS.LEVEL_SWITCHED, onLevelSwitched)
     })
-  } else {
-    // Native mp4/webm: no ABR engine, nothing to list.
-    availableQualities.value = []
   }
 })
 
@@ -334,6 +407,7 @@ function handlePlay() {
   isPlaying.value = true
   emit('started')
 }
+
 function handlePause() {
   isPlaying.value = false
 }
@@ -375,19 +449,18 @@ function handleError(event: Event) {
   emit('error', error)
 }
 
-onMounted(() => {
-  import('@videojs/html/video/minimal-skin')
-  import('@videojs/html/video/minimal-skin.css')
-  import('@videojs/html/video/player')
-  import('@videojs/html/media/dash-video')
-  import('@videojs/html/media/hlsjs-video')
+onMounted(async () => {
+  await ensureVideoCustomElementsRegistered()
+  customElementsReady.value = true
 })
 </script>
 
 <template>
-  <div ref="wrapperRef" :class="`group relative flex size-full items-center justify-center ${cssClass}`" :style="objectFitStyle" @click.self="showQualityMenu = false">
+  <div ref="wrapperRef" :class="['group relative flex size-full items-center justify-center', cssClass]" :style="objectFitStyle" @click.self="showQualityMenu = false">
     <ClientOnly>
-      <video-player class="size-full" :class="{ shimmer: !isVideoLoaded }">
+      <img v-if="!customElementsReady && poster" :src="poster" class="absolute inset-0 size-full object-cover" alt="" />
+
+      <video-player v-if="customElementsReady" class="size-full" :class="{ shimmer: !isVideoLoaded && !poster }">
         <video-minimal-skin v-if="controls" class="size-full">
           <component
             :is="mediaTag"
@@ -406,7 +479,6 @@ onMounted(() => {
             @play="handlePlay"
             @pause="handlePause"
             @canplay="handleCanPlay"
-            @time-update="handleTimeUpdate"
             @timeupdate="handleTimeUpdate"
             @ended="handleEnded"
             @error="handleError"
@@ -431,7 +503,6 @@ onMounted(() => {
             @play="handlePlay"
             @pause="handlePause"
             @canplay="handleCanPlay"
-            @time-update="handleTimeUpdate"
             @timeupdate="handleTimeUpdate"
             @ended="handleEnded"
             @error="handleError"
@@ -468,12 +539,12 @@ video-player,
 video-minimal-skin,
 media-container,
 dash-video,
-hls-video,
+hlsjs-video,
 video-player video,
 video-minimal-skin video,
 media-container video,
 dash-video video,
-hls-video video,
+hlsjs-video video,
 video {
   border-radius: 0 !important;
   border-width: 0 !important;

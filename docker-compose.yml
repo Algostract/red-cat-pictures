@@ -1,4 +1,5 @@
-name: 'red-cat-pictures-dev'
+name: red-cat-pictures-dev
+
 services:
   app:
     build:
@@ -12,12 +13,71 @@ services:
     volumes:
       - data:/app/.data
     ports:
-      - 4400:3000
+      - '4400:3000'
+    networks:
+      - internal
+
+  drive:
+    build: ../../modest-human-brands/code-drive
+    env_file:
+      - .env.prod
+    volumes:
+      - mdrive-data:/app/data
+      - mdrive-static:/app/static
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    ports:
+      - 3003:3000
+
+  media:
+    build:
+      context: ../../modest-human-brands/code-media
+      args:
+        SITE_URL: http://localhost:4300
+        CDN_URL: http://localhost:3500
+    env_file:
+      - .env.prod
+    volumes:
+      - mdrive-data:/app/.data
+      - mdrive-static:/app/static
+    ports:
+      - '3004:3111'
+    networks:
+      - internal
+    deploy:
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2048M
+        reservations:
+          cpus: '0.4'
+          memory: 1024M
 
 volumes:
+  mdrive-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./mdrive/.data
+  mdrive-static:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./mdrive/static
   data:
     driver: local
     driver_opts:
       type: none
       o: bind
       device: ./.data
+
+networks:
+  internal:
+    driver: bridge

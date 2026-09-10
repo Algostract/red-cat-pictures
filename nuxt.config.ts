@@ -70,6 +70,15 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@vueuse/nuxt',
     'magic-regexp/nuxt',
+    (_, nuxt) => {
+      const isTres = nuxt.options.vue.compilerOptions?.isCustomElement
+
+      nuxt.options.vue.compilerOptions = nuxt.options.vue.compilerOptions || {}
+      nuxt.options.vue.compilerOptions.isCustomElement = (tag: string) => {
+        // Uses `/^(video-|media-|dash-|hls)/` so it matches both `hls-video` and `hlsjs-video`
+        return /^(video-|media-|dash-|hls)/.test(tag) || (typeof isTres === 'function' ? isTres(tag) : false)
+      }
+    },
   ],
   vite: {
     server: {
