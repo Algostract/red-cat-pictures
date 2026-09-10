@@ -1,5 +1,17 @@
 # red-cat-pictures
 
+## v3.17.0
+
+[compare changes](https://github.com/RED-CAT-PICTURES/red-cat-pictures/compare/v3.16.2...v3.17.0)
+
+### 🚀 Enhancements
+
+- Enhance nuxt video component ([10914a8](https://github.com/RED-CAT-PICTURES/red-cat-pictures/commit/10914a8))
+
+### ❤️ Contributors
+
+- Shirsendu Bairagi ([@shba007](https://github.com/shba007))
+
 ## v3.16.2
 
 [compare changes](https://github.com/RED-CAT-PICTURES/red-cat-pictures/compare/v3.16.1...v3.16.2)
