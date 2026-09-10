@@ -1,6 +1,6 @@
 services:
   documenso:
-    image: documenso/documenso:v2.14.0
+    image: documenso/documenso:v2.14.0@sha256:f1043654ffd88edffa6ba5b2bbda2897723fc5e9ae06f56c1fe514ee2b567f05
     env_file:
       - .env
     volumes:
@@ -23,7 +23,7 @@ services:
           cpus: '1'
 
   postgres:
-    image: postgres:16
+    image: postgres:16@sha256:f1c3376c26f2609ab9f29f71f824103fe2fcd8ee0346485cb6122a4f93df6f94
     env_file:
       - .env
     volumes:

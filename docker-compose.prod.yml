@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   app:
-    image: ghcr.io/red-cat-pictures/red-cat-pictures:latest
+    image: ghcr.io/red-cat-pictures/red-cat-pictures:latest@sha256:ce385c41cf52181b8de96534f896c5a35513cf25d542953e605a93698fcbc8be
     env_file:
       - .env
     volumes:
